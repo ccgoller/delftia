@@ -1,5 +1,5 @@
 /.quarto/
-/_site/
+# /_site/ (unignored so built site can be committed for GitHub Pages deployment)
 /.Rproj.user/
 .Rhistory
 .DS_Store
