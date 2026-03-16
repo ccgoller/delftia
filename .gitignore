@@ -9,3 +9,4 @@
 .vscode/
 
 **/*.quarto_ipynb
+# images/ directory is intentionally NOT ignored so images are committed
