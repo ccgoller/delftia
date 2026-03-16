@@ -7,3 +7,5 @@
 *.swo
 *~
 .vscode/
+
+**/*.quarto_ipynb
