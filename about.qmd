@@ -1,0 +1,26 @@
+---
+title: "About The Delftia Project"
+---
+
+## About Us
+
+The Delftia Project is a collaborative research and education initiative focused on the bacterium *Delftia acidovorans*. We bring together undergraduate researchers, citizen scientists, and educators to explore the biology, applications, and impacts of this remarkable microorganism.
+
+Our work spans multiple areas:
+
+- **Research and Discovery**: Investigating the genomics, metabolism, and environmental roles of *Delftia*
+- **Undergraduate Education**: Integrating *Delftia* research into course-based learning experiences
+- **Citizen Science**: Engaging the broader community in collaborative annotation and scientific discovery
+- **Applications**: Exploring applications in bioremediation, e-waste recycling, and biotechnology
+
+## Our Community
+
+This project involves collaboration between NC State University researchers, undergraduate students, and community volunteers. We believe that science is most powerful when it is collaborative, transparent, and accessible.
+
+## Get Involved
+
+Whether you're a student, educator, or simply curious about microbiology, there are ways to get involved with the Delftia Project. Check out our [News](news.qmd) section for recent updates and opportunities.
+
+---
+
+For more information, visit NC State University's website.

@@ -1,0 +1,21 @@
+---
+title: "References"
+---
+
+## Scientific Literature
+
+Here are the key scientific references related to *Delftia acidovorans* research:
+
+1. Camargo CH, Ferreira AM, Javaroni E, Rosa Reis BA, Bueno MF, Francisco GR, Gallo JF, Garcia DO. 2014. Microbiological characterization of *Delftia acidovorans* clinical isolates from patients in an intensive care unit in Brazil. *J Diag Microbio* [internet]. [Cited 2015 July 25]; 80: 330-333. Available from: <http://dx.doi.org/10.1016/j.diagmicrobio.2014.09.001>
+
+2. Chotikanatis K, Backer M, Rosas-Garcia G, Hammerschlag MR. 2011. Recurrent intravascular-catheter-related bacteremia caused by *Delftia acidovorans* in a hemodialysis patient. *J Clin Microbio* [internet]. [Cited 2015 July 25]; 49:3418-3421. Available from: doi 10.1128/JCM.00625-11
+
+3. Wen A, Fegan M, Hayward C, Chakraborty S. 1999. Phylogenetic relationships among members of the Comamonadaceae, and description of *Delftia acidovorans*. *Int J Syst Bacteriol* 49:567-576
+
+4. Romanelli MG, Povolo S, Favaro L, Fontana F, Basaglia M, Casella S. 2014. Engineering *Delftia acidovorans* DSM39 to produce polyhydroxyalkanoates from slaughterhouse waste. *Int J Biol Macromol* [internet]. [Cited 2015 July 25]; 71:21-27. Available from: <http://dx.doi.org/10.1016/j.ijbiomac.2014.03.049>
+
+5. Vullo DL, Ceretti HM, Daniel MA, Ramirez SAM, Zalts A. 2007. Cadmium, zinc and copper biosorption mediated by *Pseudomonas veronii* 2E. *J Bior Tech* [internet]. [Cited 2015 July 25]; 99:5574-5581. Available from: doi 10.1016/j.biortech.2007.10.060
+
+6. Johnston CW, Wyatt MA, Li X, Ibrahim A, Shuster J, Southam G, Magarvey NA. 2013. Gold biomineralization by a metallophore from a gold-associated microbe. *Nat Chem Bio* [internet]. [Cited 2015 July 25]; 9:241-243. Available from: doi 10.1038/NCHEMBIO.1179
+
+7. Shetty AR, de Gannes V, Lucas S, Lapidus A, Cheng JF, Goodwin LA, Pitluck S, Peters L, Mikhailova N, Teshima H, Han C, Tapia R, Land M, Hauser LJ, Kyrpides N, Ivanova N, Pagani I, Bradfield CA, Chain P, Denef V, Woyke T, Hickey WJ. 2015. Complete genome sequence of the phenanthrene-degrading bacterium *Delftia acidovorans* Cs 1-4. *SIGS open access* [internet]. [Cited 2015 July 25]; 1-11. Available from: doi 10.1186/s40793-015-0012-2
