@@ -3,6 +3,7 @@ project:
 
 website:
   title: "The Delftia Project"
+  site-url: https://delftia.org
   navbar:
     left:
       - href: index.qmd
