@@ -8,7 +8,7 @@ title: "The Delftia Project"
 
 This bacterium thrives in habitats containing high concentrations of heavy metals, such as copper and cobalt [5], and it produces a nonribosomal peptide that allows it to avoid toxicity from gold by precipitating it out of solution [6]. *D. acidovorans* is also considered an opportunistic agent and has been found in several reports of infection in immunocompromised patients [1,2].
 
-![Delftia acidovorans](images/photo.jpg)
+![Delftia acidovorans](images/photo.jpg){fig-alt="Microscopic image of Delftia acidovorans bacteria showing characteristic morphology"}
 
 ## Learn More About...
 
@@ -16,21 +16,21 @@ This bacterium thrives in habitats containing high concentrations of heavy metal
 
 Research by undergraduate scholars, including course-based research experiences in Microbiology and Microbial Superheroes analysis. Students engage in hands-on research with *Delftia* and explore its applications in biotechnology.
 
-![Spot plate with Delftia](images/Spot_Plate_10ul_48hrs.jpg)
+![Spot plate with Delftia](images/Spot_Plate_10ul_48hrs.jpg){fig-alt="Laboratory spot plate showing Delftia bacterial growth in MB 360 course-based research"}
 
-![LSC 170 Microbial Superheroes](images/LSC-170-Goller-Microbial-Superheroes.jpg)
+![LSC 170 Microbial Superheroes](images/LSC-170-Goller-Microbial-Superheroes.jpg){fig-alt="LSC 170 Microbial Superheroes course analyzing Delftia-related publications"}
 
 ### Genomics and Automation
 
 Learning about *Delftia* with automation and high-throughput sequencing technologies. These tools help us understand the genome and capabilities of this fascinating organism.
 
-![BLAST Results](images/Blast-of-reverse-primer.png)
+![BLAST Results](images/Blast-of-reverse-primer.png){fig-alt="BLAST sequence analysis results showing Delftia genetic data"}
 
 ### Citizen Science
 
 Community projects and citizen science initiatives bringing *Delftia* research to a broader audience. Participate in collaborative annotation and discovery efforts with our community of researchers and learners.
 
-![DELFTIA Citizen Science](images/DELFTIA.jpg)
+![DELFTIA Citizen Science](images/DELFTIA.jpg){fig-alt="DELFTIA citizen science project graphic showing community research activities"}
 
 ---
 

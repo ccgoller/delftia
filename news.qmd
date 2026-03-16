@@ -177,6 +177,6 @@ Join us for live annotation sessions where we delve deeper into Delftia topics a
 
 Every year up to 50 million tons of electronics are discarded, with only 12% properly recycled. Current recycling methods are costly and energy-intensive. Explore how *Delftia* may play a role in improving e-waste recycling and recovery.
 
-![Alchemy Blog](images/Alchemy-blog.png)
+![Alchemy Blog](images/Alchemy-blog.png){fig-alt="Alchemy blog graphic showing Delftia research updates and undergraduate projects"}
 
-![Home Graphic](images/homegraphic-600x413.jpeg)
+![Home Graphic](images/homegraphic-600x413.jpeg){fig-alt="Delftia project homepage graphic illustrating research and citizen science activities"}
