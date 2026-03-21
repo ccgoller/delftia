@@ -3,7 +3,7 @@ project:
 
 website:
   title: "The Delftia Project"
-  site-url: "https://delftia.github.io"
+  site-url: "www.delftia.org"
 
   navbar:
     left:
