@@ -3,9 +3,12 @@ project:
 
 website:
   title: "The Delftia Project"
-  site-url: "https://www.delftia.org"
+  site-url: "https://delftia.org"
+  favicon: images/cropped-cropped-DelftiaLogo-e1594312941275-32x32.png
 
   navbar:
+    logo: images/DelftiaLogo-e1594312941275.png
+    logo-alt: "Delftia Project logo"
     left:
       - href: index.qmd
         text: Home
@@ -17,9 +20,7 @@ website:
 
 format:
   html:
-    theme:
-      - cosmo
-      - brand
+    theme: cosmo
     css: styles.css
     toc: true
 
