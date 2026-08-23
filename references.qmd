@@ -46,6 +46,14 @@ Shetty AR, de Gannes V, Lucas S, Lapidus A, Cheng JF, Goodwin LA, Pitluck S, Pet
 </li>
 
 <li>
+McNeill RM, DeFoor WM, Goller CC, Ott LE. 2015. <em>Delftia</em> spp. elicit a pro-inflammatory response in monocytes. <em>J Young Investigators</em>. 29.
+</li>
+
+<li>
+Riley NG, Goller CC, Leggett ZH, Lewis DM, Ciccone K, Dunn RR. 2020. Catalyzing rapid discovery of gold-precipitating bacterial lineages with university students. <em>PeerJ</em>. 8: e8925. <a href="https://doi.org/10.7717/peerj.8925" target="_blank" rel="noopener">doi:10.7717/peerj.8925</a>
+</li>
+
+<li>
 Spence PL, Goller C, Riley N, Norman D, Leggett Z. 2025. Where is <em>Delftia</em>? Implementing citizen science into the biotechnology and environmental science curriculum. <em>J Microbiol Biol Educ</em>. 26(1): e00088-24. <a href="https://doi.org/10.1128/jmbe.00088-24" target="_blank" rel="noopener">doi:10.1128/jmbe.00088-24</a>
 </li>
 
