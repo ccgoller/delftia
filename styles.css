@@ -11,6 +11,7 @@
   --delftia-umber:     #4b3210;   /* deep umber — 11.9:1 on white  */
   --delftia-amber:     #8b5e0a;   /* dark amber — 5.7:1  on white  */
   --delftia-gold:      #f0d060;   /* logo gold  — use with dark text */
+  --delftia-gold-hover:#e5c14f;   /* button hover — 6.9:1 with umber  */
   --delftia-sunrise:   #d4900a;   /* muted gold — decorative emphasis */
   --delftia-light:     #fdf9f0;   /* warm cream — mirrors logo bg   */
   --delftia-text:      #222018;   /* warm charcoal — 16.3:1 on white */
@@ -105,7 +106,7 @@ a:hover {
 }
 
 .btn-primary-hero:hover {
-  background: #e5c14f;
+  background: var(--delftia-gold-hover);
   color: var(--delftia-umber) !important;
 }
 
