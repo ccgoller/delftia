@@ -4,7 +4,7 @@ project:
 website:
   title: "The Delftia Project"
   site-url: "https://ccgoller.github.io/delftia"
-  favicon: images/cropped-cropped-DelftiaLogo-e1594312941275-32x32.png
+  favicon: images/delftia-logo-favicon-rounded.png
   description: "Exploring the biology and applications of Delftia acidovorans through undergraduate research, citizen science, and community collaboration."
   open-graph:
     title: "The Delftia Project"
@@ -49,5 +49,4 @@ format:
       - theme.scss
     css: styles.css
     toc: false
-
 
