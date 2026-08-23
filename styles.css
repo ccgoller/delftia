@@ -2,14 +2,18 @@
    The Delftia Project — Custom Styles
    ============================================================ */
 
-/* ---- Color palette ---------------------------------------- */
+/* ---- Color palette ----------------------------------------
+   Palette is drawn from the Delftia logo's warm gold (#f0d060)
+   and amber (#e09030) tones.  All text/interactive colors are
+   verified WCAG AA (≥ 4.5:1 on white or --delftia-light).
+   ------------------------------------------------------------ */
 :root {
-  --delftia-blue:      #1a3a5c;
-  --delftia-teal:      #1b7f8e;
-  --delftia-gold:      #c9a227;
-  --delftia-light:     #f0f6f8;
-  --delftia-text:      #222b36;
-  --delftia-muted:     #6c757d;
+  --delftia-blue:      #1a3a5c;   /* dark navy  — 11.6:1 on white  */
+  --delftia-teal:      #8b5e0a;   /* dark amber — 5.7:1  on white  */
+  --delftia-gold:      #d4900a;   /* logo amber — decorative only  */
+  --delftia-light:     #fdf9f0;   /* warm cream — mirrors logo bg  */
+  --delftia-text:      #222b36;   /* near-black — 14.3:1 on white  */
+  --delftia-muted:     #7a6450;   /* warm taupe — 5.6:1  on white  */
   --card-radius:       12px;
   --transition-fast:   0.2s ease;
 }
