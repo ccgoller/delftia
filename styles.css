@@ -1,1 +1,480 @@
-/* css styles */
+/* ============================================================
+   The Delftia Project — Custom Styles
+   ============================================================ */
+
+/* ---- Color palette ---------------------------------------- */
+:root {
+  --delftia-blue:      #1a3a5c;
+  --delftia-teal:      #1b7f8e;
+  --delftia-gold:      #c9a227;
+  --delftia-light:     #f0f6f8;
+  --delftia-text:      #222b36;
+  --delftia-muted:     #6c757d;
+  --card-radius:       12px;
+  --transition-fast:   0.2s ease;
+}
+
+/* ---- Base typography -------------------------------------- */
+body {
+  color: var(--delftia-text);
+  font-family: "Inter", "Segoe UI", system-ui, sans-serif;
+}
+
+h1, h2, h3, h4 {
+  font-weight: 700;
+  color: var(--delftia-blue);
+}
+
+a {
+  color: var(--delftia-teal);
+}
+
+a:hover {
+  color: var(--delftia-blue);
+  text-decoration: underline;
+}
+
+/* ---- Navbar ----------------------------------------------- */
+.navbar {
+  box-shadow: 0 2px 10px rgba(0,0,0,0.12);
+}
+
+.navbar-brand img {
+  max-height: 48px;
+}
+
+/* ---- Hero section ----------------------------------------- */
+.hero-section {
+  background: linear-gradient(135deg, var(--delftia-blue) 0%, var(--delftia-teal) 100%);
+  color: white;
+  padding: 5rem 2rem 4rem;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-section::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60' viewBox='0 0 60 60'%3E%3Ccircle cx='30' cy='30' r='2' fill='rgba(255,255,255,0.06)'/%3E%3C/svg%3E") repeat;
+  pointer-events: none;
+}
+
+.hero-section h1 {
+  color: white;
+  font-size: clamp(2rem, 5vw, 3.2rem);
+  margin-bottom: 1rem;
+  text-shadow: 0 2px 6px rgba(0,0,0,0.25);
+}
+
+.hero-section .hero-subtitle {
+  font-size: clamp(1rem, 2.5vw, 1.3rem);
+  opacity: 0.92;
+  max-width: 680px;
+  margin: 0 auto 2.2rem;
+  line-height: 1.6;
+}
+
+/* ---- Buttons ---------------------------------------------- */
+.btn-hero {
+  display: inline-block;
+  padding: 0.75rem 2rem;
+  border-radius: 50px;
+  font-weight: 600;
+  font-size: 1rem;
+  text-decoration: none !important;
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+  margin: 0.4rem;
+}
+
+.btn-hero:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(0,0,0,0.22);
+}
+
+.btn-primary-hero {
+  background: var(--delftia-gold);
+  color: var(--delftia-blue) !important;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.18);
+}
+
+.btn-outline-hero {
+  background: transparent;
+  color: white !important;
+  border: 2px solid rgba(255,255,255,0.8);
+}
+
+.btn-outline-hero:hover {
+  background: rgba(255,255,255,0.12);
+}
+
+/* ---- Stats bar -------------------------------------------- */
+.stats-bar {
+  background: var(--delftia-light);
+  padding: 2rem 1rem;
+  text-align: center;
+  border-bottom: 3px solid var(--delftia-teal);
+}
+
+.stats-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2rem 4rem;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.stat-item .stat-number {
+  font-size: 2.4rem;
+  font-weight: 800;
+  color: var(--delftia-teal);
+  line-height: 1;
+}
+
+.stat-item .stat-label {
+  font-size: 0.85rem;
+  color: var(--delftia-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-top: 0.3rem;
+}
+
+/* ---- Section containers ----------------------------------- */
+.section-padded {
+  padding: 4rem 1.5rem;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.section-alt {
+  background: var(--delftia-light);
+}
+
+.section-title {
+  font-size: clamp(1.6rem, 3.5vw, 2.2rem);
+  color: var(--delftia-blue);
+  margin-bottom: 0.5rem;
+}
+
+.section-subtitle {
+  color: var(--delftia-muted);
+  font-size: 1.05rem;
+  margin-bottom: 2.5rem;
+}
+
+/* ---- Feature / info cards --------------------------------- */
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.6rem;
+  margin-top: 2rem;
+}
+
+.feature-card {
+  background: white;
+  border-radius: var(--card-radius);
+  padding: 2rem 1.8rem;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+  border-left: 4px solid var(--delftia-teal);
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.feature-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+}
+
+.feature-card .card-icon {
+  font-size: 2rem;
+  margin-bottom: 0.8rem;
+}
+
+.feature-card h3 {
+  font-size: 1.15rem;
+  color: var(--delftia-blue);
+  margin-bottom: 0.6rem;
+}
+
+.feature-card p {
+  color: #4a5568;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* ---- News cards ------------------------------------------- */
+.news-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.6rem;
+  margin-top: 2rem;
+}
+
+.news-card {
+  background: white;
+  border-radius: var(--card-radius);
+  overflow: hidden;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.news-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+}
+
+.news-card-body {
+  padding: 1.4rem 1.6rem 1.6rem;
+}
+
+.news-card-date {
+  font-size: 0.78rem;
+  color: var(--delftia-teal);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-bottom: 0.4rem;
+}
+
+.news-card-title {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--delftia-blue);
+  margin-bottom: 0.5rem;
+}
+
+.news-card-text {
+  font-size: 0.9rem;
+  color: #4a5568;
+  line-height: 1.55;
+}
+
+/* ---- CTA / call-to-action section ------------------------- */
+.cta-section {
+  background: linear-gradient(135deg, var(--delftia-blue), var(--delftia-teal));
+  color: white;
+  padding: 4rem 2rem;
+  text-align: center;
+}
+
+.cta-section h2 {
+  color: white;
+  font-size: clamp(1.6rem, 3vw, 2.2rem);
+  margin-bottom: 0.8rem;
+}
+
+.cta-section p {
+  opacity: 0.9;
+  max-width: 580px;
+  margin: 0 auto 2rem;
+  font-size: 1.05rem;
+  line-height: 1.6;
+}
+
+/* ---- Research spotlight ----------------------------------- */
+.research-spotlight {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+  align-items: center;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 4rem 1.5rem;
+}
+
+.research-spotlight.reverse > :first-child {
+  order: 2;
+}
+
+.research-spotlight.reverse > :last-child {
+  order: 1;
+}
+
+.research-spotlight img {
+  width: 100%;
+  border-radius: var(--card-radius);
+  box-shadow: 0 6px 24px rgba(0,0,0,0.12);
+  object-fit: cover;
+}
+
+.research-spotlight-text h2 {
+  font-size: 1.7rem;
+  color: var(--delftia-blue);
+  margin-bottom: 1rem;
+}
+
+.research-spotlight-text p {
+  color: #4a5568;
+  line-height: 1.7;
+  margin-bottom: 1.2rem;
+}
+
+/* ---- Badge / tag chips ------------------------------------ */
+.tag-chip {
+  display: inline-block;
+  background: var(--delftia-light);
+  color: var(--delftia-teal);
+  border: 1px solid var(--delftia-teal);
+  border-radius: 50px;
+  padding: 0.2rem 0.8rem;
+  font-size: 0.78rem;
+  font-weight: 600;
+  margin: 0.2rem;
+}
+
+/* ---- Team cards ------------------------------------------- */
+.team-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.4rem;
+  margin-top: 2rem;
+}
+
+.team-card {
+  background: white;
+  border-radius: var(--card-radius);
+  padding: 2rem 1.5rem;
+  text-align: center;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+  transition: transform var(--transition-fast);
+}
+
+.team-card:hover {
+  transform: translateY(-3px);
+}
+
+.team-card .team-avatar {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--delftia-blue), var(--delftia-teal));
+  color: white;
+  font-size: 1.6rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 1rem;
+}
+
+.team-card h4 {
+  font-size: 1rem;
+  margin-bottom: 0.3rem;
+}
+
+.team-card .team-role {
+  font-size: 0.82rem;
+  color: var(--delftia-muted);
+}
+
+/* ---- Timeline (news page) --------------------------------- */
+.timeline {
+  position: relative;
+  padding-left: 2.5rem;
+  max-width: 860px;
+  margin: 2rem auto 0;
+}
+
+.timeline::before {
+  content: "";
+  position: absolute;
+  left: 0.65rem;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background: var(--delftia-teal);
+  border-radius: 2px;
+  opacity: 0.3;
+}
+
+.timeline-item {
+  position: relative;
+  margin-bottom: 2.2rem;
+}
+
+.timeline-item::before {
+  content: "";
+  position: absolute;
+  left: -2.15rem;
+  top: 0.45rem;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--delftia-teal);
+  border: 3px solid white;
+  box-shadow: 0 0 0 2px var(--delftia-teal);
+}
+
+.timeline-date {
+  font-size: 0.78rem;
+  color: var(--delftia-teal);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-bottom: 0.3rem;
+}
+
+.timeline-card {
+  background: white;
+  border-radius: var(--card-radius);
+  padding: 1.4rem 1.6rem;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.07);
+  border-left: 3px solid var(--delftia-teal);
+}
+
+.timeline-card h3 {
+  font-size: 1.05rem;
+  color: var(--delftia-blue);
+  margin-bottom: 0.5rem;
+}
+
+.timeline-card p {
+  font-size: 0.91rem;
+  color: #4a5568;
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* ---- References page -------------------------------------- */
+.ref-list {
+  list-style: none;
+  padding: 0;
+  max-width: 860px;
+  margin: 2rem auto 0;
+}
+
+.ref-list li {
+  background: white;
+  border-radius: var(--card-radius);
+  padding: 1.2rem 1.6rem;
+  margin-bottom: 1rem;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  font-size: 0.93rem;
+  line-height: 1.6;
+  border-left: 3px solid var(--delftia-gold);
+  color: #4a5568;
+}
+
+/* ---- Responsive ------------------------------------------- */
+@media (max-width: 768px) {
+  .research-spotlight,
+  .research-spotlight.reverse {
+    grid-template-columns: 1fr;
+    direction: ltr;
+  }
+
+  .hero-section {
+    padding: 3.5rem 1.2rem 3rem;
+  }
+
+  .stats-grid {
+    gap: 1.5rem 2.5rem;
+  }
+
+  .section-padded {
+    padding: 3rem 1rem;
+  }
+}
+

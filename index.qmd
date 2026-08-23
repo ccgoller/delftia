@@ -1,37 +1,156 @@
 ---
-title: "The Delftia Project"
+title: ""
+page-layout: full
 ---
 
-## What is *Delftia acidovorans*?
+```{=html}
+<!-- ===== HERO ===== -->
+<section class="hero-section">
+  <h1>The Delftia Project</h1>
+  <p class="hero-subtitle">
+    Unlocking the secrets of <em>Delftia acidovorans</em> — a remarkable bacterium
+    that biomineralizes gold, thrives in toxic environments, and holds promise for
+    bioremediation and biotechnology.
+  </p>
+  <div>
+    <a href="about.html#get-involved" class="btn-hero btn-primary-hero">Get Involved</a>
+    <a href="#research-highlights" class="btn-hero btn-outline-hero">Explore Research</a>
+  </div>
+</section>
 
-*Delftia acidovorans* is a gram-negative, non-fermentative bacterium found in soil and water [1,2]. It was first identified in Delft, Netherlands, in soil enriched with acetamide [3]. Recently, it has been found in other environments, such as waste-contaminated soil and drains [4].
+<!-- ===== STATS BAR ===== -->
+<section class="stats-bar">
+  <div class="stats-grid">
+    <div class="stat-item">
+      <div class="stat-number">7+</div>
+      <div class="stat-label">Published References</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-number">17+</div>
+      <div class="stat-label">Student Researchers</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-number">3</div>
+      <div class="stat-label">Research Initiatives</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-number">NC&nbsp;State</div>
+      <div class="stat-label">University Partner</div>
+    </div>
+  </div>
+</section>
+```
 
-This bacterium thrives in habitats containing high concentrations of heavy metals, such as copper and cobalt [5], and it produces a nonribosomal peptide that allows it to avoid toxicity from gold by precipitating it out of solution [6]. *D. acidovorans* is also considered an opportunistic agent and has been found in several reports of infection in immunocompromised patients [1,2].
+## What is *Delftia acidovorans*? {#about-delftia}
 
-![Delftia acidovorans](images/photo.jpg){fig-alt="Microscopic image of Delftia acidovorans bacteria showing characteristic morphology"}
+::: {.research-spotlight}
+::: {.research-spotlight-text}
+*Delftia acidovorans* is a gram-negative, non-fermentative bacterium first identified in Delft, Netherlands, in soil enriched with acetamide. It thrives in habitats containing high concentrations of heavy metals — copper, cobalt, and even **gold** — and produces a nonribosomal peptide that allows it to precipitate gold out of solution, avoiding toxicity.
 
-## Learn More About...
+Today, *Delftia* is found in waste-contaminated soil, water systems, and drains. Beyond its remarkable environmental capabilities, it is studied as an opportunistic pathogen and explored for applications in:
 
-### Undergraduate Research
+<span class="tag-chip">🏅 Gold Biomineralization</span>
+<span class="tag-chip">♻️ E-Waste Recycling</span>
+<span class="tag-chip">🌿 Bioremediation</span>
+<span class="tag-chip">🧬 Genomics</span>
+<span class="tag-chip">🔬 Undergraduate Research</span>
 
-Research by undergraduate scholars, including course-based research experiences in Microbiology and Microbial Superheroes analysis. Students engage in hands-on research with *Delftia* and explore its applications in biotechnology.
+<br/><br/>
+<a href="references.html" class="btn-hero btn-primary-hero" style="font-size:0.9rem;padding:0.55rem 1.4rem;">Read the Literature →</a>
+:::
 
-![Spot plate with Delftia](images/Spot_Plate_10ul_48hrs.jpg){fig-alt="Laboratory spot plate showing Delftia bacterial growth in MB 360 course-based research"}
-
-![LSC 170 Microbial Superheroes](images/LSC-170-Goller-Microbial-Superheroes.jpg){fig-alt="LSC 170 Microbial Superheroes course analyzing Delftia-related publications"}
-
-### Genomics and Automation
-
-Learning about *Delftia* with automation and high-throughput sequencing technologies. These tools help us understand the genome and capabilities of this fascinating organism.
-
-![BLAST Results](images/Blast-of-reverse-primer.png){fig-alt="BLAST sequence analysis results showing Delftia genetic data"}
-
-### Citizen Science
-
-Community projects and citizen science initiatives bringing *Delftia* research to a broader audience. Participate in collaborative annotation and discovery efforts with our community of researchers and learners.
-
-![DELFTIA Citizen Science](images/DELFTIA.jpg){fig-alt="DELFTIA citizen science project graphic showing community research activities"}
+![Microscopic image of *Delftia acidovorans*](images/photo.jpg){fig-alt="Microscopic image of Delftia acidovorans bacteria" style="max-height:400px;width:100%;object-fit:cover;"}
+:::
 
 ---
 
-For references and citations, see our [References](references.qmd) page. Check out the [News](news.qmd) section for updates on projects and research.
+```{=html}
+<!-- ===== RESEARCH HIGHLIGHTS ===== -->
+<section id="research-highlights" class="section-alt" style="padding: 4rem 1.5rem;">
+  <div style="max-width:1100px;margin:0 auto;text-align:center;">
+    <h2 class="section-title">Research Highlights</h2>
+    <p class="section-subtitle">Three pillars of the Delftia Project — from the classroom to the community</p>
+    <div class="card-grid">
+
+      <div class="feature-card">
+        <div class="card-icon">🎓</div>
+        <h3>Undergraduate Research</h3>
+        <p>
+          Students in MB 360 and LSC 170 engage in hands-on course-based research experiences —
+          growing <em>Delftia</em> in the lab, analyzing spot plates, and dissecting
+          "Microbial Superheroes" publications.
+        </p>
+      </div>
+
+      <div class="feature-card">
+        <div class="card-icon">🤖</div>
+        <h3>Genomics &amp; Automation</h3>
+        <p>
+          High-throughput sequencing and automation tools help us decode the genome of
+          <em>Delftia</em>. BLAST analyses, bioinformatics pipelines, and cloud computing
+          accelerate discovery.
+        </p>
+      </div>
+
+      <div class="feature-card">
+        <div class="card-icon">🌐</div>
+        <h3>Citizen Science</h3>
+        <p>
+          Community annotators collaborate via Hypothes.is to mine the scientific literature
+          on <em>Delftia</em> as a pathogen, gold-biomineralizing agent, and e-waste recycler.
+        </p>
+      </div>
+
+    </div>
+  </div>
+</section>
+```
+
+## Lab Gallery
+
+::: {style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1.2rem;margin-top:1.5rem;"}
+::: {style="text-align:center;"}
+![Spot plate showing *Delftia* growth](images/Spot_Plate_10ul_48hrs.jpg){fig-alt="Laboratory spot plate with Delftia colonies" style="border-radius:12px;width:100%;object-fit:cover;height:180px;box-shadow:0 2px 10px rgba(0,0,0,0.1);"}
+
+**Spot Plate — 48 hrs**  
+*MB 360 course-based research*
+:::
+
+::: {style="text-align:center;"}
+![LSC 170 Microbial Superheroes](images/LSC-170-Goller-Microbial-Superheroes.jpg){fig-alt="LSC 170 students analyzing Delftia publications" style="border-radius:12px;width:100%;object-fit:cover;height:180px;box-shadow:0 2px 10px rgba(0,0,0,0.1);"}
+
+**LSC 170 — Microbial Superheroes**  
+*Publication analysis workshop*
+:::
+
+::: {style="text-align:center;"}
+![BLAST sequence results](images/Blast-of-reverse-primer.png){fig-alt="BLAST results for Delftia reverse primer" style="border-radius:12px;width:100%;object-fit:cover;height:180px;box-shadow:0 2px 10px rgba(0,0,0,0.1);"}
+
+**BLAST Analysis**  
+*Reverse primer sequence search*
+:::
+
+::: {style="text-align:center;"}
+![DELFTIA citizen science](images/DELFTIA.jpg){fig-alt="DELFTIA citizen science graphic" style="border-radius:12px;width:100%;object-fit:cover;height:180px;box-shadow:0 2px 10px rgba(0,0,0,0.1);"}
+
+**Citizen Science**  
+*Community annotation project*
+:::
+:::
+
+---
+
+```{=html}
+<!-- ===== CALL TO ACTION ===== -->
+<section class="cta-section">
+  <h2>Interested in Joining the Delftia Project?</h2>
+  <p>
+    Whether you are an undergraduate student, educator, or citizen scientist —
+    there is a place for you. Help us uncover the biology and applications of
+    one of nature's most fascinating microbes.
+  </p>
+  <a href="about.html#get-involved" class="btn-hero btn-primary-hero">Get Involved Today</a>
+  <a href="news.html" class="btn-hero btn-outline-hero">See Latest News</a>
+</section>
+```
+
