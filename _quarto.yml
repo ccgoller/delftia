@@ -31,7 +31,7 @@ website:
   page-footer:
     background: "#4b3210"
     foreground: "white"
-    left: "© 2024 The Delftia Project · NC State University"
+    left: "© 2026 The Delftia Project · NC State University"
     right:
       - text: "Home"
         href: index.qmd
@@ -49,6 +49,5 @@ format:
       - theme.scss
     css: styles.css
     toc: false
-
 
 
