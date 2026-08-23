@@ -45,6 +45,22 @@ Johnston CW, Wyatt MA, Li X, Ibrahim A, Shuster J, Southam G, Magarvey NA. 2013.
 Shetty AR, de Gannes V, Lucas S, Lapidus A, Cheng JF, Goodwin LA, Pitluck S, Peters L, Mikhailova N, Teshima H, Han C, Tapia R, Land M, Hauser LJ, Kyrpides N, Ivanova N, Pagani I, Bradfield CA, Chain P, Denef V, Woyke T, Hickey WJ. 2015. Complete genome sequence of the phenanthrene-degrading bacterium <em>Delftia acidovorans</em> Cs 1-4. <em>SIGS</em>. 1–11. <a href="https://doi.org/10.1186/s40793-015-0012-2" target="_blank" rel="noopener">doi:10.1186/s40793-015-0012-2</a>
 </li>
 
+<li>
+McNeill RM, DeFoor WM, Goller CC, Ott LE. 2015. <em>Delftia</em> spp. elicit a pro-inflammatory response in monocytes. <em>J Young Investigators</em>. 29.
+</li>
+
+<li>
+Riley NG, Goller CC, Leggett ZH, Lewis DM, Ciccone K, Dunn RR. 2020. Catalyzing rapid discovery of gold-precipitating bacterial lineages with university students. <em>PeerJ</em>. 8: e8925. <a href="https://doi.org/10.7717/peerj.8925" target="_blank" rel="noopener">doi:10.7717/peerj.8925</a>
+</li>
+
+<li>
+Spence PL, Goller C, Riley N, Norman D, Leggett Z. 2025. Where is <em>Delftia</em>? Implementing citizen science into the biotechnology and environmental science curriculum. <em>J Microbiol Biol Educ</em>. 26(1): e00088-24. <a href="https://doi.org/10.1128/jmbe.00088-24" target="_blank" rel="noopener">doi:10.1128/jmbe.00088-24</a>
+</li>
+
+<li>
+Sai P, Hoyek A, Goller CC. 2026. <em>Delftia</em> as a small-molecule chassis: lessons from delftibactin and harmane. <em>Appl Environ Microbiol</em>. e00277-25. <a href="https://doi.org/10.1128/aem.00277-25" target="_blank" rel="noopener">doi:10.1128/aem.00277-25</a>
+</li>
+
 </ol>
 
 </div>
