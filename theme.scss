@@ -1,0 +1,36 @@
+/*-- scss:defaults --*/
+
+$primary: #5a3b12;
+$secondary: #6b5a46;
+$success: #8b5e0a;
+$info: #8b5e0a;
+$warning: #d4900a;
+$light: #fdf9f0;
+$dark: #222018;
+
+$body-color: #222018;
+$body-bg: #ffffff;
+$headings-color: #4b3210;
+$link-color: #8b5e0a;
+$link-hover-color: #4b3210;
+$component-active-bg: #5a3b12;
+$border-color: #dcc9a8;
+$input-btn-focus-color-opacity: 0.2;
+$focus-ring-color: rgba(139, 94, 10, 0.25);
+
+$navbar-bg: #4b3210;
+$navbar-fg: #ffffff;
+$navbar-hl: #f0d060;
+$footer-bg: #4b3210;
+$footer-fg: #ffffff;
+
+/*-- scss:rules --*/
+
+.btn-primary {
+  color: #ffffff;
+}
+
+.btn-outline-primary:hover,
+.btn-outline-primary:focus {
+  color: #ffffff;
+}
