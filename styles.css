@@ -521,7 +521,7 @@ button:focus-visible {
   outline-offset: 2px;
 }
 
-/* ---- Reduced-motion (WCAG 2.3.3) ------------------------- */
+/* ---- Reduced-motion (progressive enhancement for vestibular users) ------ */
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
