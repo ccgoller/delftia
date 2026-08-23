@@ -49,5 +49,6 @@ format:
       - theme.scss
     css: styles.css
     toc: false
+    include-before-body: _before-body.html
 
 
