@@ -15,6 +15,7 @@
   --delftia-light:     #f5f5f5;   /* light gray — section bg       */
   --delftia-text:      #111111;   /* black — body text             */
   --delftia-muted:     #555555;   /* medium gray — secondary text  */
+  --delftia-focus:     #005fcc;   /* accessible focus indicator    */
   --card-radius:       12px;
   --transition-fast:   0.2s ease;
 }
@@ -45,6 +46,8 @@ a:hover {
 }
 
 .navbar-brand {
+  display: flex;
+  align-items: center;
   gap: 0.75rem;
 }
 
@@ -57,11 +60,9 @@ a:hover {
 }
 
 a:focus-visible,
-button:focus-visible,
-.navbar-toggler:focus-visible {
-  outline: 3px solid var(--delftia-gold);
+button:focus-visible {
+  outline: 3px solid var(--delftia-focus);
   outline-offset: 3px;
-  border-radius: 6px;
 }
 
 /* ---- Hero section ----------------------------------------- */
