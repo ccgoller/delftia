@@ -32,8 +32,8 @@ jobs:
 
       - name: Clear custom domain
         run: |
-          gh api --method PATCH /repos/${{ github.repository }}/pages \
-            --field cname=null || true
+          echo '{"cname": null}' | gh api --method PATCH \
+            /repos/${{ github.repository }}/pages --input - || true
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
