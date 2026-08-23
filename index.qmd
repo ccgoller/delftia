@@ -22,7 +22,7 @@ page-layout: full
 <section class="stats-bar">
   <div class="stats-grid">
     <div class="stat-item">
-      <div class="stat-number">7+</div>
+      <div class="stat-number">4</div>
       <div class="stat-label">Published References</div>
     </div>
     <div class="stat-item">
