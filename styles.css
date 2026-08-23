@@ -488,6 +488,15 @@ button:focus-visible {
   color: var(--delftia-muted);
 }
 
+.ref-list a {
+  color: var(--delftia-amber);
+}
+
+.ref-list a:hover {
+  color: var(--delftia-umber);
+  text-decoration: underline;
+}
+
 /* ---- Responsive ------------------------------------------- */
 @media (max-width: 768px) {
   .research-spotlight,
