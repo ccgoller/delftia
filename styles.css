@@ -3,17 +3,19 @@
    ============================================================ */
 
 /* ---- Color palette ----------------------------------------
-   Palette is drawn from the Delftia logo's warm gold (#f0d060)
-   and amber (#e09030) tones.  All text/interactive colors are
-   verified WCAG AA (≥ 4.5:1 on white or --delftia-light).
+   Palette is drawn from the Delftia logo's warm gold (#f0d060),
+   amber (#e09030), and dark outline tones. All text/interactive
+   colors are verified WCAG AA (≥ 4.5:1 on white or --delftia-light).
    ------------------------------------------------------------ */
 :root {
-  --delftia-blue:      #1a3a5c;   /* dark navy  — 11.6:1 on white  */
-  --delftia-amber:      #8b5e0a;   /* dark amber — 5.7:1  on white  */
-  --delftia-gold:      #d4900a;   /* logo amber — decorative only  */
-  --delftia-light:     #fdf9f0;   /* warm cream — mirrors logo bg  */
-  --delftia-text:      #222b36;   /* near-black — 14.3:1 on white  */
-  --delftia-muted:     #7a6450;   /* warm taupe — 5.6:1  on white  */
+  --delftia-umber:     #4b3210;   /* deep umber — 11.9:1 on white  */
+  --delftia-amber:     #8b5e0a;   /* dark amber — 5.7:1  on white  */
+  --delftia-gold:      #f0d060;   /* logo gold  — use with dark text */
+  --delftia-gold-hover:#e5c14f;   /* button hover — 6.9:1 with umber  */
+  --delftia-sunrise:   #d4900a;   /* muted gold — decorative emphasis */
+  --delftia-light:     #fdf9f0;   /* warm cream — mirrors logo bg   */
+  --delftia-text:      #222018;   /* warm charcoal — 16.3:1 on white */
+  --delftia-muted:     #6b5a46;   /* warm taupe — 6.6:1  on white   */
   --card-radius:       12px;
   --transition-fast:   0.2s ease;
 }
@@ -26,7 +28,7 @@ body {
 
 h1, h2, h3, h4 {
   font-weight: 700;
-  color: var(--delftia-blue);
+  color: var(--delftia-umber);
 }
 
 a {
@@ -34,7 +36,7 @@ a {
 }
 
 a:hover {
-  color: var(--delftia-blue);
+  color: var(--delftia-umber);
   text-decoration: underline;
 }
 
@@ -49,7 +51,7 @@ a:hover {
 
 /* ---- Hero section ----------------------------------------- */
 .hero-section {
-  background: linear-gradient(135deg, var(--delftia-blue) 0%, var(--delftia-amber) 100%);
+  background: linear-gradient(135deg, var(--delftia-umber) 0%, #6d4a16 58%, var(--delftia-amber) 100%);
   color: white;
   padding: 5rem 2rem 4rem;
   text-align: center;
@@ -99,8 +101,13 @@ a:hover {
 
 .btn-primary-hero {
   background: var(--delftia-gold);
-  color: var(--delftia-blue) !important;
+  color: var(--delftia-umber) !important;
   box-shadow: 0 3px 10px rgba(0,0,0,0.18);
+}
+
+.btn-primary-hero:hover {
+  background: var(--delftia-gold-hover);
+  color: var(--delftia-umber) !important;
 }
 
 .btn-outline-hero {
@@ -158,7 +165,7 @@ a:hover {
 
 .section-title {
   font-size: clamp(1.6rem, 3.5vw, 2.2rem);
-  color: var(--delftia-blue);
+  color: var(--delftia-umber);
   margin-bottom: 0.5rem;
 }
 
@@ -197,12 +204,12 @@ a:hover {
 
 .feature-card h3 {
   font-size: 1.15rem;
-  color: var(--delftia-blue);
+  color: var(--delftia-umber);
   margin-bottom: 0.6rem;
 }
 
 .feature-card p {
-  color: #4a5568;
+  color: var(--delftia-muted);
   font-size: 0.95rem;
   line-height: 1.6;
   margin: 0;
@@ -245,19 +252,19 @@ a:hover {
 .news-card-title {
   font-size: 1.05rem;
   font-weight: 700;
-  color: var(--delftia-blue);
+  color: var(--delftia-umber);
   margin-bottom: 0.5rem;
 }
 
 .news-card-text {
   font-size: 0.9rem;
-  color: #4a5568;
+  color: var(--delftia-muted);
   line-height: 1.55;
 }
 
 /* ---- CTA / call-to-action section ------------------------- */
 .cta-section {
-  background: linear-gradient(135deg, var(--delftia-blue), var(--delftia-amber));
+  background: linear-gradient(135deg, var(--delftia-umber), #6d4a16 58%, var(--delftia-amber));
   color: white;
   padding: 4rem 2rem;
   text-align: center;
@@ -305,12 +312,12 @@ a:hover {
 
 .research-spotlight-text h2 {
   font-size: 1.7rem;
-  color: var(--delftia-blue);
+  color: var(--delftia-umber);
   margin-bottom: 1rem;
 }
 
 .research-spotlight-text p {
-  color: #4a5568;
+  color: var(--delftia-muted);
   line-height: 1.7;
   margin-bottom: 1.2rem;
 }
@@ -353,7 +360,7 @@ a:hover {
   width: 70px;
   height: 70px;
   border-radius: 50%;
-  background: linear-gradient(135deg, var(--delftia-blue), var(--delftia-amber));
+  background: linear-gradient(135deg, var(--delftia-umber), var(--delftia-amber));
   color: white;
   font-size: 1.6rem;
   font-weight: 700;
@@ -430,13 +437,13 @@ a:hover {
 
 .timeline-card h3 {
   font-size: 1.05rem;
-  color: var(--delftia-blue);
+  color: var(--delftia-umber);
   margin-bottom: 0.5rem;
 }
 
 .timeline-card p {
   font-size: 0.91rem;
-  color: #4a5568;
+  color: var(--delftia-muted);
   line-height: 1.6;
   margin: 0;
 }
@@ -457,8 +464,8 @@ a:hover {
   box-shadow: 0 2px 8px rgba(0,0,0,0.06);
   font-size: 0.93rem;
   line-height: 1.6;
-  border-left: 3px solid var(--delftia-gold);
-  color: #4a5568;
+  border-left: 3px solid var(--delftia-sunrise);
+  color: var(--delftia-muted);
 }
 
 /* ---- Responsive ------------------------------------------- */
@@ -481,4 +488,3 @@ a:hover {
     padding: 3rem 1rem;
   }
 }
-
