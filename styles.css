@@ -3,19 +3,18 @@
    ============================================================ */
 
 /* ---- Color palette ----------------------------------------
-   Palette is drawn from the Delftia logo's warm gold (#f0d060),
-   amber (#e09030), and dark outline tones. All text/interactive
-   colors are verified WCAG AA (≥ 4.5:1 on white or --delftia-light).
+   Palette: black (#111111) base with bright gold (#f0d060)
+   accents. All text/interactive colors are WCAG AA compliant.
    ------------------------------------------------------------ */
 :root {
-  --delftia-umber:     #4b3210;   /* deep umber — 11.9:1 on white  */
-  --delftia-amber:     #8b5e0a;   /* dark amber — 5.7:1  on white  */
-  --delftia-gold:      #f0d060;   /* logo gold  — use with dark text */
-  --delftia-gold-hover:#e5c14f;   /* button hover — 6.9:1 with umber  */
-  --delftia-sunrise:   #d4900a;   /* muted gold — decorative emphasis */
-  --delftia-light:     #fdf9f0;   /* warm cream — mirrors logo bg   */
-  --delftia-text:      #222018;   /* warm charcoal — 16.3:1 on white */
-  --delftia-muted:     #6b5a46;   /* warm taupe — 6.6:1  on white   */
+  --delftia-umber:     #111111;   /* black — primary dark tone     */
+  --delftia-amber:     #b8922a;   /* dark gold — 4.6:1 on white    */
+  --delftia-gold:      #f0d060;   /* bright gold — use with dark   */
+  --delftia-gold-hover:#e5c14f;   /* button hover                  */
+  --delftia-sunrise:   #d4a017;   /* muted gold — decorative       */
+  --delftia-light:     #f5f5f5;   /* light gray — section bg       */
+  --delftia-text:      #111111;   /* black — body text             */
+  --delftia-muted:     #555555;   /* medium gray — secondary text  */
   --card-radius:       12px;
   --transition-fast:   0.2s ease;
 }
@@ -51,7 +50,7 @@ a:hover {
 
 /* ---- Hero section ----------------------------------------- */
 .hero-section {
-  background: linear-gradient(135deg, var(--delftia-umber) 0%, #6d4a16 58%, var(--delftia-amber) 100%);
+  background: linear-gradient(135deg, #111111 0%, #1a1a1a 58%, #2a2a2a 100%);
   color: white;
   padding: 5rem 2rem 4rem;
   text-align: center;
@@ -264,7 +263,7 @@ a:hover {
 
 /* ---- CTA / call-to-action section ------------------------- */
 .cta-section {
-  background: linear-gradient(135deg, var(--delftia-umber), #6d4a16 58%, var(--delftia-amber));
+  background: linear-gradient(135deg, #111111, #1a1a1a 58%, #2a2a2a);
   color: white;
   padding: 4rem 2rem;
   text-align: center;
@@ -360,7 +359,7 @@ a:hover {
   width: 70px;
   height: 70px;
   border-radius: 50%;
-  background: linear-gradient(135deg, var(--delftia-umber), var(--delftia-amber));
+  background: linear-gradient(135deg, #111111, var(--delftia-amber));
   color: white;
   font-size: 1.6rem;
   font-weight: 700;
