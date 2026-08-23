@@ -1,1 +1,1 @@
-Sitemap: https://delftia.org/sitemap.xml
+Sitemap: https://ccgoller.github.io/delftia/sitemap.xml
