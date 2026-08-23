@@ -5,24 +5,48 @@ website:
   title: "The Delftia Project"
   site-url: "https://delftia.org"
   favicon: images/cropped-cropped-DelftiaLogo-e1594312941275-32x32.png
+  description: "Exploring the biology and applications of Delftia acidovorans through undergraduate research, citizen science, and community collaboration."
+  open-graph:
+    title: "The Delftia Project"
+    description: "Exploring the biology and applications of Delftia acidovorans through undergraduate research, citizen science, and community collaboration."
 
   navbar:
     logo: images/DelftiaLogo-e1594312941275.png
     logo-alt: "Delftia Project logo"
+    background: "#1a3a5c"
+    foreground: "white"
     left:
       - href: index.qmd
         text: Home
-      - about.qmd
+      - href: about.qmd
+        text: About
       - href: news.qmd
         text: News
       - href: references.qmd
         text: References
+    right:
+      - text: "Get Involved"
+        href: about.qmd#get-involved
+
+  page-footer:
+    background: "#1a3a5c"
+    foreground: "white"
+    left: "© 2024 The Delftia Project · NC State University"
+    right:
+      - text: "Home"
+        href: index.qmd
+      - text: "About"
+        href: about.qmd
+      - text: "News"
+        href: news.qmd
+      - text: "References"
+        href: references.qmd
 
 format:
   html:
     theme: cosmo
     css: styles.css
-    toc: true
+    toc: false
 
 
 
