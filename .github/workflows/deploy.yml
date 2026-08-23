@@ -30,6 +30,13 @@ jobs:
         with:
           path: '_site'
 
+      - name: Clear custom domain
+        run: |
+          echo '{"cname": null}' | gh api --method PATCH \
+            /repos/${{ github.repository }}/pages --input - || true
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
