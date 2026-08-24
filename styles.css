@@ -118,9 +118,7 @@ button:focus-visible {
   pointer-events: none;
 }
 
-.hero-section h1,
-.hero-section .hero-subtitle,
-.hero-section .hero-actions {
+.hero-section .hero-content {
   position: relative;
   z-index: 2;
 }
