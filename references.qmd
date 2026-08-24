@@ -1,5 +1,6 @@
 ---
 title: ""
+pagetitle: "Scientific References"
 page-layout: full
 ---
 
@@ -41,4 +42,3 @@ Sai P, Hoyek A, Goller CC. 2026. <em>Delftia</em> as a small-molecule chassis: l
 </ol>
 
 </div>
-

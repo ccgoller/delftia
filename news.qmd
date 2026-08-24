@@ -1,5 +1,6 @@
 ---
 title: ""
+pagetitle: "News & Updates"
 page-layout: full
 ---
 
@@ -206,4 +207,3 @@ Every year up to 50 million tons of electronics are discarded, with only 12% pro
   <a href="about.html#get-involved" class="btn-hero btn-primary-hero">Get Involved</a>
 </section>
 ```
-

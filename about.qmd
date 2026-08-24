@@ -1,5 +1,6 @@
 ---
 title: ""
+pagetitle: "About The Delftia Project"
 page-layout: full
 ---
 
