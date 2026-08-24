@@ -66,6 +66,13 @@ a:hover {
   padding: 3px 6px;
 }
 
+@media (max-width: 480px) {
+  .navbar-brand .navbar-logo {
+    height: 30px;
+    max-height: 30px;
+  }
+}
+
 a:focus-visible,
 button:focus-visible {
   outline: 3px solid var(--delftia-focus);
@@ -498,6 +505,19 @@ button:focus-visible {
 .ref-list a:hover {
   color: var(--delftia-umber);
   text-decoration: underline;
+}
+
+/* ---- Visually-hidden utility (WCAG — off-screen text for AT) */
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
 }
 
 /* ---- Skip navigation link (WCAG 2.4.1 Bypass Blocks) ----- */
