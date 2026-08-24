@@ -19,6 +19,9 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: Configure GitHub Pages
+        uses: actions/configure-pages@v5
+
       - name: Set up Quarto
         uses: quarto-dev/quarto-actions/setup@v2
 
@@ -29,13 +32,6 @@ jobs:
         uses: actions/upload-pages-artifact@v3
         with:
           path: '_site'
-
-      - name: Clear custom domain
-        run: |
-          echo '{"cname": null}' | gh api --method PATCH \
-            /repos/${{ github.repository }}/pages --input - || true
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Deploy to GitHub Pages
         id: deployment
