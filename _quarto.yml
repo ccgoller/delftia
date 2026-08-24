@@ -28,6 +28,9 @@ website:
     right:
       - text: "Get Involved"
         href: about.qmd#get-involved
+      - icon: github
+        href: https://github.com/ccgoller/delftia
+        aria-label: GitHub repository
 
   page-footer:
     background: "#4b3210"
@@ -51,4 +54,3 @@ format:
     css: styles.css
     toc: false
     include-before-body: _before-body.html
-

@@ -148,8 +148,8 @@ ul.task-list li input[type="checkbox"] {
 
 
 
-<section class="hero-section" style="padding:3.5rem 2rem 3rem;">
-  <h1 style="font-size:clamp(1.8rem,4vw,2.6rem);">News &amp; Updates</h1>
+<section class="hero-section" style="padding:3.5rem 2rem 3rem;" aria-labelledby="news-heading">
+  <h1 id="news-heading" style="font-size:clamp(1.8rem,4vw,2.6rem);">News &amp; Updates</h1>
   <p class="hero-subtitle" style="font-size:1.05rem;">
     Stay up to date with the latest projects, student research, and community events from the Delftia Project.
   </p>
@@ -354,8 +354,8 @@ Every year up to 50 million tons of electronics are discarded, with only 12% pro
 </div>
 <!-- .timeline -->
 </div>
-<section class="cta-section">
-  <h2 class="anchored">Stay Connected</h2>
+<section class="cta-section" aria-labelledby="news-cta-heading">
+  <h2 id="news-cta-heading" class="anchored">Stay Connected</h2>
   <p>
     Follow our progress, participate in annotations, or join a research experience.
     The Delftia Project welcomes newcomers at every level.
@@ -439,7 +439,7 @@ Every year up to 50 million tons of electronics are discarded, with only 12% pro
     }
       var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
       var mailtoRegex = new RegExp(/^mailto:/);
-        var filterRegex = /^https:\/\/ccgoller\.github\.io\/delftia/;
+        var filterRegex = new RegExp("https:\/\/ccgoller\.github\.io\/delftia");
       var isInternal = (href) => {
           return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }
