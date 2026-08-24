@@ -106,7 +106,6 @@ button:focus-visible {
     radial-gradient(circle at 90% 32%, rgba(255, 225, 136, 0.36) 0 2px, transparent 3px),
     linear-gradient(125deg, rgba(255, 214, 98, 0.13), transparent 45%, rgba(255, 193, 62, 0.12));
   z-index: 0;
-  opacity: 0.95;
   pointer-events: none;
 }
 
