@@ -144,8 +144,8 @@ ul.task-list li input[type="checkbox"] {
 
 
 
-<section class="hero-section" style="padding:3.5rem 2rem 3rem;" aria-labelledby="refs-heading">
-  <h1 id="refs-heading" style="font-size:clamp(1.8rem,4vw,2.6rem);">Scientific References</h1>
+<section class="hero-section" style="padding:3.5rem 2rem 3rem;">
+  <h1 style="font-size:clamp(1.8rem,4vw,2.6rem);">Scientific References</h1>
   <p class="hero-subtitle" style="font-size:1.05rem;">
     Publications from the Goller lab on <em>Delftia acidovorans</em> — research driven
     in partnership with undergraduate students.
@@ -160,13 +160,13 @@ ul.task-list li input[type="checkbox"] {
 McNeill RM, DeFoor WM, Goller CC, Ott LE. 2015. <em>Delftia</em> spp. elicit a pro-inflammatory response in monocytes. <em>J Young Investigators</em>. 29.
 </li>
 <li>
-Riley NG, Goller CC, Leggett ZH, Lewis DM, Ciccone K, Dunn RR. 2020. Catalyzing rapid discovery of gold-precipitating bacterial lineages with university students. <em>PeerJ</em>. 8: e8925. <a href="https://doi.org/10.7717/peerj.8925" target="_blank" rel="noopener">doi:10.7717/peerj.8925<span class="visually-hidden"> (opens in new tab)</span></a>
+Riley NG, Goller CC, Leggett ZH, Lewis DM, Ciccone K, Dunn RR. 2020. Catalyzing rapid discovery of gold-precipitating bacterial lineages with university students. <em>PeerJ</em>. 8: e8925. <a href="https://doi.org/10.7717/peerj.8925" target="_blank" rel="noopener">doi:10.7717/peerj.8925</a>
 </li>
 <li>
-Spence PL, Goller C, Riley N, Norman D, Leggett Z. 2025. Where is <em>Delftia</em>? Implementing citizen science into the biotechnology and environmental science curriculum. <em>J Microbiol Biol Educ</em>. 26(1): e00088-24. <a href="https://doi.org/10.1128/jmbe.00088-24" target="_blank" rel="noopener">doi:10.1128/jmbe.00088-24<span class="visually-hidden"> (opens in new tab)</span></a>
+Spence PL, Goller C, Riley N, Norman D, Leggett Z. 2025. Where is <em>Delftia</em>? Implementing citizen science into the biotechnology and environmental science curriculum. <em>J Microbiol Biol Educ</em>. 26(1): e00088-24. <a href="https://doi.org/10.1128/jmbe.00088-24" target="_blank" rel="noopener">doi:10.1128/jmbe.00088-24</a>
 </li>
 <li>
-Sai P, Hoyek A, Goller CC. 2026. <em>Delftia</em> as a small-molecule chassis: lessons from delftibactin and harmane. <em>Appl Environ Microbiol</em>. e00277-25. <a href="https://doi.org/10.1128/aem.00277-25" target="_blank" rel="noopener">doi:10.1128/aem.00277-25<span class="visually-hidden"> (opens in new tab)</span></a>
+Sai P, Hoyek A, Goller CC. 2026. <em>Delftia</em> as a small-molecule chassis: lessons from delftibactin and harmane. <em>Appl Environ Microbiol</em>. e00277-25. <a href="https://doi.org/10.1128/aem.00277-25" target="_blank" rel="noopener">doi:10.1128/aem.00277-25</a>
 </li>
 </ol>
 </div>
@@ -247,7 +247,7 @@ Sai P, Hoyek A, Goller CC. 2026. <em>Delftia</em> as a small-molecule chassis: l
     }
       var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
       var mailtoRegex = new RegExp(/^mailto:/);
-        var filterRegex = new RegExp("https:\/\/ccgoller\.github\.io\/delftia");
+        var filterRegex = /^https:\/\/ccgoller\.github\.io\/delftia/;
       var isInternal = (href) => {
           return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }
