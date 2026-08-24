@@ -7,15 +7,17 @@ page-layout: full
 ```{=html}
 <!-- ===== HERO ===== -->
 <section class="hero-section" aria-labelledby="hero-heading">
-  <h1 id="hero-heading">The Delftia Project</h1>
-  <p class="hero-subtitle">
-    Unlocking the secrets of <em>Delftia acidovorans</em> — a remarkable bacterium
-    that biomineralizes gold, thrives in toxic environments, and holds promise for
-    bioremediation and biotechnology.
-  </p>
-  <div>
-    <a href="about.html#get-involved" class="btn-hero btn-primary-hero">Get Involved</a>
-    <a href="#research-highlights" class="btn-hero btn-outline-hero">Explore Research</a>
+  <div class="hero-content">
+    <h1 id="hero-heading">The Delftia Project</h1>
+    <p class="hero-subtitle">
+      Unlocking the secrets of <em>Delftia acidovorans</em> — a remarkable bacterium
+      that biomineralizes gold, thrives in toxic environments, and holds promise for
+      bioremediation and biotechnology.
+    </p>
+    <div class="hero-actions">
+      <a href="about.html#get-involved" class="btn-hero btn-primary-hero">Get Involved</a>
+      <a href="#research-highlights" class="btn-hero btn-outline-hero">Explore Research</a>
+    </div>
   </div>
 </section>
 
