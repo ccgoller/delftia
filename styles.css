@@ -120,7 +120,7 @@ button:focus-visible {
 
 .hero-section h1,
 .hero-section .hero-subtitle,
-.hero-section > div {
+.hero-section .hero-actions {
   position: relative;
   z-index: 2;
 }
