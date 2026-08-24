@@ -83,6 +83,7 @@ confidence, and connections to pursue scientific careers.
 
 ::: {.research-spotlight .reverse style="background:var(--delftia-light);"}
 ![DELFTIA citizen science graphic](images/DELFTIA.jpg){fig-alt="DELFTIA citizen science community project" style="max-height:380px;width:100%;object-fit:cover;"}
+
 ::: {.research-spotlight-text}
 ### Citizen Science &amp; Community Annotation
 
@@ -173,4 +174,3 @@ there are multiple ways to contribute to the Delftia Project:
 ::: {style="text-align:center;padding:1rem 0 2rem;"}
 For more information, visit [NC State University's website](https://www.ncsu.edu) or check out the [News](news.qmd) section for recent updates and opportunities.
 :::
-
