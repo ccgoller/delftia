@@ -52,11 +52,18 @@ a:hover {
 }
 
 .navbar-brand .navbar-logo {
+  height: 42px;
   max-height: 42px;
   width: auto;
   display: block;
+  flex-shrink: 0;
+  opacity: 1;
+  visibility: visible;
   object-fit: contain;
   filter: drop-shadow(0 2px 6px rgba(0,0,0,0.22));
+  background: white;
+  border-radius: 8px;
+  padding: 3px 6px;
 }
 
 a:focus-visible,
@@ -79,7 +86,7 @@ button:focus-visible {
   content: "";
   position: absolute;
   inset: 0;
-  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60' viewBox='0 0 60 60'%3E%3Ccircle cx='30' cy='30' r='2' fill='rgba(255,255,255,0.06)'/%3E%3C/svg%3E") repeat;
+  background: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='80'%20height='80'%20viewBox='0%200%2080%2080'%3E%3Crect%20x='10'%20y='14'%20width='18'%20height='7'%20rx='3.5'%20fill='rgba(240,208,64,0.18)'%20transform='rotate(-20%2019%2017.5)'/%3E%3Crect%20x='48'%20y='52'%20width='18'%20height='7'%20rx='3.5'%20fill='rgba(240,208,64,0.18)'%20transform='rotate(35%2057%2055.5)'/%3E%3Ccircle%20cx='68'%20cy='12'%20r='3'%20fill='rgba(240,208,64,0.22)'/%3E%3Ccircle%20cx='6'%20cy='58'%20r='2'%20fill='rgba(240,208,64,0.18)'/%3E%3Ccircle%20cx='38'%20cy='34'%20r='2.5'%20fill='rgba(240,208,64,0.15)'/%3E%3Ccircle%20cx='72'%20cy='68'%20r='2'%20fill='rgba(240,208,64,0.18)'/%3E%3Ccircle%20cx='22'%20cy='72'%20r='3'%20fill='rgba(240,208,64,0.12)'/%3E%3C/svg%3E") repeat;
   pointer-events: none;
 }
 
@@ -482,6 +489,48 @@ button:focus-visible {
   line-height: 1.6;
   border-left: 3px solid var(--delftia-sunrise);
   color: var(--delftia-muted);
+}
+
+.ref-list a {
+  color: var(--delftia-amber);
+}
+
+.ref-list a:hover {
+  color: var(--delftia-umber);
+  text-decoration: underline;
+}
+
+/* ---- Skip navigation link (WCAG 2.4.1 Bypass Blocks) ----- */
+.skip-link {
+  position: absolute;
+  top: -100%;
+  left: 0;
+  z-index: 9999;
+  padding: 0.5rem 1.2rem;
+  background: var(--delftia-umber);
+  color: white !important;
+  font-weight: 600;
+  text-decoration: none !important;
+  border-radius: 0 0 8px 0;
+  transition: top 0.15s ease;
+}
+
+.skip-link:focus {
+  top: 0;
+  outline: 3px solid var(--delftia-focus);
+  outline-offset: 2px;
+}
+
+/* ---- Reduced-motion (progressive enhancement for vestibular users) ------ */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }
 
 /* ---- Responsive ------------------------------------------- */

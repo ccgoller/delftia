@@ -1,5 +1,6 @@
 ---
 title: ""
+pagetitle: "The Delftia Project"
 page-layout: full
 ---
 
@@ -153,4 +154,3 @@ Today, *Delftia* is found in waste-contaminated soil, water systems, and drains.
   <a href="news.html" class="btn-hero btn-outline-hero">See Latest News</a>
 </section>
 ```
-
