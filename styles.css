@@ -82,9 +82,9 @@ button:focus-visible {
 /* ---- Hero section ----------------------------------------- */
 .hero-section {
   background:
-    radial-gradient(circle at 18% 18%, rgba(255, 220, 120, 0.22), transparent 40%),
-    radial-gradient(circle at 82% 30%, rgba(255, 196, 70, 0.2), transparent 46%),
-    linear-gradient(140deg, #2c1c04 0%, #5f3f0d 42%, #8f6014 62%, #352307 100%);
+    radial-gradient(circle at 18% 18%, rgba(255, 220, 120, 0.2), transparent 40%),
+    radial-gradient(circle at 82% 30%, rgba(255, 196, 70, 0.18), transparent 46%),
+    linear-gradient(140deg, #241703 0%, #54370d 42%, #7d5512 62%, #2e1e06 100%);
   color: white;
   padding: 5rem 2rem 4rem;
   text-align: center;
@@ -113,7 +113,7 @@ button:focus-visible {
   content: "";
   position: absolute;
   inset: 0;
-  background: linear-gradient(180deg, rgba(0, 0, 0, 0.26) 0%, rgba(0, 0, 0, 0.4) 100%);
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.42) 0%, rgba(0, 0, 0, 0.58) 100%);
   z-index: 1;
   pointer-events: none;
 }
@@ -134,10 +134,11 @@ button:focus-visible {
 
 .hero-section .hero-subtitle {
   font-size: clamp(1rem, 2.5vw, 1.3rem);
-  opacity: 0.92;
+  color: #ffffff;
   max-width: 680px;
   margin: 0 auto 2.2rem;
   line-height: 1.6;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.42);
 }
 
 /* ---- Buttons ---------------------------------------------- */
