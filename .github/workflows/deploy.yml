@@ -21,15 +21,6 @@ jobs:
 
       - name: Configure GitHub Pages
         uses: actions/configure-pages@v5
-        with:
-          enablement: true
-
-      - name: Clear custom domain
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          gh api -X PATCH /repos/${{ github.repository }}/pages \
-            --input - <<< '{"cname": null}' || echo "Warning: could not clear custom domain (may not be set)"
 
       - name: Set up Quarto
         uses: quarto-dev/quarto-actions/setup@v2
