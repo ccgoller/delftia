@@ -29,8 +29,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           gh api -X PATCH /repos/${{ github.repository }}/pages \
-            --input - <<< '{"cname": null}' \
-            --silent || true
+            --input - <<< '{"cname": null}' || echo "Warning: could not clear custom domain (may not be set)"
 
       - name: Set up Quarto
         uses: quarto-dev/quarto-actions/setup@v2
