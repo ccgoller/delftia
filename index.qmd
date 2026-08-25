@@ -2,6 +2,7 @@
 title: ""
 pagetitle: "The Delftia Project"
 page-layout: full
+body-classes: home
 ---
 
 ```{=html}

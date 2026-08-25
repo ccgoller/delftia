@@ -581,6 +581,94 @@ button:focus-visible {
   outline-offset: 2px;
 }
 
+/* ---- WCAG non-homepage contrast overrides -------------------------
+   body.home is set only on index.qmd; all other pages get these rules.
+   Target thresholds:
+     Normal text  ≥ 4.5:1  (WCAG 2.1 AA 1.4.3)
+     Large text   ≥ 3:1    (WCAG 2.1 AA 1.4.3 — 24px+ regular or 18.66px+ bold)
+     UI / focus   ≥ 3:1    (WCAG 2.1 AA 1.4.11)
+   All ratios below are against #ffffff (#faf7ef light-bg ≈ 0.93 rel. lum.).
+   -------------------------------------------------------------------- */
+
+/* Non-home accessible color tokens --------------------------------- */
+body:not(.home) {
+  --page-text:        #1a1208;   /* body text — 19:1 on white          */
+  --page-secondary:   #3b2a0e;   /* secondary / muted — 13.8:1 on white*/
+  --page-link:        #7a5500;   /* links — 5.8:1 on white             */
+  --page-link-hover:  #120901;   /* hovered link — 21:1 on white       */
+  --page-link-visited:#5b3fa0;   /* visited — 6.0:1 on white           */
+  --page-focus:       #005fcc;   /* focus outline — accessible blue     */
+}
+
+/* Base text -------------------------------------------------------- */
+body:not(.home) {
+  color: var(--page-text);
+}
+
+body:not(.home) h1,
+body:not(.home) h2,
+body:not(.home) h3,
+body:not(.home) h4,
+body:not(.home) h5,
+body:not(.home) h6 {
+  color: var(--delftia-umber);
+}
+
+body:not(.home) p,
+body:not(.home) li,
+body:not(.home) dt,
+body:not(.home) dd,
+body:not(.home) label,
+body:not(.home) td,
+body:not(.home) th {
+  color: var(--page-text);
+}
+
+/* Links ------------------------------------------------------------ */
+body:not(.home) a:not(.btn):not(.nav-link):not(.navbar-brand):not(.skip-link):not([class*="btn-"]) {
+  color: var(--page-link);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+body:not(.home) a:not(.btn):not(.nav-link):not(.navbar-brand):not(.skip-link):not([class*="btn-"]):hover,
+body:not(.home) a:not(.btn):not(.nav-link):not(.navbar-brand):not(.skip-link):not([class*="btn-"]):focus {
+  color: var(--page-link-hover);
+  text-decoration: underline;
+}
+
+body:not(.home) a:not(.btn):not(.nav-link):not(.navbar-brand):not(.skip-link):not([class*="btn-"]):visited {
+  color: var(--page-link-visited);
+}
+
+/* Secondary / muted text ------------------------------------------- */
+body:not(.home) .section-subtitle,
+body:not(.home) .feature-card p,
+body:not(.home) .news-card-text,
+body:not(.home) .timeline-card p,
+body:not(.home) .ref-list li,
+body:not(.home) .research-spotlight-text p,
+body:not(.home) .team-card .team-role {
+  color: var(--page-secondary);
+}
+
+/* Stat label (small uppercase text — needs ≥ 4.5:1) --------------- */
+body:not(.home) .stat-item .stat-label {
+  color: var(--page-secondary);
+}
+
+/* Focus styles ----------------------------------------------------- */
+body:not(.home) :focus-visible {
+  outline: 3px solid var(--page-focus);
+  outline-offset: 3px;
+}
+
+body:not(.home) a:focus-visible,
+body:not(.home) button:focus-visible {
+  outline: 3px solid var(--page-focus);
+  outline-offset: 3px;
+}
+
 /* ---- Reduced-motion (progressive enhancement for vestibular users) ------ */
 @media (prefers-reduced-motion: reduce) {
   *,
