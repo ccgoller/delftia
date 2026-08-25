@@ -59,7 +59,7 @@ a:hover {
 #quarto-header .nav-link,
 #quarto-header .nav-link .menu-text,
 #quarto-header .quarto-navigation-tool {
-  color: #fff8dd !important;
+  color: var(--delftia-cream) !important;
 }
 
 .navbar-brand:hover,
