@@ -43,8 +43,34 @@ a:hover {
 }
 
 /* ---- Navbar ----------------------------------------------- */
+.headroom,
+#quarto-header,
+#quarto-header .navbar,
+#quarto-header .navbar-collapse {
+  background-color: #1b1002;
+}
+
 .navbar {
   box-shadow: 0 2px 10px rgba(0,0,0,0.12);
+}
+
+.navbar-brand,
+#quarto-header .navbar-title,
+#quarto-header .nav-link,
+#quarto-header .nav-link .menu-text,
+#quarto-header .quarto-navigation-tool {
+  color: #fff8dd !important;
+}
+
+.navbar-brand:hover,
+.navbar-brand:focus,
+#quarto-header .nav-link:hover,
+#quarto-header .nav-link:focus,
+#quarto-header .nav-link.active,
+#quarto-header .nav-link.active .menu-text,
+#quarto-header .quarto-navigation-tool:hover,
+#quarto-header .quarto-navigation-tool:focus {
+  color: var(--delftia-gold-glow) !important;
 }
 
 .navbar-brand {
