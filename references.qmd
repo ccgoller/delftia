@@ -16,7 +16,7 @@ page-layout: full
 
 <div style="max-width:900px;margin:0 auto;padding:3rem 1.5rem;">
 
-<p style="background:#fff8dd;border-left:4px solid #8a6200;padding:1rem 1.4rem;border-radius:8px;font-size:0.95rem;color:#4b3a21;margin-bottom:2rem;">
+<p style="background:var(--delftia-cream);border-left:4px solid var(--delftia-amber);padding:1rem 1.4rem;border-radius:8px;font-size:0.95rem;color:var(--delftia-muted);margin-bottom:2rem;">
   <strong>Note:</strong> All references listed here include Goller as an author and reflect
   collaborative work conducted with undergraduate researchers.
 </p>
