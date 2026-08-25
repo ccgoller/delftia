@@ -14,7 +14,7 @@ website:
   navbar:
     logo: images/DelftiaLogo-e1594312941275.png
     logo-alt: "Delftia Project logo"
-    background: "#4b3210"
+    background: "#1b1002"
     foreground: "white"
     left:
       - href: index.qmd
@@ -33,7 +33,7 @@ website:
         aria-label: GitHub repository
 
   page-footer:
-    background: "#4b3210"
+    background: "#1b1002"
     foreground: "white"
     left: "© 2026 The Delftia Project · NC State University"
     right:

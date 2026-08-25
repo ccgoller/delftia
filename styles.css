@@ -7,14 +7,16 @@
    accents. All text/interactive colors are WCAG AA compliant.
    ------------------------------------------------------------ */
 :root {
-  --delftia-umber:     #111111;   /* black — primary dark tone     */
-  --delftia-amber:     #b8922a;   /* dark gold — 4.6:1 on white    */
-  --delftia-gold:      #f0d060;   /* bright gold — use with dark   */
-  --delftia-gold-hover:#e5c14f;   /* button hover                  */
-  --delftia-sunrise:   #d4a017;   /* muted gold — decorative       */
-  --delftia-light:     #f5f5f5;   /* light gray — section bg       */
-  --delftia-text:      #111111;   /* black — body text             */
-  --delftia-muted:     #555555;   /* medium gray — secondary text  */
+  --delftia-umber:     #130d05;   /* near-black umber              */
+  --delftia-amber:     #8a6200;   /* readable gold on light bg     */
+  --delftia-gold:      #ffd76a;   /* bright gold — use with dark   */
+  --delftia-gold-glow: #fff0b8;   /* pale gold highlight           */
+  --delftia-gold-hover:#ffe291;   /* brighter gold hover           */
+  --delftia-cream:     #fff8dd;   /* warm light accent background  */
+  --delftia-sunrise:   #bf8400;   /* muted gold — decorative       */
+  --delftia-light:     #faf7ef;   /* warm light section bg         */
+  --delftia-text:      #1c1408;   /* body text                     */
+  --delftia-muted:     #4b3a21;   /* dark muted secondary text     */
   --delftia-focus:     #005fcc;   /* accessible focus indicator    */
   --card-radius:       12px;
   --transition-fast:   0.2s ease;
@@ -82,10 +84,10 @@ button:focus-visible {
 /* ---- Hero section ----------------------------------------- */
 .hero-section {
   background:
-    radial-gradient(circle at 18% 18%, rgba(255, 220, 120, 0.2), transparent 40%),
-    radial-gradient(circle at 82% 30%, rgba(255, 196, 70, 0.18), transparent 46%),
-    linear-gradient(140deg, #241703 0%, #54370d 42%, #7d5512 62%, #2e1e06 100%);
-  color: white;
+    radial-gradient(circle at 16% 18%, rgba(255, 229, 138, 0.28), transparent 42%),
+    radial-gradient(circle at 84% 28%, rgba(255, 208, 98, 0.24), transparent 48%),
+    linear-gradient(140deg, #120901 0%, #251502 38%, #4a2a05 62%, #110902 100%);
+  color: #ffffff;
   padding: 5rem 2rem 4rem;
   text-align: center;
   position: relative;
@@ -113,7 +115,7 @@ button:focus-visible {
   content: "";
   position: absolute;
   inset: 0;
-  background: linear-gradient(180deg, rgba(0, 0, 0, 0.42) 0%, rgba(0, 0, 0, 0.58) 100%);
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.56) 0%, rgba(0, 0, 0, 0.74) 100%);
   z-index: 1;
   pointer-events: none;
 }
@@ -124,19 +126,24 @@ button:focus-visible {
 }
 
 .hero-section h1 {
-  color: white;
+  color: var(--delftia-gold-glow);
   font-size: clamp(2rem, 5vw, 3.2rem);
   margin-bottom: 1rem;
-  text-shadow: 0 2px 6px rgba(0,0,0,0.25);
+  text-shadow: 0 3px 10px rgba(0,0,0,0.42);
 }
 
 .hero-section .hero-subtitle {
   font-size: clamp(1rem, 2.5vw, 1.3rem);
-  color: #ffffff;
+  color: #fff4cf;
   max-width: 680px;
   margin: 0 auto 2.2rem;
   line-height: 1.6;
-  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.42);
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.5);
+}
+
+.hero-section .hero-subtitle em,
+.cta-section p em {
+  color: var(--delftia-gold);
 }
 
 /* ---- Buttons ---------------------------------------------- */
@@ -157,24 +164,27 @@ button:focus-visible {
 }
 
 .btn-primary-hero {
-  background: var(--delftia-gold);
+  background: linear-gradient(135deg, var(--delftia-gold-glow), var(--delftia-gold) 60%, #efbe3f);
   color: var(--delftia-umber) !important;
-  box-shadow: 0 3px 10px rgba(0,0,0,0.18);
+  border: 1px solid rgba(255, 237, 178, 0.75);
+  box-shadow: 0 10px 24px rgba(0,0,0,0.22), 0 0 22px rgba(255, 217, 106, 0.18);
 }
 
 .btn-primary-hero:hover {
-  background: var(--delftia-gold-hover);
+  background: linear-gradient(135deg, #fff5cf, var(--delftia-gold-hover) 60%, #f7c951);
   color: var(--delftia-umber) !important;
 }
 
 .btn-outline-hero {
   background: transparent;
-  color: white !important;
-  border: 2px solid rgba(255,255,255,0.8);
+  color: var(--delftia-gold-glow) !important;
+  border: 2px solid rgba(255, 230, 150, 0.95);
+  box-shadow: inset 0 0 0 1px rgba(255, 214, 98, 0.08);
 }
 
 .btn-outline-hero:hover {
-  background: rgba(255,255,255,0.12);
+  background: rgba(255, 215, 106, 0.14);
+  color: #fff9e6 !important;
 }
 
 /* ---- Stats bar -------------------------------------------- */
@@ -321,20 +331,23 @@ button:focus-visible {
 
 /* ---- CTA / call-to-action section ------------------------- */
 .cta-section {
-  background: linear-gradient(135deg, #111111, #1a1a1a 58%, #2a2a2a);
-  color: white;
+  background:
+    radial-gradient(circle at 15% 20%, rgba(255, 220, 120, 0.12), transparent 34%),
+    linear-gradient(135deg, #110902, #1d1203 52%, #2e1c04);
+  color: #fff8e1;
   padding: 4rem 2rem;
   text-align: center;
 }
 
 .cta-section h2 {
-  color: white;
+  color: var(--delftia-gold-glow);
   font-size: clamp(1.6rem, 3vw, 2.2rem);
   margin-bottom: 0.8rem;
+  text-shadow: 0 3px 10px rgba(0, 0, 0, 0.4);
 }
 
 .cta-section p {
-  opacity: 0.9;
+  color: #fff0c4;
   max-width: 580px;
   margin: 0 auto 2rem;
   font-size: 1.05rem;
@@ -382,7 +395,7 @@ button:focus-visible {
 /* ---- Badge / tag chips ------------------------------------ */
 .tag-chip {
   display: inline-block;
-  background: var(--delftia-light);
+  background: var(--delftia-cream);
   color: var(--delftia-amber);
   border: 1px solid var(--delftia-amber);
   border-radius: 50px;
