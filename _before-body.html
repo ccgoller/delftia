@@ -1,17 +1,35 @@
 <a class="skip-link" href="#quarto-document-content">Skip to main content</a>
 <script>
   (function () {
-    const currentScript = document.currentScript;
-    const skipLink = currentScript && currentScript.previousElementSibling;
-    const firstBodyElement = document.body.firstElementChild;
-    const navToggle = document.querySelector(".navbar-toggler");
+    const moveSkipLink = () => {
+      const skipLink = document.querySelector(".skip-link");
+      const firstBodyElement = document.body.firstElementChild;
 
-    if (skipLink && firstBodyElement && skipLink.classList.contains("skip-link")) {
-      document.body.insertBefore(skipLink, firstBodyElement);
-    }
+      if (
+        skipLink &&
+        firstBodyElement &&
+        skipLink.classList.contains("skip-link") &&
+        skipLink !== firstBodyElement
+      ) {
+        document.body.insertBefore(skipLink, firstBodyElement);
+      }
+    };
 
-    if (navToggle) {
-      navToggle.removeAttribute("role");
+    const fixNavToggleRole = () => {
+      document
+        .querySelectorAll(".navbar-toggler[role='menu']")
+        .forEach((navToggle) => navToggle.removeAttribute("role"));
+    };
+
+    moveSkipLink();
+
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", () => {
+        moveSkipLink();
+        fixNavToggleRole();
+      });
+    } else {
+      fixNavToggleRole();
     }
   })();
 </script>

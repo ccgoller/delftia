@@ -6,8 +6,8 @@ page-layout: full
 
 ```{=html}
 <!-- ===== HERO ===== -->
-<section class="hero-section">
-  <h1>The Delftia Project</h1>
+<section class="hero-section" aria-labelledby="home-hero-heading">
+  <h1 id="home-hero-heading">The Delftia Project</h1>
   <p class="hero-subtitle">
     Unlocking the secrets of <em>Delftia acidovorans</em> — a remarkable bacterium
     that biomineralizes gold, thrives in toxic environments, and holds promise for
@@ -50,11 +50,11 @@ page-layout: full
 
 Today, *Delftia* is found in waste-contaminated soil, water systems, and drains. Beyond its remarkable environmental capabilities, it is studied as an opportunistic pathogen and explored for applications in:
 
-<span class="tag-chip">🏅 Gold Biomineralization</span>
-<span class="tag-chip">♻️ E-Waste Recycling</span>
-<span class="tag-chip">🌿 Bioremediation</span>
-<span class="tag-chip">🧬 Genomics</span>
-<span class="tag-chip">🔬 Undergraduate Research</span>
+<span class="tag-chip"><span aria-hidden="true">🏅</span> Gold Biomineralization</span>
+<span class="tag-chip"><span aria-hidden="true">♻️</span> E-Waste Recycling</span>
+<span class="tag-chip"><span aria-hidden="true">🌿</span> Bioremediation</span>
+<span class="tag-chip"><span aria-hidden="true">🧬</span> Genomics</span>
+<span class="tag-chip"><span aria-hidden="true">🔬</span> Undergraduate Research</span>
 
 <br/><br/>
 <a href="references.html" class="btn-hero btn-primary-hero" style="font-size:0.9rem;padding:0.55rem 1.4rem;">Read the Literature →</a>
@@ -67,9 +67,9 @@ Today, *Delftia* is found in waste-contaminated soil, water systems, and drains.
 
 ```{=html}
 <!-- ===== RESEARCH HIGHLIGHTS ===== -->
-<section id="research-highlights" class="section-alt" style="padding: 4rem 1.5rem;">
+<section id="research-highlights" class="section-alt" aria-labelledby="research-highlights-heading" style="padding: 4rem 1.5rem;">
   <div style="max-width:1100px;margin:0 auto;text-align:center;">
-    <h2 class="section-title">Research Highlights</h2>
+    <h2 id="research-highlights-heading" class="section-title">Research Highlights</h2>
     <p class="section-subtitle">Three pillars of the Delftia Project — from the classroom to the community</p>
     <div class="card-grid">
 
@@ -143,8 +143,8 @@ Today, *Delftia* is found in waste-contaminated soil, water systems, and drains.
 
 ```{=html}
 <!-- ===== CALL TO ACTION ===== -->
-<section class="cta-section">
-  <h2>Interested in Joining the Delftia Project?</h2>
+<section class="cta-section" aria-labelledby="home-cta-heading">
+  <h2 id="home-cta-heading">Interested in Joining the Delftia Project?</h2>
   <p>
     Whether you are an undergraduate student, educator, or citizen scientist —
     there is a place for you. Help us uncover the biology and applications of

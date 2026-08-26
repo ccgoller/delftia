@@ -5,8 +5,8 @@ page-layout: full
 ---
 
 ```{=html}
-<section class="hero-section" style="padding:3.5rem 2rem 3rem;">
-  <h1 style="font-size:clamp(1.8rem,4vw,2.6rem);">About The Delftia Project</h1>
+<section class="hero-section" aria-labelledby="about-hero-heading" style="padding:3.5rem 2rem 3rem;">
+  <h1 id="about-hero-heading" style="font-size:clamp(1.8rem,4vw,2.6rem);">About The Delftia Project</h1>
   <p class="hero-subtitle" style="font-size:1.05rem;">
     A community of undergraduate researchers, citizen scientists, and educators
     dedicated to exploring one of microbiology's most extraordinary organisms.
@@ -108,27 +108,27 @@ The Delftia Project thrives because of the contributions of many dedicated peopl
 ```{=html}
 <div class="team-grid">
   <div class="team-card">
-    <div class="team-avatar">CG</div>
+    <div class="team-avatar" aria-hidden="true">CG</div>
     <h4>Dr. Carlos Goller</h4>
     <div class="team-role">Principal Investigator · NC State</div>
   </div>
   <div class="team-card">
-    <div class="team-avatar">LR</div>
+    <div class="team-avatar" aria-hidden="true">LR</div>
     <h4>Lauren Ramilo</h4>
     <div class="team-role">Undergraduate Researcher</div>
   </div>
   <div class="team-card">
-    <div class="team-avatar">DN</div>
+    <div class="team-avatar" aria-hidden="true">DN</div>
     <h4>Daiza Norman</h4>
     <div class="team-role">BIT Research Assistant</div>
   </div>
   <div class="team-card">
-    <div class="team-avatar">RT</div>
+    <div class="team-avatar" aria-hidden="true">RT</div>
     <h4>Rabeya Tahir</h4>
     <div class="team-role">WikiEDU &amp; Graphics Lead</div>
   </div>
   <div class="team-card">
-    <div class="team-avatar">+</div>
+    <div class="team-avatar" aria-hidden="true">+</div>
     <h4>You?</h4>
     <div class="team-role">Future Researcher</div>
   </div>
