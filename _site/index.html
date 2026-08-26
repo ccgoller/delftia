@@ -164,7 +164,6 @@ ul.task-list li input[type="checkbox"] {
         .forEach((navToggle) => navToggle.removeAttribute("role"));
     };
     moveSkipLink();
-    moveSkipLink();
     fixNavToggleRole();
 
     if (document.readyState === "loading") {
@@ -194,7 +193,7 @@ ul.task-list li input[type="checkbox"] {
 </section>
 
 <!-- ===== STATS BAR ===== -->
-<section class="stats-bar">
+<section class="stats-bar" aria-label="Project statistics">
   <div class="stats-grid">
     <div class="stat-item">
       <div class="stat-number">4</div>
