@@ -74,7 +74,7 @@ Today, *Delftia* is found in waste-contaminated soil, water systems, and drains.
     <div class="card-grid">
 
       <div class="feature-card">
-        <div class="card-icon">🎓</div>
+        <div class="card-icon" aria-hidden="true">🎓</div>
         <h3>Undergraduate Research</h3>
         <p>
           Students in MB 360 and LSC 170 engage in hands-on course-based research experiences —
@@ -84,7 +84,7 @@ Today, *Delftia* is found in waste-contaminated soil, water systems, and drains.
       </div>
 
       <div class="feature-card">
-        <div class="card-icon">🤖</div>
+        <div class="card-icon" aria-hidden="true">🤖</div>
         <h3>Genomics &amp; Automation</h3>
         <p>
           High-throughput sequencing and automation tools help us decode the genome of
@@ -94,7 +94,7 @@ Today, *Delftia* is found in waste-contaminated soil, water systems, and drains.
       </div>
 
       <div class="feature-card">
-        <div class="card-icon">🌐</div>
+        <div class="card-icon" aria-hidden="true">🌐</div>
         <h3>Citizen Science</h3>
         <p>
           Community annotators collaborate via Hypothes.is to mine the scientific literature

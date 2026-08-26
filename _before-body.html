@@ -1,1 +1,17 @@
 <a class="skip-link" href="#quarto-document-content">Skip to main content</a>
+<script>
+  (function () {
+    const currentScript = document.currentScript;
+    const skipLink = currentScript && currentScript.previousElementSibling;
+    const header = document.getElementById("quarto-header");
+    const navToggle = document.querySelector(".navbar-toggler");
+
+    if (skipLink && header && skipLink.classList.contains("skip-link")) {
+      document.body.insertBefore(skipLink, header);
+    }
+
+    if (navToggle) {
+      navToggle.removeAttribute("role");
+    }
+  })();
+</script>
