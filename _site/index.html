@@ -142,6 +142,22 @@ ul.task-list li input[type="checkbox"] {
 <!-- main -->
 <main class="content column-page" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"></header>
 <a class="skip-link" href="#quarto-document-content">Skip to main content</a>
+<script>
+  (function () {
+    const currentScript = document.currentScript;
+    const skipLink = currentScript && currentScript.previousElementSibling;
+    const header = document.getElementById("quarto-header");
+    const navToggle = document.querySelector(".navbar-toggler");
+
+    if (skipLink && header && skipLink.classList.contains("skip-link")) {
+      document.body.insertBefore(skipLink, header);
+    }
+
+    if (navToggle) {
+      navToggle.removeAttribute("role");
+    }
+  })();
+</script>
 
 
 
@@ -206,7 +222,7 @@ ul.task-list li input[type="checkbox"] {
     <div class="card-grid">
 
       <div class="feature-card">
-        <div class="card-icon">🎓</div>
+        <div class="card-icon" aria-hidden="true">🎓</div>
         <h3 class="anchored">Undergraduate Research</h3>
         <p>
           Students in MB 360 and LSC 170 engage in hands-on course-based research experiences —
@@ -216,7 +232,7 @@ ul.task-list li input[type="checkbox"] {
       </div>
 
       <div class="feature-card">
-        <div class="card-icon">🤖</div>
+        <div class="card-icon" aria-hidden="true">🤖</div>
         <h3 class="anchored">Genomics &amp; Automation</h3>
         <p>
           High-throughput sequencing and automation tools help us decode the genome of
@@ -226,7 +242,7 @@ ul.task-list li input[type="checkbox"] {
       </div>
 
       <div class="feature-card">
-        <div class="card-icon">🌐</div>
+        <div class="card-icon" aria-hidden="true">🌐</div>
         <h3 class="anchored">Citizen Science</h3>
         <p>
           Community annotators collaborate via Hypothes.is to mine the scientific literature
@@ -372,7 +388,7 @@ ul.task-list li input[type="checkbox"] {
     }
       var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
       var mailtoRegex = new RegExp(/^mailto:/);
-        var filterRegex = /^https:\/\/ccgoller\.github\.io\/delftia/;
+        var filterRegex = new RegExp("https:\/\/ccgoller\.github\.io\/delftia");
       var isInternal = (href) => {
           return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }

@@ -142,6 +142,22 @@ ul.task-list li input[type="checkbox"] {
 <!-- main -->
 <main class="content column-page" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"></header>
 <a class="skip-link" href="#quarto-document-content">Skip to main content</a>
+<script>
+  (function () {
+    const currentScript = document.currentScript;
+    const skipLink = currentScript && currentScript.previousElementSibling;
+    const header = document.getElementById("quarto-header");
+    const navToggle = document.querySelector(".navbar-toggler");
+
+    if (skipLink && header && skipLink.classList.contains("skip-link")) {
+      document.body.insertBefore(skipLink, header);
+    }
+
+    if (navToggle) {
+      navToggle.removeAttribute("role");
+    }
+  })();
+</script>
 
 
 
@@ -163,7 +179,7 @@ ul.task-list li input[type="checkbox"] {
 <h2 class="anchored" data-anchor-id="what-we-do">What We Do</h2>
 <div class="card-grid" style="margin-bottom:2rem;">
   <div class="feature-card">
-    <div class="card-icon">🔬</div>
+    <div class="card-icon" aria-hidden="true">🔬</div>
     <h3 class="anchored">Research &amp; Discovery</h3>
     <p>
       Investigating the genomics, metabolism, and environmental roles of <em>Delftia</em>
@@ -171,7 +187,7 @@ ul.task-list li input[type="checkbox"] {
     </p>
   </div>
   <div class="feature-card">
-    <div class="card-icon">🎓</div>
+    <div class="card-icon" aria-hidden="true">🎓</div>
     <h3 class="anchored">Undergraduate Education</h3>
     <p>
       Integrating <em>Delftia</em> research into course-based learning experiences
@@ -179,7 +195,7 @@ ul.task-list li input[type="checkbox"] {
     </p>
   </div>
   <div class="feature-card">
-    <div class="card-icon">🌐</div>
+    <div class="card-icon" aria-hidden="true">🌐</div>
     <h3 class="anchored">Citizen Science</h3>
     <p>
       Engaging the broader community in collaborative annotation and scientific
@@ -187,7 +203,7 @@ ul.task-list li input[type="checkbox"] {
     </p>
   </div>
   <div class="feature-card">
-    <div class="card-icon">♻️</div>
+    <div class="card-icon" aria-hidden="true">♻️</div>
     <h3 class="anchored">Applied Biotechnology</h3>
     <p>
       Exploring <em>Delftia</em>'s potential in bioremediation, gold recovery from
@@ -266,7 +282,7 @@ ul.task-list li input[type="checkbox"] {
 <p>Whether you are a student, educator, or simply curious about microbiology, there are multiple ways to contribute to the Delftia Project:</p>
 <div class="card-grid" style="margin-top:1.5rem;margin-bottom:2rem;">
   <div class="feature-card" style="border-left-color:var(--delftia-gold);">
-    <div class="card-icon">🧪</div>
+    <div class="card-icon" aria-hidden="true">🧪</div>
     <h3 class="anchored">Undergraduate Researcher</h3>
     <p>
       Join our lab or enroll in a course-based research experience at NC State.
@@ -274,7 +290,7 @@ ul.task-list li input[type="checkbox"] {
     </p>
   </div>
   <div class="feature-card" style="border-left-color:var(--delftia-gold);">
-    <div class="card-icon">✏️</div>
+    <div class="card-icon" aria-hidden="true">✏️</div>
     <h3 class="anchored">Citizen Scientist</h3>
     <p>
       Participate in our Hypothes.is annotation groups or WikiEDU programs.
@@ -282,7 +298,7 @@ ul.task-list li input[type="checkbox"] {
     </p>
   </div>
   <div class="feature-card" style="border-left-color:var(--delftia-gold);">
-    <div class="card-icon">🤝</div>
+    <div class="card-icon" aria-hidden="true">🤝</div>
     <h3 class="anchored">Collaborator</h3>
     <p>
       Are you a researcher, educator, or institution with shared interests?
@@ -372,7 +388,7 @@ ul.task-list li input[type="checkbox"] {
     }
       var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
       var mailtoRegex = new RegExp(/^mailto:/);
-        var filterRegex = /^https:\/\/ccgoller\.github\.io\/delftia/;
+        var filterRegex = new RegExp("https:\/\/ccgoller\.github\.io\/delftia");
       var isInternal = (href) => {
           return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }
