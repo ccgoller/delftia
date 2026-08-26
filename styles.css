@@ -466,7 +466,7 @@ button:focus-visible {
   margin: 0 auto 1rem;
 }
 
-.team-card h4 {
+.team-card h3 {
   font-size: 1rem;
   margin-bottom: 0.3rem;
 }
@@ -531,7 +531,7 @@ button:focus-visible {
   border-left: 3px solid var(--delftia-amber);
 }
 
-.timeline-card h3 {
+.timeline-card h2 {
   font-size: 1.05rem;
   color: var(--delftia-umber);
   margin-bottom: 0.5rem;
