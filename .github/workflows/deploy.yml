@@ -42,21 +42,28 @@ jobs:
           PAGE_URL: ${{ steps.deployment.outputs.page_url }}
         run: |
           set -euo pipefail
+          max_attempts=12
+          sleep_seconds=10
           pages=("" "about.html" "news.html" "references.html")
+          base_url="${PAGE_URL%/}"
           for page in "${pages[@]}"; do
-            url="${PAGE_URL}${page}"
+            if [ -n "${page}" ]; then
+              url="${base_url}/${page}"
+            else
+              url="${base_url}/"
+            fi
             echo "Checking ${url}"
-            for attempt in {1..12}; do
-              status_code="$(curl -sS -L -o /dev/null -w "%{http_code}" "${url}")"
+            for attempt in $(seq 1 "${max_attempts}"); do
+              status_code="$(curl -sS -o /dev/null -w "%{http_code}" "${url}")"
               if [ "${status_code}" = "200" ]; then
                 echo "✅ ${url} is live"
                 break
               fi
-              if [ "${attempt}" -eq 12 ]; then
+              if [ "${attempt}" -eq "${max_attempts}" ]; then
                 echo "❌ ${url} did not return HTTP 200 (last status: ${status_code})"
                 exit 1
               fi
-              echo "Waiting for publication (attempt ${attempt}/12, status ${status_code})"
-              sleep 10
+              echo "Waiting for publication (attempt ${attempt}/${max_attempts}, status ${status_code})"
+              sleep "${sleep_seconds}"
             done
           done
