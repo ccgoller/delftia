@@ -144,17 +144,34 @@ ul.task-list li input[type="checkbox"] {
 <a class="skip-link" href="#quarto-document-content">Skip to main content</a>
 <script>
   (function () {
-    const currentScript = document.currentScript;
-    const skipLink = currentScript && currentScript.previousElementSibling;
-    const firstBodyElement = document.body.firstElementChild;
-    const navToggle = document.querySelector(".navbar-toggler");
+    const moveSkipLink = () => {
+      const skipLink = document.querySelector(".skip-link");
+      const firstBodyElement = document.body.firstElementChild;
 
-    if (skipLink && firstBodyElement && skipLink.classList.contains("skip-link")) {
-      document.body.insertBefore(skipLink, firstBodyElement);
-    }
+      if (
+        skipLink &&
+        firstBodyElement &&
+        skipLink.classList.contains("skip-link") &&
+        skipLink !== firstBodyElement
+      ) {
+        document.body.insertBefore(skipLink, firstBodyElement);
+      }
+    };
 
-    if (navToggle) {
-      navToggle.removeAttribute("role");
+    const fixNavToggleRole = () => {
+      document
+        .querySelectorAll(".navbar-toggler[role='menu']")
+        .forEach((navToggle) => navToggle.removeAttribute("role"));
+    };
+    moveSkipLink();
+    moveSkipLink();
+    fixNavToggleRole();
+
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", () => {
+        moveSkipLink();
+        fixNavToggleRole();
+      });
     }
   })();
 </script>
@@ -163,8 +180,8 @@ ul.task-list li input[type="checkbox"] {
 
 
 <!-- ===== HERO ===== -->
-<section class="hero-section">
-  <h1>The Delftia Project</h1>
+<section class="hero-section" aria-labelledby="home-hero-heading">
+  <h1 id="home-hero-heading">The Delftia Project</h1>
   <p class="hero-subtitle">
     Unlocking the secrets of <em>Delftia acidovorans</em> — a remarkable bacterium
     that biomineralizes gold, thrives in toxic environments, and holds promise for
@@ -203,7 +220,7 @@ ul.task-list li input[type="checkbox"] {
 <div class="research-spotlight-text">
 <p><em>Delftia acidovorans</em> is a gram-negative, non-fermentative bacterium first identified in Delft, Netherlands, in soil enriched with acetamide. It thrives in habitats containing high concentrations of heavy metals — copper, cobalt, and even <strong>gold</strong> — and produces a nonribosomal peptide that allows it to precipitate gold out of solution, avoiding toxicity.</p>
 <p>Today, <em>Delftia</em> is found in waste-contaminated soil, water systems, and drains. Beyond its remarkable environmental capabilities, it is studied as an opportunistic pathogen and explored for applications in:</p>
-<p><span class="tag-chip">🏅 Gold Biomineralization</span> <span class="tag-chip">♻️ E-Waste Recycling</span> <span class="tag-chip">🌿 Bioremediation</span> <span class="tag-chip">🧬 Genomics</span> <span class="tag-chip">🔬 Undergraduate Research</span></p>
+<p><span class="tag-chip"><span aria-hidden="true">🏅</span> Gold Biomineralization</span> <span class="tag-chip"><span aria-hidden="true">♻️</span> E-Waste Recycling</span> <span class="tag-chip"><span aria-hidden="true">🌿</span> Bioremediation</span> <span class="tag-chip"><span aria-hidden="true">🧬</span> Genomics</span> <span class="tag-chip"><span aria-hidden="true">🔬</span> Undergraduate Research</span></p>
 <p><br><br> <a href="references.html" class="btn-hero btn-primary-hero" style="font-size:0.9rem;padding:0.55rem 1.4rem;">Read the Literature →</a></p>
 </div>
 <div class="quarto-figure quarto-figure-center" style="max-height:400px;width:100%;object-fit:cover;">
@@ -215,9 +232,9 @@ ul.task-list li input[type="checkbox"] {
 </div>
 <hr>
 <!-- ===== RESEARCH HIGHLIGHTS ===== -->
-<section id="research-highlights" class="section-alt" style="padding: 4rem 1.5rem;">
+<section id="research-highlights" class="section-alt" aria-labelledby="research-highlights-heading" style="padding: 4rem 1.5rem;">
   <div style="max-width:1100px;margin:0 auto;text-align:center;">
-    <h2 class="section-title anchored">Research Highlights</h2>
+    <h2 id="research-highlights-heading" class="section-title anchored">Research Highlights</h2>
     <p class="section-subtitle">Three pillars of the Delftia Project — from the classroom to the community</p>
     <div class="card-grid">
 
@@ -300,8 +317,8 @@ ul.task-list li input[type="checkbox"] {
 </div>
 <hr>
 <!-- ===== CALL TO ACTION ===== -->
-<section class="cta-section">
-  <h2 class="anchored">Interested in Joining the Delftia Project?</h2>
+<section class="cta-section" aria-labelledby="home-cta-heading">
+  <h2 id="home-cta-heading" class="anchored">Interested in Joining the Delftia Project?</h2>
   <p>
     Whether you are an undergraduate student, educator, or citizen scientist —
     there is a place for you. Help us uncover the biology and applications of

@@ -144,17 +144,34 @@ ul.task-list li input[type="checkbox"] {
 <a class="skip-link" href="#quarto-document-content">Skip to main content</a>
 <script>
   (function () {
-    const currentScript = document.currentScript;
-    const skipLink = currentScript && currentScript.previousElementSibling;
-    const firstBodyElement = document.body.firstElementChild;
-    const navToggle = document.querySelector(".navbar-toggler");
+    const moveSkipLink = () => {
+      const skipLink = document.querySelector(".skip-link");
+      const firstBodyElement = document.body.firstElementChild;
 
-    if (skipLink && firstBodyElement && skipLink.classList.contains("skip-link")) {
-      document.body.insertBefore(skipLink, firstBodyElement);
-    }
+      if (
+        skipLink &&
+        firstBodyElement &&
+        skipLink.classList.contains("skip-link") &&
+        skipLink !== firstBodyElement
+      ) {
+        document.body.insertBefore(skipLink, firstBodyElement);
+      }
+    };
 
-    if (navToggle) {
-      navToggle.removeAttribute("role");
+    const fixNavToggleRole = () => {
+      document
+        .querySelectorAll(".navbar-toggler[role='menu']")
+        .forEach((navToggle) => navToggle.removeAttribute("role"));
+    };
+    moveSkipLink();
+    moveSkipLink();
+    fixNavToggleRole();
+
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", () => {
+        moveSkipLink();
+        fixNavToggleRole();
+      });
     }
   })();
 </script>
@@ -162,8 +179,8 @@ ul.task-list li input[type="checkbox"] {
 
 
 
-<section class="hero-section" style="padding:3.5rem 2rem 3rem;">
-  <h1 style="font-size:clamp(1.8rem,4vw,2.6rem);">About The Delftia Project</h1>
+<section class="hero-section" aria-labelledby="about-hero-heading" style="padding:3.5rem 2rem 3rem;">
+  <h1 id="about-hero-heading" style="font-size:clamp(1.8rem,4vw,2.6rem);">About The Delftia Project</h1>
   <p class="hero-subtitle" style="font-size:1.05rem;">
     A community of undergraduate researchers, citizen scientists, and educators
     dedicated to exploring one of microbiology's most extraordinary organisms.
@@ -250,27 +267,27 @@ ul.task-list li input[type="checkbox"] {
 <p>The Delftia Project thrives because of the contributions of many dedicated people:</p>
 <div class="team-grid">
   <div class="team-card">
-    <div class="team-avatar">CG</div>
+    <div class="team-avatar" aria-hidden="true">CG</div>
     <h4 class="anchored">Dr. Carlos Goller</h4>
     <div class="team-role">Principal Investigator · NC State</div>
   </div>
   <div class="team-card">
-    <div class="team-avatar">LR</div>
+    <div class="team-avatar" aria-hidden="true">LR</div>
     <h4 class="anchored">Lauren Ramilo</h4>
     <div class="team-role">Undergraduate Researcher</div>
   </div>
   <div class="team-card">
-    <div class="team-avatar">DN</div>
+    <div class="team-avatar" aria-hidden="true">DN</div>
     <h4 class="anchored">Daiza Norman</h4>
     <div class="team-role">BIT Research Assistant</div>
   </div>
   <div class="team-card">
-    <div class="team-avatar">RT</div>
+    <div class="team-avatar" aria-hidden="true">RT</div>
     <h4 class="anchored">Rabeya Tahir</h4>
     <div class="team-role">WikiEDU &amp; Graphics Lead</div>
   </div>
   <div class="team-card">
-    <div class="team-avatar">+</div>
+    <div class="team-avatar" aria-hidden="true">+</div>
     <h4 class="anchored">You?</h4>
     <div class="team-role">Future Researcher</div>
   </div>

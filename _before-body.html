@@ -20,16 +20,15 @@
         .querySelectorAll(".navbar-toggler[role='menu']")
         .forEach((navToggle) => navToggle.removeAttribute("role"));
     };
-
     moveSkipLink();
+    moveSkipLink();
+    fixNavToggleRole();
 
     if (document.readyState === "loading") {
       document.addEventListener("DOMContentLoaded", () => {
         moveSkipLink();
         fixNavToggleRole();
       });
-    } else {
-      fixNavToggleRole();
     }
   })();
 </script>
