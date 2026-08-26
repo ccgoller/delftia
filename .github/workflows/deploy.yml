@@ -25,6 +25,9 @@ jobs:
       - name: Set up Quarto
         uses: quarto-dev/quarto-actions/setup@v2
 
+      - name: Clean previous site output
+        run: rm -rf _site
+
       - name: Render
         uses: quarto-dev/quarto-actions/render@v2
 
