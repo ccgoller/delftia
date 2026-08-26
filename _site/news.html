@@ -148,11 +148,11 @@ ul.task-list li input[type="checkbox"] {
   (function () {
     const currentScript = document.currentScript;
     const skipLink = currentScript && currentScript.previousElementSibling;
-    const header = document.getElementById("quarto-header");
+    const firstBodyElement = document.body.firstElementChild;
     const navToggle = document.querySelector(".navbar-toggler");
 
-    if (skipLink && header && skipLink.classList.contains("skip-link")) {
-      document.body.insertBefore(skipLink, header);
+    if (skipLink && firstBodyElement && skipLink.classList.contains("skip-link")) {
+      document.body.insertBefore(skipLink, firstBodyElement);
     }
 
     if (navToggle) {
