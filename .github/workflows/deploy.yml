@@ -36,3 +36,34 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
+
+      - name: Verify published pages
+        env:
+          PAGE_URL: ${{ steps.deployment.outputs.page_url }}
+        run: |
+          set -euo pipefail
+          max_attempts=12
+          sleep_seconds=10
+          pages=("" "about.html" "news.html" "references.html")
+          base_url="${PAGE_URL%/}"
+          for page in "${pages[@]}"; do
+            if [ -n "${page}" ]; then
+              url="${base_url}/${page}"
+            else
+              url="${base_url}/"
+            fi
+            echo "Checking ${url}"
+            for attempt in $(seq 1 "${max_attempts}"); do
+              status_code="$(curl -sS -o /dev/null -w "%{http_code}" "${url}")"
+              if [ "${status_code}" = "200" ]; then
+                echo "✅ ${url} is live"
+                break
+              fi
+              if [ "${attempt}" -eq "${max_attempts}" ]; then
+                echo "❌ ${url} did not return HTTP 200 (last status: ${status_code})"
+                exit 1
+              fi
+              echo "Waiting for publication (attempt ${attempt}/${max_attempts}, status ${status_code})"
+              sleep "${sleep_seconds}"
+            done
+          done

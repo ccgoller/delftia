@@ -7,14 +7,16 @@
    accents. All text/interactive colors are WCAG AA compliant.
    ------------------------------------------------------------ */
 :root {
-  --delftia-umber:     #111111;   /* black — primary dark tone     */
-  --delftia-amber:     #b8922a;   /* dark gold — 4.6:1 on white    */
-  --delftia-gold:      #f0d060;   /* bright gold — use with dark   */
-  --delftia-gold-hover:#e5c14f;   /* button hover                  */
-  --delftia-sunrise:   #d4a017;   /* muted gold — decorative       */
-  --delftia-light:     #f5f5f5;   /* light gray — section bg       */
-  --delftia-text:      #111111;   /* black — body text             */
-  --delftia-muted:     #555555;   /* medium gray — secondary text  */
+  --delftia-umber:     #130d05;   /* near-black umber              */
+  --delftia-amber:     #8a6200;   /* readable gold on light bg     */
+  --delftia-gold:      #ffd76a;   /* bright gold — use with dark   */
+  --delftia-gold-glow: #fff0b8;   /* pale gold highlight           */
+  --delftia-gold-hover:#ffe291;   /* brighter gold hover           */
+  --delftia-cream:     #fff8dd;   /* warm light accent background  */
+  --delftia-sunrise:   #bf8400;   /* muted gold — decorative       */
+  --delftia-light:     #faf7ef;   /* warm light section bg         */
+  --delftia-text:      #1c1408;   /* body text                     */
+  --delftia-muted:     #4b3a21;   /* dark muted secondary text     */
   --delftia-focus:     #005fcc;   /* accessible focus indicator    */
   --card-radius:       12px;
   --transition-fast:   0.2s ease;
@@ -41,8 +43,34 @@ a:hover {
 }
 
 /* ---- Navbar ----------------------------------------------- */
+.headroom,
+#quarto-header,
+#quarto-header .navbar,
+#quarto-header .navbar-collapse {
+  background-color: #1b1002;
+}
+
 .navbar {
   box-shadow: 0 2px 10px rgba(0,0,0,0.12);
+}
+
+.navbar-brand,
+#quarto-header .navbar-title,
+#quarto-header .nav-link,
+#quarto-header .nav-link .menu-text,
+#quarto-header .quarto-navigation-tool {
+  color: var(--delftia-cream) !important;
+}
+
+.navbar-brand:hover,
+.navbar-brand:focus,
+#quarto-header .nav-link:hover,
+#quarto-header .nav-link:focus,
+#quarto-header .nav-link.active,
+#quarto-header .nav-link.active .menu-text,
+#quarto-header .quarto-navigation-tool:hover,
+#quarto-header .quarto-navigation-tool:focus {
+  color: var(--delftia-gold-glow) !important;
 }
 
 .navbar-brand {
@@ -66,6 +94,13 @@ a:hover {
   padding: 3px 6px;
 }
 
+@media (max-width: 480px) {
+  .navbar-brand .navbar-logo {
+    height: 30px;
+    max-height: 30px;
+  }
+}
+
 a:focus-visible,
 button:focus-visible {
   outline: 3px solid var(--delftia-focus);
@@ -74,8 +109,11 @@ button:focus-visible {
 
 /* ---- Hero section ----------------------------------------- */
 .hero-section {
-  background: linear-gradient(135deg, #111111 0%, #1a1a1a 58%, #2a2a2a 100%);
-  color: white;
+  background:
+    radial-gradient(circle at 16% 18%, rgba(255, 229, 138, 0.28), transparent 42%),
+    radial-gradient(circle at 84% 28%, rgba(255, 208, 98, 0.24), transparent 48%),
+    linear-gradient(140deg, #120901 0%, #251502 38%, #4a2a05 62%, #110902 100%);
+  color: #ffffff;
   padding: 5rem 2rem 4rem;
   text-align: center;
   position: relative;
@@ -86,23 +124,52 @@ button:focus-visible {
   content: "";
   position: absolute;
   inset: 0;
-  background: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='80'%20height='80'%20viewBox='0%200%2080%2080'%3E%3Crect%20x='10'%20y='14'%20width='18'%20height='7'%20rx='3.5'%20fill='rgba(240,208,64,0.18)'%20transform='rotate(-20%2019%2017.5)'/%3E%3Crect%20x='48'%20y='52'%20width='18'%20height='7'%20rx='3.5'%20fill='rgba(240,208,64,0.18)'%20transform='rotate(35%2057%2055.5)'/%3E%3Ccircle%20cx='68'%20cy='12'%20r='3'%20fill='rgba(240,208,64,0.22)'/%3E%3Ccircle%20cx='6'%20cy='58'%20r='2'%20fill='rgba(240,208,64,0.18)'/%3E%3Ccircle%20cx='38'%20cy='34'%20r='2.5'%20fill='rgba(240,208,64,0.15)'/%3E%3Ccircle%20cx='72'%20cy='68'%20r='2'%20fill='rgba(240,208,64,0.18)'/%3E%3Ccircle%20cx='22'%20cy='72'%20r='3'%20fill='rgba(240,208,64,0.12)'/%3E%3C/svg%3E") repeat;
+  background:
+    radial-gradient(circle at 10% 18%, rgba(255, 223, 127, 0.38) 0 2px, transparent 3px),
+    radial-gradient(circle at 22% 72%, rgba(255, 214, 94, 0.32) 0 3px, transparent 4px),
+    radial-gradient(circle at 34% 38%, rgba(255, 198, 74, 0.28) 0 2px, transparent 3px),
+    radial-gradient(circle at 48% 82%, rgba(255, 209, 108, 0.3) 0 2.5px, transparent 4px),
+    radial-gradient(circle at 63% 20%, rgba(255, 219, 117, 0.34) 0 2px, transparent 3px),
+    radial-gradient(circle at 76% 58%, rgba(255, 193, 62, 0.3) 0 3px, transparent 4px),
+    radial-gradient(circle at 90% 32%, rgba(255, 225, 136, 0.36) 0 2px, transparent 3px),
+    linear-gradient(125deg, rgba(255, 214, 98, 0.13), transparent 45%, rgba(255, 193, 62, 0.12));
+  z-index: 0;
   pointer-events: none;
 }
 
+.hero-section::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.56) 0%, rgba(0, 0, 0, 0.74) 100%);
+  z-index: 1;
+  pointer-events: none;
+}
+
+.hero-section .hero-content {
+  position: relative;
+  z-index: 2;
+}
+
 .hero-section h1 {
-  color: white;
+  color: var(--delftia-gold-glow);
   font-size: clamp(2rem, 5vw, 3.2rem);
   margin-bottom: 1rem;
-  text-shadow: 0 2px 6px rgba(0,0,0,0.25);
+  text-shadow: 0 3px 10px rgba(0,0,0,0.42);
 }
 
 .hero-section .hero-subtitle {
   font-size: clamp(1rem, 2.5vw, 1.3rem);
-  opacity: 0.92;
+  color: #fff4cf;
   max-width: 680px;
   margin: 0 auto 2.2rem;
   line-height: 1.6;
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.5);
+}
+
+.hero-section .hero-subtitle em,
+.cta-section p em {
+  color: var(--delftia-gold);
 }
 
 /* ---- Buttons ---------------------------------------------- */
@@ -123,24 +190,27 @@ button:focus-visible {
 }
 
 .btn-primary-hero {
-  background: var(--delftia-gold);
+  background: linear-gradient(135deg, var(--delftia-gold-glow), var(--delftia-gold) 60%, #efbe3f);
   color: var(--delftia-umber) !important;
-  box-shadow: 0 3px 10px rgba(0,0,0,0.18);
+  border: 1px solid rgba(255, 237, 178, 0.75);
+  box-shadow: 0 10px 24px rgba(0,0,0,0.22), 0 0 22px rgba(255, 217, 106, 0.18);
 }
 
 .btn-primary-hero:hover {
-  background: var(--delftia-gold-hover);
+  background: linear-gradient(135deg, #fff5cf, var(--delftia-gold-hover) 60%, #f7c951);
   color: var(--delftia-umber) !important;
 }
 
 .btn-outline-hero {
   background: transparent;
-  color: white !important;
-  border: 2px solid rgba(255,255,255,0.8);
+  color: var(--delftia-gold-glow) !important;
+  border: 2px solid rgba(255, 230, 150, 0.95);
+  box-shadow: inset 0 0 0 1px rgba(255, 214, 98, 0.08);
 }
 
 .btn-outline-hero:hover {
-  background: rgba(255,255,255,0.12);
+  background: rgba(255, 215, 106, 0.14);
+  color: #fff9e6 !important;
 }
 
 /* ---- Stats bar -------------------------------------------- */
@@ -287,20 +357,23 @@ button:focus-visible {
 
 /* ---- CTA / call-to-action section ------------------------- */
 .cta-section {
-  background: linear-gradient(135deg, #111111, #1a1a1a 58%, #2a2a2a);
-  color: white;
+  background:
+    radial-gradient(circle at 15% 20%, rgba(255, 220, 120, 0.12), transparent 34%),
+    linear-gradient(135deg, #110902, #1d1203 52%, #2e1c04);
+  color: #fff8e1;
   padding: 4rem 2rem;
   text-align: center;
 }
 
 .cta-section h2 {
-  color: white;
+  color: var(--delftia-gold-glow);
   font-size: clamp(1.6rem, 3vw, 2.2rem);
   margin-bottom: 0.8rem;
+  text-shadow: 0 3px 10px rgba(0, 0, 0, 0.4);
 }
 
 .cta-section p {
-  opacity: 0.9;
+  color: #fff0c4;
   max-width: 580px;
   margin: 0 auto 2rem;
   font-size: 1.05rem;
@@ -348,7 +421,7 @@ button:focus-visible {
 /* ---- Badge / tag chips ------------------------------------ */
 .tag-chip {
   display: inline-block;
-  background: var(--delftia-light);
+  background: var(--delftia-cream);
   color: var(--delftia-amber);
   border: 1px solid var(--delftia-amber);
   border-radius: 50px;
@@ -498,6 +571,19 @@ button:focus-visible {
 .ref-list a:hover {
   color: var(--delftia-umber);
   text-decoration: underline;
+}
+
+/* ---- Visually-hidden utility (WCAG — off-screen text for AT) */
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
 }
 
 /* ---- Skip navigation link (WCAG 2.4.1 Bypass Blocks) ----- */

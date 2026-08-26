@@ -4,6 +4,7 @@ project:
 website:
   title: "The Delftia Project"
   site-url: "https://ccgoller.github.io/delftia"
+  repo-url: "https://github.com/ccgoller/delftia"
   favicon: images/cropped-cropped-DelftiaLogo-e1594312941275-32x32.png
   description: "Exploring the biology and applications of Delftia acidovorans through undergraduate research, citizen science, and community collaboration."
   open-graph:
@@ -13,7 +14,7 @@ website:
   navbar:
     logo: images/DelftiaLogo-e1594312941275.png
     logo-alt: "Delftia Project logo"
-    background: "#4b3210"
+    background: "#1b1002"
     foreground: "white"
     left:
       - href: index.qmd
@@ -27,9 +28,12 @@ website:
     right:
       - text: "Get Involved"
         href: about.qmd#get-involved
+      - icon: github
+        href: https://github.com/ccgoller/delftia
+        aria-label: GitHub repository
 
   page-footer:
-    background: "#4b3210"
+    background: "#1b1002"
     foreground: "white"
     left: "© 2026 The Delftia Project · NC State University"
     right:
@@ -50,5 +54,3 @@ format:
     css: styles.css
     toc: false
     include-before-body: _before-body.html
-
-

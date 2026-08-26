@@ -2,6 +2,7 @@
 title: ""
 pagetitle: "The Delftia Project"
 page-layout: full
+body-classes: home
 ---
 
 ```{=html}
@@ -23,20 +24,20 @@ page-layout: full
 <section class="stats-bar" aria-label="Project statistics">
   <div class="stats-grid">
     <div class="stat-item">
-      <div class="stat-number">4</div>
-      <div class="stat-label">Published References</div>
+      <div class="stat-number" aria-hidden="true">4</div>
+      <div class="stat-label"><span class="visually-hidden">4 </span>Published References</div>
     </div>
     <div class="stat-item">
-      <div class="stat-number">17+</div>
-      <div class="stat-label">Student Researchers</div>
+      <div class="stat-number" aria-hidden="true">17+</div>
+      <div class="stat-label"><span class="visually-hidden">17+ </span>Student Researchers</div>
     </div>
     <div class="stat-item">
-      <div class="stat-number">3</div>
-      <div class="stat-label">Research Initiatives</div>
+      <div class="stat-number" aria-hidden="true">3</div>
+      <div class="stat-label"><span class="visually-hidden">3 </span>Research Initiatives</div>
     </div>
     <div class="stat-item">
-      <div class="stat-number">NC&nbsp;State</div>
-      <div class="stat-label">University Partner</div>
+      <div class="stat-number" aria-hidden="true">NC&nbsp;State</div>
+      <div class="stat-label"><span class="visually-hidden">NC State </span>University Partner</div>
     </div>
   </div>
 </section>
