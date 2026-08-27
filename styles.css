@@ -152,10 +152,23 @@ button:focus-visible {
 }
 
 .hero-section h1 {
-  color: var(--delftia-gold-glow);
+  color: #fff4cf;
   font-size: clamp(2rem, 5vw, 3.2rem);
   margin-bottom: 1rem;
-  text-shadow: 0 3px 10px rgba(0,0,0,0.42);
+  text-shadow:
+    0 2px 0 rgba(83, 48, 3, 0.45),
+    0 3px 12px rgba(0,0,0,0.44),
+    0 0 18px rgba(255, 221, 131, 0.18);
+  filter: drop-shadow(0 0 0.35rem rgba(255, 231, 163, 0.18));
+}
+
+@supports ((-webkit-background-clip: text) or (background-clip: text)) {
+  .hero-section h1 {
+    background: linear-gradient(180deg, #fffaf0 0%, #fff0b8 42%, #ffe08a 74%, #ffd76a 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
 }
 
 .hero-section .hero-subtitle {
