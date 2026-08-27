@@ -45,7 +45,7 @@ jobs:
           PAGE_URL: ${{ steps.deployment.outputs.page_url }}
         run: |
           set -euo pipefail
-          max_attempts=30
+          max_attempts=60
           sleep_seconds=5
           pages=("" "about.html" "news.html" "references.html")
           base_url="${PAGE_URL%/}"
@@ -57,7 +57,7 @@ jobs:
             fi
             echo "Checking ${url}"
             for attempt in $(seq 1 "${max_attempts}"); do
-              status_code="$(curl -sS -o /dev/null -w "%{http_code}" "${url}")"
+              status_code="$(curl -sSL -o /dev/null -w "%{http_code}" "${url}")"
               if [ "${status_code}" = "200" ]; then
                 echo "✅ ${url} is live"
                 break
