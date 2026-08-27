@@ -11,7 +11,7 @@
   --delftia-amber:     #8a6200;   /* readable gold on light bg     */
   --delftia-gold:      #ffd76a;   /* bright gold — use with dark   */
   --delftia-gold-glow: #fff0b8;   /* pale gold highlight           */
-  --delftia-gold-hero: #fff4cf;   /* high-contrast hero gold       */
+  --delftia-gold-hero: #fff4cf;   /* hero gold — use with dark bg  */
   --delftia-gold-hover:#ffe291;   /* brighter gold hover           */
   --delftia-cream:     #fff8dd;   /* warm light accent background  */
   --delftia-sunrise:   #bf8400;   /* muted gold — decorative       */
