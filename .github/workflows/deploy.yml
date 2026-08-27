@@ -45,8 +45,8 @@ jobs:
           PAGE_URL: ${{ steps.deployment.outputs.page_url }}
         run: |
           set -euo pipefail
-          max_attempts=12
-          sleep_seconds=10
+          max_attempts=30
+          sleep_seconds=5
           pages=("" "about.html" "news.html" "references.html")
           base_url="${PAGE_URL%/}"
           for page in "${pages[@]}"; do
