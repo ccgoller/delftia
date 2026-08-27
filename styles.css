@@ -11,6 +11,7 @@
   --delftia-amber:     #8a6200;   /* readable gold on light bg     */
   --delftia-gold:      #ffd76a;   /* bright gold — use with dark   */
   --delftia-gold-glow: #fff0b8;   /* pale gold highlight           */
+  --delftia-gold-hero: #fff4cf;   /* hero gold on dark bg (11.75:1) */
   --delftia-gold-hover:#ffe291;   /* brighter gold hover           */
   --delftia-cream:     #fff8dd;   /* warm light accent background  */
   --delftia-sunrise:   #bf8400;   /* muted gold — decorative       */
@@ -152,10 +153,14 @@ button:focus-visible {
 }
 
 .hero-section h1 {
-  color: var(--delftia-gold-glow);
+  color: var(--delftia-gold-hero);
   font-size: clamp(2rem, 5vw, 3.2rem);
   margin-bottom: 1rem;
-  text-shadow: 0 3px 10px rgba(0,0,0,0.42);
+  text-shadow:
+    0 0 1px rgba(255, 250, 240, 0.7),
+    0 2px 0 rgba(83, 48, 3, 0.45),
+    0 3px 12px rgba(0,0,0,0.44),
+    0 0 18px rgba(255, 221, 131, 0.18);
 }
 
 .hero-section .hero-subtitle {
