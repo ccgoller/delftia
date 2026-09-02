@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
     inputs:
       domain:
-        description: Apex custom domain to diagnose (example: delftia.org)
+        description: "Apex custom domain to diagnose (example: delftia.org)"
         required: true
         type: string
 
