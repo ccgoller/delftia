@@ -1,0 +1,93 @@
+name: Domain Diagnostics
+
+on:
+  workflow_dispatch:
+    inputs:
+      domain:
+        description: Apex custom domain to diagnose (example: delftia.org)
+        required: true
+        type: string
+
+jobs:
+  diagnose:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - name: Validate input
+        env:
+          DOMAIN: ${{ inputs.domain }}
+        run: |
+          set -euo pipefail
+          domain="$(echo "${DOMAIN}" | xargs)"
+          if [ -z "${domain}" ]; then
+            echo "Domain input is empty."
+            exit 1
+          fi
+          echo "DOMAIN=${domain}" >> "$GITHUB_ENV"
+          echo "WWW_DOMAIN=www.${domain}" >> "$GITHUB_ENV"
+          echo "GITHUB_URL=https://${GITHUB_REPOSITORY_OWNER}.github.io/${GITHUB_REPOSITORY#*/}" >> "$GITHUB_ENV"
+
+      - name: Check apex A records
+        run: |
+          set -euo pipefail
+          expected="$(printf "%s\n" \
+            "185.199.108.153" \
+            "185.199.109.153" \
+            "185.199.110.153" \
+            "185.199.111.153" | sort)"
+          actual="$(dig +short A "${DOMAIN}" | sed '/^$/d' | sort)"
+          echo "Expected A records:"
+          echo "${expected}"
+          echo "Actual A records for ${DOMAIN}:"
+          echo "${actual:-<none>}"
+          if [ "${actual}" != "${expected}" ]; then
+            echo "❌ Apex A records do not match GitHub Pages requirements."
+            exit 1
+          fi
+          echo "✅ Apex A records are correct."
+
+      - name: Check www CNAME
+        run: |
+          set -euo pipefail
+          expected="ccgoller.github.io."
+          actual="$(dig +short CNAME "${WWW_DOMAIN}" | sed 's/[[:space:]]*$//' | head -n 1)"
+          echo "Expected CNAME for ${WWW_DOMAIN}: ${expected}"
+          echo "Actual CNAME for ${WWW_DOMAIN}: ${actual:-<none>}"
+          if [ "${actual}" != "${expected}" ]; then
+            echo "❌ www CNAME does not match ${expected}."
+            exit 1
+          fi
+          echo "✅ www CNAME is correct."
+
+      - name: Check HTTP responses on custom domain
+        run: |
+          set -euo pipefail
+          urls=("https://${DOMAIN}/" "https://${DOMAIN}/about.html")
+          for url in "${urls[@]}"; do
+            code="$(curl -sS -L --connect-timeout 10 --max-time 30 -o /dev/null -w "%{http_code}" "${url}" || true)"
+            echo "${url} -> ${code}"
+            if [ "${code}" != "200" ]; then
+              echo "❌ ${url} returned ${code}."
+              exit 1
+            fi
+          done
+          echo "✅ Custom-domain HTTP checks passed."
+
+      - name: Check GitHub Pages baseline URL
+        run: |
+          set -euo pipefail
+          urls=("${GITHUB_URL}/" "${GITHUB_URL}/about.html")
+          for url in "${urls[@]}"; do
+            code="$(curl -sS -L --connect-timeout 10 --max-time 30 -o /dev/null -w "%{http_code}" "${url}" || true)"
+            echo "${url} -> ${code}"
+            if [ "${code}" != "200" ]; then
+              echo "❌ Baseline GitHub Pages URL failed; investigate site build/deploy before DNS."
+              exit 1
+            fi
+          done
+          echo "✅ Baseline GitHub Pages URL checks passed."
+
+      - name: Propagation reminder
+        run: |
+          echo "If DNS was recently changed, allow up to 24-48 hours for propagation and resolver cache expiry."
