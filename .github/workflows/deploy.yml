@@ -50,9 +50,13 @@ jobs:
       - name: Verify generated pages before upload
         run: |
           set -euo pipefail
-          required_files=("index.html" "about.html" "news.html" "references.html")
-          for file in "${required_files[@]}"; do
-            path="_site/${file}"
+          mapfile -t source_pages < <(find . -maxdepth 1 -type f -name "*.qmd" -printf "%f\n" | sort)
+          if [ "${#source_pages[@]}" -eq 0 ]; then
+            echo "❌ No .qmd source pages found at repository root."
+            exit 1
+          fi
+          for source in "${source_pages[@]}"; do
+            path="_site/${source%.qmd}.html"
             if [ ! -s "${path}" ]; then
               echo "❌ Missing generated file: ${path}"
               exit 1
