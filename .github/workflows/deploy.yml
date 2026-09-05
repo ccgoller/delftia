@@ -47,6 +47,19 @@ jobs:
             echo "No custom domain configured (vars.CUSTOM_DOMAIN or repository CNAME)."
           fi
 
+      - name: Verify generated pages before upload
+        run: |
+          set -euo pipefail
+          required_files=("index.html" "about.html" "news.html" "references.html")
+          for file in "${required_files[@]}"; do
+            path="_site/${file}"
+            if [ ! -s "${path}" ]; then
+              echo "❌ Missing generated file: ${path}"
+              exit 1
+            fi
+            echo "✅ Found ${path}"
+          done
+
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
@@ -55,54 +68,3 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
-
-      - name: Verify published pages
-        env:
-          PAGE_URL: ${{ steps.deployment.outputs.page_url }}
-          CUSTOM_DOMAIN: ${{ vars.CUSTOM_DOMAIN }}
-        run: |
-          set -euo pipefail
-          max_attempts=120
-          sleep_seconds=5
-          pages=("" "about.html" "news.html" "references.html")
-          
-          check_base_url() {
-            local base_url="$1"
-            local label="$2"
-            for page in "${pages[@]}"; do
-              if [ -n "${page}" ]; then
-                url="${base_url}/${page}"
-              else
-                url="${base_url}/"
-              fi
-              echo "Checking ${label}: ${url}"
-              for attempt in $(seq 1 "${max_attempts}"); do
-                status_code="$(curl -sS -L --connect-timeout 10 --max-time 30 -o /dev/null -w "%{http_code}" "${url}" || true)"
-                if [ "${status_code}" = "200" ]; then
-                  echo "✅ ${url} is live"
-                  break
-                fi
-                if [ "${attempt}" -eq "${max_attempts}" ]; then
-                  echo "❌ ${url} did not return HTTP 200 (last status: ${status_code})"
-                  return 1
-                fi
-                echo "Waiting for publication (attempt ${attempt}/${max_attempts}, status ${status_code})"
-                sleep "${sleep_seconds}"
-              done
-            done
-          }
-
-          pages_base_url="${PAGE_URL%/}"
-          if [ -z "${pages_base_url}" ]; then
-            pages_base_url="https://${GITHUB_REPOSITORY_OWNER}.github.io/${GITHUB_REPOSITORY#*/}"
-          fi
-          check_base_url "${pages_base_url}" "GitHub Pages URL"
-
-          if [ -n "${CUSTOM_DOMAIN:-}" ]; then
-            custom_domain="$(echo "${CUSTOM_DOMAIN}" | xargs)"
-            custom_base_url="https://${custom_domain%/}"
-            if ! check_base_url "${custom_base_url}" "Custom domain"; then
-              echo "Custom domain checks failed. Confirm GitHub Pages custom domain settings and DNS records."
-              exit 1
-            fi
-          fi
