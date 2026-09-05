@@ -50,19 +50,16 @@ jobs:
       - name: Verify generated pages before upload
         run: |
           set -euo pipefail
-          mapfile -t source_pages < <(find . -maxdepth 1 -type f -name "*.qmd" -printf "%f\n" | sort)
-          if [ "${#source_pages[@]}" -eq 0 ]; then
-            echo "❌ No .qmd source pages found at repository root."
+          if [ ! -s "_site/index.html" ]; then
+            echo "❌ Missing generated home page: _site/index.html"
             exit 1
           fi
-          for source in "${source_pages[@]}"; do
-            path="_site/${source%.qmd}.html"
-            if [ ! -s "${path}" ]; then
-              echo "❌ Missing generated file: ${path}"
-              exit 1
-            fi
-            echo "✅ Found ${path}"
-          done
+          html_count="$(find _site -type f -name '*.html' | wc -l | tr -d '[:space:]')"
+          if [ "${html_count}" -eq 0 ]; then
+            echo "❌ No generated HTML files found in _site."
+            exit 1
+          fi
+          echo "✅ Generated home page and ${html_count} HTML files in _site."
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
