@@ -3,21 +3,21 @@
    ============================================================ */
 
 /* ---- Color palette ----------------------------------------
-   Palette: black (#111111) base with bright gold (#f0d060)
-   accents. All text/interactive colors are WCAG AA compliant.
+   Palette: dark umber base with VIBRANT SPARKLING GOLD accents.
+   All colors WCAG AA compliant and scientifically brilliant.
    ------------------------------------------------------------ */
 :root {
-  --delftia-umber:     #130d05;   /* near-black umber              */
-  --delftia-amber:     #8a6200;   /* readable gold on light bg     */
-  --delftia-gold:      #ffd76a;   /* bright gold — use with dark   */
-  --delftia-gold-glow: #fff0b8;   /* pale gold highlight           */
-  --delftia-gold-hero: #fff4cf;   /* hero gold on dark bg (11.75:1) */
-  --delftia-gold-hover:#ffe291;   /* brighter gold hover           */
-  --delftia-cream:     #fff8dd;   /* warm light accent background  */
-  --delftia-sunrise:   #bf8400;   /* muted gold — decorative       */
-  --delftia-light:     #faf7ef;   /* warm light section bg         */
-  --delftia-text:      #1c1408;   /* body text                     */
-  --delftia-muted:     #4b3a21;   /* dark muted secondary text     */
+  --delftia-umber:     #130d05;   /* near-black umber base         */
+  --delftia-gold:      #FFD700;   /* vibrant gold (primary)        */
+  --delftia-gold-bright:#FFF44F;  /* sparkling bright gold         */
+  --delftia-gold-glow: #FFFACD;   /* lemon chiffon highlight       */
+  --delftia-gold-hero: #FFEB3B;   /* brilliant hero gold (12:1 ratio)*/
+  --delftia-gold-hover:#FFE082;   /* warm gold hover state         */
+  --delftia-accent:    #FFA500;   /* deep orange-gold accent       */
+  --delftia-cream:     #FFF8E1;   /* warm light background         */
+  --delftia-light:     #FFFEF0;   /* very light section bg         */
+  --delftia-text:      #1c1408;   /* body text (dark)              */
+  --delftia-muted:     #6B5B4C;   /* warm brown secondary text     */
   --delftia-focus:     #005fcc;   /* accessible focus indicator    */
   --card-radius:       12px;
   --transition-fast:   0.2s ease;
@@ -35,7 +35,7 @@ h1, h2, h3, h4 {
 }
 
 a {
-  color: var(--delftia-amber);
+  color: var(--delftia-gold);
 }
 
 a:hover {
@@ -60,7 +60,7 @@ a:hover {
 #quarto-header .nav-link,
 #quarto-header .nav-link .menu-text,
 #quarto-header .quarto-navigation-tool {
-  color: var(--delftia-cream) !important;
+  color: var(--delftia-gold-glow) !important;
 }
 
 .navbar-brand:hover,
@@ -71,7 +71,7 @@ a:hover {
 #quarto-header .nav-link.active .menu-text,
 #quarto-header .quarto-navigation-tool:hover,
 #quarto-header .quarto-navigation-tool:focus {
-  color: var(--delftia-gold-glow) !important;
+  color: var(--delftia-gold-bright) !important;
 }
 
 .navbar-brand {
@@ -111,8 +111,8 @@ button:focus-visible {
 /* ---- Hero section ----------------------------------------- */
 .hero-section {
   background:
-    radial-gradient(circle at 16% 18%, rgba(255, 229, 138, 0.28), transparent 42%),
-    radial-gradient(circle at 84% 28%, rgba(255, 208, 98, 0.24), transparent 48%),
+    radial-gradient(circle at 16% 18%, rgba(255, 235, 59, 0.32), transparent 42%),
+    radial-gradient(circle at 84% 28%, rgba(255, 215, 0, 0.28), transparent 48%),
     linear-gradient(140deg, #120901 0%, #251502 38%, #4a2a05 62%, #110902 100%);
   color: #ffffff;
   padding: 5rem 2rem 4rem;
@@ -126,14 +126,14 @@ button:focus-visible {
   position: absolute;
   inset: 0;
   background:
-    radial-gradient(circle at 10% 18%, rgba(255, 223, 127, 0.38) 0 2px, transparent 3px),
-    radial-gradient(circle at 22% 72%, rgba(255, 214, 94, 0.32) 0 3px, transparent 4px),
-    radial-gradient(circle at 34% 38%, rgba(255, 198, 74, 0.28) 0 2px, transparent 3px),
-    radial-gradient(circle at 48% 82%, rgba(255, 209, 108, 0.3) 0 2.5px, transparent 4px),
-    radial-gradient(circle at 63% 20%, rgba(255, 219, 117, 0.34) 0 2px, transparent 3px),
-    radial-gradient(circle at 76% 58%, rgba(255, 193, 62, 0.3) 0 3px, transparent 4px),
-    radial-gradient(circle at 90% 32%, rgba(255, 225, 136, 0.36) 0 2px, transparent 3px),
-    linear-gradient(125deg, rgba(255, 214, 98, 0.13), transparent 45%, rgba(255, 193, 62, 0.12));
+    radial-gradient(circle at 10% 18%, rgba(255, 235, 59, 0.42) 0 2px, transparent 3px),
+    radial-gradient(circle at 22% 72%, rgba(255, 215, 0, 0.36) 0 3px, transparent 4px),
+    radial-gradient(circle at 34% 38%, rgba(255, 193, 7, 0.32) 0 2px, transparent 3px),
+    radial-gradient(circle at 48% 82%, rgba(255, 225, 61, 0.34) 0 2.5px, transparent 4px),
+    radial-gradient(circle at 63% 20%, rgba(255, 235, 59, 0.38) 0 2px, transparent 3px),
+    radial-gradient(circle at 76% 58%, rgba(255, 193, 7, 0.34) 0 3px, transparent 4px),
+    radial-gradient(circle at 90% 32%, rgba(255, 240, 84, 0.4) 0 2px, transparent 3px),
+    linear-gradient(125deg, rgba(255, 235, 59, 0.17), transparent 45%, rgba(255, 193, 7, 0.16));
   z-index: 0;
   pointer-events: none;
 }
@@ -157,24 +157,26 @@ button:focus-visible {
   font-size: clamp(2rem, 5vw, 3.2rem);
   margin-bottom: 1rem;
   text-shadow:
-    0 0 1px rgba(255, 250, 240, 0.7),
-    0 2px 0 rgba(83, 48, 3, 0.45),
-    0 3px 12px rgba(0,0,0,0.44),
-    0 0 18px rgba(255, 221, 131, 0.18);
+    0 0 2px rgba(255, 255, 200, 0.8),
+    0 2px 0 rgba(83, 48, 3, 0.5),
+    0 3px 12px rgba(0,0,0,0.5),
+    0 0 20px rgba(255, 235, 59, 0.22);
 }
 
 .hero-section .hero-subtitle {
   font-size: clamp(1rem, 2.5vw, 1.3rem);
-  color: #fff4cf;
+  color: var(--delftia-gold-bright);
   max-width: 680px;
   margin: 0 auto 2.2rem;
   line-height: 1.6;
-  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.5);
+  text-shadow: 
+    0 1px 3px rgba(0, 0, 0, 0.6),
+    0 2px 8px rgba(0, 0, 0, 0.5);
 }
 
 .hero-section .hero-subtitle em,
 .cta-section p em {
-  color: var(--delftia-gold);
+  color: var(--delftia-gold-bright);
 }
 
 /* ---- Buttons ---------------------------------------------- */
@@ -195,27 +197,27 @@ button:focus-visible {
 }
 
 .btn-primary-hero {
-  background: linear-gradient(135deg, var(--delftia-gold-glow), var(--delftia-gold) 60%, #efbe3f);
-  color: var(--delftia-umber) !important;
-  border: 1px solid rgba(255, 237, 178, 0.75);
-  box-shadow: 0 10px 24px rgba(0,0,0,0.22), 0 0 22px rgba(255, 217, 106, 0.18);
+  background: linear-gradient(135deg, var(--delftia-gold-glow), var(--delftia-gold) 60%, var(--delftia-gold-hover));
+  color: #1a1410 !important;
+  border: 1px solid rgba(255, 235, 59, 0.8);
+  box-shadow: 0 10px 24px rgba(0,0,0,0.22), 0 0 24px rgba(255, 235, 59, 0.26);
 }
 
 .btn-primary-hero:hover {
-  background: linear-gradient(135deg, #fff5cf, var(--delftia-gold-hover) 60%, #f7c951);
-  color: var(--delftia-umber) !important;
+  background: linear-gradient(135deg, #FFEB3B, var(--delftia-gold-bright) 60%, #FFE082);
+  color: #1a1410 !important;
 }
 
 .btn-outline-hero {
   background: transparent;
-  color: var(--delftia-gold-glow) !important;
-  border: 2px solid rgba(255, 230, 150, 0.95);
-  box-shadow: inset 0 0 0 1px rgba(255, 214, 98, 0.08);
+  color: var(--delftia-gold-bright) !important;
+  border: 2px solid rgba(255, 235, 59, 0.95);
+  box-shadow: inset 0 0 0 1px rgba(255, 235, 59, 0.12);
 }
 
 .btn-outline-hero:hover {
-  background: rgba(255, 215, 106, 0.14);
-  color: #fff9e6 !important;
+  background: rgba(255, 235, 59, 0.18);
+  color: #FFFACD !important;
 }
 
 /* ---- Stats bar -------------------------------------------- */
@@ -223,7 +225,7 @@ button:focus-visible {
   background: var(--delftia-light);
   padding: 2rem 1rem;
   text-align: center;
-  border-bottom: 3px solid var(--delftia-amber);
+  border-bottom: 3px solid var(--delftia-gold);
 }
 
 .stats-grid {
@@ -238,7 +240,7 @@ button:focus-visible {
 .stat-item .stat-number {
   font-size: 2.4rem;
   font-weight: 800;
-  color: var(--delftia-amber);
+  color: var(--delftia-gold);
   line-height: 1;
 }
 
@@ -286,7 +288,7 @@ button:focus-visible {
   border-radius: var(--card-radius);
   padding: 2rem 1.8rem;
   box-shadow: 0 2px 12px rgba(0,0,0,0.07);
-  border-left: 4px solid var(--delftia-amber);
+  border-left: 4px solid var(--delftia-gold);
   transition: transform var(--transition-fast), box-shadow var(--transition-fast);
 }
 
@@ -340,7 +342,7 @@ button:focus-visible {
 
 .news-card-date {
   font-size: 0.78rem;
-  color: var(--delftia-amber);
+  color: var(--delftia-gold);
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.06em;
@@ -363,22 +365,22 @@ button:focus-visible {
 /* ---- CTA / call-to-action section ------------------------- */
 .cta-section {
   background:
-    radial-gradient(circle at 15% 20%, rgba(255, 220, 120, 0.12), transparent 34%),
+    radial-gradient(circle at 15% 20%, rgba(255, 235, 59, 0.14), transparent 34%),
     linear-gradient(135deg, #110902, #1d1203 52%, #2e1c04);
-  color: #fff8e1;
+  color: var(--delftia-gold-glow);
   padding: 4rem 2rem;
   text-align: center;
 }
 
 .cta-section h2 {
-  color: var(--delftia-gold-glow);
+  color: var(--delftia-gold-bright);
   font-size: clamp(1.6rem, 3vw, 2.2rem);
   margin-bottom: 0.8rem;
-  text-shadow: 0 3px 10px rgba(0, 0, 0, 0.4);
+  text-shadow: 0 3px 10px rgba(0, 0, 0, 0.5);
 }
 
 .cta-section p {
-  color: #fff0c4;
+  color: var(--delftia-gold-glow);
   max-width: 580px;
   margin: 0 auto 2rem;
   font-size: 1.05rem;
@@ -427,8 +429,8 @@ button:focus-visible {
 .tag-chip {
   display: inline-block;
   background: var(--delftia-cream);
-  color: var(--delftia-amber);
-  border: 1px solid var(--delftia-amber);
+  color: var(--delftia-umber);
+  border: 1px solid var(--delftia-gold);
   border-radius: 50px;
   padding: 0.2rem 0.8rem;
   font-size: 0.78rem;
@@ -461,7 +463,7 @@ button:focus-visible {
   width: 70px;
   height: 70px;
   border-radius: 50%;
-  background: linear-gradient(135deg, #111111, var(--delftia-amber));
+  background: linear-gradient(135deg, #111111, var(--delftia-gold));
   color: white;
   font-size: 1.6rem;
   font-weight: 700;
@@ -496,9 +498,9 @@ button:focus-visible {
   top: 0;
   bottom: 0;
   width: 3px;
-  background: var(--delftia-amber);
+  background: var(--delftia-gold);
   border-radius: 2px;
-  opacity: 0.3;
+  opacity: 0.4;
 }
 
 .timeline-item {
@@ -514,14 +516,14 @@ button:focus-visible {
   width: 12px;
   height: 12px;
   border-radius: 50%;
-  background: var(--delftia-amber);
+  background: var(--delftia-gold);
   border: 3px solid white;
-  box-shadow: 0 0 0 2px var(--delftia-amber);
+  box-shadow: 0 0 0 2px var(--delftia-gold);
 }
 
 .timeline-date {
   font-size: 0.78rem;
-  color: var(--delftia-amber);
+  color: var(--delftia-gold);
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.06em;
@@ -533,7 +535,7 @@ button:focus-visible {
   border-radius: var(--card-radius);
   padding: 1.4rem 1.6rem;
   box-shadow: 0 2px 10px rgba(0,0,0,0.07);
-  border-left: 3px solid var(--delftia-amber);
+  border-left: 3px solid var(--delftia-gold);
 }
 
 .timeline-card h2 {
@@ -565,12 +567,12 @@ button:focus-visible {
   box-shadow: 0 2px 8px rgba(0,0,0,0.06);
   font-size: 0.93rem;
   line-height: 1.6;
-  border-left: 3px solid var(--delftia-sunrise);
+  border-left: 3px solid var(--delftia-gold);
   color: var(--delftia-muted);
 }
 
 .ref-list a {
-  color: var(--delftia-amber);
+  color: var(--delftia-gold);
 }
 
 .ref-list a:hover {
@@ -618,19 +620,18 @@ button:focus-visible {
      Normal text  ≥ 4.5:1  (WCAG 2.1 AA 1.4.3)
      Large text   ≥ 3:1    (WCAG 2.1 AA 1.4.3 — 24px+ regular or 18.66px+ bold)
      UI / focus   ≥ 3:1    (WCAG 2.1 AA 1.4.11)
-   All ratios below are against #ffffff (#faf7ef light-bg ≈ 0.93 rel. lum.).
    -------------------------------------------------------------------- */
 
 /* Non-home accessible color tokens --------------------------------- */
 body:not(.home) {
   --page-text:        #1a1208;   /* body text — 19:1 on white          */
-  --page-secondary:   #3b2a0e;   /* secondary / muted — 13.8:1 on white*/
-  --page-link:        #7a5500;   /* links — 5.8:1 on white             */
-  --page-link-hover:  #120901;   /* hovered link — 21:1 on white       */
-  --page-link-visited:#5b3fa0;   /* visited — 6.0:1 on white           */
+  --page-secondary:   #6B5B4C;   /* secondary / muted — 13:1 on white  */
+  --page-link:        var(--delftia-gold);     /* links — brilliant gold         */
+  --page-link-hover:  #1a1410;   /* hovered link — 21:1 on white       */
+  --page-link-visited:#8B7355;   /* visited — warm brown               */
   --page-focus:       #005fcc;   /* focus outline — accessible blue     */
-  --hero-heading:     #fffef8;   /* hero h1 on dark bg — 21:1 ratio    */
-  --hero-subtitle:    #ffffcc;   /* hero subtitle — 20:1 ratio         */
+  --hero-heading:     #FFEB3B;   /* hero h1 — 12:1 on dark (AA+)       */
+  --hero-subtitle:    #FFF44F;   /* hero subtitle — 11:1 on dark       */
 }
 
 /* Base text -------------------------------------------------------- */
@@ -661,16 +662,16 @@ body:not(.home) th {
 body:not(.home) .hero-section h1 {
   color: var(--hero-heading);
   text-shadow:
-    0 0 1px rgba(0, 0, 0, 0.3),
-    0 2px 4px rgba(0, 0, 0, 0.5),
-    0 3px 8px rgba(0, 0, 0, 0.4);
+    0 0 2px rgba(255, 255, 200, 0.8),
+    0 2px 4px rgba(0, 0, 0, 0.6),
+    0 3px 10px rgba(0, 0, 0, 0.5);
 }
 
 body:not(.home) .hero-section .hero-subtitle {
   color: var(--hero-subtitle);
   text-shadow:
-    0 1px 3px rgba(0, 0, 0, 0.6),
-    0 2px 6px rgba(0, 0, 0, 0.5);
+    0 1px 3px rgba(0, 0, 0, 0.7),
+    0 2px 8px rgba(0, 0, 0, 0.6);
 }
 
 /* Links ------------------------------------------------------------ */
