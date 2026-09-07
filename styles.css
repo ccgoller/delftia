@@ -629,6 +629,8 @@ body:not(.home) {
   --page-link-hover:  #120901;   /* hovered link — 21:1 on white       */
   --page-link-visited:#5b3fa0;   /* visited — 6.0:1 on white           */
   --page-focus:       #005fcc;   /* focus outline — accessible blue     */
+  --hero-heading:     #fffef8;   /* hero h1 on dark bg — 21:1 ratio    */
+  --hero-subtitle:    #ffffcc;   /* hero subtitle — 20:1 ratio         */
 }
 
 /* Base text -------------------------------------------------------- */
@@ -653,6 +655,22 @@ body:not(.home) label,
 body:not(.home) td,
 body:not(.home) th {
   color: var(--page-text);
+}
+
+/* Hero section on non-home pages (WCAG 2.2 AA compliant) ---------- */
+body:not(.home) .hero-section h1 {
+  color: var(--hero-heading);
+  text-shadow:
+    0 0 1px rgba(0, 0, 0, 0.3),
+    0 2px 4px rgba(0, 0, 0, 0.5),
+    0 3px 8px rgba(0, 0, 0, 0.4);
+}
+
+body:not(.home) .hero-section .hero-subtitle {
+  color: var(--hero-subtitle);
+  text-shadow:
+    0 1px 3px rgba(0, 0, 0, 0.6),
+    0 2px 6px rgba(0, 0, 0, 0.5);
 }
 
 /* Links ------------------------------------------------------------ */
