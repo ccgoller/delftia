@@ -19,8 +19,9 @@
   --delftia-text:      #1c1408;   /* body text (dark)              */
   --delftia-muted:     #6B5B4C;   /* warm brown secondary text     */
   --delftia-focus:     #005fcc;   /* accessible focus indicator    */
-  --delftia-title-dark:#fff06a;   /* shared heading color on dark backgrounds */
-  --delftia-subtitle-dark:#fff8b3;/* shared supporting text on dark backgrounds */
+  --delftia-title-dark:#fff3cf;   /* logo-inspired light gold for dark sections */
+  --delftia-subtitle-dark:#fff8e5;/* high-contrast warm cream on dark sections    */
+  --delftia-hero-accent:#f6d98d;  /* logo-inspired accent text on dark sections   */
   --card-radius:       12px;
   --transition-fast:   0.2s ease;
 }
@@ -144,7 +145,7 @@ button:focus-visible {
   content: "";
   position: absolute;
   inset: 0;
-  background: linear-gradient(180deg, rgba(0, 0, 0, 0.56) 0%, rgba(0, 0, 0, 0.74) 100%);
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.68) 0%, rgba(0, 0, 0, 0.84) 100%);
   z-index: 1;
   pointer-events: none;
 }
@@ -178,7 +179,7 @@ button:focus-visible {
 
 .hero-section .hero-subtitle em,
 .cta-section p em {
-  color: var(--delftia-gold-bright);
+  color: var(--delftia-hero-accent);
 }
 
 /* ---- Buttons ---------------------------------------------- */
@@ -212,14 +213,14 @@ button:focus-visible {
 
 .btn-outline-hero {
   background: transparent;
-  color: var(--delftia-gold-bright) !important;
-  border: 2px solid rgba(255, 235, 59, 0.95);
-  box-shadow: inset 0 0 0 1px rgba(255, 235, 59, 0.12);
+  color: var(--delftia-title-dark) !important;
+  border: 2px solid rgba(246, 217, 141, 0.95);
+  box-shadow: inset 0 0 0 1px rgba(246, 217, 141, 0.18);
 }
 
 .btn-outline-hero:hover {
-  background: rgba(255, 235, 59, 0.18);
-  color: #FFFACD !important;
+  background: rgba(246, 217, 141, 0.22);
+  color: #fffde8 !important;
 }
 
 /* ---- Stats bar -------------------------------------------- */
@@ -367,8 +368,8 @@ button:focus-visible {
 /* ---- CTA / call-to-action section ------------------------- */
 .cta-section {
   background:
-    radial-gradient(circle at 15% 20%, rgba(255, 235, 59, 0.08), transparent 34%),
-    linear-gradient(135deg, #070401, #120a02 52%, #1d1203);
+    radial-gradient(circle at 15% 20%, rgba(246, 217, 141, 0.10), transparent 34%),
+    linear-gradient(135deg, #060300, #120a02 52%, #201303);
   color: var(--delftia-gold-glow);
   padding: 4rem 2rem;
   text-align: center;
