@@ -19,6 +19,8 @@
   --delftia-text:      #1c1408;   /* body text (dark)              */
   --delftia-muted:     #6B5B4C;   /* warm brown secondary text     */
   --delftia-focus:     #005fcc;   /* accessible focus indicator    */
+  --delftia-title-dark:#fff06a;   /* shared heading color on dark backgrounds */
+  --delftia-subtitle-dark:#fff8b3;/* shared supporting text on dark backgrounds */
   --card-radius:       12px;
   --transition-fast:   0.2s ease;
 }
@@ -111,9 +113,9 @@ button:focus-visible {
 /* ---- Hero section ----------------------------------------- */
 .hero-section {
   background:
-    radial-gradient(circle at 16% 18%, rgba(255, 235, 59, 0.32), transparent 42%),
-    radial-gradient(circle at 84% 28%, rgba(255, 215, 0, 0.28), transparent 48%),
-    linear-gradient(140deg, #120901 0%, #251502 38%, #4a2a05 62%, #110902 100%);
+    radial-gradient(circle at 16% 18%, rgba(255, 235, 59, 0.10), transparent 40%),
+    radial-gradient(circle at 84% 28%, rgba(255, 235, 59, 0.08), transparent 44%),
+    linear-gradient(140deg, #070401 0%, #120a02 40%, #241603 68%, #060301 100%);
   color: #ffffff;
   padding: 5rem 2rem 4rem;
   text-align: center;
@@ -126,14 +128,14 @@ button:focus-visible {
   position: absolute;
   inset: 0;
   background:
-    radial-gradient(circle at 10% 18%, rgba(255, 235, 59, 0.42) 0 2px, transparent 3px),
-    radial-gradient(circle at 22% 72%, rgba(255, 215, 0, 0.36) 0 3px, transparent 4px),
-    radial-gradient(circle at 34% 38%, rgba(255, 193, 7, 0.32) 0 2px, transparent 3px),
-    radial-gradient(circle at 48% 82%, rgba(255, 225, 61, 0.34) 0 2.5px, transparent 4px),
-    radial-gradient(circle at 63% 20%, rgba(255, 235, 59, 0.38) 0 2px, transparent 3px),
-    radial-gradient(circle at 76% 58%, rgba(255, 193, 7, 0.34) 0 3px, transparent 4px),
-    radial-gradient(circle at 90% 32%, rgba(255, 240, 84, 0.4) 0 2px, transparent 3px),
-    linear-gradient(125deg, rgba(255, 235, 59, 0.17), transparent 45%, rgba(255, 193, 7, 0.16));
+    radial-gradient(circle at 10% 18%, rgba(255, 235, 59, 0.16) 0 2px, transparent 3px),
+    radial-gradient(circle at 22% 72%, rgba(255, 215, 0, 0.14) 0 3px, transparent 4px),
+    radial-gradient(circle at 34% 38%, rgba(255, 193, 7, 0.12) 0 2px, transparent 3px),
+    radial-gradient(circle at 48% 82%, rgba(255, 225, 61, 0.13) 0 2.5px, transparent 4px),
+    radial-gradient(circle at 63% 20%, rgba(255, 235, 59, 0.14) 0 2px, transparent 3px),
+    radial-gradient(circle at 76% 58%, rgba(255, 193, 7, 0.12) 0 3px, transparent 4px),
+    radial-gradient(circle at 90% 32%, rgba(255, 240, 84, 0.15) 0 2px, transparent 3px),
+    linear-gradient(125deg, rgba(255, 235, 59, 0.08), transparent 45%, rgba(255, 193, 7, 0.08));
   z-index: 0;
   pointer-events: none;
 }
@@ -153,7 +155,7 @@ button:focus-visible {
 }
 
 .hero-section h1 {
-  color: var(--delftia-gold-hero);
+  color: var(--delftia-title-dark);
   font-size: clamp(2rem, 5vw, 3.2rem);
   margin-bottom: 1rem;
   text-shadow:
@@ -165,7 +167,7 @@ button:focus-visible {
 
 .hero-section .hero-subtitle {
   font-size: clamp(1rem, 2.5vw, 1.3rem);
-  color: var(--delftia-gold-bright);
+  color: var(--delftia-subtitle-dark);
   max-width: 680px;
   margin: 0 auto 2.2rem;
   line-height: 1.6;
@@ -365,22 +367,22 @@ button:focus-visible {
 /* ---- CTA / call-to-action section ------------------------- */
 .cta-section {
   background:
-    radial-gradient(circle at 15% 20%, rgba(255, 235, 59, 0.14), transparent 34%),
-    linear-gradient(135deg, #110902, #1d1203 52%, #2e1c04);
+    radial-gradient(circle at 15% 20%, rgba(255, 235, 59, 0.08), transparent 34%),
+    linear-gradient(135deg, #070401, #120a02 52%, #1d1203);
   color: var(--delftia-gold-glow);
   padding: 4rem 2rem;
   text-align: center;
 }
 
 .cta-section h2 {
-  color: var(--delftia-gold-bright);
+  color: var(--delftia-title-dark);
   font-size: clamp(1.6rem, 3vw, 2.2rem);
   margin-bottom: 0.8rem;
   text-shadow: 0 3px 10px rgba(0, 0, 0, 0.5);
 }
 
 .cta-section p {
-  color: var(--delftia-gold-glow);
+  color: var(--delftia-subtitle-dark);
   max-width: 580px;
   margin: 0 auto 2rem;
   font-size: 1.05rem;
@@ -630,8 +632,8 @@ body:not(.home) {
   --page-link-hover:  #1a1410;   /* hovered link — 21:1 on white       */
   --page-link-visited:#8B7355;   /* visited — warm brown               */
   --page-focus:       #005fcc;   /* focus outline — accessible blue     */
-  --hero-heading:     #FFEB3B;   /* hero h1 — 12:1 on dark (AA+)       */
-  --hero-subtitle:    #FFF44F;   /* hero subtitle — 11:1 on dark       */
+  --hero-heading:     var(--delftia-title-dark);    /* shared dark-section heading */
+  --hero-subtitle:    var(--delftia-subtitle-dark); /* shared dark-section subtitle */
 }
 
 /* Base text -------------------------------------------------------- */
