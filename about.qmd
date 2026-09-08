@@ -173,5 +173,5 @@ there are multiple ways to contribute to the Delftia Project:
 ```
 
 ::: {style="text-align:center;padding:1rem 0 2rem;"}
-For more information, visit [NC State University's website](https://www.ncsu.edu) or check out the [News](news.qmd) section for recent updates and opportunities.
+For more information, visit [NC State University's website](https://www.ncsu.edu) or check out the [News](news.html) section for recent updates and opportunities.
 :::
