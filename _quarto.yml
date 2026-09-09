@@ -3,7 +3,7 @@ project:
 
 website:
   title: "The Delftia Project"
-  site-url: "https://delftia.org"
+  site-url: "https://www.delftia.org"
   repo-url: "https://github.com/ccgoller/delftia"
   favicon: images/cropped-cropped-DelftiaLogo-e1594312941275-32x32.png
   description: "Exploring the biology and applications of Delftia acidovorans through undergraduate research, citizen science, and community collaboration."
