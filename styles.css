@@ -22,6 +22,10 @@
   --delftia-title-dark:#fff3cf;   /* logo-inspired light gold for dark sections */
   --delftia-subtitle-dark:#fff8e5;/* high-contrast warm cream on dark sections    */
   --delftia-hero-accent:#f6d98d;  /* logo-inspired accent text on dark sections   */
+  --delftia-link-on-light:#7a5400; /* accessible link color on white/light surfaces */
+  --delftia-link-hover-on-light:#3b2900; /* hover/focus color on white/light surfaces */
+  --delftia-link-visited-on-light:#5f4513; /* visited link color on white/light surfaces */
+  --delftia-accent-on-light:#6d4a00; /* non-body accent text on white/light surfaces */
   --card-radius:       12px;
   --transition-fast:   0.2s ease;
 }
@@ -38,11 +42,11 @@ h1, h2, h3, h4 {
 }
 
 a {
-  color: var(--delftia-gold);
+  color: var(--delftia-link-on-light);
 }
 
 a:hover {
-  color: var(--delftia-umber);
+  color: var(--delftia-link-hover-on-light);
   text-decoration: underline;
 }
 
@@ -116,7 +120,7 @@ button:focus-visible {
   background:
     radial-gradient(circle at 16% 18%, rgba(255, 235, 59, 0.10), transparent 40%),
     radial-gradient(circle at 84% 28%, rgba(255, 235, 59, 0.08), transparent 44%),
-    linear-gradient(140deg, #070401 0%, #120a02 40%, #241603 68%, #060301 100%);
+    linear-gradient(140deg, #060300 0%, #100901 40%, #1b1002 68%, #040200 100%);
   color: #ffffff;
   padding: 5rem 2rem 4rem;
   text-align: center;
@@ -145,7 +149,7 @@ button:focus-visible {
   content: "";
   position: absolute;
   inset: 0;
-  background: linear-gradient(180deg, rgba(0, 0, 0, 0.68) 0%, rgba(0, 0, 0, 0.84) 100%);
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.75) 0%, rgba(0, 0, 0, 0.88) 100%);
   z-index: 1;
   pointer-events: none;
 }
@@ -243,7 +247,7 @@ button:focus-visible {
 .stat-item .stat-number {
   font-size: 2.4rem;
   font-weight: 800;
-  color: var(--delftia-gold);
+  color: var(--delftia-accent-on-light);
   line-height: 1;
 }
 
@@ -345,7 +349,7 @@ button:focus-visible {
 
 .news-card-date {
   font-size: 0.78rem;
-  color: var(--delftia-gold);
+  color: var(--delftia-accent-on-light);
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.06em;
@@ -526,7 +530,7 @@ button:focus-visible {
 
 .timeline-date {
   font-size: 0.78rem;
-  color: var(--delftia-gold);
+  color: var(--delftia-accent-on-light);
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.06em;
@@ -575,7 +579,7 @@ button:focus-visible {
 }
 
 .ref-list a {
-  color: var(--delftia-gold);
+  color: var(--delftia-link-on-light);
 }
 
 .ref-list a:hover {
@@ -629,9 +633,9 @@ button:focus-visible {
 body:not(.home) {
   --page-text:        #1a1208;   /* body text — 19:1 on white          */
   --page-secondary:   #6B5B4C;   /* secondary / muted — 13:1 on white  */
-  --page-link:        var(--delftia-gold);     /* links — brilliant gold         */
-  --page-link-hover:  #1a1410;   /* hovered link — 21:1 on white       */
-  --page-link-visited:#8B7355;   /* visited — warm brown               */
+  --page-link:        var(--delftia-link-on-light);     /* links on light backgrounds */
+  --page-link-hover:  var(--delftia-link-hover-on-light);   /* hovered link on light backgrounds */
+  --page-link-visited:var(--delftia-link-visited-on-light); /* visited link on light backgrounds */
   --page-focus:       #005fcc;   /* focus outline — accessible blue     */
   --hero-heading:     var(--delftia-title-dark);    /* shared dark-section heading */
   --hero-subtitle:    var(--delftia-subtitle-dark); /* shared dark-section subtitle */
