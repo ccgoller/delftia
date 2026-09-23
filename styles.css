@@ -17,7 +17,7 @@
   --delftia-cream:     #FFF8E1;   /* warm light background         */
   --delftia-light:     #FFFEF0;   /* very light section bg         */
   --delftia-text:      #1c1408;   /* body text (dark)              */
-  --delftia-muted:     #6B5B4C;   /* warm brown secondary text     */
+  --delftia-muted:     #4f4032;   /* darker secondary text for stronger contrast */
   --delftia-focus:     #005fcc;   /* accessible focus indicator    */
   --delftia-title-dark:#fff3cf;   /* logo-inspired light gold for dark sections */
   --delftia-subtitle-dark:#fff8e5;/* high-contrast warm cream on dark sections    */
