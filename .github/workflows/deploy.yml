@@ -31,20 +31,14 @@ jobs:
       - name: Render
         uses: quarto-dev/quarto-actions/render@v2
 
-      - name: Ensure custom-domain CNAME is published
-        env:
-          CUSTOM_DOMAIN: ${{ vars.CUSTOM_DOMAIN }}
+      - name: Publish CNAME only when repository CNAME exists
         run: |
           set -euo pipefail
-          if [ -n "${CUSTOM_DOMAIN:-}" ]; then
-            domain="$(echo "${CUSTOM_DOMAIN}" | xargs)"
-            echo "${domain}" > _site/CNAME
-            echo "Published _site/CNAME from vars.CUSTOM_DOMAIN: ${domain}"
-          elif [ -f CNAME ]; then
+          if [ -f CNAME ]; then
             cp CNAME _site/CNAME
             echo "Published _site/CNAME from repository CNAME file."
           else
-            echo "No custom domain configured (vars.CUSTOM_DOMAIN or repository CNAME)."
+            echo "No repository CNAME file found; publishing with default github.io domain."
           fi
 
       - name: Verify generated pages before upload
