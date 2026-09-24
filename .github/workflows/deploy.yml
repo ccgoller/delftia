@@ -104,13 +104,16 @@ jobs:
             "${base_url}/references.html"
           )
 
+          config_file="$(mktemp)"
+          printf '%s\n' '{"chromeLaunchConfig":{"args":["--no-sandbox","--disable-setuid-sandbox"]}}' > "${config_file}"
+
           failures=0
           for url in "${urls[@]}"; do
             echo "Running color-contrast audit for ${url}"
             report_file="$(mktemp)"
             npx --yes pa11y "${url}" \
               --runner axe \
-              --chrome-launch-config='{"args":["--no-sandbox","--disable-setuid-sandbox"]}' \
+              --config "${config_file}" \
               --reporter json \
               --threshold 9999 > "${report_file}"
 
@@ -121,6 +124,8 @@ jobs:
 
             rm -f "${report_file}"
           done
+
+          rm -f "${config_file}"
 
           if [ "${failures}" -ne 0 ]; then
             echo "❌ Color contrast audit failed on ${failures} page(s)."
