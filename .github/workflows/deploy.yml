@@ -110,6 +110,7 @@ jobs:
             report_file="$(mktemp)"
             npx --yes pa11y "${url}" \
               --runner axe \
+              --chrome-launch-config='{"args":["--no-sandbox","--disable-setuid-sandbox"]}' \
               --reporter json \
               --threshold 9999 > "${report_file}"
 
