@@ -109,6 +109,7 @@ jobs:
             echo "Running color-contrast audit for ${url}"
             report_file="$(mktemp)"
             npx --yes pa11y "${url}" \
+              --config .github/pa11y.cjs \
               --runner axe \
               --reporter json \
               --threshold 9999 > "${report_file}"
