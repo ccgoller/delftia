@@ -113,31 +113,7 @@ jobs:
               --reporter json \
               --threshold 9999 > "${report_file}"
 
-            if ! python - "${url}" "${report_file}" <<'PY'
-            import json
-            import sys
-
-            url = sys.argv[1]
-            report_path = sys.argv[2]
-
-            with open(report_path, "r", encoding="utf-8") as handle:
-                issues = json.load(handle)
-
-            contrast_issues = [
-                issue for issue in issues
-                if "color-contrast" in (issue.get("code") or "")
-            ]
-
-            if contrast_issues:
-                print(f"❌ {url}: {len(contrast_issues)} color-contrast issue(s) found.")
-                for issue in contrast_issues[:10]:
-                    selector = issue.get("selector", "n/a")
-                    message = issue.get("message", "")
-                    print(f"  - {selector}: {message}")
-                sys.exit(1)
-
-            print(f"✅ {url}: no color-contrast issues found.")
-            PY
+            if ! python -c $'import json\nimport sys\n\nurl = sys.argv[1]\nreport_path = sys.argv[2]\n\nwith open(report_path, "r", encoding="utf-8") as handle:\n    issues = json.load(handle)\n\ncontrast_issues = [\n    issue for issue in issues\n    if "color-contrast" in (issue.get("code") or "")\n]\n\nif contrast_issues:\n    print(f"❌ {url}: {len(contrast_issues)} color-contrast issue(s) found.")\n    for issue in contrast_issues[:10]:\n        selector = issue.get("selector", "n/a")\n        message = issue.get("message", "")\n        print(f"  - {selector}: {message}")\n    sys.exit(1)\n\nprint(f"✅ {url}: no color-contrast issues found.")' "${url}" "${report_file}"
             then
               failures=$((failures + 1))
             fi
