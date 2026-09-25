@@ -108,9 +108,11 @@ jobs:
           for url in "${urls[@]}"; do
             echo "Running color-contrast audit for ${url}"
             report_file="$(mktemp)"
+            launch_config_file="$(mktemp)"
+            printf '%s\n' '{"chromeLaunchConfig":{"args":["--no-sandbox","--disable-setuid-sandbox"]}}' > "${launch_config_file}"
             npx --yes pa11y "${url}" \
               --runner axe \
-              --chrome-launch-config='{"args":["--no-sandbox","--disable-setuid-sandbox"]}' \
+              --config "${launch_config_file}" \
               --reporter json \
               --threshold 9999 > "${report_file}"
 
@@ -119,7 +121,7 @@ jobs:
               failures=$((failures + 1))
             fi
 
-            rm -f "${report_file}"
+            rm -f "${report_file}" "${launch_config_file}"
           done
 
           if [ "${failures}" -ne 0 ]; then
