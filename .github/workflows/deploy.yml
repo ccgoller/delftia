@@ -55,6 +55,24 @@ jobs:
           fi
           echo "✅ Generated home page and ${html_count} HTML files in _site."
 
+      - name: Clear GitHub Pages custom domain
+        id: clear-pages-domain
+        continue-on-error: true
+        uses: actions/github-script@v7
+        with:
+          script: |
+            await github.request("PUT /repos/{owner}/{repo}/pages", {
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              cname: null,
+              https_enforced: true
+            });
+
+      - name: Warn when custom-domain clearing is not authorized
+        if: steps.clear-pages-domain.outcome != 'success'
+        run: |
+          echo "::warning::Could not clear GitHub Pages custom domain with GITHUB_TOKEN. If github.io still redirects, clear the custom domain manually in repository Pages settings."
+
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
@@ -64,14 +82,30 @@ jobs:
         id: deployment
         uses: actions/deploy-pages@v4
 
-      - name: Verify deployed Pages URLs are publicly accessible
+      - name: Derive GitHub Pages base URL
+        id: pages-base-url
         env:
-          PAGE_URL: ${{ steps.deployment.outputs.page_url }}
+          REPO_OWNER: ${{ github.repository_owner }}
+          REPO_NAME: ${{ github.event.repository.name }}
         run: |
           set -euo pipefail
-          base_url="${PAGE_URL%/}"
+          repo_owner="${REPO_OWNER,,}"
+          repo_name="${REPO_NAME,,}"
+          if [ "${repo_name}" = "${repo_owner}.github.io" ]; then
+            base_url="https://${repo_owner}.github.io"
+          else
+            base_url="https://${repo_owner}.github.io/${repo_name}"
+          fi
+          echo "base_url=${base_url%/}" >> "$GITHUB_OUTPUT"
+
+      - name: Verify deployed Pages URLs are publicly accessible
+        env:
+          BASE_URL: ${{ steps.pages-base-url.outputs.base_url }}
+        run: |
+          set -euo pipefail
+          base_url="${BASE_URL%/}"
           if [ -z "${base_url}" ]; then
-            echo "❌ deployment page_url output is empty."
+            echo "❌ BASE_URL is empty."
             exit 1
           fi
 
@@ -93,10 +127,10 @@ jobs:
 
       - name: Check deployed page color contrast (axe color-contrast)
         env:
-          PAGE_URL: ${{ steps.deployment.outputs.page_url }}
+          BASE_URL: ${{ steps.pages-base-url.outputs.base_url }}
         run: |
           set -euo pipefail
-          base_url="${PAGE_URL%/}"
+          base_url="${BASE_URL%/}"
           urls=(
             "${base_url}/"
             "${base_url}/about.html"
