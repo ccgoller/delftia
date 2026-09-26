@@ -108,8 +108,8 @@ jobs:
           for url in "${urls[@]}"; do
             echo "Running color-contrast audit for ${url}"
             report_file="$(mktemp)"
-            launch_config_file="$(mktemp)"
-            printf '%s\n' '{"chromeLaunchConfig":{"args":["--no-sandbox","--disable-setuid-sandbox"]}}' > "${launch_config_file}"
+            launch_config_file="$(mktemp --suffix=.cjs)"
+            printf '%s\n' 'module.exports = { chromeLaunchConfig: { args: ["--no-sandbox", "--disable-setuid-sandbox"] } };' > "${launch_config_file}"
             npx --yes pa11y "${url}" \
               --runner axe \
               --config "${launch_config_file}" \
