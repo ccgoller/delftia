@@ -56,6 +56,8 @@ jobs:
           echo "✅ Generated home page and ${html_count} HTML files in _site."
 
       - name: Clear GitHub Pages custom domain
+        id: clear-pages-domain
+        continue-on-error: true
         uses: actions/github-script@v7
         with:
           script: |
@@ -65,6 +67,11 @@ jobs:
               cname: null,
               https_enforced: true
             });
+
+      - name: Warn when custom-domain clearing is not authorized
+        if: steps.clear-pages-domain.outcome != 'success'
+        run: |
+          echo "::warning::Could not clear GitHub Pages custom domain with GITHUB_TOKEN. If github.io still redirects, clear the custom domain manually in repository Pages settings."
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
