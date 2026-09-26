@@ -138,7 +138,7 @@ jobs:
           for url in "${urls[@]}"; do
             echo "Checking ${url} (allowing for GitHub Pages propagation)..."
             if curl --silent --show-error --location --fail \
-              --retry 15 --retry-delay 10 --retry-all-errors \
+              --retry 30 --retry-delay 10 --retry-all-errors \
               --max-time 30 \
               "${url}" > /dev/null; then
               echo "✅ ${url} returned HTTP 200."
@@ -149,11 +149,13 @@ jobs:
           done
 
           if [ "${#failed_urls[@]}" -ne 0 ]; then
-            echo "::warning::Some deployed URLs were not reachable yet after retries. This can be caused by GitHub Pages propagation delay."
+            echo "❌ Some deployed URLs were not reachable after retries."
+            echo "This may indicate an unusually slow GitHub Pages propagation or a deployment issue."
             echo "Unreachable URLs:"
             for url in "${failed_urls[@]}"; do
               echo " - ${url}"
             done
+            exit 1
           else
             echo "✅ All expected deployed URLs are publicly reachable."
           fi
@@ -175,7 +177,7 @@ jobs:
           skipped=0
           for url in "${urls[@]}"; do
             if ! curl --silent --show-error --location --fail \
-              --retry 3 --retry-delay 10 --retry-all-errors \
+              --retry 30 --retry-delay 10 --retry-all-errors \
               --max-time 30 \
               "${url}" > /dev/null; then
               echo "::warning::Skipping color-contrast audit for ${url} because the page is not yet reachable."
@@ -203,8 +205,12 @@ jobs:
 
           if [ "${failures}" -ne 0 ]; then
             echo "::warning::Color contrast audit found issues on ${failures} page(s). See logs for selectors and messages."
-          elif [ "${skipped}" -ne 0 ]; then
+          fi
+
+          if [ "${skipped}" -ne 0 ]; then
             echo "::warning::Color contrast audit skipped ${skipped} page(s) that were not reachable yet."
-          else
+          fi
+
+          if [ "${failures}" -eq 0 ] && [ "${skipped}" -eq 0 ]; then
             echo "✅ Color contrast audit passed on all pages."
           fi
