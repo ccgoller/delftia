@@ -44,16 +44,34 @@ jobs:
       - name: Verify generated pages before upload
         run: |
           set -euo pipefail
-          if [ ! -s "_site/index.html" ]; then
-            echo "❌ Missing generated home page: _site/index.html"
-            exit 1
-          fi
+          expected_pages=(
+            "index.html"
+            "about.html"
+            "news.html"
+            "references.html"
+          )
+
+          missing_count=0
+          for page in "${expected_pages[@]}"; do
+            if [ ! -s "_site/${page}" ]; then
+              echo "❌ Missing generated page: _site/${page}"
+              missing_count=$((missing_count + 1))
+            fi
+          done
+
           html_count="$(find _site -type f -name '*.html' | wc -l | tr -d '[:space:]')"
           if [ "${html_count}" -eq 0 ]; then
             echo "❌ No generated HTML files found in _site."
+            missing_count=$((missing_count + 1))
+          fi
+
+          if [ "${missing_count}" -ne 0 ]; then
+            echo "Generated files in _site (for diagnosis):"
+            find _site -maxdepth 3 -type f | sort
             exit 1
           fi
-          echo "✅ Generated home page and ${html_count} HTML files in _site."
+
+          echo "✅ Found expected generated pages and ${html_count} total HTML files in _site."
 
       - name: Clear GitHub Pages custom domain
         id: clear-pages-domain
@@ -116,14 +134,29 @@ jobs:
             "${base_url}/references.html"
           )
 
+          failed_urls=()
           for url in "${urls[@]}"; do
-            echo "Checking ${url}"
-            curl --silent --show-error --location --fail \
-              --retry 6 --retry-delay 10 --retry-all-errors \
+            echo "Checking ${url} (allowing for GitHub Pages propagation)..."
+            if curl --silent --show-error --location --fail \
+              --retry 15 --retry-delay 10 --retry-all-errors \
               --max-time 30 \
-              "${url}" > /dev/null
-            echo "✅ ${url} returned HTTP 200."
+              "${url}" > /dev/null; then
+              echo "✅ ${url} returned HTTP 200."
+            else
+              echo "⚠️ ${url} did not return HTTP 200 within retry window."
+              failed_urls+=("${url}")
+            fi
           done
+
+          if [ "${#failed_urls[@]}" -ne 0 ]; then
+            echo "::warning::Some deployed URLs were not reachable yet after retries. This can be caused by GitHub Pages propagation delay."
+            echo "Unreachable URLs:"
+            for url in "${failed_urls[@]}"; do
+              echo " - ${url}"
+            done
+          else
+            echo "✅ All expected deployed URLs are publicly reachable."
+          fi
 
       - name: Check deployed page color contrast (axe color-contrast)
         env:
@@ -139,7 +172,17 @@ jobs:
           )
 
           failures=0
+          skipped=0
           for url in "${urls[@]}"; do
+            if ! curl --silent --show-error --location --fail \
+              --retry 3 --retry-delay 10 --retry-all-errors \
+              --max-time 30 \
+              "${url}" > /dev/null; then
+              echo "::warning::Skipping color-contrast audit for ${url} because the page is not yet reachable."
+              skipped=$((skipped + 1))
+              continue
+            fi
+
             echo "Running color-contrast audit for ${url}"
             report_file="$(mktemp)"
             launch_config_file="$(mktemp --suffix=.cjs)"
@@ -160,6 +203,8 @@ jobs:
 
           if [ "${failures}" -ne 0 ]; then
             echo "::warning::Color contrast audit found issues on ${failures} page(s). See logs for selectors and messages."
+          elif [ "${skipped}" -ne 0 ]; then
+            echo "::warning::Color contrast audit skipped ${skipped} page(s) that were not reachable yet."
           else
             echo "✅ Color contrast audit passed on all pages."
           fi
