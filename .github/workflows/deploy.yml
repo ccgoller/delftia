@@ -64,14 +64,25 @@ jobs:
         id: deployment
         uses: actions/deploy-pages@v4
 
+      - name: Clear GitHub Pages custom domain
+        uses: actions/github-script@v7
+        with:
+          script: |
+            await github.request("PUT /repos/{owner}/{repo}/pages", {
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              cname: null,
+              https_enforced: true
+            });
+
       - name: Verify deployed Pages URLs are publicly accessible
         env:
-          PAGE_URL: ${{ steps.deployment.outputs.page_url }}
+          BASE_URL: https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}
         run: |
           set -euo pipefail
-          base_url="${PAGE_URL%/}"
+          base_url="${BASE_URL%/}"
           if [ -z "${base_url}" ]; then
-            echo "❌ deployment page_url output is empty."
+            echo "❌ BASE_URL is empty."
             exit 1
           fi
 
@@ -93,10 +104,10 @@ jobs:
 
       - name: Check deployed page color contrast (axe color-contrast)
         env:
-          PAGE_URL: ${{ steps.deployment.outputs.page_url }}
+          BASE_URL: https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}
         run: |
           set -euo pipefail
-          base_url="${PAGE_URL%/}"
+          base_url="${BASE_URL%/}"
           urls=(
             "${base_url}/"
             "${base_url}/about.html"
