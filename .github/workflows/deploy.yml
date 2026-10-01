@@ -103,10 +103,11 @@ jobs:
                 });
                 core.info("✅ Pages source switched to GitHub Actions (build_type: workflow).");
               } catch (error) {
-                throw new Error(
+                core.warning(
                   `Could not switch the Pages source automatically (${error.message}). ` +
                   `Go to ${settingsUrl} and set "Build and deployment" > "Source" to "GitHub Actions", ` +
-                  "then re-run this workflow."
+                  "then re-run this workflow. " +
+                  "Continuing with deployment and post-deploy verification."
                 );
               }
             } else {
