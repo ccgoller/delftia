@@ -5,6 +5,10 @@ on:
     branches: [ main ]
   workflow_dispatch:
 
+concurrency:
+  group: github-pages
+  cancel-in-progress: false
+
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
@@ -19,6 +23,41 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: Check GitHub Pages configuration
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const settingsUrl = `https://github.com/${context.repo.owner}/${context.repo.repo}/settings/pages`;
+            const expectedDomain = require("fs").readFileSync("CNAME", "utf8").trim();
+            const params = { owner: context.repo.owner, repo: context.repo.repo };
+            let { data: pages } = await github.request("GET /repos/{owner}/{repo}/pages", params);
+            if (pages.build_type !== "workflow" || pages.cname !== expectedDomain) {
+              try {
+                await github.request("PUT /repos/{owner}/{repo}/pages", {
+                  ...params,
+                  build_type: "workflow",
+                  cname: expectedDomain
+                });
+                ({ data: pages } = await github.request("GET /repos/{owner}/{repo}/pages", params));
+              } catch (error) {
+                core.setFailed(
+                  `Cannot configure GitHub Pages (${error.message}). ` +
+                  `At ${settingsUrl}, set "Build and deployment" > "Source" to "GitHub Actions" ` +
+                  `and "Custom domain" to "${expectedDomain}", then re-run this workflow. ` +
+                  "A branch-based Pages build can overwrite this deployment with raw source files and cause 404s."
+                );
+                return;
+              }
+            }
+            if (pages.build_type !== "workflow" || pages.cname !== expectedDomain) {
+              core.setFailed(
+                `GitHub Pages settings did not persist. At ${settingsUrl}, select "GitHub Actions" ` +
+                `and set the custom domain to "${expectedDomain}", then re-run this workflow.`
+              );
+              return;
+            }
+            core.info(`GitHub Pages uses GitHub Actions and the custom domain ${expectedDomain}.`);
+
       - name: Configure GitHub Pages
         uses: actions/configure-pages@v5
 
@@ -31,15 +70,11 @@ jobs:
       - name: Render
         uses: quarto-dev/quarto-actions/render@v2
 
-      - name: Publish CNAME only when repository CNAME exists
+      - name: Publish custom domain
         run: |
           set -euo pipefail
-          if [ -f CNAME ]; then
-            cp CNAME _site/CNAME
-            echo "Published _site/CNAME from repository CNAME file."
-          else
-            echo "No repository CNAME file found; publishing with default github.io domain."
-          fi
+          cp CNAME _site/CNAME
+          touch _site/.nojekyll
 
       - name: Verify generated pages before upload
         run: |
@@ -73,47 +108,6 @@ jobs:
 
           echo "✅ Found expected generated pages and ${html_count} total HTML files in _site."
 
-      - name: Check GitHub Pages configuration
-        uses: actions/github-script@v7
-        with:
-          script: |
-            const settingsUrl = `https://github.com/${context.repo.owner}/${context.repo.repo}/settings/pages`;
-            const { data: pages } = await github.request("GET /repos/{owner}/{repo}/pages", {
-              owner: context.repo.owner,
-              repo: context.repo.repo
-            });
-            if (pages.cname && !require("fs").existsSync("CNAME")) {
-              throw new Error(
-                `GitHub Pages is still configured for ${pages.cname}. ` +
-                `Remove the custom domain at ${settingsUrl} ` +
-                "before publishing to the default github.io URL."
-              );
-            }
-            if (pages.build_type !== "workflow") {
-              core.warning(
-                `GitHub Pages source is "${pages.build_type}" (deploy from a branch). ` +
-                "The legacy 'pages build and deployment' run overwrites this workflow's deployment " +
-                "with raw repository files, causing 404s. Switching the Pages source to GitHub Actions..."
-              );
-              try {
-                await github.request("PUT /repos/{owner}/{repo}/pages", {
-                  owner: context.repo.owner,
-                  repo: context.repo.repo,
-                  build_type: "workflow"
-                });
-                core.info("✅ Pages source switched to GitHub Actions (build_type: workflow).");
-              } catch (error) {
-                core.warning(
-                  `Could not switch the Pages source automatically (${error.message}). ` +
-                  `Go to ${settingsUrl} and set "Build and deployment" > "Source" to "GitHub Actions", ` +
-                  "then re-run this workflow. " +
-                  "Continuing with deployment and post-deploy verification."
-                );
-              }
-            } else {
-              core.info("✅ Pages source is already GitHub Actions (build_type: workflow).");
-            }
-
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
@@ -123,21 +117,12 @@ jobs:
         id: deployment
         uses: actions/deploy-pages@v4
 
-      - name: Derive GitHub Pages base URL
+      - name: Derive custom-domain base URL
         id: pages-base-url
-        env:
-          REPO_OWNER: ${{ github.repository_owner }}
-          REPO_NAME: ${{ github.event.repository.name }}
         run: |
           set -euo pipefail
-          repo_owner="${REPO_OWNER,,}"
-          repo_name="${REPO_NAME,,}"
-          if [ "${repo_name}" = "${repo_owner}.github.io" ]; then
-            base_url="https://${repo_owner}.github.io"
-          else
-            base_url="https://${repo_owner}.github.io/${repo_name}"
-          fi
-          echo "base_url=${base_url%/}" >> "$GITHUB_OUTPUT"
+          domain="$(tr -d '[:space:]' < CNAME)"
+          echo "base_url=https://${domain}" >> "$GITHUB_OUTPUT"
 
       - name: Verify deployed Pages URLs are publicly accessible
         env:
@@ -160,10 +145,11 @@ jobs:
           failed_urls=()
           for url in "${urls[@]}"; do
             echo "Checking ${url} (allowing for GitHub Pages propagation)..."
-            if curl --silent --show-error --location --fail \
+            if status="$(curl --silent --show-error --location --fail \
               --retry 30 --retry-delay 10 --retry-all-errors \
               --max-time 30 \
-              "${url}" > /dev/null; then
+              --output /dev/null --write-out '%{http_code}' \
+              "${url}")" && [ "${status}" = "200" ]; then
               echo "✅ ${url} returned HTTP 200."
             else
               echo "⚠️ ${url} did not return HTTP 200 within retry window."
@@ -174,6 +160,8 @@ jobs:
           if [ "${#failed_urls[@]}" -ne 0 ]; then
             echo "❌ Some deployed URLs were not reachable after retries."
             echo "This may indicate an unusually slow GitHub Pages propagation or a deployment issue."
+            echo "Check Settings > Pages: custom domain delftia.org, DNS check successful, and HTTPS certificate ready."
+            echo "At your DNS provider, point the apex domain to GitHub Pages (not to a repository path)."
             echo "Unreachable URLs:"
             for url in "${failed_urls[@]}"; do
               echo " - ${url}"
@@ -186,10 +174,11 @@ jobs:
 
           overwritten_urls=()
           for url in "${urls[@]}"; do
-            if curl --silent --show-error --location --fail \
+            if status="$(curl --silent --show-error --location --fail \
               --retry 3 --retry-delay 10 --retry-all-errors \
               --max-time 30 \
-              "${url}" > /dev/null; then
+              --output /dev/null --write-out '%{http_code}' \
+              "${url}")" && [ "${status}" = "200" ]; then
               echo "✅ ${url} still returns HTTP 200."
             else
               echo "❌ ${url} stopped responding after initially succeeding."
