@@ -30,29 +30,13 @@ jobs:
             const settingsUrl = `https://github.com/${context.repo.owner}/${context.repo.repo}/settings/pages`;
             const expectedDomain = require("fs").readFileSync("CNAME", "utf8").trim();
             const params = { owner: context.repo.owner, repo: context.repo.repo };
-            let { data: pages } = await github.request("GET /repos/{owner}/{repo}/pages", params);
-            if (pages.build_type !== "workflow" || pages.cname !== expectedDomain) {
-              try {
-                await github.request("PUT /repos/{owner}/{repo}/pages", {
-                  ...params,
-                  build_type: "workflow",
-                  cname: expectedDomain
-                });
-                ({ data: pages } = await github.request("GET /repos/{owner}/{repo}/pages", params));
-              } catch (error) {
-                core.setFailed(
-                  `Cannot configure GitHub Pages (${error.message}). ` +
-                  `At ${settingsUrl}, set "Build and deployment" > "Source" to "GitHub Actions" ` +
-                  `and "Custom domain" to "${expectedDomain}", then re-run this workflow. ` +
-                  "A branch-based Pages build can overwrite this deployment with raw source files and cause 404s."
-                );
-                return;
-              }
-            }
+            const { data: pages } = await github.request("GET /repos/{owner}/{repo}/pages", params);
+            core.info(`GitHub Pages settings: build_type="${pages.build_type}", cname="${pages.cname}".`);
             if (pages.build_type !== "workflow" || pages.cname !== expectedDomain) {
               core.setFailed(
-                `GitHub Pages settings did not persist. At ${settingsUrl}, select "GitHub Actions" ` +
-                `and set the custom domain to "${expectedDomain}", then re-run this workflow.`
+                `GitHub Pages settings do not match the expected configuration. At ${settingsUrl}, ` +
+                `set "Build and deployment" > "Source" to "GitHub Actions" and "Custom domain" ` +
+                `to "${expectedDomain}", then re-run this workflow.`
               );
               return;
             }
