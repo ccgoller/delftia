@@ -23,6 +23,9 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      # ============================================================
+      # 1. PRE-BUILD CHECKS: Validate GitHub Pages configuration
+      # ============================================================
       - name: Check GitHub Pages configuration
         uses: actions/github-script@v7
         with:
@@ -40,8 +43,11 @@ jobs:
               );
               return;
             }
-            core.info(`GitHub Pages uses GitHub Actions and the custom domain ${expectedDomain}.`);
+            core.info(`✅ GitHub Pages uses GitHub Actions and the custom domain ${expectedDomain}.`);
 
+      # ============================================================
+      # 2. BUILD SETUP: Configure pages and Quarto
+      # ============================================================
       - name: Configure GitHub Pages
         uses: actions/configure-pages@v5
 
@@ -51,15 +57,21 @@ jobs:
       - name: Clean previous site output
         run: rm -rf _site
 
-      - name: Render
+      # ============================================================
+      # 3. BUILD: Render the Quarto website
+      # ============================================================
+      - name: Render Quarto site
         uses: quarto-dev/quarto-actions/render@v2
 
-      - name: Publish custom domain
+      - name: Prepare deployment (copy CNAME and .nojekyll)
         run: |
           set -euo pipefail
           cp CNAME _site/CNAME
           touch _site/.nojekyll
 
+      # ============================================================
+      # 4. PRE-DEPLOY VALIDATION: Verify all pages generated
+      # ============================================================
       - name: Verify generated pages before upload
         run: |
           set -euo pipefail
@@ -90,8 +102,11 @@ jobs:
             exit 1
           fi
 
-          echo "✅ Found expected generated pages and ${html_count} total HTML files in _site."
+          echo "✅ All expected pages generated: ${html_count} total HTML files in _site."
 
+      # ============================================================
+      # 5. DEPLOYMENT: Upload and deploy to GitHub Pages
+      # ============================================================
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
@@ -101,21 +116,24 @@ jobs:
         id: deployment
         uses: actions/deploy-pages@v4
 
-      - name: Derive custom-domain base URL
+      # ============================================================
+      # 6. POST-DEPLOYMENT VERIFICATION: Validate live site
+      # ============================================================
+      - name: Prepare base URL for verification
         id: pages-base-url
         run: |
           set -euo pipefail
           domain="$(tr -d '[:space:]' < CNAME)"
           echo "base_url=https://${domain}" >> "$GITHUB_OUTPUT"
 
-      - name: Verify deployed Pages URLs are publicly accessible
+      - name: Verify deployed pages are publicly accessible
         env:
           BASE_URL: ${{ steps.pages-base-url.outputs.base_url }}
         run: |
           set -euo pipefail
           base_url="${BASE_URL%/}"
           if [ -z "${base_url}" ]; then
-            echo "❌ BASE_URL is empty."
+            echo "❌ BASE_URL is empty. Cannot verify deployment."
             exit 1
           fi
 
@@ -153,7 +171,7 @@ jobs:
             exit 1
           fi
 
-          echo "Waiting 60 seconds and re-checking to ensure the deployment is not overwritten..."
+          echo "Waiting 60 seconds to verify deployment persists (no conflicts)..."
           sleep 60
 
           overwritten_urls=()
@@ -179,7 +197,10 @@ jobs:
             echo "✅ All expected deployed URLs are publicly reachable and stable."
           fi
 
-      - name: Check deployed page color contrast (axe color-contrast)
+      # ============================================================
+      # 7. ACCESSIBILITY AUDIT: Check color contrast (axe/pa11y)
+      # ============================================================
+      - name: Audit deployed pages for color contrast accessibility
         env:
           BASE_URL: ${{ steps.pages-base-url.outputs.base_url }}
         run: |
@@ -195,6 +216,7 @@ jobs:
           failures=0
           skipped=0
           for url in "${urls[@]}"; do
+            # Skip if page is not yet reachable
             if ! curl --silent --show-error --location --fail \
               --retry 30 --retry-delay 10 --retry-all-errors \
               --max-time 30 \
@@ -207,13 +229,18 @@ jobs:
             echo "Running color-contrast audit for ${url}"
             report_file="$(mktemp)"
             launch_config_file="$(mktemp --suffix=.cjs)"
+            
+            # Configure Chromium launch args for Headless Chrome in CI
             printf '%s\n' 'module.exports = { chromeLaunchConfig: { args: ["--no-sandbox", "--disable-setuid-sandbox"] } };' > "${launch_config_file}"
+            
+            # Run pa11y with axe rule-set to check color contrast
             npx --yes pa11y "${url}" \
               --runner axe \
               --config "${launch_config_file}" \
               --reporter json \
               --threshold 9999 > "${report_file}"
 
+            # Parse JSON output and filter for color-contrast issues
             if ! python -c $'import json\nimport sys\n\nurl = sys.argv[1]\nreport_path = sys.argv[2]\n\nwith open(report_path, "r", encoding="utf-8") as handle:\n    issues = json.load(handle)\n\ncontrast_issues = [\n    issue for issue in issues\n    if "color-contrast" in (issue.get("code") or "")\n]\n\nif contrast_issues:\n    print(f"❌ {url}: {len(contrast_issues)} color-contrast issue(s) found.")\n    for issue in contrast_issues[:10]:\n        selector = issue.get("selector", "n/a")\n        message = issue.get("message", "")\n        print(f"  - {selector}: {message}")\n    sys.exit(1)\n\nprint(f"✅ {url}: no color-contrast issues found.")' "${url}" "${report_file}"
             then
               failures=$((failures + 1))

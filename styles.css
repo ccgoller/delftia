@@ -108,6 +108,24 @@ h1, h2, h3, h4, h5, h6 {
   font-weight: 700;
   margin-top: 1.5em;
   margin-bottom: 0.5em;
+  color: var(--delftia-umber);
+  transition: color var(--transition-fast);
+}
+
+/* Ensure high contrast for headings in dark mode */
+@media (prefers-color-scheme: dark) {
+  h1, h2, h3, h4, h5, h6 {
+    color: var(--delftia-title-dark);
+  }
+}
+
+html[data-theme="dark"] h1,
+html[data-theme="dark"] h2,
+html[data-theme="dark"] h3,
+html[data-theme="dark"] h4,
+html[data-theme="dark"] h5,
+html[data-theme="dark"] h6 {
+  color: var(--delftia-title-dark);
 }
 
 /* Fix Quarto title block visibility for all pages */
@@ -194,6 +212,7 @@ html[data-theme="dark"] #quarto-header .navbar-collapse {
 #quarto-header .quarto-navigation-tool {
   color: var(--delftia-gold-glow) !important;
   transition: color var(--transition-fast);
+  font-weight: 500;
 }
 
 .navbar-brand:hover,
@@ -205,6 +224,12 @@ html[data-theme="dark"] #quarto-header .navbar-collapse {
 #quarto-header .quarto-navigation-tool:hover,
 #quarto-header .quarto-navigation-tool:focus {
   color: var(--delftia-gold-bright) !important;
+}
+
+/* Ensure keyboard focus is visible on nav links */
+#quarto-header .nav-link:focus-visible {
+  outline: 2px solid var(--delftia-gold-bright);
+  outline-offset: 2px;
 }
 
 .navbar-brand {
@@ -239,6 +264,26 @@ a:focus-visible,
 button:focus-visible {
   outline: 3px solid var(--delftia-focus);
   outline-offset: 3px;
+}
+
+/* Improved skip link styling for accessibility */
+.skip-link {
+  position: absolute;
+  top: -40px;
+  left: 0;
+  background: var(--delftia-focus);
+  color: white;
+  padding: 8px;
+  text-decoration: none;
+  z-index: 100;
+  font-weight: 600;
+  border-radius: 4px;
+}
+
+.skip-link:focus {
+  top: 0;
+  outline: 3px solid var(--delftia-umber);
+  outline-offset: 2px;
 }
 
 /* ---- Hero section ----------------------------------------- */
@@ -303,7 +348,7 @@ html[data-theme="dark"] .hero-section {
 }
 
 .hero-section h1 {
-  color: var(--delftia-title-dark);
+  color: #FFFFFF;
   font-size: clamp(2rem, 5vw, 3.2rem);
   margin-bottom: 1rem;
   margin-top: 0;
@@ -317,15 +362,15 @@ html[data-theme="dark"] .hero-section {
   font-weight: 800;
 }
 
-/* Ensure hero titles are visible in inline styles (for news, about, references pages) */
+/* Ensure hero titles are visible with inline font-size overrides */
 .hero-section h1[style*="font-size"] {
-  color: #FFFFFF !important;
+  color: #FFFFFF;
   font-weight: 800;
   text-shadow: 
     0 0 2px rgba(255, 255, 200, 0.9),
     0 2px 4px rgba(0, 0, 0, 0.8),
     0 3px 12px rgba(0, 0, 0, 0.7),
-    0 0 20px rgba(232, 149, 75, 0.4) !important;
+    0 0 20px rgba(232, 149, 75, 0.4);
 }
 
 .hero-section .hero-subtitle {
@@ -354,6 +399,15 @@ html[data-theme="dark"] .hero-section {
   text-decoration: none !important;
   transition: transform var(--transition-fast), box-shadow var(--transition-fast), background-color var(--transition-fast), color var(--transition-fast);
   margin: 0.4rem;
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-hero:focus-visible {
+  outline: 3px solid var(--delftia-focus);
+  outline-offset: 3px;
 }
 
 .btn-hero:hover {
@@ -435,19 +489,11 @@ html[data-theme="dark"] .stat-item .stat-number {
 .stat-item .stat-label {
   font-size: 0.85rem;
   text-transform: uppercase;
-  letter-spacing: 1px;
-  color: var(--page-text-secondary);
-  transition: color var(--transition-fast);
-}
-  line-height: 1;
-}
-
-.stat-item .stat-label {
-  font-size: 0.85rem;
-  color: var(--delftia-muted);
-  text-transform: uppercase;
   letter-spacing: 0.06em;
+  color: var(--delftia-muted);
   margin-top: 0.3rem;
+  line-height: 1;
+  transition: color var(--transition-fast);
 }
 
 /* ---- Section containers ----------------------------------- */
@@ -477,6 +523,7 @@ html[data-theme="dark"] .section-alt {
   color: var(--delftia-umber);
   margin-bottom: 0.5rem;
   transition: color var(--transition-fast);
+  font-weight: 700;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -487,6 +534,38 @@ html[data-theme="dark"] .section-alt {
 
 html[data-theme="dark"] .section-title {
   color: var(--delftia-gold-glow);
+}
+
+/* High-contrast page titles for accessibility */
+.page-title {
+  font-size: clamp(1.8rem, 4vw, 2.6rem);
+  font-weight: 800;
+  margin-top: 0;
+  margin-bottom: 1rem;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  transition: color var(--transition-fast);
+  color: var(--delftia-umber);
+}
+
+/* Page titles on dark backgrounds (hero sections) */
+.hero-section .page-title {
+  color: #FFFFFF;
+  text-shadow: 
+    0 0 2px rgba(255, 255, 200, 0.9),
+    0 2px 4px rgba(0, 0, 0, 0.8),
+    0 3px 12px rgba(0, 0, 0, 0.7),
+    0 0 20px rgba(232, 149, 75, 0.4);
+}
+
+@media (prefers-color-scheme: dark) {
+  .page-title {
+    color: var(--delftia-title-dark);
+  }
+}
+
+html[data-theme="dark"] .page-title {
+  color: var(--delftia-title-dark);
 }
 
 .section-subtitle {
@@ -562,6 +641,7 @@ html[data-theme="dark"] .feature-card:hover {
   color: var(--delftia-umber);
   margin-bottom: 0.6rem;
   transition: color var(--transition-fast);
+  font-weight: 700;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -1345,6 +1425,8 @@ html[data-theme="dark"] .timeline-card {
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
+  min-height: 44px;
+  min-width: 44px;
 }
 
 .theme-toggle:hover,
@@ -1352,6 +1434,11 @@ html[data-theme="dark"] .timeline-card {
   background-color: rgba(232, 149, 75, 0.15);
   color: var(--delftia-gold-bright);
   border-color: var(--delftia-gold-bright);
+}
+
+.theme-toggle:focus-visible {
+  outline: 3px solid var(--delftia-focus);
+  outline-offset: 2px;
 }
 
 .theme-toggle-icon {
