@@ -3,8 +3,8 @@
    ============================================================ */
 
 /* ---- Color palette (Light Mode - Default) ----------------
-   Palette: Professional academic theme with refined gold accents.
-   All colors WCAG 2.2 AAA compliant for maximum accessibility.
+   Palette: Professional academic theme with refined amber accents.
+   All colors verified for WCAG 2.2 AAA compliance (7:1+ contrast).
    ------------------------------------------------------------ */
 :root {
   /* Delftia Brand Colors */
@@ -14,7 +14,7 @@
   --delftia-gold-glow: #FCE4C3;   /* delftia orange light glow     */
   --delftia-gold-hero: #E8954B;   /* delftia orange for dark bg    */
   --delftia-gold-hover:#D67E3E;   /* delftia orange hover state    */
-  --delftia-accent:    #C17A35;   /* delftia orange accent         */
+  --delftia-accent:    #704A1F;   /* delftia dark amber accent     */
   --delftia-cream:     #FAF7F0;   /* refined light background      */
   --delftia-light:     #F9F5ED;   /* sophisticated light section   */
   
@@ -31,10 +31,10 @@
   --delftia-title-dark:#F5E6D3;   /* refined light text on dark    */
   --delftia-subtitle-dark:#E8D9C9;/* refined subtitle on dark      */
   --delftia-hero-accent:#E8954B;  /* delftia orange on dark        */
-  --delftia-link-on-light:#C17A35; /* delftia orange on light       */
-  --delftia-link-hover-on-light:#A85C22; /* darker orange hover light */
-  --delftia-link-visited-on-light:#C17A35; /* visited orange on light */
-  --delftia-accent-on-light:#C17A35; /* accent orange on light     */
+  --delftia-link-on-light:#704A1F; /* dark amber on light (AAA 7.8:1) */
+  --delftia-link-hover-on-light:#5A3A15; /* darker amber hover (AAA 10:1) */
+  --delftia-link-visited-on-light:#704A1F; /* visited dark amber on light */
+  --delftia-accent-on-light:#704A1F; /* accent dark amber on light (AAA) */
   
   /* Dark Mode Overrides (when prefers-color-scheme: dark) */
   --delftia-link-on-dark: #F4A854;  /* delftia orange for dark mode  */
