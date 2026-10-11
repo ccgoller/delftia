@@ -8,12 +8,14 @@ page-layout: full
 <section class="hero-section hero-section--compact" aria-labelledby="news-heading">
   <h1 id="news-heading">News &amp; Updates</h1>
   <p class="hero-subtitle">
-    Stay up to date with the latest projects, student research, and community events from the Delftia Project.
+    Project milestones in student research, community annotation, and outreach.
   </p>
 </section>
 ```
 
 <div class="content-wrap news-content">
+
+<p class="archive-note">Archive: these updates document project activities from 2020–2021.</p>
 
 <div class="timeline">
 

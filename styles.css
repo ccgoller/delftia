@@ -553,6 +553,13 @@ html body:not(.home) .hero-section h1 {
   object-fit: cover;
 }
 
+.research-spotlight .spotlight-image img,
+.research-spotlight img.spotlight-image {
+  max-height: 380px;
+  width: 100%;
+  object-fit: cover;
+}
+
 .get-involved-grid {
   margin-top: 1.5rem;
   margin-bottom: 2rem;
@@ -577,6 +584,15 @@ html body:not(.home) .hero-section h1 {
   font-size: 0.95rem;
   color: var(--page-text);
   margin-bottom: 2rem;
+}
+
+.archive-note {
+  margin: 0 auto 2rem;
+  padding: 0.9rem 1.2rem;
+  border-left: 4px solid var(--page-decoration);
+  background: var(--page-bg-secondary);
+  color: var(--page-text);
+  border-radius: 8px;
 }
 
 .timeline-tags {
