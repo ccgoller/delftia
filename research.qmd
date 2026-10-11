@@ -1,0 +1,54 @@
+---
+title: ""
+pagetitle: "Research"
+description: "Explore Delftia research projects in microbiology, genomics, and community science."
+---
+
+```{=html}
+<section class="hero-section hero-section--compact" aria-labelledby="research-heading">
+  <h1 id="research-heading">Research</h1>
+  <p class="hero-subtitle">Projects connecting microbiology, genomics, and community science.</p>
+</section>
+```
+
+Our research connects undergraduate learning with questions about the biology and applications of *Delftia acidovorans*.
+
+## Projects
+
+::: {.card-grid}
+::: {.feature-card}
+### Hands-on Microbiology
+
+Students in MB 360 and LSC 170 investigate *Delftia* through laboratory work, spot-plate assays, and analysis of scientific publications.
+
+[Explore student projects](news.qmd)
+:::
+
+::: {.feature-card}
+### Genomics and Bioinformatics
+
+Explore *Delftia* sequences using BLAST and comparative genomics to investigate the organism's biology and environmental capabilities.
+
+[Browse the genomes dashboard](dashboard.qmd#latest-genomes)
+:::
+
+::: {.feature-card}
+### Gold Recovery and E-Waste
+
+Literature-based projects examine *Delftia*'s gold-biomineralizing abilities and their potential relevance to sustainable biotechnology.
+
+[Read the foundational literature](references.qmd)
+:::
+
+::: {.feature-card}
+### Citizen Science and Communication
+
+Community annotation and WikiEDU projects help make research about *Delftia*, including its environmental roles and occurrence in clinical reports, more accessible.
+
+[See community and student contributions](news.qmd)
+:::
+:::
+
+## Explore and Participate
+
+Follow the [latest publications](dashboard.qmd#latest-publications), meet our [people](people.qmd), or [get involved](about.qmd#get-involved).

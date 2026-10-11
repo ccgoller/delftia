@@ -82,6 +82,10 @@ jobs:
             "about.html"
             "news.html"
             "references.html"
+            "research.html"
+            "people.html"
+            "dashboard.html"
+            "learn.html"
           )
 
           missing_count=0
@@ -168,6 +172,10 @@ jobs:
             "${base_url}/about.html"
             "${base_url}/news.html"
             "${base_url}/references.html"
+            "${base_url}/research.html"
+            "${base_url}/people.html"
+            "${base_url}/dashboard.html"
+            "${base_url}/learn.html"
           )
 
           failed_urls=()
@@ -227,6 +235,11 @@ jobs:
             "about.html"
             "news.html"
             "references.html"
+            "research.html"
+            "people.html"
+            "dashboard.html"
+            "learn.html"
+            "dashboard.js"
             "styles.css"
           )
           mismatched_paths=()

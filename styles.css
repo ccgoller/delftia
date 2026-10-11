@@ -1285,3 +1285,15 @@ html[data-reading-focus="true"] .cta-section {
     padding: 1.5rem 1rem;
   }
 }
+
+.dashboard-list li {
+  margin-bottom: 1.5rem;
+  overflow-wrap: anywhere;
+}
+
+.nav-footer .footer-items {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.5rem;
+}

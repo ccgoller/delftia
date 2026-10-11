@@ -1,0 +1,43 @@
+---
+title: ""
+pagetitle: "Dashboard"
+description: "Latest Delftia publications and recently updated genome assemblies from public research databases."
+---
+
+```{=html}
+<section class="hero-section hero-section--compact" aria-labelledby="dashboard-heading">
+  <h1 id="dashboard-heading">Dashboard</h1>
+  <p class="hero-subtitle">Follow Delftia publications and genome assemblies.</p>
+</section>
+```
+
+Explore research across the genus *Delftia*. This dashboard loads public database records when you visit; results are not limited to the Delftia Project.
+
+```{=html}
+<button type="button" id="refresh-dashboard" class="btn btn-primary" hidden>Refresh dashboard</button>
+```
+
+## Latest Publications {#latest-publications}
+
+Up to 10 publications matching **Delftia**, newest publication date first, from Europe PMC. Database indexing can lag behind publication.
+
+[Browse all Delftia publications on Europe PMC](https://europepmc.org/search?query=Delftia%20sort_date%3Ay)
+
+```{=html}
+<p id="publications-status" role="status">Live publications require JavaScript. Use the source link above to browse the latest records.</p>
+<ol id="publications-list" class="dashboard-list"></ol>
+```
+
+## Latest Genomes {#latest-genomes}
+
+The 10 most recently updated *Delftia* genome assemblies from the European Nucleotide Archive (ENA), including species and strains within the genus. **Updated dates refer to database records, not necessarily new genome releases.**
+
+[Browse Delftia genome assemblies on ENA](https://www.ebi.ac.uk/ena/browser/advanced-search?result=assembly&amp;query=tax_tree%2880865%29)
+
+```{=html}
+<p id="genomes-status" role="status">Live genomes require JavaScript. Use the source link above to browse the latest records.</p>
+<ol id="genomes-list" class="dashboard-list"></ol>
+<script src="dashboard.js" defer></script>
+```
+
+For background, explore our [research projects](research.qmd) and [foundational references](references.qmd).
