@@ -1,5 +1,7 @@
 project:
   type: website
+  render:
+    - "*.qmd"
   resources:
     - "!tests/**"
     - "!node_modules/**"
@@ -28,10 +30,20 @@ website:
         text: Home
       - href: about.qmd
         text: About
-      - href: news.qmd
-        text: Student Projects
-      - href: references.qmd
-        text: References
+      - text: Research
+        menu:
+          - href: research.qmd
+            text: Research Projects
+          - href: news.qmd
+            text: Student Projects
+          - href: references.qmd
+            text: References
+      - href: people.qmd
+        text: People
+      - href: dashboard.qmd
+        text: Dashboard
+      - href: learn.qmd
+        text: Learn
     right:
       - text: "Get Involved"
         href: about.qmd#get-involved
@@ -48,6 +60,14 @@ website:
         href: index.qmd
       - text: "About"
         href: about.qmd
+      - text: "Research"
+        href: research.qmd
+      - text: "People"
+        href: people.qmd
+      - text: "Dashboard"
+        href: dashboard.qmd
+      - text: "Learn"
+        href: learn.qmd
       - text: "Student Projects"
         href: news.qmd
       - text: "References"

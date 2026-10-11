@@ -1,0 +1,54 @@
+---
+title: ""
+pagetitle: "People"
+description: "Meet the educators, undergraduate researchers, and community contributors behind the Delftia Project."
+---
+
+```{=html}
+<section class="hero-section hero-section--compact" aria-labelledby="people-heading">
+  <h1 id="people-heading">People</h1>
+  <p class="hero-subtitle">Meet the contributors behind the Delftia Project.</p>
+</section>
+```
+
+The Delftia Project brings together educators, undergraduate researchers, and citizen scientists at NC State University and beyond.
+
+## Project Contributors
+
+The contributors below are recognized in our [project overview](about.qmd#community); this is not a complete or current lab roster.
+
+::: {.team-grid}
+::: {.team-card}
+### Dr. Carlos Goller
+
+Principal Investigator · NC State
+:::
+
+::: {.team-card}
+### Lauren Ramilo
+
+Undergraduate Researcher
+:::
+
+::: {.team-card}
+### Daiza Norman
+
+BIT Research Assistant
+:::
+
+::: {.team-card}
+### Rabeya Tahir
+
+WikiEDU & Graphics Lead
+:::
+:::
+
+## Students and Community
+
+Students in MB 360 and LSC 170 contribute through course-based research. In 2020, 17 undergraduate volunteers participated in the Delftia WikiEDU program to improve access to information about this organism.
+
+Explore their [projects](news.qmd) and our [learning resources](learn.qmd).
+
+## Join the Community
+
+Students, educators, citizen scientists, and collaborators are welcome. Visit [Get Involved](about.qmd#get-involved) to learn about ways to participate.

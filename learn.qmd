@@ -1,0 +1,34 @@
+---
+title: ""
+pagetitle: "Learn"
+description: "Learning resources for MB 360 and the Delftia book."
+---
+
+```{=html}
+<section class="hero-section hero-section--compact" aria-labelledby="learn-heading">
+  <h1 id="learn-heading">Learn</h1>
+  <p class="hero-subtitle">Course resources and the Delftia book.</p>
+</section>
+```
+
+Explore microbiology and *Delftia* with these learning resources.
+
+::: {.card-grid}
+::: {.feature-card}
+## MB 360
+
+Access the MB 360 course resource.
+
+[Visit MB 360](https://go.ncsu.edu/mb360)
+:::
+
+::: {.feature-card}
+## Delftia Book
+
+Explore the Delftia book for learning about this remarkable bacterium.
+
+[Read the Delftia book](https://go.ncsu.edu/delftiabook)
+:::
+:::
+
+Connect your learning to our [research projects](research.qmd) and [scientific references](references.qmd).
