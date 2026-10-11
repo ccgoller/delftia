@@ -29,7 +29,7 @@ website:
       - href: about.qmd
         text: About
       - href: news.qmd
-        text: News
+        text: Student Projects
       - href: references.qmd
         text: References
     right:
@@ -48,7 +48,7 @@ website:
         href: index.qmd
       - text: "About"
         href: about.qmd
-      - text: "News"
+      - text: "Student Projects"
         href: news.qmd
       - text: "References"
         href: references.qmd
