@@ -7,7 +7,7 @@ $dark: #1a1410;
 
 $body-color: #1a1208;
 $body-bg: #ffffff;
-$headings-color: #1a1410;
+$headings-color: #0a0805;  /* Darker for better contrast on light backgrounds */
 $link-color: #704A1F;
 $link-hover-color: #5A3A15;
 $component-active-bg: #1a1410;
@@ -47,7 +47,7 @@ html[data-theme="light"] h3,
 html[data-theme="light"] h4,
 html[data-theme="light"] h5,
 html[data-theme="light"] h6 {
-  color: #1a1410;
+  color: #0a0805 !important;
 }
 
 html[data-theme="light"] .navbar {
@@ -77,7 +77,7 @@ html[data-theme="dark"] h3,
 html[data-theme="dark"] h4,
 html[data-theme="dark"] h5,
 html[data-theme="dark"] h6 {
-  color: #F5E6D3;
+  color: #F5E6D3 !important;
 }
 
 html[data-theme="dark"] .navbar {
@@ -103,7 +103,7 @@ html[data-theme="dark"] .btn-primary:hover {
   }
   
   h1, h2, h3, h4, h5, h6 {
-    color: #F5E6D3;
+    color: #F5E6D3 !important;
   }
   
   .navbar {
