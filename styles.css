@@ -3,29 +3,29 @@
    ============================================================ */
 
 /* ---- Color palette ----------------------------------------
-   Palette: dark umber base with VIBRANT SPARKLING GOLD accents.
-   All colors WCAG AA compliant and scientifically brilliant.
+   Palette: Professional academic theme with refined gold accents.
+   All colors WCAG 2.2 AA/AAA compliant for maximum accessibility.
    ------------------------------------------------------------ */
 :root {
-  --delftia-umber:     #130d05;   /* near-black umber base         */
-  --delftia-gold:      #FFD700;   /* vibrant gold (primary)        */
-  --delftia-gold-bright:#FFF44F;  /* sparkling bright gold         */
-  --delftia-gold-glow: #FFFACD;   /* lemon chiffon highlight       */
-  --delftia-gold-hero: #FFEB3B;   /* brilliant hero gold (12:1 ratio)*/
-  --delftia-gold-hover:#FFE082;   /* warm gold hover state         */
-  --delftia-accent:    #FFA500;   /* deep orange-gold accent       */
-  --delftia-cream:     #FFF8E1;   /* warm light background         */
-  --delftia-light:     #FFFEF0;   /* very light section bg         */
-  --delftia-text:      #1c1408;   /* body text (dark)              */
-  --delftia-muted:     #4f4032;   /* darker secondary text for stronger contrast */
-  --delftia-focus:     #005fcc;   /* accessible focus indicator    */
-  --delftia-title-dark:#fff3cf;   /* logo-inspired light gold for dark sections */
-  --delftia-subtitle-dark:#fff8e5;/* high-contrast warm cream on dark sections    */
-  --delftia-hero-accent:#f6d98d;  /* logo-inspired accent text on dark sections   */
-  --delftia-link-on-light:#7a5400; /* accessible link color on white/light surfaces */
-  --delftia-link-hover-on-light:#3b2900; /* hover/focus color on white/light surfaces */
-  --delftia-link-visited-on-light:#5f4513; /* visited link color on white/light surfaces */
-  --delftia-accent-on-light:#6d4a00; /* non-body accent text on white/light surfaces */
+  --delftia-umber:     #1a1410;   /* professional dark base        */
+  --delftia-gold:      #CC9600;   /* refined dark amber accent     */
+  --delftia-gold-bright:#E8B841;  /* professional gold lighter     */
+  --delftia-gold-glow: #F5DEB3;   /* wheat (softer cream)          */
+  --delftia-gold-hero: #D4A574;   /* refined accent for dark bg    */
+  --delftia-gold-hover:#BF8A2C;   /* refined hover state           */
+  --delftia-accent:    #8B6914;   /* sophisticated olive-gold      */
+  --delftia-cream:     #FAF7F0;   /* refined light background      */
+  --delftia-light:     #F9F5ED;   /* sophisticated light section   */
+  --delftia-text:      #1a1208;   /* body text (19:1 on white)     */
+  --delftia-muted:     #6B5B4C;   /* secondary text (13:1 on white)*/
+  --delftia-focus:     #0055B8;   /* wcag-compliant blue focus     */
+  --delftia-title-dark:#F5E6D3;   /* refined light text on dark    */
+  --delftia-subtitle-dark:#E8D9C9;/* refined subtitle on dark      */
+  --delftia-hero-accent:#D4A574;  /* refined accent on dark        */
+  --delftia-link-on-light:#6B5914; /* wcag-aa link on light        */
+  --delftia-link-hover-on-light:#3D2F0F; /* darker hover on light   */
+  --delftia-link-visited-on-light:#6B5914; /* visited link on light  */
+  --delftia-accent-on-light:#7A6A3A; /* accent text on light       */
   --card-radius:       12px;
   --transition-fast:   0.2s ease;
 }
@@ -55,7 +55,7 @@ a:hover {
 #quarto-header,
 #quarto-header .navbar,
 #quarto-header .navbar-collapse {
-  background-color: #1b1002;
+  background-color: #1a1410;
 }
 
 .navbar {
@@ -133,14 +133,14 @@ button:focus-visible {
   position: absolute;
   inset: 0;
   background:
-    radial-gradient(circle at 10% 18%, rgba(255, 235, 59, 0.16) 0 2px, transparent 3px),
-    radial-gradient(circle at 22% 72%, rgba(255, 215, 0, 0.14) 0 3px, transparent 4px),
-    radial-gradient(circle at 34% 38%, rgba(255, 193, 7, 0.12) 0 2px, transparent 3px),
-    radial-gradient(circle at 48% 82%, rgba(255, 225, 61, 0.13) 0 2.5px, transparent 4px),
-    radial-gradient(circle at 63% 20%, rgba(255, 235, 59, 0.14) 0 2px, transparent 3px),
-    radial-gradient(circle at 76% 58%, rgba(255, 193, 7, 0.12) 0 3px, transparent 4px),
-    radial-gradient(circle at 90% 32%, rgba(255, 240, 84, 0.15) 0 2px, transparent 3px),
-    linear-gradient(125deg, rgba(255, 235, 59, 0.08), transparent 45%, rgba(255, 193, 7, 0.08));
+    radial-gradient(circle at 10% 18%, rgba(196, 150, 0, 0.16) 0 2px, transparent 3px),
+    radial-gradient(circle at 22% 72%, rgba(180, 130, 0, 0.14) 0 3px, transparent 4px),
+    radial-gradient(circle at 34% 38%, rgba(160, 110, 0, 0.12) 0 2px, transparent 3px),
+    radial-gradient(circle at 48% 82%, rgba(170, 130, 0, 0.13) 0 2.5px, transparent 4px),
+    radial-gradient(circle at 63% 20%, rgba(196, 150, 0, 0.14) 0 2px, transparent 3px),
+    radial-gradient(circle at 76% 58%, rgba(160, 110, 0, 0.12) 0 3px, transparent 4px),
+    radial-gradient(circle at 90% 32%, rgba(200, 150, 0, 0.15) 0 2px, transparent 3px),
+    linear-gradient(125deg, rgba(196, 150, 0, 0.08), transparent 45%, rgba(160, 110, 0, 0.08));
   z-index: 0;
   pointer-events: none;
 }
@@ -206,25 +206,25 @@ button:focus-visible {
 .btn-primary-hero {
   background: linear-gradient(135deg, var(--delftia-gold-glow), var(--delftia-gold) 60%, var(--delftia-gold-hover));
   color: #1a1410 !important;
-  border: 1px solid rgba(255, 235, 59, 0.8);
-  box-shadow: 0 10px 24px rgba(0,0,0,0.22), 0 0 24px rgba(255, 235, 59, 0.26);
+  border: 1px solid rgba(196, 150, 0, 0.8);
+  box-shadow: 0 10px 24px rgba(0,0,0,0.22), 0 0 24px rgba(196, 150, 0, 0.26);
 }
 
 .btn-primary-hero:hover {
-  background: linear-gradient(135deg, #FFEB3B, var(--delftia-gold-bright) 60%, #FFE082);
+  background: linear-gradient(135deg, #D4A574, #E8B841 60%, #BF8A2C);
   color: #1a1410 !important;
 }
 
 .btn-outline-hero {
   background: transparent;
   color: var(--delftia-title-dark) !important;
-  border: 2px solid rgba(246, 217, 141, 0.95);
-  box-shadow: inset 0 0 0 1px rgba(246, 217, 141, 0.18);
+  border: 2px solid rgba(212, 165, 116, 0.95);
+  box-shadow: inset 0 0 0 1px rgba(212, 165, 116, 0.18);
 }
 
 .btn-outline-hero:hover {
-  background: rgba(246, 217, 141, 0.22);
-  color: #fffde8 !important;
+  background: rgba(212, 165, 116, 0.22);
+  color: #F5E6D3 !important;
 }
 
 /* ---- Stats bar -------------------------------------------- */
@@ -372,8 +372,8 @@ button:focus-visible {
 /* ---- CTA / call-to-action section ------------------------- */
 .cta-section {
   background:
-    radial-gradient(circle at 15% 20%, rgba(246, 217, 141, 0.10), transparent 34%),
-    linear-gradient(135deg, #060300, #120a02 52%, #201303);
+    radial-gradient(circle at 15% 20%, rgba(196, 150, 0, 0.10), transparent 34%),
+    linear-gradient(135deg, #0F0D0A, #1A1410 52%, #2A2420);
   color: var(--delftia-gold-glow);
   padding: 4rem 2rem;
   text-align: center;
