@@ -6,8 +6,10 @@
   (function() {
     const preference = window.matchMedia('(prefers-color-scheme: dark)');
     let savedTheme;
+    let readingFocus = false;
     try {
       savedTheme = localStorage.getItem('delftia-theme');
+      readingFocus = localStorage.getItem('delftia-reading-focus') === 'true';
     } catch {
       // Theme selection still works when browser storage is unavailable.
     }
@@ -23,22 +25,48 @@
     }
 
     applyTheme(explicitTheme || (preference.matches ? 'dark' : 'light'));
+    function applyReadingFocus() {
+      document.documentElement.setAttribute('data-reading-focus', String(readingFocus));
+      const button = document.querySelector('.reading-toggle');
+      if (button) button.setAttribute('aria-pressed', String(readingFocus));
+    }
+    applyReadingFocus();
     preference.addEventListener('change', function(event) {
       if (!explicitTheme) applyTheme(event.matches ? 'dark' : 'light');
     });
 
     document.addEventListener('DOMContentLoaded', function() {
-      const navbar = document.querySelector('#quarto-header .navbar-collapse .navbar-nav');
-      if (!navbar) return;
+      const header = document.querySelector('#quarto-header');
+      if (!header) return;
 
-      const container = document.createElement('li');
-      container.className = 'nav-item';
+      const container = document.createElement('div');
+      container.className = 'display-controls';
+      container.setAttribute('role', 'group');
+      container.setAttribute('aria-label', 'Display preferences');
       const button = document.createElement('button');
       button.type = 'button';
       button.className = 'theme-toggle';
       container.appendChild(button);
-      navbar.appendChild(container);
+      const readingButton = document.createElement('button');
+      readingButton.type = 'button';
+      readingButton.className = 'reading-toggle';
+      readingButton.textContent = 'Reading focus';
+      readingButton.setAttribute('aria-label', 'Reading focus');
+      readingButton.title = 'Simplify the layout and increase text spacing';
+      container.appendChild(readingButton);
+      header.appendChild(container);
       applyTheme(document.documentElement.getAttribute('data-theme'));
+      applyReadingFocus();
+
+      readingButton.addEventListener('click', function() {
+        readingFocus = !readingFocus;
+        applyReadingFocus();
+        try {
+          localStorage.setItem('delftia-reading-focus', String(readingFocus));
+        } catch {
+          // Keep reading focus usable when browser storage is unavailable.
+        }
+      });
 
       button.addEventListener('click', function() {
         explicitTheme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';

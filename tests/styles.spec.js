@@ -103,4 +103,55 @@ test('theme selection works when storage is blocked', async ({ page }) => {
   if (test.info().project.name === 'mobile') await page.locator('.navbar-toggler').click();
   await page.getByRole('button', { name: 'Switch to dark mode' }).click();
   await expect(page.locator('html')).toHaveAttribute('data-theme', 'dark');
+  await page.getByRole('button', { name: 'Reading focus', exact: true }).click();
+  await expect(page.locator('html')).toHaveAttribute('data-reading-focus', 'true');
+});
+
+for (const path of pages) {
+  for (const theme of ['light', 'dark']) {
+    test(`${path} reading focus in ${theme} is accessible and persistent`, async ({ page }) => {
+      await page.addInitScript(value => localStorage.setItem('delftia-theme', value), theme);
+      await page.goto(`/${path}`);
+      await ready(page);
+      const button = page.getByRole('button', { name: 'Reading focus', exact: true });
+      // Display preferences remain reachable without expanding mobile navigation.
+      await expect(button).toBeVisible();
+      await expect(button).toHaveAttribute('aria-pressed', 'false');
+      await button.focus();
+      await page.keyboard.press('Space');
+      await expect(button).toBeFocused();
+      await expect(button).toHaveAttribute('aria-pressed', 'true');
+      await expect(page.locator('html')).toHaveAttribute('data-reading-focus', 'true');
+      await checkStyles(page, theme);
+      expect(await page.locator('#quarto-document-content').evaluate(element =>
+        parseFloat(getComputedStyle(element).fontSize) /
+        parseFloat(getComputedStyle(document.documentElement).fontSize))).toBe(1.125);
+      for (const grid of await page.locator('.card-grid, .news-grid, .team-grid, .research-spotlight').all()) {
+        expect(await grid.evaluate(element =>
+          getComputedStyle(element).gridTemplateColumns.split(' ').length)).toBe(1);
+      }
+      await expect(page).toHaveScreenshot(`${path}-${theme}-reading.png`, { fullPage: true });
+      await page.reload();
+      await expect(button).toHaveAttribute('aria-pressed', 'true');
+      await page.getByRole('link', { name: 'Home', exact: true }).last().click();
+      await expect(button).toHaveAttribute('aria-pressed', 'true');
+      await button.click();
+      await expect(button).toHaveAttribute('aria-pressed', 'false');
+      await expect(page.locator('html')).toHaveAttribute('data-reading-focus', 'false');
+    });
+  }
+}
+
+test('display controls and cards reflow on narrow screens', async ({ page }) => {
+  await page.setViewportSize({ width: 320, height: 740 });
+  await page.goto('/index.html');
+  await expect(page.getByRole('button', { name: 'Reading focus', exact: true })).toBeVisible();
+  await checkStyles(page, 'light');
+});
+
+test('invalid reading preference is off by default', async ({ page }) => {
+  await page.addInitScript(() => localStorage.setItem('delftia-reading-focus', 'invalid'));
+  await page.goto('/index.html');
+  await expect(page.getByRole('button', { name: 'Reading focus', exact: true }))
+    .toHaveAttribute('aria-pressed', 'false');
 });
