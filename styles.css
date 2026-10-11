@@ -105,17 +105,27 @@ body.dark-mode {
 }
 
 h1, h2, h3, h4, h5, h6 {
-  font-weight: 700;
-  margin-top: 1.5em;
-  margin-bottom: 0.5em;
-  color: var(--delftia-umber);
+  font-weight: 700 !important;
+  margin-top: 1.5em !important;
+  margin-bottom: 0.5em !important;
+  color: #0a0805 !important;
   transition: color var(--transition-fast);
+}
+
+/* Light mode explicitly override with high-contrast title color */
+html[data-theme="light"] h1,
+html[data-theme="light"] h2,
+html[data-theme="light"] h3,
+html[data-theme="light"] h4,
+html[data-theme="light"] h5,
+html[data-theme="light"] h6 {
+  color: #0a0805 !important;
 }
 
 /* Ensure high contrast for headings in dark mode */
 @media (prefers-color-scheme: dark) {
   h1, h2, h3, h4, h5, h6 {
-    color: var(--delftia-title-dark);
+    color: var(--delftia-title-dark) !important;
   }
 }
 
@@ -125,7 +135,25 @@ html[data-theme="dark"] h3,
 html[data-theme="dark"] h4,
 html[data-theme="dark"] h5,
 html[data-theme="dark"] h6 {
-  color: var(--delftia-title-dark);
+  color: var(--delftia-title-dark) !important;
+}
+
+body.light-mode h1,
+body.light-mode h2,
+body.light-mode h3,
+body.light-mode h4,
+body.light-mode h5,
+body.light-mode h6 {
+  color: #0a0805 !important;
+}
+
+body.dark-mode h1,
+body.dark-mode h2,
+body.dark-mode h3,
+body.dark-mode h4,
+body.dark-mode h5,
+body.dark-mode h6 {
+  color: var(--delftia-title-dark) !important;
 }
 
 /* Fix Quarto title block visibility for all pages */
@@ -520,37 +548,41 @@ html[data-theme="dark"] .section-alt {
 
 .section-title {
   font-size: clamp(1.6rem, 3.5vw, 2.2rem);
-  color: var(--delftia-umber);
+  color: #0a0805 !important;
   margin-bottom: 0.5rem;
   transition: color var(--transition-fast);
-  font-weight: 700;
+  font-weight: 700 !important;
 }
 
 @media (prefers-color-scheme: dark) {
   .section-title {
-    color: var(--delftia-gold-glow);
+    color: var(--delftia-gold-glow) !important;
   }
 }
 
+html[data-theme="light"] .section-title {
+  color: #0a0805 !important;
+}
+
 html[data-theme="dark"] .section-title {
-  color: var(--delftia-gold-glow);
+  color: var(--delftia-gold-glow) !important;
 }
 
 /* High-contrast page titles for accessibility */
 .page-title {
   font-size: clamp(1.8rem, 4vw, 2.6rem);
-  font-weight: 800;
-  margin-top: 0;
-  margin-bottom: 1rem;
-  line-height: 1.2;
-  letter-spacing: -0.02em;
+  font-weight: 800 !important;
+  margin-top: 0 !important;
+  margin-bottom: 1rem !important;
+  line-height: 1.2 !important;
+  letter-spacing: -0.02em !important;
   transition: color var(--transition-fast);
-  color: var(--delftia-umber);
+  color: #0a0805 !important;
 }
 
 /* Page titles on dark backgrounds (hero sections) */
 .hero-section .page-title {
-  color: #FFFFFF;
+  color: #FFFFFF !important;
   text-shadow: 
     0 0 2px rgba(255, 255, 200, 0.9),
     0 2px 4px rgba(0, 0, 0, 0.8),
@@ -560,12 +592,16 @@ html[data-theme="dark"] .section-title {
 
 @media (prefers-color-scheme: dark) {
   .page-title {
-    color: var(--delftia-title-dark);
+    color: var(--delftia-title-dark) !important;
   }
 }
 
+html[data-theme="light"] .page-title:not(.hero-section .page-title) {
+  color: #0a0805 !important;
+}
+
 html[data-theme="dark"] .page-title {
-  color: var(--delftia-title-dark);
+  color: var(--delftia-title-dark) !important;
 }
 
 .section-subtitle {
