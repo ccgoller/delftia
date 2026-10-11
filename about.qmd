@@ -5,9 +5,9 @@ page-layout: full
 ---
 
 ```{=html}
-<section class="hero-section" style="padding:3.5rem 2rem 3rem;" aria-labelledby="about-heading">
-  <h1 id="about-heading" style="font-size:clamp(1.8rem,4vw,2.6rem);">About The Delftia Project</h1>
-  <p class="hero-subtitle" style="font-size:1.05rem;">
+<section class="hero-section hero-section--compact" aria-labelledby="about-heading">
+  <h1 id="about-heading">About The Delftia Project</h1>
+  <p class="hero-subtitle">
     A community of undergraduate researchers, citizen scientists, and educators
     dedicated to exploring one of microbiology's most extraordinary organisms.
   </p>
@@ -25,7 +25,7 @@ We believe that science is most powerful when it is **collaborative, transparent
 ## What We Do {#what-we-do}
 
 ```{=html}
-<div class="card-grid" style="margin-bottom:2rem;">
+<div class="card-grid get-involved-grid">
   <div class="feature-card">
     <div class="card-icon" aria-hidden="true">🔬</div>
     <h3>Research &amp; Discovery</h3>
@@ -77,13 +77,13 @@ growing understanding of this organism.
 These course-based undergraduate research experiences (CUREs) give students the skills,
 confidence, and connections to pursue scientific careers.
 
-<a href="news.html" class="btn-hero btn-primary-hero" style="font-size:0.9rem;padding:0.55rem 1.4rem;">See Student Work →</a>
+<a href="news.html" class="btn-hero btn-primary-hero btn-hero--compact">See Student Work →</a>
 :::
-![Spot plate with Delftia colonies](images/Spot_Plate_10ul_48hrs.jpg){fig-alt="Spot plate showing Delftia bacterial growth" style="max-height:380px;width:100%;object-fit:cover;"}
+![Spot plate with Delftia colonies](images/Spot_Plate_10ul_48hrs.jpg){fig-alt="Spot plate showing Delftia bacterial growth" .spotlight-image}
 :::
 
-::: {.research-spotlight .reverse style="background:var(--delftia-light);"}
-![DELFTIA citizen science graphic](images/DELFTIA.jpg){fig-alt="DELFTIA citizen science community project" style="max-height:380px;width:100%;object-fit:cover;"}
+::: {.research-spotlight .reverse .research-spotlight--alt}
+![DELFTIA citizen science graphic](images/DELFTIA.jpg){fig-alt="DELFTIA citizen science community project" .spotlight-image}
 
 ::: {.research-spotlight-text}
 ### Citizen Science &amp; Community Annotation
@@ -95,7 +95,7 @@ information equity about this organism on Wikipedia.
 
 These projects bridge the gap between academic research and public knowledge.
 
-<a href="news.html" class="btn-hero btn-primary-hero" style="font-size:0.9rem;padding:0.55rem 1.4rem;">Learn About Citizen Science →</a>
+<a href="news.html" class="btn-hero btn-primary-hero btn-hero--compact">Learn About Citizen Science →</a>
 :::
 :::
 
@@ -143,8 +143,8 @@ Whether you are a student, educator, or simply curious about microbiology,
 there are multiple ways to contribute to the Delftia Project:
 
 ```{=html}
-<div class="card-grid" style="margin-top:1.5rem;margin-bottom:2rem;">
-  <div class="feature-card" style="border-left-color:var(--delftia-gold);">
+<div class="card-grid get-involved-grid">
+  <div class="feature-card">
     <div class="card-icon" aria-hidden="true">🧪</div>
     <h3>Undergraduate Researcher</h3>
     <p>
@@ -152,7 +152,7 @@ there are multiple ways to contribute to the Delftia Project:
       Gain hands-on skills in microbiology, genomics, and bioinformatics.
     </p>
   </div>
-  <div class="feature-card" style="border-left-color:var(--delftia-gold);">
+  <div class="feature-card">
     <div class="card-icon" aria-hidden="true">✏️</div>
     <h3>Citizen Scientist</h3>
     <p>
@@ -160,7 +160,7 @@ there are multiple ways to contribute to the Delftia Project:
       No lab required — just curiosity and a web browser.
     </p>
   </div>
-  <div class="feature-card" style="border-left-color:var(--delftia-gold);">
+  <div class="feature-card">
     <div class="card-icon" aria-hidden="true">🤝</div>
     <h3>Collaborator</h3>
     <p>
@@ -172,6 +172,6 @@ there are multiple ways to contribute to the Delftia Project:
 </div>
 ```
 
-::: {style="text-align:center;padding:1rem 0 2rem;"}
+::: {.involvement-note}
 For more information, visit [NC State University's website](https://www.ncsu.edu) or check out the [News](news.html) section for recent updates and opportunities.
 :::
