@@ -157,6 +157,18 @@ body.dark-mode h6 {
   color: var(--delftia-title-dark) !important;
 }
 
+/* Ensure all h3, h4, h5, h6 have dark color on light backgrounds */
+html[data-theme="light"] h3,
+html[data-theme="light"] h4,
+html[data-theme="light"] h5,
+html[data-theme="light"] h6,
+body.light-mode h3,
+body.light-mode h4,
+body.light-mode h5,
+body.light-mode h6 {
+  color: #0a0805 !important;
+}
+
 /* Fix Quarto title block visibility for all pages */
 #title-block-header,
 .quarto-title-block {
