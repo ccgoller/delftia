@@ -61,7 +61,7 @@ Counts of articles matching **Delftia** in PubMed, retrieved through Europe PMC 
 
 ### Delftia Genome Assemblies by Species
 
-Counts of all *Delftia* genome assembly records in ENA (genus taxonomy **80865**), grouped by scientific name. Assemblies are not necessarily unique strains or complete genomes. This is a current database inventory, **not a release-year graph**: record update dates do not establish when a genome was first published.
+Counts of all *Delftia* genome assembly records in ENA (genus taxonomy **80865**), grouped by scientific name. Assemblies are not necessarily unique strains or complete genomes. Date sorting uses the most recent record update for each species. This is a current database inventory, **not a release-year graph**: record update dates do not establish when a genome was first published.
 
 ```{=html}
 <section class="dashboard-panel" aria-label="Genome assemblies by species">
@@ -69,6 +69,8 @@ Counts of all *Delftia* genome assembly records in ENA (genus taxonomy **80865**
   <select id="genomes-chart-sort" hidden>
     <option value="descending">Most assemblies first</option>
     <option value="ascending">Species name</option>
+    <option value="newest">Most recently updated first</option>
+    <option value="oldest">Least recently updated first</option>
   </select>
   <p id="genomes-chart-status" role="status">Live graphs require JavaScript. Use the ENA link below to browse assemblies.</p>
   <p id="genomes-chart-detail" class="dashboard-chart-detail" aria-live="polite"></p>
@@ -91,12 +93,18 @@ Up to 10 publications matching **Delftia**, newest publication date first, from 
 
 ## Latest Genomes {#latest-genomes}
 
-The 10 most recently updated *Delftia* genome assemblies from the European Nucleotide Archive (ENA), including species and strains within the genus. **Updated dates refer to database records, not necessarily new genome releases.**
+Up to 10 *Delftia* genome assemblies from the European Nucleotide Archive (ENA), including assembly names, species and strains within the genus. Choose name order or newest/oldest record updates first. **Updated dates refer to database records, not necessarily new genome releases.**
 
 [Browse Delftia genome assemblies on ENA](https://www.ebi.ac.uk/ena/browser/advanced-search?result=assembly&amp;query=tax_tree%2880865%29)
 
 ::: {.dashboard-panel}
 ```{=html}
+<label for="genomes-sort">Assembly order</label>
+<select id="genomes-sort" hidden>
+  <option value="newest">Newest update first</option>
+  <option value="oldest">Oldest update first</option>
+  <option value="name">Assembly name</option>
+</select>
 <p id="genomes-status" role="status">Live genomes require JavaScript. Use the source link above to browse the latest records.</p>
 <ol id="genomes-list" class="dashboard-list"></ol>
 <script src="dashboard.js" defer></script>

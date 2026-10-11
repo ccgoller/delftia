@@ -1310,7 +1310,11 @@ html[data-reading-focus="true"] .cta-section {
 }
 
 .dashboard-metric-value {
-  color: var(--page-heading);
+  color: var(--delftia-gold);
+  background: var(--delftia-umber);
+  border-radius: 0.25rem;
+  padding: 0.2rem 0.4rem;
+  width: fit-content;
   font-size: 1.5rem;
   font-weight: 800;
   line-height: 1.2;
@@ -1408,7 +1412,15 @@ html[data-reading-focus="true"] .cta-section {
 .dashboard-chart-bar {
   display: block;
   height: 100%;
-  background: var(--page-link);
+  background: var(--delftia-brand-gradient);
+}
+
+.dashboard-chart-count {
+  color: var(--delftia-yellow);
+  background: var(--delftia-umber);
+  border-radius: 0.25rem;
+  padding: 0.2rem 0.4rem;
+  text-align: center;
 }
 
 .dashboard-chart-detail {

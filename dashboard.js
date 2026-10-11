@@ -9,7 +9,7 @@
   genomesURL.search = new URLSearchParams({
     result: 'assembly',
     query: 'tax_tree(80865)',
-    fields: 'assembly_accession,scientific_name,last_updated',
+    fields: 'assembly_accession,assembly_name,scientific_name,last_updated',
     format: 'json',
     limit: '0',
   });
@@ -39,6 +39,13 @@
 
   const chartData = {};
 
+  function compareDates(a, b, order) {
+    const first = /^\d{4}-\d{2}-\d{2}$/.test(a) ? a : '';
+    const second = /^\d{4}-\d{2}-\d{2}$/.test(b) ? b : '';
+    if (!first || !second) return Number(Boolean(second)) - Number(Boolean(first));
+    return order === 'oldest' ? first.localeCompare(second) : second.localeCompare(first);
+  }
+
   function renderChart(name) {
     const chart = document.getElementById(`${name}-chart`);
     const detail = document.getElementById(`${name}-chart-detail`);
@@ -46,8 +53,9 @@
     const rows = [...(chartData[name] || [])];
     rows.sort(name === 'publications'
       ? (a, b) => order === 'ascending' ? a.label.localeCompare(b.label) : b.label.localeCompare(a.label)
-      : (a, b) => order === 'ascending' ? a.label.localeCompare(b.label)
-        : b.count - a.count || a.label.localeCompare(b.label));
+      : (a, b) => (order === 'newest' || order === 'oldest'
+        ? compareDates(a.updated, b.updated, order)
+        : order === 'ascending' ? 0 : b.count - a.count) || a.label.localeCompare(b.label));
     const maximum = Math.max(1, ...rows.map(row => row.count));
     chart.replaceChildren();
     detail.textContent = '';
@@ -69,6 +77,7 @@
       bar.style.width = `${row.count / maximum * 100}%`;
       track.append(bar);
       const count = document.createElement('span');
+      count.className = 'dashboard-chart-count';
       count.textContent = row.count.toLocaleString();
       link.append(label, track, count);
       for (const event of ['mouseenter', 'focus']) {
@@ -86,16 +95,21 @@
       if (!record.assembly_accession || accessions.has(record.assembly_accession)) continue;
       accessions.add(record.assembly_accession);
       const species = record.scientific_name || 'Scientific name unavailable';
-      groups.set(species, (groups.get(species) || 0) + 1);
+      const group = groups.get(species) || { count: 0, updated: '' };
+      group.count++;
+      if (/^\d{4}-\d{2}-\d{2}$/.test(record.last_updated) && record.last_updated > group.updated) {
+        group.updated = record.last_updated;
+      }
+      groups.set(species, group);
     }
-    chartData.genomes = [...groups].map(([label, count]) => {
+    chartData.genomes = [...groups].map(([label, { count, updated }]) => {
       const url = new URL('https://www.ebi.ac.uk/ena/browser/advanced-search');
       url.search = new URLSearchParams({
         result: 'assembly',
         query: label === 'Scientific name unavailable' ? 'tax_tree(80865)'
           : `tax_tree(80865) AND scientific_name="${label.replace(/["\\]/g, '\\$&')}"`,
       });
-      return { label, count, url: url.href };
+      return { label, count, updated, url: url.href };
     });
     renderChart('genomes');
     document.getElementById('genomes-chart-status').textContent = accessions.size
@@ -183,15 +197,19 @@
       url: genomesURL,
       records(data) {
         if (!Array.isArray(data)) throw new Error('Invalid genomes response');
-        return data.filter(record => record.assembly_accession)
-          .sort((a, b) => (b.last_updated || '').localeCompare(a.last_updated || '') ||
-            a.assembly_accession.localeCompare(b.assembly_accession))
-          .slice(0, 10);
+        const accessions = new Set();
+        return data.map(record => ({
+          ...record, assembly_accession: record.assembly_accession || record.accession,
+        })).filter(record => {
+          if (!record.assembly_accession || accessions.has(record.assembly_accession)) return false;
+          accessions.add(record.assembly_accession);
+          return true;
+        });
       },
       render(list, record) {
-        addRecord(list, `${record.assembly_accession} — ${record.scientific_name || 'Delftia'}`,
+        addRecord(list, `${record.assembly_name || record.assembly_accession} — ${record.scientific_name || 'Delftia'}`,
           `https://www.ebi.ac.uk/ena/browser/view/${encodeURIComponent(record.assembly_accession)}`,
-          `Record updated: ${record.last_updated || 'Date unavailable'}`);
+          `${record.assembly_accession} · Record updated: ${record.last_updated || 'Date unavailable'}`);
       },
     },
   ];
@@ -201,6 +219,23 @@
   const publicationCount = document.getElementById('publications-count');
   const genomeCount = document.getElementById('genomes-count');
   const updated = document.getElementById('dashboard-updated');
+  const genomeSort = document.getElementById('genomes-sort');
+  let genomeRecords = [];
+
+  function renderGenomeList() {
+    const list = document.getElementById('genomes-list');
+    const feed = feeds.find(feed => feed.name === 'genomes');
+    const order = genomeSort.value;
+    const records = [...genomeRecords].sort((a, b) =>
+      (order === 'name'
+        ? (a.assembly_name || a.assembly_accession).localeCompare(b.assembly_name || b.assembly_accession)
+        : compareDates(a.last_updated, b.last_updated, order)) ||
+      a.assembly_accession.localeCompare(b.assembly_accession)).slice(0, 10);
+    list.replaceChildren();
+    records.forEach(record => feed.render(list, record));
+    updateDashboardSummary();
+    return records.length;
+  }
 
   function updateDashboardSummary() {
     const query = search.value.trim().toLocaleLowerCase();
@@ -234,10 +269,16 @@
     try {
       const data = await fetchRecords(feed.url);
       const records = feed.records(data);
-      if (feed.name === 'genomes') renderGenomeChart(data);
-      records.forEach(record => feed.render(list, record));
-      status.textContent = records.length
-        ? `Showing ${records.length} records. Retrieved ${new Date().toLocaleString()}.`
+      let count = records.length;
+      if (feed.name === 'genomes') {
+        genomeRecords = records;
+        renderGenomeChart(records);
+        count = renderGenomeList();
+      } else {
+        records.forEach(record => feed.render(list, record));
+      }
+      status.textContent = count
+        ? `Showing ${count} records. Retrieved ${new Date().toLocaleString()}.`
         : `No ${feed.name} records found. Try the source link above.`;
     } catch {
       list.replaceChildren();
@@ -254,6 +295,7 @@
   async function loadDashboard() {
     refresh.disabled = true;
     updated.textContent = 'Checking…';
+    genomeRecords = [];
     chartData.genomes = [];
     renderChart('genomes');
     document.getElementById('genomes-chart-status').textContent = 'Loading all Delftia genome assemblies…';
@@ -263,6 +305,8 @@
   }
   search.hidden = false;
   refresh.hidden = false;
+  genomeSort.hidden = false;
+  genomeSort.addEventListener('change', renderGenomeList);
   for (const name of ['publications', 'genomes']) {
     const sort = document.getElementById(`${name}-chart-sort`);
     sort.hidden = false;

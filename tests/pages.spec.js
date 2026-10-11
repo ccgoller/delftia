@@ -27,9 +27,10 @@ async function mockFeeds(page, { empty = false, failPublications = false, failGe
     const params = new URL(route.request().url()).searchParams;
     expect(params.get('query')).toBe('tax_tree(80865)');
     expect(params.get('limit')).toBe('0');
+    expect(params.get('fields')).toBe('assembly_accession,assembly_name,scientific_name,last_updated');
     return route.fulfill({ json: empty ? [] : [
-      { assembly_accession: 'GCA_000001', scientific_name: 'Delftia acidovorans', last_updated: '2025-01-01' },
-      { assembly_accession: 'GCA_000002', scientific_name: 'Delftia tsuruhatensis', last_updated: '2026-10-02' },
+      { accession: 'GCA_000001', assembly_name: 'Alpha assembly', scientific_name: 'Delftia acidovorans', last_updated: '2025-01-01' },
+      { accession: 'GCA_000002', assembly_name: 'Beta assembly', scientific_name: 'Delftia tsuruhatensis', last_updated: '2026-10-02' },
     ] });
   });
 }
@@ -46,6 +47,11 @@ for (const path of ['research', 'people', 'dashboard', 'learn']) {
         await expect(page.locator('#publications-list li')).toHaveCount(1);
         await expect(page.locator('#publications-count')).toHaveText('1');
         await expect(page.locator('#genomes-count')).toHaveText('2');
+        await expect(page.locator('#genomes-count')).toHaveCSS('color', 'rgb(232, 149, 75)');
+        await expect(page.locator('#genomes-count')).toHaveCSS('background-color', 'rgb(26, 20, 16)');
+        await expect(page.locator('#genomes-chart .dashboard-chart-count').first()).toHaveCSS('color', 'rgb(255, 218, 115)');
+        await expect(page.locator('#genomes-chart .dashboard-chart-bar').first()).toHaveCSS('background-image',
+          'linear-gradient(110deg, rgb(232, 149, 75), rgb(255, 218, 115))');
       }
       for (const name of ['Research', 'People', 'Dashboard', 'Learn']) {
         await expect(page.getByRole('link', { name, exact: true }).last()).toBeVisible();
@@ -82,6 +88,43 @@ test('dashboard displays safe linked records sorted by date and refreshes', asyn
   await page.getByRole('button', { name: 'Refresh dashboard' }).click();
   await expect(page.locator('#publications-list li')).toHaveCount(1);
   await expect(page.getByRole('button', { name: 'Refresh dashboard' })).toBeEnabled();
+});
+
+test('assembly names and dates can be sorted without refetching and retain filtering', async ({ page }) => {
+  await mockFeeds(page);
+  await page.goto('/dashboard.html');
+  const assemblies = page.locator('#genomes-list li');
+  await expect(assemblies.first()).toContainText('Beta assembly');
+  await page.getByLabel('Assembly order').selectOption('oldest');
+  await expect(assemblies.first()).toContainText('Alpha assembly');
+  await page.getByLabel('Assembly order').selectOption('name');
+  await expect(assemblies.first()).toContainText('Alpha assembly');
+  await page.getByRole('searchbox', { name: 'Filter loaded records' }).fill('Beta assembly');
+  await page.getByLabel('Assembly order').selectOption('newest');
+  await expect(page.locator('#genomes-list li:visible')).toHaveCount(1);
+  await expect(page.locator('#genomes-list li:visible')).toContainText('GCA_000002');
+  await page.getByRole('button', { name: 'Refresh dashboard' }).click();
+  await expect(page.getByRole('button', { name: 'Refresh dashboard' })).toBeEnabled();
+  await expect(page.locator('#genomes-list li:visible')).toHaveCount(1);
+  await expect(assemblies.first()).toContainText('Beta assembly');
+});
+
+test('assembly sorting keeps undated records last and renders names safely', async ({ page }) => {
+  await mockFeeds(page);
+  await page.route('https://www.ebi.ac.uk/ena/portal/api/search?**', route => route.fulfill({ json: [
+    { assembly_accession: 'GCA_missing', assembly_name: '<script>alert(1)</script>' },
+    { assembly_accession: 'GCA_old', scientific_name: 'Delftia acidovorans', last_updated: '2024-01-01' },
+    { assembly_accession: 'GCA_new', scientific_name: 'Delftia acidovorans', last_updated: '2026-01-01' },
+  ] }));
+  await page.goto('/dashboard.html');
+  const assemblies = page.locator('#genomes-list li');
+  await expect(assemblies.first()).toContainText('GCA_new');
+  await expect(assemblies.last()).toContainText('<script>alert(1)</script>');
+  await expect(page.locator('#genomes-list script')).toHaveCount(0);
+  await expect(assemblies.last()).toContainText('Date unavailable');
+  await page.getByLabel('Assembly order').selectOption('oldest');
+  await expect(assemblies.first()).toContainText('GCA_old');
+  await expect(assemblies.last()).toContainText('GCA_missing');
 });
 
 test('dashboard handles independent failures and retries', async ({ page }) => {
@@ -122,6 +165,10 @@ test('dashboard charts count all pages, include zero years, and support keyboard
   await expect(page.locator('#genomes-chart-detail')).toContainText('1 genome assemblies');
   await page.getByLabel('Species order').selectOption('ascending');
   await expect(page.locator('#genomes-chart a').first()).toContainText('Delftia acidovorans');
+  await page.getByLabel('Species order').selectOption('newest');
+  await expect(page.locator('#genomes-chart a').first()).toContainText('Delftia tsuruhatensis');
+  await page.getByLabel('Species order').selectOption('oldest');
+  await expect(page.locator('#genomes-chart a').first()).toContainText('Delftia acidovorans');
   await page.getByRole('searchbox', { name: 'Filter loaded records' }).fill('no matches');
   await expect(page.locator('#publications-chart li')).toHaveCount(3);
   await expect(page.locator('#genomes-chart li')).toHaveCount(2);
@@ -131,7 +178,8 @@ test('genome chart groups all assemblies rather than the ten latest records', as
   await mockFeeds(page);
   await page.route('https://www.ebi.ac.uk/ena/portal/api/search?**', route => route.fulfill({ json: [
     ...Array.from({ length: 12 }, (_, index) => ({
-      assembly_accession: `GCA_${index}`, scientific_name: 'Delftia acidovorans', last_updated: '2026-01-01',
+      assembly_accession: `GCA_${index}`, scientific_name: 'Delftia acidovorans',
+      last_updated: `2026-01-${String(index + 1).padStart(2, '0')}`,
     })),
     { assembly_accession: 'GCA_other', scientific_name: 'Delftia tsuruhatensis', last_updated: '2026-01-01' },
     { assembly_accession: 'GCA_0', scientific_name: 'Delftia acidovorans' },
@@ -144,6 +192,9 @@ test('genome chart groups all assemblies rather than the ten latest records', as
     'Delftia acidovorans: 12 genome assemblies. Browse source records.');
   const url = new URL(await page.locator('#genomes-chart a').first().getAttribute('href'));
   expect(url.searchParams.get('query')).toBe('tax_tree(80865) AND scientific_name="Delftia acidovorans"');
+  await expect(page.locator('#genomes-list li').first()).toContainText('GCA_11');
+  await page.getByLabel('Assembly order').selectOption('oldest');
+  await expect(page.locator('#genomes-list li').first()).toContainText('GCA_0');
 });
 
 test('chart failures are independent and refresh clears stale graphs', async ({ page }) => {
