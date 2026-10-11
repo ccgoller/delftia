@@ -1,15 +1,15 @@
 /*-- scss:defaults --*/
 
 $primary: #1a1410;
-$secondary: #8B6914;
+$secondary: #E8954B;
 $light: #FAF7F0;
 $dark: #1a1410;
 
 $body-color: #1a1208;
 $body-bg: #ffffff;
 $headings-color: #1a1410;
-$link-color: #6B5914;
-$link-hover-color: #3D2F0F;
+$link-color: #C17A35;
+$link-hover-color: #A85C22;
 $component-active-bg: #1a1410;
 $border-color: #E5D8CC;
 $input-btn-focus-color-opacity: 0.85;
@@ -17,7 +17,7 @@ $focus-ring-color: rgba(0, 85, 184, 0.85);
 
 $navbar-bg: #1a1410;
 $navbar-fg: #ffffff;
-$navbar-hl: #D4A574;
+$navbar-hl: #E8954B;
 $footer-bg: #1a1410;
 $footer-fg: #ffffff;
 
@@ -85,14 +85,14 @@ html[data-theme="dark"] .navbar {
 }
 
 html[data-theme="dark"] .btn-primary {
-  background-color: #CC9600;
-  border-color: #CC9600;
+  background-color: #E8954B;
+  border-color: #E8954B;
   color: #1a1410;
 }
 
 html[data-theme="dark"] .btn-primary:hover {
-  background-color: #D4A574;
-  border-color: #D4A574;
+  background-color: #E8954B;
+  border-color: #E8954B;
 }
 
 /* System preference support for prefers-color-scheme (fallback when data-theme not set) */
@@ -111,14 +111,14 @@ html[data-theme="dark"] .btn-primary:hover {
   }
   
   .btn-primary {
-    background-color: #CC9600;
-    border-color: #CC9600;
+    background-color: #E8954B;
+    border-color: #E8954B;
     color: #1a1410;
   }
   
   .btn-primary:hover {
-    background-color: #D4A574;
-    border-color: #D4A574;
+    background-color: #E8954B;
+    border-color: #E8954B;
   }
 }
 
