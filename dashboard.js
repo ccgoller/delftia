@@ -9,7 +9,7 @@
   genomesURL.search = new URLSearchParams({
     result: 'assembly',
     query: 'tax_tree(80865)',
-    fields: 'assembly_accession,scientific_name,last_updated',
+    fields: 'assembly_accession,assembly_name,scientific_name,last_updated',
     format: 'json',
     limit: '0',
   });
@@ -197,7 +197,14 @@
       url: genomesURL,
       records(data) {
         if (!Array.isArray(data)) throw new Error('Invalid genomes response');
-        return data.filter(record => record.assembly_accession);
+        const accessions = new Set();
+        return data.map(record => ({
+          ...record, assembly_accession: record.assembly_accession || record.accession,
+        })).filter(record => {
+          if (!record.assembly_accession || accessions.has(record.assembly_accession)) return false;
+          accessions.add(record.assembly_accession);
+          return true;
+        });
       },
       render(list, record) {
         addRecord(list, `${record.assembly_name || record.assembly_accession} — ${record.scientific_name || 'Delftia'}`,
