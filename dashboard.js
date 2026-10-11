@@ -37,6 +37,129 @@
     list.append(item);
   }
 
+  const chartData = {};
+
+  function renderChart(name) {
+    const chart = document.getElementById(`${name}-chart`);
+    const detail = document.getElementById(`${name}-chart-detail`);
+    const order = document.getElementById(`${name}-chart-sort`).value;
+    const rows = [...(chartData[name] || [])];
+    rows.sort(name === 'publications'
+      ? (a, b) => order === 'ascending' ? a.label.localeCompare(b.label) : b.label.localeCompare(a.label)
+      : (a, b) => order === 'ascending' ? a.label.localeCompare(b.label)
+        : b.count - a.count || a.label.localeCompare(b.label));
+    const maximum = Math.max(1, ...rows.map(row => row.count));
+    chart.replaceChildren();
+    detail.textContent = '';
+    for (const row of rows) {
+      const item = document.createElement('li');
+      const link = document.createElement('a');
+      const description = `${row.label}: ${row.count.toLocaleString()} ${name === 'publications' ? 'PubMed articles' : 'genome assemblies'}`;
+      link.href = row.url;
+      link.className = 'dashboard-chart-row';
+      link.setAttribute('aria-label', `${description}. Browse source records.`);
+      link.title = description;
+      const label = document.createElement('span');
+      label.textContent = row.label;
+      const track = document.createElement('span');
+      track.className = 'dashboard-chart-track';
+      track.setAttribute('aria-hidden', 'true');
+      const bar = document.createElement('span');
+      bar.className = 'dashboard-chart-bar';
+      bar.style.width = `${row.count / maximum * 100}%`;
+      track.append(bar);
+      const count = document.createElement('span');
+      count.textContent = row.count.toLocaleString();
+      link.append(label, track, count);
+      for (const event of ['mouseenter', 'focus']) {
+        link.addEventListener(event, () => { detail.textContent = description; });
+      }
+      item.append(link);
+      chart.append(item);
+    }
+  }
+
+  function renderGenomeChart(records) {
+    const groups = new Map();
+    const accessions = new Set();
+    for (const record of records) {
+      if (!record.assembly_accession || accessions.has(record.assembly_accession)) continue;
+      accessions.add(record.assembly_accession);
+      const species = record.scientific_name || 'Scientific name unavailable';
+      groups.set(species, (groups.get(species) || 0) + 1);
+    }
+    chartData.genomes = [...groups].map(([label, count]) => {
+      const url = new URL('https://www.ebi.ac.uk/ena/browser/advanced-search');
+      url.search = new URLSearchParams({
+        result: 'assembly',
+        query: label === 'Scientific name unavailable' ? 'tax_tree(80865)'
+          : `tax_tree(80865) AND scientific_name="${label.replace(/["\\]/g, '\\$&')}"`,
+      });
+      return { label, count, url: url.href };
+    });
+    renderChart('genomes');
+    document.getElementById('genomes-chart-status').textContent = accessions.size
+      ? `${accessions.size.toLocaleString()} assembly records across ${groups.size} scientific names. Retrieved ${new Date().toLocaleString()}.`
+      : 'No genome assembly records found.';
+  }
+
+  async function loadPublicationChart() {
+    const status = document.getElementById('publications-chart-status');
+    chartData.publications = [];
+    renderChart('publications');
+    status.textContent = 'Loading all PubMed-indexed Delftia articles…';
+    try {
+      const years = new Map();
+      let cursor = '*';
+      let loaded = 0;
+      let undated = 0;
+      let total;
+      const seen = new Set();
+      do {
+        const url = new URL(publicationsURL);
+        url.search = new URLSearchParams({
+          query: 'Delftia AND SRC:MED', format: 'json', pageSize: '1000', cursorMark: cursor,
+        });
+        const data = await fetchRecords(url);
+        const records = data.resultList?.result;
+        if (!Array.isArray(records) || !Number.isInteger(data.hitCount) || data.hitCount < 0) {
+          throw new Error('Invalid article counts response');
+        }
+        total ??= data.hitCount;
+        if (total !== data.hitCount) throw new Error('Article count changed during retrieval');
+        loaded += records.length;
+        for (const record of records) {
+          const year = String(record.pubYear || '');
+          if (/^\d{4}$/.test(year) && Number(year) >= 1800 && Number(year) <= new Date().getFullYear()) {
+            years.set(year, (years.get(year) || 0) + 1);
+          } else {
+            undated++;
+          }
+        }
+        if (loaded >= total) break;
+        if (!records.length || !data.nextCursorMark || seen.has(data.nextCursorMark)) {
+          throw new Error('Incomplete article counts response');
+        }
+        seen.add(cursor);
+        cursor = data.nextCursorMark;
+      } while (true);
+      if (years.size) {
+        const first = Math.min(...[...years.keys()].map(Number));
+        for (let year = first; year <= new Date().getFullYear(); year++) {
+          const url = new URL('https://pubmed.ncbi.nlm.nih.gov/');
+          url.searchParams.set('term', `Delftia AND ${year}[dp]`);
+          chartData.publications.push({ label: String(year), count: years.get(String(year)) || 0, url: url.href });
+        }
+      }
+      renderChart('publications');
+      status.textContent = total
+        ? `${total.toLocaleString()} PubMed articles. ${undated ? `${undated} without a valid publication year omitted from graph. ` : ''}Retrieved ${new Date().toLocaleString()}.`
+        : 'No PubMed articles found.';
+    } catch {
+      status.textContent = 'Unable to load PubMed article counts right now. Use the PubMed link above or refresh to try again.';
+    }
+  }
+
   const feeds = [
     {
       name: 'publications',
@@ -109,7 +232,9 @@
     status.textContent = `Loading latest ${feed.name}…`;
     list.replaceChildren();
     try {
-      const records = feed.records(await fetchRecords(feed.url));
+      const data = await fetchRecords(feed.url);
+      const records = feed.records(data);
+      if (feed.name === 'genomes') renderGenomeChart(data);
       records.forEach(record => feed.render(list, record));
       status.textContent = records.length
         ? `Showing ${records.length} records. Retrieved ${new Date().toLocaleString()}.`
@@ -117,6 +242,9 @@
     } catch {
       list.replaceChildren();
       status.textContent = `Unable to load ${feed.name} right now. Use the source link above or refresh to try again.`;
+      if (feed.name === 'genomes') {
+        document.getElementById('genomes-chart-status').textContent = 'Unable to load genome counts right now. Use the ENA link below or refresh to try again.';
+      }
     } finally {
       updateDashboardSummary();
     }
@@ -126,12 +254,20 @@
   async function loadDashboard() {
     refresh.disabled = true;
     updated.textContent = 'Checking…';
-    await Promise.all(feeds.map(loadFeed));
+    chartData.genomes = [];
+    renderChart('genomes');
+    document.getElementById('genomes-chart-status').textContent = 'Loading all Delftia genome assemblies…';
+    await Promise.all([...feeds.map(loadFeed), loadPublicationChart()]);
     updated.textContent = new Date().toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' });
     refresh.disabled = false;
   }
   search.hidden = false;
   refresh.hidden = false;
+  for (const name of ['publications', 'genomes']) {
+    const sort = document.getElementById(`${name}-chart-sort`);
+    sort.hidden = false;
+    sort.addEventListener('change', () => renderChart(name));
+  }
   search.addEventListener('input', updateDashboardSummary);
   refresh.addEventListener('click', loadDashboard);
   loadDashboard();

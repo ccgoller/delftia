@@ -1,7 +1,7 @@
 ---
 title: ""
 pagetitle: "Dashboard"
-description: "Latest Delftia publications and recently updated genome assemblies from public research databases."
+description: "Interactive annual PubMed publication counts, Delftia genome assembly counts, and latest research records."
 ---
 
 ```{=html}
@@ -34,6 +34,46 @@ Explore research across the genus *Delftia*. These live public database results 
   <button type="button" id="refresh-dashboard" class="btn btn-primary" hidden>Refresh dashboard</button>
 </div>
 <p id="dashboard-results-status" class="dashboard-results-status" role="status" aria-live="polite">Live records will appear here when JavaScript is available.</p>
+```
+
+## Research in Numbers {#research-in-numbers}
+
+These interactive graphs cover **all matching database records**, not just the latest 10 below. Hover over or focus a bar to inspect its count; select it to browse the source records. The record filter above does not change these graphs.
+
+### PubMed Articles per Year
+
+Counts of articles matching **Delftia** in PubMed, retrieved through Europe PMC using **SRC:MED** (PubMed-indexed records only), grouped by publication year. The current year is incomplete; indexing and publication-date corrections can change counts.
+
+[Browse Delftia articles on PubMed](https://pubmed.ncbi.nlm.nih.gov/?term=Delftia)
+
+```{=html}
+<section class="dashboard-panel" aria-label="PubMed articles per year">
+  <label for="publications-chart-sort">Year order</label>
+  <select id="publications-chart-sort" hidden>
+    <option value="ascending">Oldest first</option>
+    <option value="descending">Newest first</option>
+  </select>
+  <p id="publications-chart-status" role="status">Live graphs require JavaScript. Use the PubMed link above to browse articles.</p>
+  <p id="publications-chart-detail" class="dashboard-chart-detail" aria-live="polite"></p>
+  <ul id="publications-chart" class="dashboard-chart" aria-label="Article counts by publication year"></ul>
+</section>
+```
+
+### Delftia Genome Assemblies by Species
+
+Counts of all *Delftia* genome assembly records in ENA (genus taxonomy **80865**), grouped by scientific name. Assemblies are not necessarily unique strains or complete genomes. This is a current database inventory, **not a release-year graph**: record update dates do not establish when a genome was first published.
+
+```{=html}
+<section class="dashboard-panel" aria-label="Genome assemblies by species">
+  <label for="genomes-chart-sort">Species order</label>
+  <select id="genomes-chart-sort" hidden>
+    <option value="descending">Most assemblies first</option>
+    <option value="ascending">Species name</option>
+  </select>
+  <p id="genomes-chart-status" role="status">Live graphs require JavaScript. Use the ENA link below to browse assemblies.</p>
+  <p id="genomes-chart-detail" class="dashboard-chart-detail" aria-live="polite"></p>
+  <ul id="genomes-chart" class="dashboard-chart" aria-label="Assembly counts by scientific name"></ul>
+</section>
 ```
 
 ## Latest Publications {#latest-publications}

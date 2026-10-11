@@ -1375,6 +1375,55 @@ html[data-reading-focus="true"] .cta-section {
   margin-bottom: 0;
 }
 
+.dashboard-chart {
+  list-style: none;
+  padding: 0;
+  max-height: 30rem;
+  overflow-y: auto;
+}
+
+.dashboard-chart-row {
+  display: grid;
+  grid-template-columns: minmax(5rem, 2fr) minmax(2rem, 3fr) minmax(2rem, auto);
+  align-items: center;
+  gap: 0.75rem;
+  min-height: 44px;
+  padding: 0.35rem;
+  overflow-wrap: anywhere;
+}
+
+.dashboard-chart-row:hover,
+.dashboard-chart-row:focus-visible {
+  outline: 2px solid var(--page-link);
+  outline-offset: -2px;
+}
+
+.dashboard-chart-track {
+  height: 1rem;
+  background: var(--page-border);
+  border-radius: 0.2rem;
+  overflow: hidden;
+}
+
+.dashboard-chart-bar {
+  display: block;
+  height: 100%;
+  background: var(--page-link);
+}
+
+.dashboard-chart-detail {
+  min-height: 1.5em;
+}
+
+.dashboard-panel select {
+  max-width: 100%;
+  min-height: 44px;
+  background: var(--page-surface);
+  color: var(--page-text);
+  border: 1px solid var(--page-border);
+  border-radius: 0.25rem;
+}
+
 .dashboard-list li[hidden] {
   display: none;
 }
