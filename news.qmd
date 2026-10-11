@@ -5,27 +5,29 @@ page-layout: full
 ---
 
 ```{=html}
-<section class="hero-section" style="padding:3.5rem 2rem 3rem;" aria-labelledby="news-heading">
-  <h1 id="news-heading" style="font-size:clamp(1.8rem,4vw,2.6rem);">News &amp; Updates</h1>
-  <p class="hero-subtitle" style="font-size:1.05rem;">
-    Stay up to date with the latest projects, student research, and community events from the Delftia Project.
+<section class="hero-section hero-section--compact" aria-labelledby="news-heading">
+  <h1 id="news-heading">News &amp; Updates</h1>
+  <p class="hero-subtitle">
+    Project milestones in student research, community annotation, and outreach.
   </p>
 </section>
 ```
 
-<div style="max-width:900px;margin:0 auto;padding:3rem 1.5rem;">
+<div class="content-wrap news-content">
+
+<p class="archive-note">Archive: these updates document project activities from 2020–2021.</p>
 
 <div class="timeline">
 
 <div class="timeline-item">
-<div class="timeline-date">January 16, 2021</div>
+<div class="timeline-date"><time datetime="2021-01-16">January 16, 2021</time></div>
 <div class="timeline-card">
 <h2>The Delftia Project: Engaging Citizen Scientists</h2>
 <p>
 <em>Authors: Lauren Ramilo, Daiza Norman, Rabeya Tahir, Tanasha Lertjanyarak, Carlos Goller</em><br/><br/>
 Presented at the 2021 Mid-Atlantic SENCER Conference. This presentation explored collaborative annotation practices and how citizen scientists can participate in meaningful research. Collaborative annotation enables groups to annotate electronic materials together while making those annotations visible to all participants.
 </p>
-<p style="margin-top:0.8rem;">
+<p class="timeline-tags">
 <span class="tag-chip">Conference</span>
 <span class="tag-chip">Citizen Science</span>
 </p>
@@ -33,13 +35,13 @@ Presented at the 2021 Mid-Atlantic SENCER Conference. This presentation explored
 </div>
 
 <div class="timeline-item">
-<div class="timeline-date">December 31, 2020</div>
+<div class="timeline-date"><time datetime="2020-12-31">December 31, 2020</time></div>
 <div class="timeline-card">
 <h2>Meet the Researcher: Rabeya Tahir</h2>
 <p>
 Rabeya Tahir is a new addition to the Delftia team, helping with the WikiEdu course and producing graphics focused on bioremediation and electronic waste recycling. She is from Long Island, New York, and brings valuable expertise to our research efforts.
 </p>
-<p style="margin-top:0.8rem;">
+<p class="timeline-tags">
 <span class="tag-chip">Team Spotlight</span>
 <span class="tag-chip">WikiEDU</span>
 </p>
@@ -47,13 +49,13 @@ Rabeya Tahir is a new addition to the Delftia team, helping with the WikiEdu cou
 </div>
 
 <div class="timeline-item">
-<div class="timeline-date">December 1, 2020</div>
+<div class="timeline-date"><time datetime="2020-12-01">December 1, 2020</time></div>
 <div class="timeline-card">
 <h2>Delftia WikiEDU</h2>
 <p>
 WikiEDU is a nonprofit organization that incorporates Wikipedia into education. From August to November 2020, 17 undergraduate volunteers enrolled in the Delftia WikiEDU class. Our goal was to improve the accessibility of Delftia research, improving information equity and catalyzing future research. Students prepared for Wikipedia editing through virtual lessons and reference collection.
 </p>
-<p style="margin-top:0.8rem;">
+<p class="timeline-tags">
 <span class="tag-chip">Education</span>
 <span class="tag-chip">Wikipedia</span>
 <span class="tag-chip">Undergrad Research</span>
@@ -62,13 +64,13 @@ WikiEDU is a nonprofit organization that incorporates Wikipedia into education. 
 </div>
 
 <div class="timeline-item">
-<div class="timeline-date">November 28, 2020</div>
+<div class="timeline-date"><time datetime="2020-11-28">November 28, 2020</time></div>
 <div class="timeline-card">
 <h2>Pathogen Case Study</h2>
 <p>
 Examining <em>Delftia</em> as a pathogen through collaborative annotation. Our team analyzed key case studies about <em>Delftia acidovorans</em> infections. Check out our Hypothes.is group for detailed annotations on Delftia-related literature.
 </p>
-<p style="margin-top:0.8rem;">
+<p class="timeline-tags">
 <span class="tag-chip">Pathogen Research</span>
 <span class="tag-chip">Hypothes.is</span>
 </p>
@@ -76,14 +78,14 @@ Examining <em>Delftia</em> as a pathogen through collaborative annotation. Our t
 </div>
 
 <div class="timeline-item">
-<div class="timeline-date">November 28, 2020</div>
+<div class="timeline-date"><time datetime="2020-11-28">November 28, 2020</time></div>
 <div class="timeline-card">
 <h2>Literature Findings: Delftia as a Pathogen</h2>
 <p>
 Our community of annotators found important information on infections involving <em>Delftia acidovorans</em>. Join us on Hypothes.is to see the full annotations and findings.<br/><br/>
 <em>Disclaimer: This information should not be used as medical advice.</em>
 </p>
-<p style="margin-top:0.8rem;">
+<p class="timeline-tags">
 <span class="tag-chip">Literature Review</span>
 <span class="tag-chip">Citizen Science</span>
 </p>
@@ -91,13 +93,13 @@ Our community of annotators found important information on infections involving 
 </div>
 
 <div class="timeline-item">
-<div class="timeline-date">November 25, 2020</div>
+<div class="timeline-date"><time datetime="2020-11-25">November 25, 2020</time></div>
 <div class="timeline-card">
 <h2>#CitSciChat Recap</h2>
 <p>
 Lauren Ramilo, one of our undergraduate researchers, hosted a #CitSciChat on Twitter. These events use a Q&amp;A-style format to drive fast-paced conversations about citizen science. Lauren's chat explored a new corner of citizen science where participants do hands-on research about microbes and biotechnology.
 </p>
-<p style="margin-top:0.8rem;">
+<p class="timeline-tags">
 <span class="tag-chip">Social Media</span>
 <span class="tag-chip">Citizen Science</span>
 </p>
@@ -105,13 +107,13 @@ Lauren Ramilo, one of our undergraduate researchers, hosted a #CitSciChat on Twi
 </div>
 
 <div class="timeline-item">
-<div class="timeline-date">October 30, 2020</div>
+<div class="timeline-date"><time datetime="2020-10-30">October 30, 2020</time></div>
 <div class="timeline-card">
 <h2>Meet the Researcher: Daiza Norman</h2>
 <p>
 Daiza Norman is a Biotechnology Research Assistant at the BIT program and a biological science major with a concentration in molecular, cellular, and developmental biology. She has worked on many Delftia-related projects with the BIT program, including the "Where's Delftia?" project.
 </p>
-<p style="margin-top:0.8rem;">
+<p class="timeline-tags">
 <span class="tag-chip">Team Spotlight</span>
 <span class="tag-chip">BIT Program</span>
 </p>
@@ -119,13 +121,13 @@ Daiza Norman is a Biotechnology Research Assistant at the BIT program and a biol
 </div>
 
 <div class="timeline-item">
-<div class="timeline-date">October 27, 2020</div>
+<div class="timeline-date"><time datetime="2020-10-27">October 27, 2020</time></div>
 <div class="timeline-card">
 <h2>Annotation Focus: Delftia as a Pathogen</h2>
 <p>
 <em>Delftia</em> has attracted interest in biotechnology due to its ability to recover gold from solution, but it has also raised concerns in medicine. Although it is a rare opportunistic pathogen, it can be hard to identify and effectively treat. Join our annotations to explore the scientific literature on this topic.
 </p>
-<p style="margin-top:0.8rem;">
+<p class="timeline-tags">
 <span class="tag-chip">Annotation</span>
 <span class="tag-chip">Medicine</span>
 </p>
@@ -133,13 +135,13 @@ Daiza Norman is a Biotechnology Research Assistant at the BIT program and a biol
 </div>
 
 <div class="timeline-item">
-<div class="timeline-date">October 7, 2020</div>
+<div class="timeline-date"><time datetime="2020-10-07">October 7, 2020</time></div>
 <div class="timeline-card">
 <h2>Delftia and E-Waste: Literature Findings</h2>
 <p>
 Our community of annotators took on an interesting challenge: exploring how <em>Delftia</em> and its ability to biomineralize gold could be applied to recover gold from e-waste. Discover what our volunteer annotators found about improving e-waste recycling.
 </p>
-<p style="margin-top:0.8rem;">
+<p class="timeline-tags">
 <span class="tag-chip">E-Waste</span>
 <span class="tag-chip">Bioremediation</span>
 <span class="tag-chip">Gold Recovery</span>
@@ -148,13 +150,13 @@ Our community of annotators took on an interesting challenge: exploring how <em>
 </div>
 
 <div class="timeline-item">
-<div class="timeline-date">October 1, 2020</div>
+<div class="timeline-date"><time datetime="2020-10-01">October 1, 2020</time></div>
 <div class="timeline-card">
 <h2>Presenting Delftia at the Sidewalk Symposium</h2>
 <p>
 Members of our research team had the opportunity to present current research at the Sidewalk Symposium. Thanks to the Office of Undergraduate Research, NC State Libraries, and the Crafts Center for sponsoring this event! Students created visual representations of their research.
 </p>
-<p style="margin-top:0.8rem;">
+<p class="timeline-tags">
 <span class="tag-chip">Outreach</span>
 <span class="tag-chip">Student Presentations</span>
 </p>
@@ -162,13 +164,13 @@ Members of our research team had the opportunity to present current research at 
 </div>
 
 <div class="timeline-item">
-<div class="timeline-date">September 16, 2020</div>
+<div class="timeline-date"><time datetime="2020-09-16">September 16, 2020</time></div>
 <div class="timeline-card">
 <h2>Live Annotation: E-Waste</h2>
 <p>
 Join us for live annotation sessions where we delve deeper into Delftia topics and foster our community of annotators. Meet peers, practice reading scientific literature, and learn about e-waste and bioremediation.
 </p>
-<p style="margin-top:0.8rem;">
+<p class="timeline-tags">
 <span class="tag-chip">Live Event</span>
 <span class="tag-chip">E-Waste</span>
 </p>
@@ -176,17 +178,17 @@ Join us for live annotation sessions where we delve deeper into Delftia topics a
 </div>
 
 <div class="timeline-item">
-<div class="timeline-date">September 1, 2020</div>
+<div class="timeline-date"><time datetime="2020-09-01">September 1, 2020</time></div>
 <div class="timeline-card">
 <h2>Annotation Focus: Recovering E-Waste</h2>
 <p>
 Every year up to 50 million tons of electronics are discarded, with only 12% properly recycled. Current recycling methods are costly and energy-intensive. Explore how <em>Delftia</em> may play a role in improving e-waste recycling and recovery.
 </p>
-<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1rem;margin-top:1rem;">
-<img src="images/Alchemy-blog.png" alt="Alchemy blog — Delftia research updates and undergraduate projects" style="border-radius:8px;width:100%;object-fit:cover;max-height:160px;"/>
-<img src="images/homegraphic-600x413.jpeg" alt="Delftia Project homepage graphic illustrating research and citizen science activities" style="border-radius:8px;width:100%;object-fit:cover;max-height:160px;"/>
+<div class="news-image-grid">
+<img src="images/Alchemy-blog.png" alt="Alchemy blog — Delftia research updates and undergraduate projects"/>
+<img src="images/homegraphic-600x413.jpeg" alt="Delftia Project homepage graphic illustrating research and citizen science activities"/>
 </div>
-<p style="margin-top:0.8rem;">
+<p class="timeline-tags">
 <span class="tag-chip">E-Waste</span>
 <span class="tag-chip">Sustainability</span>
 <span class="tag-chip">Gold Recovery</span>

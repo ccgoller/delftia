@@ -30,8 +30,8 @@ body-classes: home
       <div class="stat-label"><span class="visually-hidden">4 </span>Published References</div>
     </div>
     <div class="stat-item">
-      <div class="stat-number" aria-hidden="true">17+</div>
-      <div class="stat-label"><span class="visually-hidden">17+ </span>Student Researchers</div>
+      <div class="stat-number" aria-hidden="true">17</div>
+      <div class="stat-label"><span class="visually-hidden">17 </span>2020 WikiEDU Volunteers</div>
     </div>
     <div class="stat-item">
       <div class="stat-number" aria-hidden="true">3</div>
@@ -60,18 +60,18 @@ Today, *Delftia* is found in waste-contaminated soil, water systems, and drains.
 <span class="tag-chip"><span aria-hidden="true">🔬</span> Undergraduate Research</span>
 
 <br/><br/>
-<a href="references.html" class="btn-hero btn-primary-hero" style="font-size:0.9rem;padding:0.55rem 1.4rem;">Read the Literature →</a>
+<a href="references.html" class="btn-hero btn-primary-hero btn-hero--compact">Read the Literature →</a>
 :::
 
-![Colonies of *Delftia acidovorans* on agar](images/photo.jpg){fig-alt="Colonies of Delftia acidovorans on agar" style="max-height:400px;width:100%;object-fit:cover;"}
+![Colonies of *Delftia acidovorans* on agar](images/photo.jpg){fig-alt="Colonies of Delftia acidovorans on agar" .spotlight-image}
 :::
 
 ---
 
 ```{=html}
 <!-- ===== RESEARCH HIGHLIGHTS ===== -->
-<section id="research-highlights" class="section-alt" style="padding: 4rem 1.5rem;" aria-labelledby="research-highlights-heading">
-  <div style="max-width:1100px;margin:0 auto;text-align:center;">
+<section id="research-highlights" class="section-alt research-highlights" aria-labelledby="research-highlights-heading">
+  <div class="research-highlights-inner">
     <h2 id="research-highlights-heading" class="section-title">Research Highlights</h2>
     <p class="section-subtitle">Three pillars of the Delftia Project — from the classroom to the community</p>
     <div class="card-grid">
@@ -112,30 +112,30 @@ Today, *Delftia* is found in waste-contaminated soil, water systems, and drains.
 
 ## Lab Gallery
 
-::: {style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1.2rem;margin-top:1.5rem;"}
-::: {style="text-align:center;"}
-![Spot plate showing *Delftia* growth](images/Spot_Plate_10ul_48hrs.jpg){fig-alt="Laboratory spot plate with Delftia colonies" style="border-radius:12px;width:100%;object-fit:cover;height:180px;box-shadow:0 2px 10px rgba(0,0,0,0.1);"}
+::: {.gallery-grid}
+::: {.gallery-item}
+![Spot plate showing *Delftia* growth](images/Spot_Plate_10ul_48hrs.jpg){fig-alt="Laboratory spot plate with Delftia colonies"}
 
 **Spot Plate — 48 hrs**  
 *MB 360 course-based research*
 :::
 
-::: {style="text-align:center;"}
-![LSC 170 Microbial Superheroes](images/LSC-170-Goller-Microbial-Superheroes.jpg){fig-alt="LSC 170 students analyzing Delftia publications" style="border-radius:12px;width:100%;object-fit:cover;height:180px;box-shadow:0 2px 10px rgba(0,0,0,0.1);"}
+::: {.gallery-item}
+![LSC 170 Microbial Superheroes](images/LSC-170-Goller-Microbial-Superheroes.jpg){fig-alt="LSC 170 students analyzing Delftia publications"}
 
 **LSC 170 — Microbial Superheroes**  
 *Publication analysis workshop*
 :::
 
-::: {style="text-align:center;"}
-![BLAST sequence results](images/Blast-of-reverse-primer.png){fig-alt="BLAST results for Delftia reverse primer" style="border-radius:12px;width:100%;object-fit:cover;height:180px;box-shadow:0 2px 10px rgba(0,0,0,0.1);"}
+::: {.gallery-item}
+![BLAST sequence results](images/Blast-of-reverse-primer.png){fig-alt="BLAST results for Delftia reverse primer"}
 
 **BLAST Analysis**  
 *Reverse primer sequence search*
 :::
 
-::: {style="text-align:center;"}
-![DELFTIA citizen science](images/DELFTIA.jpg){fig-alt="DELFTIA citizen science graphic" style="border-radius:12px;width:100%;object-fit:cover;height:180px;box-shadow:0 2px 10px rgba(0,0,0,0.1);"}
+::: {.gallery-item}
+![DELFTIA citizen science](images/DELFTIA.jpg){fig-alt="DELFTIA citizen science graphic"}
 
 **Citizen Science**  
 *Community annotation project*

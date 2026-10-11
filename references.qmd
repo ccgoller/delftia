@@ -5,18 +5,18 @@ page-layout: full
 ---
 
 ```{=html}
-<section class="hero-section" style="padding:3.5rem 2rem 3rem;" aria-labelledby="refs-heading">
-  <h1 id="refs-heading" style="font-size:clamp(1.8rem,4vw,2.6rem);">Scientific References</h1>
-  <p class="hero-subtitle" style="font-size:1.05rem;">
+<section class="hero-section hero-section--compact" aria-labelledby="refs-heading">
+  <h1 id="refs-heading">Scientific References</h1>
+  <p class="hero-subtitle">
     Publications from the Goller lab on <em>Delftia acidovorans</em> — research driven
     in partnership with undergraduate students.
   </p>
 </section>
 ```
 
-<div style="max-width:900px;margin:0 auto;padding:3rem 1.5rem;">
+<div class="content-wrap references-content">
 
-<p style="background:var(--delftia-cream);border-left:4px solid var(--delftia-gold);padding:1rem 1.4rem;border-radius:8px;font-size:0.95rem;color:var(--delftia-muted);margin-bottom:2rem;">
+<p class="reference-note">
   <strong>Note:</strong> All references listed here include Goller as an author and reflect
   collaborative work conducted with undergraduate researchers.
 </p>
