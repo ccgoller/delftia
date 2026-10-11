@@ -794,20 +794,24 @@ html[data-theme="dark"] .news-card-date {
 
 .news-card-title {
   font-size: 1.05rem;
-  font-weight: 700;
-  color: var(--delftia-umber);
+  font-weight: 700 !important;
+  color: #0a0805 !important;
   margin-bottom: 0.5rem;
   transition: color var(--transition-fast);
 }
 
 @media (prefers-color-scheme: dark) {
   .news-card-title {
-    color: var(--delftia-gold-glow);
+    color: var(--delftia-gold-glow) !important;
   }
 }
 
+html[data-theme="light"] .news-card-title {
+  color: #0a0805 !important;
+}
+
 html[data-theme="dark"] .news-card-title {
-  color: var(--delftia-gold-glow);
+  color: var(--delftia-gold-glow) !important;
 }
 
 .news-card-text {
@@ -994,7 +998,7 @@ html[data-theme="dark"] .research-spotlight-text p {
 .tag-chip {
   display: inline-block;
   background: var(--delftia-cream);
-  color: var(--delftia-umber);
+  color: #0a0805 !important;
   border: 1px solid var(--delftia-gold);
   border-radius: 50px;
   padding: 0.2rem 0.8rem;
@@ -1007,14 +1011,18 @@ html[data-theme="dark"] .research-spotlight-text p {
 @media (prefers-color-scheme: dark) {
   .tag-chip {
     background: rgba(232, 149, 75, 0.15);
-    color: var(--delftia-gold-glow);
+    color: var(--delftia-gold-glow) !important;
     border-color: var(--delftia-gold-glow);
   }
 }
 
+html[data-theme="light"] .tag-chip {
+  color: #0a0805 !important;
+}
+
 html[data-theme="dark"] .tag-chip {
   background: rgba(232, 149, 75, 0.15);
-  color: var(--delftia-gold-glow);
+  color: var(--delftia-gold-glow) !important;
   border-color: var(--delftia-gold-glow);
 }
 
@@ -1237,7 +1245,7 @@ html[data-theme="dark"] .timeline-card p {
 }
 
 .ref-list a:hover {
-  color: var(--delftia-umber);
+  color: var(--delftia-link-hover-on-light);
   text-decoration: underline;
 }
 
@@ -1306,7 +1314,37 @@ body:not(.home) h3,
 body:not(.home) h4,
 body:not(.home) h5,
 body:not(.home) h6 {
-  color: var(--delftia-umber);
+  color: #0a0805 !important;
+}
+
+/* Dark mode for body:not(.home) headings */
+@media (prefers-color-scheme: dark) {
+  body:not(.home) h1,
+  body:not(.home) h2,
+  body:not(.home) h3,
+  body:not(.home) h4,
+  body:not(.home) h5,
+  body:not(.home) h6 {
+    color: var(--delftia-title-dark) !important;
+  }
+}
+
+html[data-theme="light"] body:not(.home) h1,
+html[data-theme="light"] body:not(.home) h2,
+html[data-theme="light"] body:not(.home) h3,
+html[data-theme="light"] body:not(.home) h4,
+html[data-theme="light"] body:not(.home) h5,
+html[data-theme="light"] body:not(.home) h6 {
+  color: #0a0805 !important;
+}
+
+html[data-theme="dark"] body:not(.home) h1,
+html[data-theme="dark"] body:not(.home) h2,
+html[data-theme="dark"] body:not(.home) h3,
+html[data-theme="dark"] body:not(.home) h4,
+html[data-theme="dark"] body:not(.home) h5,
+html[data-theme="dark"] body:not(.home) h6 {
+  color: var(--delftia-title-dark) !important;
 }
 
 body:not(.home) p,
