@@ -31,10 +31,10 @@
   --delftia-title-dark:#F5E6D3;   /* refined light text on dark    */
   --delftia-subtitle-dark:#E8D9C9;/* refined subtitle on dark      */
   --delftia-hero-accent:#E8954B;  /* delftia orange on dark        */
-  --delftia-link-on-light:#6B5914; /* wcag-aa link on light        */
-  --delftia-link-hover-on-light:#3D2F0F; /* darker hover on light   */
-  --delftia-link-visited-on-light:#6B5914; /* visited link on light  */
-  --delftia-accent-on-light:#7A6A3A; /* accent text on light       */
+  --delftia-link-on-light:#C17A35; /* delftia orange on light       */
+  --delftia-link-hover-on-light:#A85C22; /* darker orange hover light */
+  --delftia-link-visited-on-light:#C17A35; /* visited orange on light */
+  --delftia-accent-on-light:#C17A35; /* accent orange on light     */
   
   /* Dark Mode Overrides (when prefers-color-scheme: dark) */
   --delftia-link-on-dark: #F4A854;  /* delftia orange for dark mode  */
