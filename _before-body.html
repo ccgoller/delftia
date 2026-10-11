@@ -4,77 +4,51 @@
 <script>
   // Initialize theme based on user preference and localStorage
   (function() {
-    const savedTheme = localStorage.getItem('delftia-theme');
-    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-    const theme = savedTheme || (prefersDark ? 'dark' : 'light');
-    
-    // Apply theme immediately to prevent flash
-    document.documentElement.setAttribute('data-theme', theme);
-    if (theme === 'dark') {
-      document.documentElement.classList.add('dark-mode');
-      document.body.classList.add('dark-mode');
-    } else {
-      document.documentElement.classList.add('light-mode');
-      document.body.classList.add('light-mode');
+    const preference = window.matchMedia('(prefers-color-scheme: dark)');
+    let savedTheme;
+    try {
+      savedTheme = localStorage.getItem('delftia-theme');
+    } catch {
+      // Theme selection still works when browser storage is unavailable.
     }
-  })();
-</script>
+    let explicitTheme = savedTheme === 'light' || savedTheme === 'dark' ? savedTheme : null;
 
-<!-- Theme Toggle Button in Navbar -->
-<style>
-  .navbar-nav-custom {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    margin-left: auto;
-  }
-  
-  #quarto-navbar .navbar-nav-custom {
-    flex-direction: row-reverse;
-  }
-</style>
+    function applyTheme(theme) {
+      document.documentElement.setAttribute('data-theme', theme);
+      const button = document.querySelector('.theme-toggle');
+      if (button) {
+        button.textContent = theme === 'dark' ? '☀️ Light' : '🌙 Dark';
+        button.setAttribute('aria-label', theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode');
+      }
+    }
 
-<script>
-  // Add theme toggle button to navbar after page loads
-  document.addEventListener('DOMContentLoaded', function() {
-    const navbar = document.querySelector('#quarto-header .navbar-collapse .navbar-nav');
-    
-    if (navbar) {
-      // Create theme toggle button
-      const toggleContainer = document.createElement('div');
-      toggleContainer.style.cssText = 'display: flex; align-items: center; gap: 1rem; margin-left: 1rem;';
-      
-      const toggleBtn = document.createElement('button');
-      toggleBtn.className = 'theme-toggle';
-      toggleBtn.setAttribute('aria-label', 'Toggle dark mode');
-      toggleBtn.setAttribute('title', 'Toggle dark/light theme');
-      
-      const currentTheme = document.documentElement.getAttribute('data-theme') || 'light';
-      toggleBtn.innerHTML = currentTheme === 'dark' 
-        ? '☀️ Light' 
-        : '🌙 Dark';
-      
-      toggleBtn.addEventListener('click', function() {
-        const html = document.documentElement;
-        const currentTheme = html.getAttribute('data-theme') || 'light';
-        const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-        
-        // Update theme
-        html.setAttribute('data-theme', newTheme);
-        localStorage.setItem('delftia-theme', newTheme);
-        
-        // Update body classes
-        document.body.classList.remove('light-mode', 'dark-mode');
-        document.body.classList.add(newTheme === 'dark' ? 'dark-mode' : 'light-mode');
-        
-        // Update button text
-        toggleBtn.innerHTML = newTheme === 'dark' 
-          ? '☀️ Light' 
-          : '🌙 Dark';
+    applyTheme(explicitTheme || (preference.matches ? 'dark' : 'light'));
+    preference.addEventListener('change', function(event) {
+      if (!explicitTheme) applyTheme(event.matches ? 'dark' : 'light');
+    });
+
+    document.addEventListener('DOMContentLoaded', function() {
+      const navbar = document.querySelector('#quarto-header .navbar-collapse .navbar-nav');
+      if (!navbar) return;
+
+      const container = document.createElement('li');
+      container.className = 'nav-item';
+      const button = document.createElement('button');
+      button.type = 'button';
+      button.className = 'theme-toggle';
+      container.appendChild(button);
+      navbar.appendChild(container);
+      applyTheme(document.documentElement.getAttribute('data-theme'));
+
+      button.addEventListener('click', function() {
+        explicitTheme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+        applyTheme(explicitTheme);
+        try {
+          localStorage.setItem('delftia-theme', explicitTheme);
+        } catch {
+          // Keep the selected theme for this page even without storage.
+        }
       });
-      
-      toggleContainer.appendChild(toggleBtn);
-      navbar.appendChild(toggleContainer);
-    }
-  });
+    });
+  })();
 </script>

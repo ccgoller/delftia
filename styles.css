@@ -6,7 +6,8 @@
    Palette: Professional academic theme with refined amber accents.
    All colors verified for WCAG 2.2 AAA compliance (7:1+ contrast).
    ------------------------------------------------------------ */
-:root {
+:root,
+html[data-theme="light"] {
   /* Delftia Brand Colors */
   --delftia-umber:     #1a1410;   /* professional dark base        */
   --delftia-umber-darker:#0a0805; /* high-contrast dark for titles on light bg */
@@ -16,16 +17,32 @@
   --delftia-gold-hero: #E8954B;   /* delftia orange for dark bg    */
   --delftia-gold-hover:#D67E3E;   /* delftia orange hover state    */
   --delftia-accent:    #704A1F;   /* delftia dark amber accent     */
-  --delftia-cream:     #FAF7F0;   /* refined light background      */
-  --delftia-light:     #F9F5ED;   /* sophisticated light section   */
+  --delftia-cream:     var(--page-chip-bg);
+  --delftia-light:     var(--page-bg-secondary);
   
   /* Light Mode Palette */
   --page-bg:           #ffffff;   /* light background              */
   --page-bg-secondary: #F9F5ED;   /* secondary light background    */
   --page-text:         #1a1208;   /* body text (19:1 on white)     */
   --page-text-secondary:#6B5B4C;  /* secondary text (13:1 on white)*/
-  --delftia-text:      #1a1208;   /* body text (19:1 on white)     */
-  --delftia-muted:     #6B5B4C;   /* secondary text (13:1 on white)*/
+  --page-heading:      #0a0805;
+  --page-surface:      #ffffff;
+  --page-border:       #E5D8CC;
+  --page-accent:       #704A1F;
+  --page-link:         #704A1F;
+  --page-link-hover:   #5A3A15;
+  --page-link-visited: #704A1F;
+  --page-chip-bg:      #FAF7F0;
+  --page-decoration:   #E8954B;
+  --page-decoration-opacity: 0.4;
+  --page-shadow-color: rgba(0, 0, 0, 0.07);
+  --page-hover-shadow-color: rgba(0, 0, 0, 0.12);
+  --page-image-shadow-color: rgba(0, 0, 0, 0.12);
+  --page-button-bg:    #1a1410;
+  --page-button-text:  #ffffff;
+  --page-button-hover: #3D2F0F;
+  --delftia-text:      var(--page-text);
+  --delftia-muted:     var(--page-text-secondary);
   
   /* Accessibility & Focus */
   --delftia-focus:     #0055B8;   /* wcag-compliant blue focus     */
@@ -37,7 +54,7 @@
   --delftia-link-visited-on-light:#704A1F; /* visited dark amber on light */
   --delftia-accent-on-light:#704A1F; /* accent dark amber on light (AAA) */
   
-  /* Dark Mode Overrides (when prefers-color-scheme: dark) */
+  /* Fixed colors for always-dark sections */
   --delftia-link-on-dark: #F4A854;  /* delftia orange for dark mode  */
   --delftia-link-hover-on-dark: #FCE4C3; /* brighter orange on hover  */
   --delftia-link-visited-on-dark: #E8954B; /* muted orange visited     */
@@ -47,40 +64,67 @@
   --transition-fast:   0.2s ease;
 }
 
-/* Dark Mode Support */
-  @media (prefers-color-scheme: dark) {
-  :root {
-    --page-bg:           #0F0D0A;   /* dark background               */
-    --page-bg-secondary: #1a1410;  /* secondary dark background     */
-    --page-text:         #F5E6D3;  /* light text on dark            */
-    --page-text-secondary:#E8954B; /* secondary text on dark        */
-    --delftia-text:      #F5E6D3;  /* light text on dark            */
-    --delftia-muted:     #E8954B;  /* secondary text on dark        */
-  }
-}
-
-/* Theme Override for Explicit Dark Mode (when data-theme="dark") */
+/* Explicit preferences are authoritative; only an unset theme follows the system. */
 html[data-theme="dark"] {
-  --page-bg:           #0F0D0A;   /* dark background               */
-  --page-bg-secondary: #1a1410;  /* secondary dark background     */
-  --page-text:         #F5E6D3;  /* light text on dark            */
-  --page-text-secondary:#E8954B; /* secondary text on dark        */
-  --delftia-text:      #F5E6D3;  /* light text on dark            */
-  --delftia-muted:     #E8954B;  /* secondary text on dark        */
+  color-scheme: dark;
+  --page-bg:           #0F0D0A;
+  --page-bg-secondary: #1a1410;
+  --page-text:         #F5E6D3;
+  --page-text-secondary: #E8954B;
+  --page-heading:      #F5E6D3;
+  --page-surface:      #241b13;
+  --page-border:       rgba(232, 149, 75, 0.3);
+  --page-accent:       #F4A854;
+  --page-link:         #F4A854;
+  --page-link-hover:   #FCE4C3;
+  --page-link-visited: #E8954B;
+  --page-chip-bg:      rgba(232, 149, 75, 0.15);
+  --page-decoration:   #FCE4C3;
+  --page-decoration-opacity: 0.6;
+  --page-shadow-color: rgba(0, 0, 0, 0.4);
+  --page-hover-shadow-color: rgba(232, 149, 75, 0.2);
+  --page-image-shadow-color: rgba(232, 149, 75, 0.2);
+  --page-button-bg:    #E8954B;
+  --page-button-text:  #1a1410;
+  --page-button-hover: #F4A854;
 }
 
-/* Light Mode Override for Explicit Light Mode */
-html[data-theme="light"] {
-  --page-bg:           #ffffff;   /* light background              */
-  --page-bg-secondary: #F9F5ED;   /* secondary light background    */
-  --page-text:         #1a1208;   /* body text                     */
-  --page-text-secondary:#6B5B4C;  /* secondary text                */
-  --delftia-text:      #1a1208;   /* body text                     */
-  --delftia-muted:     #6B5B4C;   /* secondary text                */
+@media (prefers-color-scheme: dark) {
+  html:not([data-theme]) {
+    color-scheme: dark;
+    --page-bg:           #0F0D0A;
+    --page-bg-secondary: #1a1410;
+    --page-text:         #F5E6D3;
+    --page-text-secondary: #E8954B;
+    --page-heading:      #F5E6D3;
+    --page-surface:      #241b13;
+    --page-border:       rgba(232, 149, 75, 0.3);
+    --page-accent:       #F4A854;
+    --page-link:         #F4A854;
+    --page-link-hover:   #FCE4C3;
+    --page-link-visited: #E8954B;
+    --page-chip-bg:      rgba(232, 149, 75, 0.15);
+    --page-decoration:   #FCE4C3;
+    --page-decoration-opacity: 0.6;
+    --page-shadow-color: rgba(0, 0, 0, 0.4);
+    --page-hover-shadow-color: rgba(232, 149, 75, 0.2);
+    --page-image-shadow-color: rgba(232, 149, 75, 0.2);
+    --page-button-bg:    #E8954B;
+    --page-button-text:  #1a1410;
+    --page-button-hover: #F4A854;
+  }
 }
 
 /* ---- Base Typography & HTML -------------------------------------- */
 html {
+  color-scheme: light;
+  --bs-body-bg: var(--page-bg);
+  --bs-body-color: var(--page-text);
+  --bs-secondary-color: var(--page-text-secondary);
+  --bs-heading-color: var(--page-heading);
+  --bs-link-color: var(--page-link);
+  --bs-link-hover-color: var(--page-link-hover);
+  --bs-border-color: var(--page-border);
   scroll-behavior: smooth;
   transition: background-color var(--transition-fast), color var(--transition-fast);
 }
@@ -94,79 +138,12 @@ body {
   transition: background-color var(--transition-fast), color var(--transition-fast);
 }
 
-/* Ensure proper text rendering in all modes */
-body.light-mode {
-  color: #1a1208;
-  background-color: #ffffff;
-}
-
-body.dark-mode {
-  color: #F5E6D3;
-  background-color: #0F0D0A;
-}
-
 h1, h2, h3, h4, h5, h6 {
-  font-weight: 700 !important;
-  margin-top: 1.5em !important;
-  margin-bottom: 0.5em !important;
-  color: #0a0805 !important;
+  font-weight: 700;
+  margin-top: 1.5em;
+  margin-bottom: 0.5em;
+  color: var(--page-heading);
   transition: color var(--transition-fast);
-}
-
-/* Light mode explicitly override with high-contrast title color */
-html[data-theme="light"] h1,
-html[data-theme="light"] h2,
-html[data-theme="light"] h3,
-html[data-theme="light"] h4,
-html[data-theme="light"] h5,
-html[data-theme="light"] h6 {
-  color: #0a0805 !important;
-}
-
-/* Ensure high contrast for headings in dark mode */
-@media (prefers-color-scheme: dark) {
-  h1, h2, h3, h4, h5, h6 {
-    color: var(--delftia-title-dark) !important;
-  }
-}
-
-html[data-theme="dark"] h1,
-html[data-theme="dark"] h2,
-html[data-theme="dark"] h3,
-html[data-theme="dark"] h4,
-html[data-theme="dark"] h5,
-html[data-theme="dark"] h6 {
-  color: var(--delftia-title-dark) !important;
-}
-
-body.light-mode h1,
-body.light-mode h2,
-body.light-mode h3,
-body.light-mode h4,
-body.light-mode h5,
-body.light-mode h6 {
-  color: #0a0805 !important;
-}
-
-body.dark-mode h1,
-body.dark-mode h2,
-body.dark-mode h3,
-body.dark-mode h4,
-body.dark-mode h5,
-body.dark-mode h6 {
-  color: var(--delftia-title-dark) !important;
-}
-
-/* Ensure all h3, h4, h5, h6 have dark color on light backgrounds */
-html[data-theme="light"] h3,
-html[data-theme="light"] h4,
-html[data-theme="light"] h5,
-html[data-theme="light"] h6,
-body.light-mode h3,
-body.light-mode h4,
-body.light-mode h5,
-body.light-mode h6 {
-  color: #0a0805 !important;
 }
 
 /* Fix Quarto title block visibility for all pages */
@@ -180,38 +157,39 @@ body.light-mode h6 {
   display: block;
 }
 
-/* Light Mode Link Colors */
-@media (prefers-color-scheme: light) {
-  a {
-    color: var(--delftia-link-on-light);
-  }
-  
-  a:hover,
-  a:focus {
-    color: var(--delftia-link-hover-on-light);
-    text-decoration: underline;
-  }
-  
-  a:visited {
-    color: var(--delftia-link-visited-on-light);
-  }
+/* Links inherit the active section's tokens. */
+a {
+  color: var(--page-link);
 }
 
-/* Dark Mode Link Colors */
-@media (prefers-color-scheme: dark) {
-  a {
-    color: var(--delftia-link-on-dark);
-  }
-  
-  a:hover,
-  a:focus {
-    color: var(--delftia-link-hover-on-dark);
-    text-decoration: underline;
-  }
-  
-  a:visited {
-    color: var(--delftia-link-visited-on-dark);
-  }
+a:visited {
+  color: var(--page-link-visited);
+}
+
+a:hover,
+a:focus {
+  color: var(--page-link-hover);
+  text-decoration: underline;
+}
+
+.headroom,
+#quarto-header,
+#quarto-footer,
+.page-footer,
+.hero-section,
+.cta-section {
+  color-scheme: dark;
+  --page-text: var(--delftia-title-dark);
+  --page-text-secondary: var(--delftia-subtitle-dark);
+  --page-heading: var(--delftia-title-dark);
+  --page-link: var(--delftia-link-on-dark);
+  --page-link-hover: var(--delftia-link-hover-on-dark);
+  --page-link-visited: var(--delftia-link-visited-on-dark);
+  --delftia-text: var(--page-text);
+  --delftia-muted: var(--page-text-secondary);
+  --page-button-bg: #E8954B;
+  --page-button-text: #1a1410;
+  --page-button-hover: #F4A854;
 }
 
 /* ---- Navbar ----------------------------------------------- */
@@ -221,24 +199,6 @@ body.light-mode h6 {
 #quarto-header .navbar-collapse {
   background-color: var(--delftia-umber);
   transition: background-color var(--transition-fast);
-}
-
-@media (prefers-color-scheme: dark) {
-  .headroom,
-  #quarto-header,
-  #quarto-header .navbar,
-  #quarto-header .navbar-collapse {
-    background-color: #1a1410;
-    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.4);
-  }
-}
-
-html[data-theme="dark"] .headroom,
-html[data-theme="dark"] #quarto-header,
-html[data-theme="dark"] #quarto-header .navbar,
-html[data-theme="dark"] #quarto-header .navbar-collapse {
-  background-color: #1a1410;
-  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.4);
 }
 
 .navbar {
@@ -340,23 +300,6 @@ button:focus-visible {
   overflow: hidden;
 }
 
-/* Dark mode hero section adjustments */
-@media (prefers-color-scheme: dark) {
-  .hero-section {
-    background:
-      radial-gradient(circle at 16% 18%, rgba(232, 149, 75, 0.15), transparent 40%),
-      radial-gradient(circle at 84% 28%, rgba(232, 149, 75, 0.12), transparent 44%),
-      linear-gradient(140deg, #1a1410 0%, #2a2415 40%, #3a3420 68%, #0a0805 100%);
-  }
-}
-
-html[data-theme="dark"] .hero-section {
-  background:
-    radial-gradient(circle at 16% 18%, rgba(232, 149, 75, 0.15), transparent 40%),
-    radial-gradient(circle at 84% 28%, rgba(232, 149, 75, 0.12), transparent 44%),
-    linear-gradient(140deg, #1a1410 0%, #2a2415 40%, #3a3420 68%, #0a0805 100%);
-}
-
 .hero-section::before {
   content: "";
   position: absolute;
@@ -383,6 +326,7 @@ html[data-theme="dark"] .hero-section {
   pointer-events: none;
 }
 
+.hero-section > *,
 .hero-section .hero-content {
   position: relative;
   z-index: 2;
@@ -482,23 +426,12 @@ html[data-theme="dark"] .hero-section {
 
 /* ---- Stats bar -------------------------------------------- */
 .stats-bar {
-  background: var(--delftia-light);
+  background: var(--page-bg-secondary);
+  color: var(--page-text);
   padding: 2rem 1rem;
   text-align: center;
-  border-bottom: 3px solid var(--delftia-gold);
+  border-bottom: 3px solid var(--page-decoration);
   transition: background-color var(--transition-fast), border-color var(--transition-fast);
-}
-
-@media (prefers-color-scheme: dark) {
-  .stats-bar {
-    background: #1a1410;
-    border-bottom: 3px solid var(--delftia-gold-glow);
-  }
-}
-
-html[data-theme="dark"] .stats-bar {
-  background: #1a1410;
-  border-bottom: 3px solid var(--delftia-gold-glow);
 }
 
 .stats-grid {
@@ -513,18 +446,8 @@ html[data-theme="dark"] .stats-bar {
 .stat-item .stat-number {
   font-size: 2.4rem;
   font-weight: 800;
-  color: var(--delftia-accent-on-light);
+  color: var(--page-accent);
   transition: color var(--transition-fast);
-}
-
-@media (prefers-color-scheme: dark) {
-  .stat-item .stat-number {
-    color: var(--delftia-gold);
-  }
-}
-
-html[data-theme="dark"] .stat-item .stat-number {
-  color: var(--delftia-gold);
 }
 
 .stat-item .stat-label {
@@ -545,76 +468,38 @@ html[data-theme="dark"] .stat-item .stat-number {
 }
 
 .section-alt {
-  background: var(--delftia-light);
+  background: var(--page-bg-secondary);
   transition: background-color var(--transition-fast);
-}
-
-@media (prefers-color-scheme: dark) {
-  .section-alt {
-    background: #1a1410;
-  }
-}
-
-html[data-theme="dark"] .section-alt {
-  background: #1a1410;
 }
 
 .section-title {
   font-size: clamp(1.6rem, 3.5vw, 2.2rem);
-  color: #0a0805 !important;
+  color: var(--page-heading);
   margin-bottom: 0.5rem;
   transition: color var(--transition-fast);
-  font-weight: 700 !important;
-}
-
-@media (prefers-color-scheme: dark) {
-  .section-title {
-    color: var(--delftia-gold-glow) !important;
-  }
-}
-
-html[data-theme="light"] .section-title {
-  color: #0a0805 !important;
-}
-
-html[data-theme="dark"] .section-title {
-  color: var(--delftia-gold-glow) !important;
+  font-weight: 700;
 }
 
 /* High-contrast page titles for accessibility */
 .page-title {
   font-size: clamp(1.8rem, 4vw, 2.6rem);
-  font-weight: 800 !important;
-  margin-top: 0 !important;
-  margin-bottom: 1rem !important;
-  line-height: 1.2 !important;
-  letter-spacing: -0.02em !important;
+  font-weight: 800;
+  margin-top: 0;
+  margin-bottom: 1rem;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
   transition: color var(--transition-fast);
-  color: #0a0805 !important;
+  color: var(--page-heading);
 }
 
 /* Page titles on dark backgrounds (hero sections) */
 .hero-section .page-title {
-  color: #FFFFFF !important;
+  color: #FFFFFF;
   text-shadow: 
     0 0 2px rgba(255, 255, 200, 0.9),
     0 2px 4px rgba(0, 0, 0, 0.8),
     0 3px 12px rgba(0, 0, 0, 0.7),
     0 0 20px rgba(232, 149, 75, 0.4);
-}
-
-@media (prefers-color-scheme: dark) {
-  .page-title {
-    color: var(--delftia-title-dark) !important;
-  }
-}
-
-html[data-theme="light"] .page-title:not(.hero-section .page-title) {
-  color: #0a0805 !important;
-}
-
-html[data-theme="dark"] .page-title {
-  color: var(--delftia-title-dark) !important;
 }
 
 .section-subtitle {
@@ -624,14 +509,9 @@ html[data-theme="dark"] .page-title {
   transition: color var(--transition-fast);
 }
 
-@media (prefers-color-scheme: dark) {
-  .section-subtitle {
-    color: #E8954B;
-  }
-}
-
-html[data-theme="dark"] .section-subtitle {
-  color: #E8954B;
+.quarto-figure figure > figcaption,
+.quarto-float-caption {
+  color: var(--page-text-secondary);
 }
 
 /* ---- Feature / info cards --------------------------------- */
@@ -643,41 +523,18 @@ html[data-theme="dark"] .section-subtitle {
 }
 
 .feature-card {
-  background: white;
+  background: var(--page-surface);
+  color: var(--page-text);
   border-radius: var(--card-radius);
   padding: 2rem 1.8rem;
-  box-shadow: 0 2px 12px rgba(0,0,0,0.07);
-  border-left: 4px solid var(--delftia-gold);
+  box-shadow: 0 2px 12px var(--page-shadow-color);
+  border-left: 4px solid var(--page-decoration);
   transition: transform var(--transition-fast), box-shadow var(--transition-fast), background-color var(--transition-fast);
-}
-
-@media (prefers-color-scheme: dark) {
-  .feature-card {
-    background: rgba(232, 149, 75, 0.08);
-    box-shadow: 0 2px 12px rgba(0,0,0,0.4);
-    border-left-color: var(--delftia-gold-glow);
-  }
-}
-
-html[data-theme="dark"] .feature-card {
-  background: rgba(232, 149, 75, 0.08);
-  box-shadow: 0 2px 12px rgba(0,0,0,0.4);
-  border-left-color: var(--delftia-gold-glow);
 }
 
 .feature-card:hover {
   transform: translateY(-4px);
-  box-shadow: 0 8px 24px rgba(0,0,0,0.12);
-}
-
-@media (prefers-color-scheme: dark) {
-  .feature-card:hover {
-    box-shadow: 0 8px 24px rgba(232, 149, 75, 0.2);
-  }
-}
-
-html[data-theme="dark"] .feature-card:hover {
-  box-shadow: 0 8px 24px rgba(232, 149, 75, 0.2);
+  box-shadow: 0 8px 24px var(--page-hover-shadow-color);
 }
 
 .feature-card .card-icon {
@@ -687,24 +544,10 @@ html[data-theme="dark"] .feature-card:hover {
 
 .feature-card h3 {
   font-size: 1.15rem;
-  color: #0a0805 !important;
+  color: var(--page-heading);
   margin-bottom: 0.6rem;
   transition: color var(--transition-fast);
-  font-weight: 700 !important;
-}
-
-@media (prefers-color-scheme: dark) {
-  .feature-card h3 {
-    color: var(--delftia-gold-glow) !important;
-  }
-}
-
-html[data-theme="light"] .feature-card h3 {
-  color: #0a0805 !important;
-}
-
-html[data-theme="dark"] .feature-card h3 {
-  color: var(--delftia-gold-glow) !important;
+  font-weight: 700;
 }
 
 .feature-card p {
@@ -713,16 +556,6 @@ html[data-theme="dark"] .feature-card h3 {
   line-height: 1.6;
   margin: 0;
   transition: color var(--transition-fast);
-}
-
-@media (prefers-color-scheme: dark) {
-  .feature-card p {
-    color: #E8954B;
-  }
-}
-
-html[data-theme="dark"] .feature-card p {
-  color: #E8954B;
 }
 
 /* ---- News cards ------------------------------------------- */
@@ -734,38 +567,17 @@ html[data-theme="dark"] .feature-card p {
 }
 
 .news-card {
-  background: white;
+  background: var(--page-surface);
+  color: var(--page-text);
   border-radius: var(--card-radius);
   overflow: hidden;
-  box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+  box-shadow: 0 2px 12px var(--page-shadow-color);
   transition: transform var(--transition-fast), box-shadow var(--transition-fast), background-color var(--transition-fast);
-}
-
-@media (prefers-color-scheme: dark) {
-  .news-card {
-    background: rgba(232, 149, 75, 0.08);
-    box-shadow: 0 2px 12px rgba(0,0,0,0.4);
-  }
-}
-
-html[data-theme="dark"] .news-card {
-  background: rgba(232, 149, 75, 0.08);
-  box-shadow: 0 2px 12px rgba(0,0,0,0.4);
 }
 
 .news-card:hover {
   transform: translateY(-4px);
-  box-shadow: 0 8px 24px rgba(0,0,0,0.12);
-}
-
-@media (prefers-color-scheme: dark) {
-  .news-card:hover {
-    box-shadow: 0 8px 24px rgba(232, 149, 75, 0.2);
-  }
-}
-
-html[data-theme="dark"] .news-card:hover {
-  box-shadow: 0 8px 24px rgba(232, 149, 75, 0.2);
+  box-shadow: 0 8px 24px var(--page-hover-shadow-color);
 }
 
 .news-card-body {
@@ -774,7 +586,7 @@ html[data-theme="dark"] .news-card:hover {
 
 .news-card-date {
   font-size: 0.78rem;
-  color: var(--delftia-accent-on-light);
+  color: var(--page-accent);
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.06em;
@@ -782,36 +594,12 @@ html[data-theme="dark"] .news-card:hover {
   transition: color var(--transition-fast);
 }
 
-@media (prefers-color-scheme: dark) {
-  .news-card-date {
-    color: var(--delftia-gold-glow);
-  }
-}
-
-html[data-theme="dark"] .news-card-date {
-  color: var(--delftia-gold-glow);
-}
-
 .news-card-title {
   font-size: 1.05rem;
-  font-weight: 700 !important;
-  color: #0a0805 !important;
+  font-weight: 700;
+  color: var(--page-heading);
   margin-bottom: 0.5rem;
   transition: color var(--transition-fast);
-}
-
-@media (prefers-color-scheme: dark) {
-  .news-card-title {
-    color: var(--delftia-gold-glow) !important;
-  }
-}
-
-html[data-theme="light"] .news-card-title {
-  color: #0a0805 !important;
-}
-
-html[data-theme="dark"] .news-card-title {
-  color: var(--delftia-gold-glow) !important;
 }
 
 .news-card-text {
@@ -819,16 +607,6 @@ html[data-theme="dark"] .news-card-title {
   color: var(--delftia-muted);
   line-height: 1.55;
   transition: color var(--transition-fast);
-}
-
-@media (prefers-color-scheme: dark) {
-  .news-card-text {
-    color: #E8954B;
-  }
-}
-
-html[data-theme="dark"] .news-card-text {
-  color: #E8954B;
 }
 
 /* ---- CTA / call-to-action section ------------------------- */
@@ -877,56 +655,10 @@ html[data-theme="dark"] .news-card-text {
 
 .research-spotlight-text h3 {
   font-size: 1.4rem;
-  color: #0a0805 !important;
+  color: var(--page-heading);
   margin-bottom: 1rem;
   transition: color var(--transition-fast);
-  font-weight: 700 !important;
-}
-
-@media (prefers-color-scheme: dark) {
-  .research-spotlight-text h3 {
-    color: var(--delftia-gold-glow) !important;
-  }
-}
-
-html[data-theme="light"] .research-spotlight-text h3 {
-  color: #0a0805 !important;
-}
-
-html[data-theme="dark"] .research-spotlight-text h3 {
-  color: var(--delftia-gold-glow) !important;
-}
-
-.research-spotlight-text p {
-  color: var(--delftia-muted);
-  line-height: 1.7;
-  transition: color var(--transition-fast);
-}
-
-@media (prefers-color-scheme: dark) {
-  .research-spotlight-text p {
-    color: #E8954B;
-  }
-}
-
-html[data-theme="dark"] .research-spotlight-text p {
-  color: #E8954B;
-}
-
-.research-spotlight img {
-  border-radius: var(--card-radius);
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
-  transition: box-shadow var(--transition-fast);
-}
-
-@media (prefers-color-scheme: dark) {
-  .research-spotlight img {
-    box-shadow: 0 4px 16px rgba(232, 149, 75, 0.2);
-  }
-}
-
-html[data-theme="dark"] .research-spotlight img {
-  box-shadow: 0 4px 16px rgba(232, 149, 75, 0.2);
+  font-weight: 700;
 }
 
 .research-spotlight.reverse > :first-child {
@@ -940,41 +672,17 @@ html[data-theme="dark"] .research-spotlight img {
 .research-spotlight img {
   width: 100%;
   border-radius: var(--card-radius);
-  box-shadow: 0 6px 24px rgba(0,0,0,0.12);
+  box-shadow: 0 6px 24px var(--page-image-shadow-color);
   object-fit: cover;
   transition: box-shadow var(--transition-fast);
 }
 
-@media (prefers-color-scheme: dark) {
-  .research-spotlight img {
-    box-shadow: 0 6px 24px rgba(232, 149, 75, 0.2);
-  }
-}
-
-html[data-theme="dark"] .research-spotlight img {
-  box-shadow: 0 6px 24px rgba(232, 149, 75, 0.2);
-}
-
 .research-spotlight-text h2 {
   font-size: 1.7rem;
-  color: #0a0805 !important;
+  color: var(--page-heading);
   margin-bottom: 1rem;
   transition: color var(--transition-fast);
-  font-weight: 700 !important;
-}
-
-@media (prefers-color-scheme: dark) {
-  .research-spotlight-text h2 {
-    color: var(--delftia-gold-glow) !important;
-  }
-}
-
-html[data-theme="light"] .research-spotlight-text h2 {
-  color: #0a0805 !important;
-}
-
-html[data-theme="dark"] .research-spotlight-text h2 {
-  color: var(--delftia-gold-glow) !important;
+  font-weight: 700;
 }
 
 .research-spotlight-text p {
@@ -984,46 +692,18 @@ html[data-theme="dark"] .research-spotlight-text h2 {
   transition: color var(--transition-fast);
 }
 
-@media (prefers-color-scheme: dark) {
-  .research-spotlight-text p {
-    color: #E8954B;
-  }
-}
-
-html[data-theme="dark"] .research-spotlight-text p {
-  color: #E8954B;
-}
-
 /* ---- Badge / tag chips ------------------------------------ */
 .tag-chip {
   display: inline-block;
-  background: var(--delftia-cream);
-  color: #0a0805 !important;
-  border: 1px solid var(--delftia-gold);
+  background: var(--page-chip-bg);
+  color: var(--page-heading);
+  border: 1px solid var(--page-decoration);
   border-radius: 50px;
   padding: 0.2rem 0.8rem;
   font-size: 0.78rem;
   font-weight: 600;
   margin: 0.2rem;
   transition: all var(--transition-fast);
-}
-
-@media (prefers-color-scheme: dark) {
-  .tag-chip {
-    background: rgba(232, 149, 75, 0.15);
-    color: var(--delftia-gold-glow) !important;
-    border-color: var(--delftia-gold-glow);
-  }
-}
-
-html[data-theme="light"] .tag-chip {
-  color: #0a0805 !important;
-}
-
-html[data-theme="dark"] .tag-chip {
-  background: rgba(232, 149, 75, 0.15);
-  color: var(--delftia-gold-glow) !important;
-  border-color: var(--delftia-gold-glow);
 }
 
 /* ---- Team cards ------------------------------------------- */
@@ -1035,11 +715,12 @@ html[data-theme="dark"] .tag-chip {
 }
 
 .team-card {
-  background: white;
+  background: var(--page-surface);
+  color: var(--page-text);
   border-radius: var(--card-radius);
   padding: 2rem 1.5rem;
   text-align: center;
-  box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+  box-shadow: 0 2px 12px var(--page-shadow-color);
   transition: transform var(--transition-fast);
 }
 
@@ -1086,22 +767,10 @@ html[data-theme="dark"] .tag-chip {
   top: 0;
   bottom: 0;
   width: 3px;
-  background: var(--delftia-gold);
+  background: var(--page-decoration);
   border-radius: 2px;
-  opacity: 0.4;
+  opacity: var(--page-decoration-opacity);
   transition: background-color var(--transition-fast), opacity var(--transition-fast);
-}
-
-@media (prefers-color-scheme: dark) {
-  .timeline::before {
-    background: var(--delftia-gold-glow);
-    opacity: 0.6;
-  }
-}
-
-html[data-theme="dark"] .timeline::before {
-  background: var(--delftia-gold-glow);
-  opacity: 0.6;
 }
 
 .timeline-item {
@@ -1117,29 +786,15 @@ html[data-theme="dark"] .timeline::before {
   width: 12px;
   height: 12px;
   border-radius: 50%;
-  background: var(--delftia-gold);
-  border: 3px solid white;
-  box-shadow: 0 0 0 2px var(--delftia-gold);
+  background: var(--page-decoration);
+  border: 3px solid var(--page-bg);
+  box-shadow: 0 0 0 2px var(--page-decoration);
   transition: all var(--transition-fast);
-}
-
-@media (prefers-color-scheme: dark) {
-  .timeline-item::before {
-    background: var(--delftia-gold-glow);
-    border-color: #0F0D0A;
-    box-shadow: 0 0 0 2px var(--delftia-gold-glow);
-  }
-}
-
-html[data-theme="dark"] .timeline-item::before {
-  background: var(--delftia-gold-glow);
-  border-color: #0F0D0A;
-  box-shadow: 0 0 0 2px var(--delftia-gold-glow);
 }
 
 .timeline-date {
   font-size: 0.78rem;
-  color: var(--delftia-accent-on-light);
+  color: var(--page-accent);
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.06em;
@@ -1147,59 +802,22 @@ html[data-theme="dark"] .timeline-item::before {
   transition: color var(--transition-fast);
 }
 
-@media (prefers-color-scheme: dark) {
-  .timeline-date {
-    color: var(--delftia-gold-glow);
-  }
-}
-
-html[data-theme="dark"] .timeline-date {
-  color: var(--delftia-gold-glow);
-}
-
 .timeline-card {
-  background: white;
+  background: var(--page-surface);
+  color: var(--page-text);
   border-radius: var(--card-radius);
   padding: 1.4rem 1.6rem;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.07);
-  border-left: 3px solid var(--delftia-gold);
+  box-shadow: 0 2px 10px var(--page-shadow-color);
+  border-left: 3px solid var(--page-decoration);
   transition: all var(--transition-fast);
-}
-
-@media (prefers-color-scheme: dark) {
-  .timeline-card {
-    background: rgba(232, 149, 75, 0.08);
-    box-shadow: 0 2px 10px rgba(0,0,0,0.4);
-    border-left-color: var(--delftia-gold-glow);
-  }
-}
-
-html[data-theme="dark"] .timeline-card {
-  background: rgba(232, 149, 75, 0.08);
-  box-shadow: 0 2px 10px rgba(0,0,0,0.4);
-  border-left-color: var(--delftia-gold-glow);
 }
 
 .timeline-card h2 {
   font-size: 1.05rem;
-  color: #0a0805 !important;
+  color: var(--page-heading);
   margin-bottom: 0.5rem;
   transition: color var(--transition-fast);
-  font-weight: 700 !important;
-}
-
-@media (prefers-color-scheme: dark) {
-  .timeline-card h2 {
-    color: var(--delftia-gold-glow) !important;
-  }
-}
-
-html[data-theme="light"] .timeline-card h2 {
-  color: #0a0805 !important;
-}
-
-html[data-theme="dark"] .timeline-card h2 {
-  color: var(--delftia-gold-glow) !important;
+  font-weight: 700;
 }
 
 .timeline-card p {
@@ -1208,16 +826,6 @@ html[data-theme="dark"] .timeline-card h2 {
   line-height: 1.6;
   margin: 0;
   transition: color var(--transition-fast);
-}
-
-@media (prefers-color-scheme: dark) {
-  .timeline-card p {
-    color: #E8954B;
-  }
-}
-
-html[data-theme="dark"] .timeline-card p {
-  color: #E8954B;
 }
 
 /* ---- References page -------------------------------------- */
@@ -1229,24 +837,15 @@ html[data-theme="dark"] .timeline-card p {
 }
 
 .ref-list li {
-  background: white;
+  background: var(--page-surface);
   border-radius: var(--card-radius);
   padding: 1.2rem 1.6rem;
   margin-bottom: 1rem;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  box-shadow: 0 2px 8px var(--page-shadow-color);
   font-size: 0.93rem;
   line-height: 1.6;
-  border-left: 3px solid var(--delftia-gold);
+  border-left: 3px solid var(--page-decoration);
   color: var(--delftia-muted);
-}
-
-.ref-list a {
-  color: var(--delftia-link-on-light);
-}
-
-.ref-list a:hover {
-  color: var(--delftia-link-hover-on-light);
-  text-decoration: underline;
 }
 
 /* ---- Visually-hidden utility (WCAG — off-screen text for AT) */
@@ -1283,83 +882,9 @@ html[data-theme="dark"] .timeline-card p {
   outline-offset: 2px;
 }
 
-/* ---- WCAG non-homepage contrast overrides -------------------------
-   body.home is set only on index.qmd; all other pages get these rules.
-   Target thresholds:
-     Normal text  ≥ 4.5:1  (WCAG 2.1 AA 1.4.3)
-     Large text   ≥ 3:1    (WCAG 2.1 AA 1.4.3 — 24px+ regular or 18.66px+ bold)
-     UI / focus   ≥ 3:1    (WCAG 2.1 AA 1.4.11)
-   -------------------------------------------------------------------- */
-
-/* Non-home accessible color tokens --------------------------------- */
-body:not(.home) {
-  --page-text:        #1a1208;   /* body text — 19:1 on white          */
-  --page-secondary:   #6B5B4C;   /* secondary / muted — 13:1 on white  */
-  --page-link:        var(--delftia-link-on-light);     /* links on light backgrounds */
-  --page-link-hover:  var(--delftia-link-hover-on-light);   /* hovered link on light backgrounds */
-  --page-link-visited:var(--delftia-link-visited-on-light); /* visited link on light backgrounds */
-  --page-focus:       #005fcc;   /* focus outline — accessible blue     */
-  --hero-heading:     var(--delftia-title-dark);    /* shared dark-section heading */
-  --hero-subtitle:    var(--delftia-subtitle-dark); /* shared dark-section subtitle */
-}
-
-/* Base text -------------------------------------------------------- */
-body:not(.home) {
-  color: var(--page-text);
-}
-
-body:not(.home) h1,
-body:not(.home) h2,
-body:not(.home) h3,
-body:not(.home) h4,
-body:not(.home) h5,
-body:not(.home) h6 {
-  color: #0a0805 !important;
-}
-
-/* Dark mode for body:not(.home) headings */
-@media (prefers-color-scheme: dark) {
-  body:not(.home) h1,
-  body:not(.home) h2,
-  body:not(.home) h3,
-  body:not(.home) h4,
-  body:not(.home) h5,
-  body:not(.home) h6 {
-    color: var(--delftia-title-dark) !important;
-  }
-}
-
-html[data-theme="light"] body:not(.home) h1,
-html[data-theme="light"] body:not(.home) h2,
-html[data-theme="light"] body:not(.home) h3,
-html[data-theme="light"] body:not(.home) h4,
-html[data-theme="light"] body:not(.home) h5,
-html[data-theme="light"] body:not(.home) h6 {
-  color: #0a0805 !important;
-}
-
-html[data-theme="dark"] body:not(.home) h1,
-html[data-theme="dark"] body:not(.home) h2,
-html[data-theme="dark"] body:not(.home) h3,
-html[data-theme="dark"] body:not(.home) h4,
-html[data-theme="dark"] body:not(.home) h5,
-html[data-theme="dark"] body:not(.home) h6 {
-  color: var(--delftia-title-dark) !important;
-}
-
-body:not(.home) p,
-body:not(.home) li,
-body:not(.home) dt,
-body:not(.home) dd,
-body:not(.home) label,
-body:not(.home) td,
-body:not(.home) th {
-  color: var(--page-text);
-}
-
 /* Hero section on non-home pages (WCAG 2.2 AA compliant) ---------- */
 body:not(.home) .hero-section h1 {
-  color: var(--hero-heading);
+  color: var(--delftia-title-dark);
   text-shadow:
     0 0 2px rgba(255, 255, 200, 0.8),
     0 2px 4px rgba(0, 0, 0, 0.6),
@@ -1367,7 +892,7 @@ body:not(.home) .hero-section h1 {
 }
 
 body:not(.home) .hero-section .hero-subtitle {
-  color: var(--hero-subtitle);
+  color: var(--delftia-subtitle-dark);
   text-shadow:
     0 1px 3px rgba(0, 0, 0, 0.7),
     0 2px 8px rgba(0, 0, 0, 0.6);
@@ -1375,46 +900,13 @@ body:not(.home) .hero-section .hero-subtitle {
 
 /* Links ------------------------------------------------------------ */
 body:not(.home) a:not(.btn):not(.nav-link):not(.navbar-brand):not(.skip-link):not([class*="btn-"]) {
-  color: var(--page-link);
   text-decoration: underline;
   text-underline-offset: 2px;
 }
 
-body:not(.home) a:not(.btn):not(.nav-link):not(.navbar-brand):not(.skip-link):not([class*="btn-"]):hover,
-body:not(.home) a:not(.btn):not(.nav-link):not(.navbar-brand):not(.skip-link):not([class*="btn-"]):focus {
-  color: var(--page-link-hover);
-  text-decoration: underline;
-}
-
-body:not(.home) a:not(.btn):not(.nav-link):not(.navbar-brand):not(.skip-link):not([class*="btn-"]):visited {
-  color: var(--page-link-visited);
-}
-
-/* Secondary / muted text ------------------------------------------- */
-body:not(.home) .section-subtitle,
-body:not(.home) .feature-card p,
-body:not(.home) .news-card-text,
-body:not(.home) .timeline-card p,
-body:not(.home) .ref-list li,
-body:not(.home) .research-spotlight-text p,
-body:not(.home) .team-card .team-role {
-  color: var(--page-secondary);
-}
-
-/* Stat label (small uppercase text — needs ≥ 4.5:1) --------------- */
-body:not(.home) .stat-item .stat-label {
-  color: var(--page-secondary);
-}
-
 /* Focus styles ----------------------------------------------------- */
 body:not(.home) :focus-visible {
-  outline: 3px solid var(--page-focus);
-  outline-offset: 3px;
-}
-
-body:not(.home) a:focus-visible,
-body:not(.home) button:focus-visible {
-  outline: 3px solid var(--page-focus);
+  outline: 3px solid var(--delftia-focus);
   outline-offset: 3px;
 }
 
@@ -1440,27 +932,17 @@ body:not(.home) button:focus-visible {
   transition: background-color var(--transition-fast), color var(--transition-fast);
 }
 
-@media (prefers-color-scheme: dark) {
-  #quarto-footer,
-  .page-footer {
-    background-color: #1a1410;
-    box-shadow: 0 -2px 12px rgba(0, 0, 0, 0.4);
-  }
-}
-
-html[data-theme="dark"] #quarto-footer,
-html[data-theme="dark"] .page-footer {
-  background-color: #1a1410;
-  box-shadow: 0 -2px 12px rgba(0, 0, 0, 0.4);
-}
-
 #quarto-footer a,
-.page-footer a {
+.page-footer a,
+#quarto-footer a:visited,
+.page-footer a:visited {
   color: var(--delftia-gold-glow);
 }
 
 #quarto-footer a:hover,
-.page-footer a:hover {
+.page-footer a:hover,
+#quarto-footer a:focus,
+.page-footer a:focus {
   color: var(--delftia-gold-bright);
 }
 
@@ -1473,48 +955,24 @@ html[data-theme="dark"] .page-footer {
   transition: background-color var(--transition-fast), color var(--transition-fast);
 }
 
-@media (prefers-color-scheme: dark) {
-  .content,
-  #quarto-document-content,
-  .page-columns {
-    background-color: var(--page-bg);
-    color: var(--page-text);
-  }
-}
-
 /* ---- Cards and secondary content areas -------------------- */
 .card,
 .feature-card,
 .news-card,
 .timeline-card,
+.team-card,
+.ref-list li,
 .stats-bar {
-  transition: background-color var(--transition-fast), color var(--transition-fast), box-shadow var(--transition-fast);
+  transition: transform var(--transition-fast), background-color var(--transition-fast), color var(--transition-fast), box-shadow var(--transition-fast);
 }
 
-@media (prefers-color-scheme: dark) {
-  .stats-bar {
-    background-color: var(--page-bg-secondary);
-    color: var(--page-text);
-  }
-  
-  .feature-card,
-  .news-card,
-  .timeline-card {
-    background-color: rgba(255, 235, 59, 0.05);
-    border-color: rgba(232, 149, 75, 0.3);
-  }
-}
-
-html[data-theme="dark"] .stats-bar {
-  background-color: var(--page-bg-secondary);
+.card {
+  --bs-card-bg: var(--page-surface);
+  --bs-card-color: var(--page-text);
+  --bs-card-border-color: var(--page-border);
+  background-color: var(--page-surface);
   color: var(--page-text);
-}
-
-html[data-theme="dark"] .feature-card,
-html[data-theme="dark"] .news-card,
-html[data-theme="dark"] .timeline-card {
-  background-color: rgba(255, 235, 59, 0.05);
-  border-color: rgba(232, 149, 75, 0.3);
+  border-color: var(--page-border);
 }
 
 /* ---- Theme toggle button styling -------------------------- */
