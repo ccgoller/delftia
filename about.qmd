@@ -95,7 +95,7 @@ information equity about this organism on Wikipedia.
 
 These projects bridge the gap between academic research and public knowledge.
 
-<a href="news.html" class="btn-hero btn-primary-hero btn-hero--compact">Learn About Citizen Science →</a>
+<a href="news.html" class="btn-hero btn-primary-hero btn-hero--compact">Explore Student Projects →</a>
 :::
 :::
 
@@ -173,5 +173,5 @@ there are multiple ways to contribute to the Delftia Project:
 ```
 
 ::: {.involvement-note}
-For more information, visit [NC State University's website](https://www.ncsu.edu) or check out the [News](news.html) section for recent updates and opportunities.
+For more information, visit [NC State University's website](https://www.ncsu.edu) or explore our [undergraduate research projects](news.html).
 :::

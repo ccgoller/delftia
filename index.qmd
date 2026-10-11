@@ -154,6 +154,6 @@ Today, *Delftia* is found in waste-contaminated soil, water systems, and drains.
     one of nature's most fascinating microbes.
   </p>
   <a href="about.html#get-involved" class="btn-hero btn-primary-hero">Get Involved Today</a>
-  <a href="news.html" class="btn-hero btn-outline-hero">See Latest News</a>
+  <a href="news.html" class="btn-hero btn-outline-hero">Explore Student Projects</a>
 </section>
 ```
