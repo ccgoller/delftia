@@ -1303,6 +1303,14 @@ body:not(.home) {
   --hero-subtitle:    var(--delftia-subtitle-dark); /* shared dark-section subtitle */
 }
 
+html[data-theme="dark"] body:not(.home) {
+  --page-text:         #F5E6D3;
+  --page-secondary:    #E8D9C9;
+  --page-link:         var(--delftia-link-on-dark);
+  --page-link-hover:   var(--delftia-link-hover-on-dark);
+  --page-link-visited: var(--delftia-link-visited-on-dark);
+}
+
 /* Base text -------------------------------------------------------- */
 body:not(.home) {
   color: var(--page-text);
@@ -1552,6 +1560,124 @@ html[data-theme="dark"] .timeline-card {
   width: 1.2em;
   height: 1.2em;
   margin-right: 0.3rem;
+}
+
+/* Keep page colors aligned with the selected theme, even when it differs
+   from the operating-system color-scheme preference. */
+html[data-theme="light"] {
+  color-scheme: light;
+}
+
+html[data-theme="light"] a {
+  color: var(--delftia-link-on-light);
+}
+
+html[data-theme="light"] a:visited {
+  color: var(--delftia-link-visited-on-light);
+}
+
+html[data-theme="light"] a:hover,
+html[data-theme="light"] a:focus {
+  color: var(--delftia-link-hover-on-light);
+}
+
+html[data-theme="light"] .btn-primary:hover {
+  background-color: #3D2F0F;
+  border-color: #3D2F0F;
+}
+
+html[data-theme="light"] .stats-bar {
+  background: var(--delftia-light);
+  border-bottom-color: var(--delftia-gold);
+}
+
+html[data-theme="light"] .stat-item .stat-number {
+  color: var(--delftia-accent-on-light);
+}
+
+html[data-theme="light"] .section-alt {
+  background: var(--delftia-light);
+}
+
+html[data-theme="light"] .section-subtitle,
+html[data-theme="light"] .feature-card p,
+html[data-theme="light"] .news-card-text,
+html[data-theme="light"] .research-spotlight-text p,
+html[data-theme="light"] .timeline-card p {
+  color: var(--delftia-muted);
+}
+
+html[data-theme="light"] .feature-card,
+html[data-theme="light"] .news-card,
+html[data-theme="light"] .timeline-card {
+  background: #fff;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.07);
+}
+
+html[data-theme="light"] .feature-card {
+  border-color: var(--delftia-gold);
+}
+
+html[data-theme="light"] .feature-card:hover,
+html[data-theme="light"] .news-card:hover {
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+}
+
+html[data-theme="light"] .news-card-date,
+html[data-theme="light"] .timeline-date {
+  color: var(--delftia-accent-on-light);
+}
+
+html[data-theme="light"] .tag-chip {
+  background: var(--delftia-cream);
+  border-color: var(--delftia-gold);
+}
+
+html[data-theme="light"] .timeline::before {
+  background: var(--delftia-gold);
+  opacity: 0.4;
+}
+
+html[data-theme="light"] .timeline-item::before {
+  background: var(--delftia-gold);
+  border-color: #fff;
+  box-shadow: 0 0 0 2px var(--delftia-gold);
+}
+
+html[data-theme="light"] .research-spotlight img {
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.12);
+}
+
+html[data-theme="dark"] {
+  color-scheme: dark;
+}
+
+html[data-theme="dark"] a {
+  color: var(--delftia-link-on-dark);
+}
+
+html[data-theme="dark"] a:visited {
+  color: var(--delftia-link-visited-on-dark);
+}
+
+html[data-theme="dark"] a:hover,
+html[data-theme="dark"] a:focus {
+  color: var(--delftia-link-hover-on-dark);
+}
+
+html[data-theme="dark"] .team-card,
+html[data-theme="dark"] .ref-list li {
+  background: #1a1410;
+  color: var(--page-text);
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.4);
+}
+
+html[data-theme="dark"] .ref-list a {
+  color: var(--delftia-link-on-dark);
+}
+
+html[data-theme="dark"] .ref-list a:hover {
+  color: var(--delftia-link-hover-on-dark);
 }
 
 /* ---- Responsive ------------------------------------------- */
