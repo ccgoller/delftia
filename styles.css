@@ -9,12 +9,12 @@
 :root {
   /* Delftia Brand Colors */
   --delftia-umber:     #1a1410;   /* professional dark base        */
-  --delftia-gold:      #CC9600;   /* refined dark amber accent     */
-  --delftia-gold-bright:#E8B841;  /* professional gold lighter     */
-  --delftia-gold-glow: #F5DEB3;   /* wheat (softer cream)          */
-  --delftia-gold-hero: #D4A574;   /* refined accent for dark bg    */
-  --delftia-gold-hover:#BF8A2C;   /* refined hover state           */
-  --delftia-accent:    #8B6914;   /* sophisticated olive-gold      */
+  --delftia-gold:      #E8954B;   /* delftia orange accent (logo)  */
+  --delftia-gold-bright:#F4A854;  /* delftia orange lighter        */
+  --delftia-gold-glow: #FCE4C3;   /* delftia orange light glow     */
+  --delftia-gold-hero: #E8954B;   /* delftia orange for dark bg    */
+  --delftia-gold-hover:#D67E3E;   /* delftia orange hover state    */
+  --delftia-accent:    #C17A35;   /* delftia orange accent         */
   --delftia-cream:     #FAF7F0;   /* refined light background      */
   --delftia-light:     #F9F5ED;   /* sophisticated light section   */
   
@@ -30,16 +30,16 @@
   --delftia-focus:     #0055B8;   /* wcag-compliant blue focus     */
   --delftia-title-dark:#F5E6D3;   /* refined light text on dark    */
   --delftia-subtitle-dark:#E8D9C9;/* refined subtitle on dark      */
-  --delftia-hero-accent:#D4A574;  /* refined accent on dark        */
-  --delftia-link-on-light:#6B5914; /* wcag-aa link on light        */
-  --delftia-link-hover-on-light:#3D2F0F; /* darker hover on light   */
-  --delftia-link-visited-on-light:#6B5914; /* visited link on light  */
-  --delftia-accent-on-light:#7A6A3A; /* accent text on light       */
+  --delftia-hero-accent:#E8954B;  /* delftia orange on dark        */
+  --delftia-link-on-light:#C17A35; /* delftia orange on light       */
+  --delftia-link-hover-on-light:#A85C22; /* darker orange hover light */
+  --delftia-link-visited-on-light:#C17A35; /* visited orange on light */
+  --delftia-accent-on-light:#C17A35; /* accent orange on light     */
   
   /* Dark Mode Overrides (when prefers-color-scheme: dark) */
-  --delftia-link-on-dark: #FFD700;  /* gold for dark mode           */
-  --delftia-link-hover-on-dark: #FFE347; /* brighter gold on hover  */
-  --delftia-link-visited-on-dark: #D4A574; /* muted gold visited    */
+  --delftia-link-on-dark: #F4A854;  /* delftia orange for dark mode  */
+  --delftia-link-hover-on-dark: #FCE4C3; /* brighter orange on hover  */
+  --delftia-link-visited-on-dark: #E8954B; /* muted orange visited     */
   
   /* Spacing & Timing */
   --card-radius:       12px;
@@ -47,14 +47,14 @@
 }
 
 /* Dark Mode Support */
-@media (prefers-color-scheme: dark) {
+  @media (prefers-color-scheme: dark) {
   :root {
     --page-bg:           #0F0D0A;   /* dark background               */
     --page-bg-secondary: #1a1410;  /* secondary dark background     */
     --page-text:         #F5E6D3;  /* light text on dark            */
-    --page-text-secondary:#D4A574; /* secondary text on dark        */
+    --page-text-secondary:#E8954B; /* secondary text on dark        */
     --delftia-text:      #F5E6D3;  /* light text on dark            */
-    --delftia-muted:     #D4A574;  /* secondary text on dark        */
+    --delftia-muted:     #E8954B;  /* secondary text on dark        */
   }
 }
 
@@ -63,9 +63,9 @@ html[data-theme="dark"] {
   --page-bg:           #0F0D0A;   /* dark background               */
   --page-bg-secondary: #1a1410;  /* secondary dark background     */
   --page-text:         #F5E6D3;  /* light text on dark            */
-  --page-text-secondary:#D4A574; /* secondary text on dark        */
+  --page-text-secondary:#E8954B; /* secondary text on dark        */
   --delftia-text:      #F5E6D3;  /* light text on dark            */
-  --delftia-muted:     #D4A574;  /* secondary text on dark        */
+  --delftia-muted:     #E8954B;  /* secondary text on dark        */
 }
 
 /* Light Mode Override for Explicit Light Mode */
@@ -244,8 +244,8 @@ button:focus-visible {
 /* ---- Hero section ----------------------------------------- */
 .hero-section {
   background:
-    radial-gradient(circle at 16% 18%, rgba(255, 235, 59, 0.10), transparent 40%),
-    radial-gradient(circle at 84% 28%, rgba(255, 235, 59, 0.08), transparent 44%),
+    radial-gradient(circle at 16% 18%, rgba(232, 149, 75, 0.10), transparent 40%),
+    radial-gradient(circle at 84% 28%, rgba(232, 149, 75, 0.08), transparent 44%),
     linear-gradient(140deg, #060300 0%, #100901 40%, #1b1002 68%, #040200 100%);
   color: #ffffff;
   padding: 5rem 2rem 4rem;
@@ -258,16 +258,16 @@ button:focus-visible {
 @media (prefers-color-scheme: dark) {
   .hero-section {
     background:
-      radial-gradient(circle at 16% 18%, rgba(255, 235, 59, 0.15), transparent 40%),
-      radial-gradient(circle at 84% 28%, rgba(255, 235, 59, 0.12), transparent 44%),
+      radial-gradient(circle at 16% 18%, rgba(232, 149, 75, 0.15), transparent 40%),
+      radial-gradient(circle at 84% 28%, rgba(232, 149, 75, 0.12), transparent 44%),
       linear-gradient(140deg, #1a1410 0%, #2a2415 40%, #3a3420 68%, #0a0805 100%);
   }
 }
 
 html[data-theme="dark"] .hero-section {
   background:
-    radial-gradient(circle at 16% 18%, rgba(255, 235, 59, 0.15), transparent 40%),
-    radial-gradient(circle at 84% 28%, rgba(255, 235, 59, 0.12), transparent 44%),
+    radial-gradient(circle at 16% 18%, rgba(232, 149, 75, 0.15), transparent 40%),
+    radial-gradient(circle at 84% 28%, rgba(232, 149, 75, 0.12), transparent 44%),
     linear-gradient(140deg, #1a1410 0%, #2a2415 40%, #3a3420 68%, #0a0805 100%);
 }
 
@@ -276,14 +276,14 @@ html[data-theme="dark"] .hero-section {
   position: absolute;
   inset: 0;
   background:
-    radial-gradient(circle at 10% 18%, rgba(196, 150, 0, 0.16) 0 2px, transparent 3px),
-    radial-gradient(circle at 22% 72%, rgba(180, 130, 0, 0.14) 0 3px, transparent 4px),
-    radial-gradient(circle at 34% 38%, rgba(160, 110, 0, 0.12) 0 2px, transparent 3px),
-    radial-gradient(circle at 48% 82%, rgba(170, 130, 0, 0.13) 0 2.5px, transparent 4px),
-    radial-gradient(circle at 63% 20%, rgba(196, 150, 0, 0.14) 0 2px, transparent 3px),
-    radial-gradient(circle at 76% 58%, rgba(160, 110, 0, 0.12) 0 3px, transparent 4px),
-    radial-gradient(circle at 90% 32%, rgba(200, 150, 0, 0.15) 0 2px, transparent 3px),
-    linear-gradient(125deg, rgba(196, 150, 0, 0.08), transparent 45%, rgba(160, 110, 0, 0.08));
+    radial-gradient(circle at 10% 18%, rgba(232, 149, 75, 0.16) 0 2px, transparent 3px),
+    radial-gradient(circle at 22% 72%, rgba(216, 125, 55, 0.14) 0 3px, transparent 4px),
+    radial-gradient(circle at 34% 38%, rgba(200, 110, 45, 0.12) 0 2px, transparent 3px),
+    radial-gradient(circle at 48% 82%, rgba(210, 130, 60, 0.13) 0 2.5px, transparent 4px),
+    radial-gradient(circle at 63% 20%, rgba(232, 149, 75, 0.14) 0 2px, transparent 3px),
+    radial-gradient(circle at 76% 58%, rgba(200, 110, 45, 0.12) 0 3px, transparent 4px),
+    radial-gradient(circle at 90% 32%, rgba(236, 160, 85, 0.15) 0 2px, transparent 3px),
+    linear-gradient(125deg, rgba(232, 149, 75, 0.08), transparent 45%, rgba(200, 110, 45, 0.08));
   z-index: 0;
   pointer-events: none;
 }
@@ -311,7 +311,7 @@ html[data-theme="dark"] .hero-section {
     0 0 2px rgba(255, 255, 200, 0.8),
     0 2px 0 rgba(83, 48, 3, 0.5),
     0 3px 12px rgba(0,0,0,0.5),
-    0 0 20px rgba(255, 235, 59, 0.22);
+    0 0 20px rgba(232, 149, 75, 0.28);
   line-height: 1.3;
   letter-spacing: -0.02em;
   font-weight: 800;
@@ -319,12 +319,13 @@ html[data-theme="dark"] .hero-section {
 
 /* Ensure hero titles are visible in inline styles (for news, about, references pages) */
 .hero-section h1[style*="font-size"] {
-  color: #F5E6D3 !important;
+  color: #FFFFFF !important;
+  font-weight: 800;
   text-shadow: 
     0 0 2px rgba(255, 255, 200, 0.9),
-    0 2px 4px rgba(0, 0, 0, 0.7),
-    0 3px 12px rgba(0,0,0,0.6),
-    0 0 20px rgba(255, 235, 59, 0.3) !important;
+    0 2px 4px rgba(0, 0, 0, 0.8),
+    0 3px 12px rgba(0, 0, 0, 0.7),
+    0 0 20px rgba(232, 149, 75, 0.4) !important;
 }
 
 .hero-section .hero-subtitle {
@@ -363,24 +364,24 @@ html[data-theme="dark"] .hero-section {
 .btn-primary-hero {
   background: linear-gradient(135deg, var(--delftia-gold-glow), var(--delftia-gold) 60%, var(--delftia-gold-hover));
   color: #1a1410 !important;
-  border: 1px solid rgba(196, 150, 0, 0.8);
-  box-shadow: 0 10px 24px rgba(0,0,0,0.22), 0 0 24px rgba(196, 150, 0, 0.26);
+  border: 1px solid rgba(232, 149, 75, 0.8);
+  box-shadow: 0 10px 24px rgba(0,0,0,0.22), 0 0 24px rgba(232, 149, 75, 0.26);
 }
 
 .btn-primary-hero:hover {
-  background: linear-gradient(135deg, #D4A574, #E8B841 60%, #BF8A2C);
+  background: linear-gradient(135deg, #E8954B, #F4A854 60%, #D67E3E);
   color: #1a1410 !important;
 }
 
 .btn-outline-hero {
   background: transparent;
   color: var(--delftia-title-dark) !important;
-  border: 2px solid rgba(212, 165, 116, 0.95);
-  box-shadow: inset 0 0 0 1px rgba(212, 165, 116, 0.18);
+  border: 2px solid rgba(232, 149, 75, 0.95);
+  box-shadow: inset 0 0 0 1px rgba(232, 149, 75, 0.18);
 }
 
 .btn-outline-hero:hover {
-  background: rgba(212, 165, 116, 0.22);
+  background: rgba(232, 149, 75, 0.22);
   color: #F5E6D3 !important;
 }
 
@@ -497,12 +498,12 @@ html[data-theme="dark"] .section-title {
 
 @media (prefers-color-scheme: dark) {
   .section-subtitle {
-    color: #D4A574;
+    color: #E8954B;
   }
 }
 
 html[data-theme="dark"] .section-subtitle {
-  color: #D4A574;
+  color: #E8954B;
 }
 
 /* ---- Feature / info cards --------------------------------- */
@@ -524,14 +525,14 @@ html[data-theme="dark"] .section-subtitle {
 
 @media (prefers-color-scheme: dark) {
   .feature-card {
-    background: rgba(212, 165, 116, 0.08);
+    background: rgba(232, 149, 75, 0.08);
     box-shadow: 0 2px 12px rgba(0,0,0,0.4);
     border-left-color: var(--delftia-gold-glow);
   }
 }
 
 html[data-theme="dark"] .feature-card {
-  background: rgba(212, 165, 116, 0.08);
+  background: rgba(232, 149, 75, 0.08);
   box-shadow: 0 2px 12px rgba(0,0,0,0.4);
   border-left-color: var(--delftia-gold-glow);
 }
@@ -543,12 +544,12 @@ html[data-theme="dark"] .feature-card {
 
 @media (prefers-color-scheme: dark) {
   .feature-card:hover {
-    box-shadow: 0 8px 24px rgba(212, 165, 116, 0.2);
+    box-shadow: 0 8px 24px rgba(232, 149, 75, 0.2);
   }
 }
 
 html[data-theme="dark"] .feature-card:hover {
-  box-shadow: 0 8px 24px rgba(212, 165, 116, 0.2);
+  box-shadow: 0 8px 24px rgba(232, 149, 75, 0.2);
 }
 
 .feature-card .card-icon {
@@ -583,12 +584,12 @@ html[data-theme="dark"] .feature-card h3 {
 
 @media (prefers-color-scheme: dark) {
   .feature-card p {
-    color: #D4A574;
+    color: #E8954B;
   }
 }
 
 html[data-theme="dark"] .feature-card p {
-  color: #D4A574;
+  color: #E8954B;
 }
 
 /* ---- News cards ------------------------------------------- */
@@ -609,13 +610,13 @@ html[data-theme="dark"] .feature-card p {
 
 @media (prefers-color-scheme: dark) {
   .news-card {
-    background: rgba(212, 165, 116, 0.08);
+    background: rgba(232, 149, 75, 0.08);
     box-shadow: 0 2px 12px rgba(0,0,0,0.4);
   }
 }
 
 html[data-theme="dark"] .news-card {
-  background: rgba(212, 165, 116, 0.08);
+  background: rgba(232, 149, 75, 0.08);
   box-shadow: 0 2px 12px rgba(0,0,0,0.4);
 }
 
@@ -626,12 +627,12 @@ html[data-theme="dark"] .news-card {
 
 @media (prefers-color-scheme: dark) {
   .news-card:hover {
-    box-shadow: 0 8px 24px rgba(212, 165, 116, 0.2);
+    box-shadow: 0 8px 24px rgba(232, 149, 75, 0.2);
   }
 }
 
 html[data-theme="dark"] .news-card:hover {
-  box-shadow: 0 8px 24px rgba(212, 165, 116, 0.2);
+  box-shadow: 0 8px 24px rgba(232, 149, 75, 0.2);
 }
 
 .news-card-body {
@@ -685,18 +686,18 @@ html[data-theme="dark"] .news-card-title {
 
 @media (prefers-color-scheme: dark) {
   .news-card-text {
-    color: #D4A574;
+    color: #E8954B;
   }
 }
 
 html[data-theme="dark"] .news-card-text {
-  color: #D4A574;
+  color: #E8954B;
 }
 
 /* ---- CTA / call-to-action section ------------------------- */
 .cta-section {
   background:
-    radial-gradient(circle at 15% 20%, rgba(196, 150, 0, 0.10), transparent 34%),
+    radial-gradient(circle at 15% 20%, rgba(232, 149, 75, 0.10), transparent 34%),
     linear-gradient(135deg, #0F0D0A, #1A1410 52%, #2A2420);
   color: var(--delftia-gold-glow);
   padding: 4rem 2rem;
@@ -762,12 +763,12 @@ html[data-theme="dark"] .research-spotlight-text h3 {
 
 @media (prefers-color-scheme: dark) {
   .research-spotlight-text p {
-    color: #D4A574;
+    color: #E8954B;
   }
 }
 
 html[data-theme="dark"] .research-spotlight-text p {
-  color: #D4A574;
+  color: #E8954B;
 }
 
 .research-spotlight img {
@@ -778,12 +779,12 @@ html[data-theme="dark"] .research-spotlight-text p {
 
 @media (prefers-color-scheme: dark) {
   .research-spotlight img {
-    box-shadow: 0 4px 16px rgba(212, 165, 116, 0.2);
+    box-shadow: 0 4px 16px rgba(232, 149, 75, 0.2);
   }
 }
 
 html[data-theme="dark"] .research-spotlight img {
-  box-shadow: 0 4px 16px rgba(212, 165, 116, 0.2);
+  box-shadow: 0 4px 16px rgba(232, 149, 75, 0.2);
 }
 
 .research-spotlight.reverse > :first-child {
@@ -804,12 +805,12 @@ html[data-theme="dark"] .research-spotlight img {
 
 @media (prefers-color-scheme: dark) {
   .research-spotlight img {
-    box-shadow: 0 6px 24px rgba(212, 165, 116, 0.2);
+    box-shadow: 0 6px 24px rgba(232, 149, 75, 0.2);
   }
 }
 
 html[data-theme="dark"] .research-spotlight img {
-  box-shadow: 0 6px 24px rgba(212, 165, 116, 0.2);
+  box-shadow: 0 6px 24px rgba(232, 149, 75, 0.2);
 }
 
 .research-spotlight-text h2 {
@@ -838,12 +839,12 @@ html[data-theme="dark"] .research-spotlight-text h2 {
 
 @media (prefers-color-scheme: dark) {
   .research-spotlight-text p {
-    color: #D4A574;
+    color: #E8954B;
   }
 }
 
 html[data-theme="dark"] .research-spotlight-text p {
-  color: #D4A574;
+  color: #E8954B;
 }
 
 /* ---- Badge / tag chips ------------------------------------ */
@@ -862,14 +863,14 @@ html[data-theme="dark"] .research-spotlight-text p {
 
 @media (prefers-color-scheme: dark) {
   .tag-chip {
-    background: rgba(212, 165, 116, 0.15);
+    background: rgba(232, 149, 75, 0.15);
     color: var(--delftia-gold-glow);
     border-color: var(--delftia-gold-glow);
   }
 }
 
 html[data-theme="dark"] .tag-chip {
-  background: rgba(212, 165, 116, 0.15);
+  background: rgba(232, 149, 75, 0.15);
   color: var(--delftia-gold-glow);
   border-color: var(--delftia-gold-glow);
 }
@@ -1016,14 +1017,14 @@ html[data-theme="dark"] .timeline-date {
 
 @media (prefers-color-scheme: dark) {
   .timeline-card {
-    background: rgba(212, 165, 116, 0.08);
+    background: rgba(232, 149, 75, 0.08);
     box-shadow: 0 2px 10px rgba(0,0,0,0.4);
     border-left-color: var(--delftia-gold-glow);
   }
 }
 
 html[data-theme="dark"] .timeline-card {
-  background: rgba(212, 165, 116, 0.08);
+  background: rgba(232, 149, 75, 0.08);
   box-shadow: 0 2px 10px rgba(0,0,0,0.4);
   border-left-color: var(--delftia-gold-glow);
 }
@@ -1055,12 +1056,12 @@ html[data-theme="dark"] .timeline-card h2 {
 
 @media (prefers-color-scheme: dark) {
   .timeline-card p {
-    color: #D4A574;
+    color: #E8954B;
   }
 }
 
 html[data-theme="dark"] .timeline-card p {
-  color: #D4A574;
+  color: #E8954B;
 }
 
 /* ---- References page -------------------------------------- */
@@ -1314,7 +1315,7 @@ html[data-theme="dark"] .page-footer {
   .news-card,
   .timeline-card {
     background-color: rgba(255, 235, 59, 0.05);
-    border-color: rgba(212, 165, 116, 0.3);
+    border-color: rgba(232, 149, 75, 0.3);
   }
 }
 
@@ -1327,7 +1328,7 @@ html[data-theme="dark"] .feature-card,
 html[data-theme="dark"] .news-card,
 html[data-theme="dark"] .timeline-card {
   background-color: rgba(255, 235, 59, 0.05);
-  border-color: rgba(212, 165, 116, 0.3);
+  border-color: rgba(232, 149, 75, 0.3);
 }
 
 /* ---- Theme toggle button styling -------------------------- */
@@ -1348,7 +1349,7 @@ html[data-theme="dark"] .timeline-card {
 
 .theme-toggle:hover,
 .theme-toggle:focus {
-  background-color: rgba(212, 165, 116, 0.15);
+  background-color: rgba(232, 149, 75, 0.15);
   color: var(--delftia-gold-bright);
   border-color: var(--delftia-gold-bright);
 }
