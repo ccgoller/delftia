@@ -1,0 +1,47 @@
+name: Browser regression checks
+
+on:
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  browser-checks:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: quarto-dev/quarto-actions/setup@v2
+        with:
+          version: '1.10.19'
+
+      - name: Render site
+        run: |
+          rm -rf _site
+          quarto render
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+
+      - name: Install browser check dependencies
+        run: |
+          npm ci
+          npx playwright install --with-deps chromium
+
+      - name: Check themes, screenshots, and color contrast
+        run: npm test
+
+      - name: Upload browser check report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: browser-check-report
+          path: |
+            playwright-report/
+            test-results/
+          retention-days: 14

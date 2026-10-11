@@ -1,5 +1,5 @@
 /.quarto/
-# /_site/ (unignored so built site can be committed for GitHub Pages deployment)
+# Generated site output is uploaded by the deployment workflow.
 /.Rproj.user/
 .Rhistory
 .DS_Store
@@ -9,4 +9,8 @@
 .vscode/
 
 **/*.quarto_ipynb
+node_modules/
+playwright-report/
+test-results/
+/_site/
 # images/ directory is intentionally NOT ignored so images are committed

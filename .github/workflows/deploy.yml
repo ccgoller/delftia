@@ -53,6 +53,8 @@ jobs:
 
       - name: Set up Quarto
         uses: quarto-dev/quarto-actions/setup@v2
+        with:
+          version: '1.10.19'
 
       - name: Clean previous site output
         run: rm -rf _site
@@ -104,8 +106,32 @@ jobs:
 
           echo "✅ All expected pages generated: ${html_count} total HTML files in _site."
 
+      - name: Set up Node for browser checks
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+
+      - name: Install browser check dependencies
+        run: |
+          npm ci
+          npx playwright install --with-deps chromium
+
+      - name: Check themes, screenshots, and color contrast before publishing
+        run: npm test
+
+      - name: Upload browser check report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: browser-check-report
+          path: |
+            playwright-report/
+            test-results/
+          retention-days: 14
+
       # ============================================================
-      # 5. DEPLOYMENT: Upload and deploy to GitHub Pages
+      # 5. DEPLOYMENT: Upload and deploy only after browser checks pass
       # ============================================================
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
@@ -232,67 +258,3 @@ jobs:
           fi
 
           echo "✅ All expected deployed URLs are stable and their content matches this build."
-
-      # ============================================================
-      # 7. ACCESSIBILITY AUDIT: Check color contrast (axe/pa11y)
-      # ============================================================
-      - name: Audit deployed pages for color contrast accessibility
-        env:
-          BASE_URL: ${{ steps.pages-base-url.outputs.base_url }}
-        run: |
-          set -euo pipefail
-          base_url="${BASE_URL%/}"
-          urls=(
-            "${base_url}/"
-            "${base_url}/about.html"
-            "${base_url}/news.html"
-            "${base_url}/references.html"
-          )
-
-          failures=0
-          skipped=0
-          for url in "${urls[@]}"; do
-            # Skip if page is not yet reachable
-            if ! curl --silent --show-error --location --fail \
-              --retry 30 --retry-delay 10 --retry-all-errors \
-              --max-time 30 \
-              "${url}" > /dev/null; then
-              echo "::warning::Skipping color-contrast audit for ${url} because the page is not yet reachable."
-              skipped=$((skipped + 1))
-              continue
-            fi
-
-            echo "Running color-contrast audit for ${url}"
-            report_file="$(mktemp)"
-            launch_config_file="$(mktemp --suffix=.cjs)"
-            
-            # Configure Chromium launch args for Headless Chrome in CI
-            printf '%s\n' 'module.exports = { chromeLaunchConfig: { args: ["--no-sandbox", "--disable-setuid-sandbox"] } };' > "${launch_config_file}"
-            
-            # Run pa11y with axe rule-set to check color contrast
-            npx --yes pa11y "${url}" \
-              --runner axe \
-              --config "${launch_config_file}" \
-              --reporter json \
-              --threshold 9999 > "${report_file}"
-
-            # Parse JSON output and filter for color-contrast issues
-            if ! python -c $'import json\nimport sys\n\nurl = sys.argv[1]\nreport_path = sys.argv[2]\n\nwith open(report_path, "r", encoding="utf-8") as handle:\n    issues = json.load(handle)\n\ncontrast_issues = [\n    issue for issue in issues\n    if "color-contrast" in (issue.get("code") or "")\n]\n\nif contrast_issues:\n    print(f"❌ {url}: {len(contrast_issues)} color-contrast issue(s) found.")\n    for issue in contrast_issues[:10]:\n        selector = issue.get("selector", "n/a")\n        message = issue.get("message", "")\n        print(f"  - {selector}: {message}")\n    sys.exit(1)\n\nprint(f"✅ {url}: no color-contrast issues found.")' "${url}" "${report_file}"
-            then
-              failures=$((failures + 1))
-            fi
-
-            rm -f "${report_file}" "${launch_config_file}"
-          done
-
-          if [ "${failures}" -ne 0 ]; then
-            echo "::warning::Color contrast audit found issues on ${failures} page(s). See logs for selectors and messages."
-          fi
-
-          if [ "${skipped}" -ne 0 ]; then
-            echo "::warning::Color contrast audit skipped ${skipped} page(s) that were not reachable yet."
-          fi
-
-          if [ "${failures}" -eq 0 ] && [ "${skipped}" -eq 0 ]; then
-            echo "✅ Color contrast audit passed on all pages."
-          fi

@@ -1,5 +1,12 @@
 project:
   type: website
+  resources:
+    - "!tests/**"
+    - "!node_modules/**"
+    - "!playwright-report/**"
+    - "!test-results/**"
+    - "!package*.json"
+    - "!playwright.config.js"
 
 website:
   title: "The Delftia Project"

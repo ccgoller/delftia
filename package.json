@@ -1,0 +1,20 @@
+{
+  "name": "delftia",
+  "version": "1.0.0",
+  "description": "Browser regression checks for the Delftia Quarto website",
+  "private": true,
+  "scripts": {
+    "test": "playwright test",
+    "test:update": "playwright test --update-snapshots"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ccgoller/delftia"
+  },
+  "keywords": [],
+  "author": "",
+  "devDependencies": {
+    "@axe-core/playwright": "4.13.0",
+    "@playwright/test": "1.64.0"
+  }
+}
