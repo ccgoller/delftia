@@ -675,20 +675,24 @@ html[data-theme="dark"] .feature-card:hover {
 
 .feature-card h3 {
   font-size: 1.15rem;
-  color: var(--delftia-umber);
+  color: #0a0805 !important;
   margin-bottom: 0.6rem;
   transition: color var(--transition-fast);
-  font-weight: 700;
+  font-weight: 700 !important;
 }
 
 @media (prefers-color-scheme: dark) {
   .feature-card h3 {
-    color: var(--delftia-gold-glow);
+    color: var(--delftia-gold-glow) !important;
   }
 }
 
+html[data-theme="light"] .feature-card h3 {
+  color: #0a0805 !important;
+}
+
 html[data-theme="dark"] .feature-card h3 {
-  color: var(--delftia-gold-glow);
+  color: var(--delftia-gold-glow) !important;
 }
 
 .feature-card p {
@@ -857,19 +861,24 @@ html[data-theme="dark"] .news-card-text {
 
 .research-spotlight-text h3 {
   font-size: 1.4rem;
-  color: var(--delftia-umber);
+  color: #0a0805 !important;
   margin-bottom: 1rem;
   transition: color var(--transition-fast);
+  font-weight: 700 !important;
 }
 
 @media (prefers-color-scheme: dark) {
   .research-spotlight-text h3 {
-    color: var(--delftia-gold-glow);
+    color: var(--delftia-gold-glow) !important;
   }
 }
 
+html[data-theme="light"] .research-spotlight-text h3 {
+  color: #0a0805 !important;
+}
+
 html[data-theme="dark"] .research-spotlight-text h3 {
-  color: var(--delftia-gold-glow);
+  color: var(--delftia-gold-glow) !important;
 }
 
 .research-spotlight-text p {
@@ -932,19 +941,24 @@ html[data-theme="dark"] .research-spotlight img {
 
 .research-spotlight-text h2 {
   font-size: 1.7rem;
-  color: var(--delftia-umber);
+  color: #0a0805 !important;
   margin-bottom: 1rem;
   transition: color var(--transition-fast);
+  font-weight: 700 !important;
 }
 
 @media (prefers-color-scheme: dark) {
   .research-spotlight-text h2 {
-    color: var(--delftia-gold-glow);
+    color: var(--delftia-gold-glow) !important;
   }
 }
 
+html[data-theme="light"] .research-spotlight-text h2 {
+  color: #0a0805 !important;
+}
+
 html[data-theme="dark"] .research-spotlight-text h2 {
-  color: var(--delftia-gold-glow);
+  color: var(--delftia-gold-glow) !important;
 }
 
 .research-spotlight-text p {
@@ -1148,19 +1162,24 @@ html[data-theme="dark"] .timeline-card {
 
 .timeline-card h2 {
   font-size: 1.05rem;
-  color: var(--delftia-umber);
+  color: #0a0805 !important;
   margin-bottom: 0.5rem;
   transition: color var(--transition-fast);
+  font-weight: 700 !important;
 }
 
 @media (prefers-color-scheme: dark) {
   .timeline-card h2 {
-    color: var(--delftia-gold-glow);
+    color: var(--delftia-gold-glow) !important;
   }
 }
 
+html[data-theme="light"] .timeline-card h2 {
+  color: #0a0805 !important;
+}
+
 html[data-theme="dark"] .timeline-card h2 {
-  color: var(--delftia-gold-glow);
+  color: var(--delftia-gold-glow) !important;
 }
 
 .timeline-card p {
