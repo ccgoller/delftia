@@ -30,8 +30,8 @@ body-classes: home
       <div class="stat-label"><span class="visually-hidden">4 </span>Published References</div>
     </div>
     <div class="stat-item">
-      <div class="stat-number" aria-hidden="true">17</div>
-      <div class="stat-label"><span class="visually-hidden">17 </span>2020 WikiEDU Volunteers</div>
+      <div class="stat-number" aria-hidden="true">13</div>
+      <div class="stat-label"><span class="visually-hidden">13 years of </span>Delftia research</div>
     </div>
     <div class="stat-item">
       <div class="stat-number" aria-hidden="true">3</div>
