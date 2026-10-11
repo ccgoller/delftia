@@ -7,14 +7,33 @@ description: "Latest Delftia publications and recently updated genome assemblies
 ```{=html}
 <section class="hero-section hero-section--compact" aria-labelledby="dashboard-heading">
   <h1 id="dashboard-heading">Dashboard</h1>
-  <p class="hero-subtitle">Follow Delftia publications and genome assemblies.</p>
+  <p class="hero-subtitle">A live window into the growing body of Delftia research.</p>
 </section>
 ```
 
-Explore research across the genus *Delftia*. This dashboard loads public database records when you visit; results are not limited to the Delftia Project.
+Explore research across the genus *Delftia*. These live public database results are not limited to the Delftia Project.
 
 ```{=html}
-<button type="button" id="refresh-dashboard" class="btn btn-primary" hidden>Refresh dashboard</button>
+<section class="dashboard-overview" aria-label="Dashboard overview">
+  <div class="dashboard-metric">
+    <span class="dashboard-metric-value" id="publications-count">—</span>
+    <span class="dashboard-metric-label">Publications loaded</span>
+  </div>
+  <div class="dashboard-metric">
+    <span class="dashboard-metric-value" id="genomes-count">—</span>
+    <span class="dashboard-metric-label">Genome assemblies loaded</span>
+  </div>
+  <div class="dashboard-metric">
+    <span class="dashboard-metric-value" id="dashboard-updated">—</span>
+    <span class="dashboard-metric-label">Last checked</span>
+  </div>
+</section>
+<div class="dashboard-controls">
+  <label for="dashboard-search">Filter loaded records</label>
+  <input type="search" id="dashboard-search" placeholder="Try a species, title, author, or accession" hidden>
+  <button type="button" id="refresh-dashboard" class="btn btn-primary" hidden>Refresh dashboard</button>
+</div>
+<p id="dashboard-results-status" class="dashboard-results-status" role="status" aria-live="polite">Live records will appear here when JavaScript is available.</p>
 ```
 
 ## Latest Publications {#latest-publications}
@@ -23,10 +42,12 @@ Up to 10 publications matching **Delftia**, newest publication date first, from 
 
 [Browse all Delftia publications on Europe PMC](https://europepmc.org/search?query=Delftia%20sort_date%3Ay)
 
+::: {.dashboard-panel}
 ```{=html}
 <p id="publications-status" role="status">Live publications require JavaScript. Use the source link above to browse the latest records.</p>
 <ol id="publications-list" class="dashboard-list"></ol>
 ```
+:::
 
 ## Latest Genomes {#latest-genomes}
 
@@ -34,10 +55,12 @@ The 10 most recently updated *Delftia* genome assemblies from the European Nucle
 
 [Browse Delftia genome assemblies on ENA](https://www.ebi.ac.uk/ena/browser/advanced-search?result=assembly&amp;query=tax_tree%2880865%29)
 
+::: {.dashboard-panel}
 ```{=html}
 <p id="genomes-status" role="status">Live genomes require JavaScript. Use the source link above to browse the latest records.</p>
 <ol id="genomes-list" class="dashboard-list"></ol>
 <script src="dashboard.js" defer></script>
 ```
+:::
 
 For background, explore our [research projects](research.qmd) and [foundational references](references.qmd).

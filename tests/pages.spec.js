@@ -31,6 +31,8 @@ for (const path of ['research', 'people', 'dashboard', 'learn']) {
       if (path === 'dashboard') {
         await expect(page.locator('#genomes-list li')).toHaveCount(2);
         await expect(page.locator('#publications-list li')).toHaveCount(1);
+        await expect(page.locator('#publications-count')).toHaveText('1');
+        await expect(page.locator('#genomes-count')).toHaveText('2');
       }
       for (const name of ['Research', 'People', 'Dashboard', 'Learn']) {
         await expect(page.getByRole('link', { name, exact: true }).last()).toBeVisible();
@@ -56,6 +58,14 @@ test('dashboard displays safe linked records sorted by date and refreshes', asyn
   await expect(page.locator('#publications-list a')).toHaveText('Delftia research <script>alert(1)</script>');
   await expect(page.locator('#publications-list script')).toHaveCount(0);
   await expect(page.locator('#publications-list a')).toHaveAttribute('href', 'https://doi.org/10.1234%2Fdelftia');
+  await page.getByRole('searchbox', { name: 'Filter loaded records' }).fill('tsuruhatensis');
+  await expect(page.locator('#genomes-list li:visible')).toHaveCount(1);
+  await expect(page.locator('#publications-list li:visible')).toHaveCount(0);
+  await expect(page.locator('#dashboard-results-status')).toContainText('Showing 1 of 3');
+  await page.getByRole('searchbox', { name: 'Filter loaded records' }).fill('no matching record');
+  await expect(page.locator('#dashboard-results-status')).toContainText('No loaded records match');
+  await page.getByRole('searchbox', { name: 'Filter loaded records' }).clear();
+  await expect(page.locator('#genomes-list li:visible')).toHaveCount(2);
   await page.getByRole('button', { name: 'Refresh dashboard' }).click();
   await expect(page.locator('#publications-list li')).toHaveCount(1);
   await expect(page.getByRole('button', { name: 'Refresh dashboard' })).toBeEnabled();
@@ -87,4 +97,10 @@ test('dashboard keeps database links available without JavaScript', async ({ bro
   await expect(page.getByRole('link', { name: 'Browse all Delftia publications on Europe PMC' })).toBeVisible();
   await expect(page.getByRole('link', { name: 'Browse Delftia genome assemblies on ENA' })).toBeVisible();
   await context.close();
+});
+
+test('people page identifies the alumni section without guessing names', async ({ page }) => {
+  await page.goto('/people.html');
+  await expect(page.getByRole('heading', { name: 'Lab Alumni' })).toBeVisible();
+  await expect(page.getByText('do not yet identify former lab members by name')).toBeVisible();
 });

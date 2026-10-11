@@ -1291,6 +1291,94 @@ html[data-reading-focus="true"] .cta-section {
   overflow-wrap: anywhere;
 }
 
+.dashboard-overview {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 170px), 1fr));
+  gap: 1rem;
+  margin: 2rem 0 1.5rem;
+}
+
+.dashboard-metric {
+  display: grid;
+  gap: 0.2rem;
+  padding: 1.1rem 1.25rem;
+  border: 1px solid var(--page-border);
+  border-top: 3px solid var(--page-decoration);
+  border-radius: var(--card-radius);
+  background: var(--page-surface);
+  box-shadow: 0 2px 10px var(--page-shadow-color);
+}
+
+.dashboard-metric-value {
+  color: var(--page-heading);
+  font-size: 1.5rem;
+  font-weight: 800;
+  line-height: 1.2;
+}
+
+.dashboard-metric-label {
+  color: var(--page-text-secondary);
+  font-size: 0.9rem;
+}
+
+.dashboard-controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: end;
+  gap: 0.75rem 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.dashboard-controls label {
+  display: grid;
+  flex: 1 1 280px;
+  gap: 0.35rem;
+  color: var(--page-text);
+  font-weight: 600;
+}
+
+.dashboard-controls input {
+  width: 100%;
+  min-height: 2.8rem;
+  padding: 0.55rem 0.75rem;
+  border: 1px solid var(--page-border);
+  border-radius: 8px;
+  background: var(--page-surface);
+  color: var(--page-text);
+}
+
+.dashboard-controls input::placeholder {
+  color: var(--page-text-secondary);
+  opacity: 0.85;
+}
+
+.dashboard-controls .btn {
+  margin: 0;
+}
+
+.dashboard-results-status {
+  min-height: 1.5em;
+  color: var(--page-text-secondary);
+  font-size: 0.92rem;
+}
+
+.dashboard-panel {
+  margin: 1rem 0 2rem;
+  padding: 1.25rem;
+  border: 1px solid var(--page-border);
+  border-radius: var(--card-radius);
+  background: var(--page-surface);
+  box-shadow: 0 2px 12px var(--page-shadow-color);
+}
+
+.dashboard-panel > :last-child {
+  margin-bottom: 0;
+}
+
+.dashboard-list li[hidden] {
+  display: none;
+}
+
 .nav-footer .footer-items {
   display: flex;
   flex-wrap: wrap;

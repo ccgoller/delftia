@@ -73,6 +73,36 @@
     },
   ];
 
+  const search = document.getElementById('dashboard-search');
+  const resultsStatus = document.getElementById('dashboard-results-status');
+  const publicationCount = document.getElementById('publications-count');
+  const genomeCount = document.getElementById('genomes-count');
+  const updated = document.getElementById('dashboard-updated');
+
+  function updateDashboardSummary() {
+    const query = search.value.trim().toLocaleLowerCase();
+    let matches = 0;
+    let total = 0;
+
+    for (const feed of feeds) {
+      const list = document.getElementById(`${feed.name}-list`);
+      const items = [...list.children];
+      const visible = items.reduce((count, item) => {
+        const isMatch = item.textContent.toLocaleLowerCase().includes(query);
+        item.hidden = !isMatch;
+        return count + Number(isMatch);
+      }, 0);
+      total += items.length;
+      matches += visible;
+      document.getElementById(`${feed.name}-count`).textContent = items.length;
+    }
+
+    resultsStatus.textContent = query
+      ? (matches ? `Showing ${matches} of ${total} loaded records matching “${search.value.trim()}”.`
+        : `No loaded records match “${search.value.trim()}”.`)
+      : `Showing all ${total} loaded records.`;
+  }
+
   async function loadFeed(feed) {
     const status = document.getElementById(`${feed.name}-status`);
     const list = document.getElementById(`${feed.name}-list`);
@@ -87,16 +117,22 @@
     } catch {
       list.replaceChildren();
       status.textContent = `Unable to load ${feed.name} right now. Use the source link above or refresh to try again.`;
+    } finally {
+      updateDashboardSummary();
     }
   }
 
   const refresh = document.getElementById('refresh-dashboard');
   async function loadDashboard() {
     refresh.disabled = true;
+    updated.textContent = 'Checking…';
     await Promise.all(feeds.map(loadFeed));
+    updated.textContent = new Date().toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' });
     refresh.disabled = false;
   }
+  search.hidden = false;
   refresh.hidden = false;
+  search.addEventListener('input', updateDashboardSummary);
   refresh.addEventListener('click', loadDashboard);
   loadDashboard();
 })();
