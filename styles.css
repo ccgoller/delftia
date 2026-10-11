@@ -9,6 +9,7 @@
 :root {
   /* Delftia Brand Colors */
   --delftia-umber:     #1a1410;   /* professional dark base        */
+  --delftia-umber-darker:#0a0805; /* high-contrast dark for titles on light bg */
   --delftia-gold:      #E8954B;   /* delftia orange accent (logo)  */
   --delftia-gold-bright:#F4A854;  /* delftia orange lighter        */
   --delftia-gold-glow: #FCE4C3;   /* delftia orange light glow     */
