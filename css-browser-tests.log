@@ -1,6 +1,0 @@
-
-> delftia@1.0.0 test:update
-> playwright test --update-snapshots
-
-Error: http://127.0.0.1:8000 is already used, make sure that nothing is running on the port/url or set reuseExistingServer:true in config.webServer.
-
