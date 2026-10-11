@@ -23,6 +23,7 @@ $footer-fg: #ffffff;
 
 /*-- scss:rules --*/
 
+/* Light mode button styles */
 .btn-primary {
   color: #ffffff;
 }
@@ -31,3 +32,66 @@ $footer-fg: #ffffff;
 .btn-outline-primary:focus {
   color: #ffffff;
 }
+
+/* Dark mode support - Quarto theme integration */
+@media (prefers-color-scheme: dark) {
+  body {
+    background-color: #0F0D0A;
+    color: #F5E6D3;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    color: #F5E6D3;
+  }
+  
+  .navbar {
+    background-color: #1a1410;
+  }
+  
+  .btn-primary {
+    background-color: #CC9600;
+    border-color: #CC9600;
+    color: #1a1410;
+  }
+  
+  .btn-primary:hover {
+    background-color: #D4A574;
+    border-color: #D4A574;
+  }
+}
+
+/* Explicit dark theme support */
+html[data-theme="dark"] {
+  --body-color: #F5E6D3;
+  --body-bg: #0F0D0A;
+}
+
+html[data-theme="dark"] body {
+  background-color: #0F0D0A;
+  color: #F5E6D3;
+}
+
+html[data-theme="dark"] h1,
+html[data-theme="dark"] h2,
+html[data-theme="dark"] h3,
+html[data-theme="dark"] h4,
+html[data-theme="dark"] h5,
+html[data-theme="dark"] h6 {
+  color: #F5E6D3;
+}
+
+html[data-theme="dark"] .navbar {
+  background-color: #1a1410;
+}
+
+html[data-theme="dark"] .btn-primary {
+  background-color: #CC9600;
+  border-color: #CC9600;
+  color: #1a1410;
+}
+
+html[data-theme="dark"] .btn-primary:hover {
+  background-color: #D4A574;
+  border-color: #D4A574;
+}
+

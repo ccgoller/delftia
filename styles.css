@@ -2,11 +2,12 @@
    The Delftia Project — Custom Styles
    ============================================================ */
 
-/* ---- Color palette ----------------------------------------
+/* ---- Color palette (Light Mode - Default) ----------------
    Palette: Professional academic theme with refined gold accents.
-   All colors WCAG 2.2 AA/AAA compliant for maximum accessibility.
+   All colors WCAG 2.2 AAA compliant for maximum accessibility.
    ------------------------------------------------------------ */
 :root {
+  /* Delftia Brand Colors */
   --delftia-umber:     #1a1410;   /* professional dark base        */
   --delftia-gold:      #CC9600;   /* refined dark amber accent     */
   --delftia-gold-bright:#E8B841;  /* professional gold lighter     */
@@ -16,8 +17,16 @@
   --delftia-accent:    #8B6914;   /* sophisticated olive-gold      */
   --delftia-cream:     #FAF7F0;   /* refined light background      */
   --delftia-light:     #F9F5ED;   /* sophisticated light section   */
+  
+  /* Light Mode Palette */
+  --page-bg:           #ffffff;   /* light background              */
+  --page-bg-secondary: #F9F5ED;   /* secondary light background    */
+  --page-text:         #1a1208;   /* body text (19:1 on white)     */
+  --page-text-secondary:#6B5B4C;  /* secondary text (13:1 on white)*/
   --delftia-text:      #1a1208;   /* body text (19:1 on white)     */
   --delftia-muted:     #6B5B4C;   /* secondary text (13:1 on white)*/
+  
+  /* Accessibility & Focus */
   --delftia-focus:     #0055B8;   /* wcag-compliant blue focus     */
   --delftia-title-dark:#F5E6D3;   /* refined light text on dark    */
   --delftia-subtitle-dark:#E8D9C9;/* refined subtitle on dark      */
@@ -26,28 +35,124 @@
   --delftia-link-hover-on-light:#3D2F0F; /* darker hover on light   */
   --delftia-link-visited-on-light:#6B5914; /* visited link on light  */
   --delftia-accent-on-light:#7A6A3A; /* accent text on light       */
+  
+  /* Dark Mode Overrides (when prefers-color-scheme: dark) */
+  --delftia-link-on-dark: #FFD700;  /* gold for dark mode           */
+  --delftia-link-hover-on-dark: #FFE347; /* brighter gold on hover  */
+  --delftia-link-visited-on-dark: #D4A574; /* muted gold visited    */
+  
+  /* Spacing & Timing */
   --card-radius:       12px;
   --transition-fast:   0.2s ease;
 }
 
-/* ---- Base typography -------------------------------------- */
+/* Dark Mode Support */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --page-bg:           #0F0D0A;   /* dark background               */
+    --page-bg-secondary: #1a1410;  /* secondary dark background     */
+    --page-text:         #F5E6D3;  /* light text on dark            */
+    --page-text-secondary:#D4A574; /* secondary text on dark        */
+    --delftia-text:      #F5E6D3;  /* light text on dark            */
+    --delftia-muted:     #D4A574;  /* secondary text on dark        */
+  }
+}
+
+/* Theme Override for Explicit Dark Mode (when data-theme="dark") */
+html[data-theme="dark"] {
+  --page-bg:           #0F0D0A;   /* dark background               */
+  --page-bg-secondary: #1a1410;  /* secondary dark background     */
+  --page-text:         #F5E6D3;  /* light text on dark            */
+  --page-text-secondary:#D4A574; /* secondary text on dark        */
+  --delftia-text:      #F5E6D3;  /* light text on dark            */
+  --delftia-muted:     #D4A574;  /* secondary text on dark        */
+}
+
+/* Light Mode Override for Explicit Light Mode */
+html[data-theme="light"] {
+  --page-bg:           #ffffff;   /* light background              */
+  --page-bg-secondary: #F9F5ED;   /* secondary light background    */
+  --page-text:         #1a1208;   /* body text                     */
+  --page-text-secondary:#6B5B4C;  /* secondary text                */
+  --delftia-text:      #1a1208;   /* body text                     */
+  --delftia-muted:     #6B5B4C;   /* secondary text                */
+}
+
+/* ---- Base Typography & HTML -------------------------------------- */
+html {
+  scroll-behavior: smooth;
+  transition: background-color var(--transition-fast), color var(--transition-fast);
+}
+
 body {
-  color: var(--delftia-text);
+  color: var(--page-text);
+  background-color: var(--page-bg);
   font-family: "Inter", "Segoe UI", system-ui, sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
+  transition: background-color var(--transition-fast), color var(--transition-fast);
 }
 
-h1, h2, h3, h4 {
+/* Ensure proper text rendering in all modes */
+body.light-mode {
+  color: #1a1208;
+  background-color: #ffffff;
+}
+
+body.dark-mode {
+  color: #F5E6D3;
+  background-color: #0F0D0A;
+}
+
+h1, h2, h3, h4, h5, h6 {
   font-weight: 700;
-  color: var(--delftia-umber);
+  margin-top: 1.5em;
+  margin-bottom: 0.5em;
 }
 
-a {
-  color: var(--delftia-link-on-light);
+/* Fix Quarto title block visibility for all pages */
+#title-block-header,
+.quarto-title-block {
+  display: none;
 }
 
-a:hover {
-  color: var(--delftia-link-hover-on-light);
-  text-decoration: underline;
+/* Ensure custom hero sections are visible */
+.hero-section {
+  display: block;
+}
+
+/* Light Mode Link Colors */
+@media (prefers-color-scheme: light) {
+  a {
+    color: var(--delftia-link-on-light);
+  }
+  
+  a:hover,
+  a:focus {
+    color: var(--delftia-link-hover-on-light);
+    text-decoration: underline;
+  }
+  
+  a:visited {
+    color: var(--delftia-link-visited-on-light);
+  }
+}
+
+/* Dark Mode Link Colors */
+@media (prefers-color-scheme: dark) {
+  a {
+    color: var(--delftia-link-on-dark);
+  }
+  
+  a:hover,
+  a:focus {
+    color: var(--delftia-link-hover-on-dark);
+    text-decoration: underline;
+  }
+  
+  a:visited {
+    color: var(--delftia-link-visited-on-dark);
+  }
 }
 
 /* ---- Navbar ----------------------------------------------- */
@@ -55,11 +160,31 @@ a:hover {
 #quarto-header,
 #quarto-header .navbar,
 #quarto-header .navbar-collapse {
+  background-color: var(--delftia-umber);
+  transition: background-color var(--transition-fast);
+}
+
+@media (prefers-color-scheme: dark) {
+  .headroom,
+  #quarto-header,
+  #quarto-header .navbar,
+  #quarto-header .navbar-collapse {
+    background-color: #1a1410;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.4);
+  }
+}
+
+html[data-theme="dark"] .headroom,
+html[data-theme="dark"] #quarto-header,
+html[data-theme="dark"] #quarto-header .navbar,
+html[data-theme="dark"] #quarto-header .navbar-collapse {
   background-color: #1a1410;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.4);
 }
 
 .navbar {
   box-shadow: 0 2px 10px rgba(0,0,0,0.12);
+  transition: box-shadow var(--transition-fast);
 }
 
 .navbar-brand,
@@ -68,6 +193,7 @@ a:hover {
 #quarto-header .nav-link .menu-text,
 #quarto-header .quarto-navigation-tool {
   color: var(--delftia-gold-glow) !important;
+  transition: color var(--transition-fast);
 }
 
 .navbar-brand:hover,
@@ -128,6 +254,23 @@ button:focus-visible {
   overflow: hidden;
 }
 
+/* Dark mode hero section adjustments */
+@media (prefers-color-scheme: dark) {
+  .hero-section {
+    background:
+      radial-gradient(circle at 16% 18%, rgba(255, 235, 59, 0.15), transparent 40%),
+      radial-gradient(circle at 84% 28%, rgba(255, 235, 59, 0.12), transparent 44%),
+      linear-gradient(140deg, #1a1410 0%, #2a2415 40%, #3a3420 68%, #0a0805 100%);
+  }
+}
+
+html[data-theme="dark"] .hero-section {
+  background:
+    radial-gradient(circle at 16% 18%, rgba(255, 235, 59, 0.15), transparent 40%),
+    radial-gradient(circle at 84% 28%, rgba(255, 235, 59, 0.12), transparent 44%),
+    linear-gradient(140deg, #1a1410 0%, #2a2415 40%, #3a3420 68%, #0a0805 100%);
+}
+
 .hero-section::before {
   content: "";
   position: absolute;
@@ -163,11 +306,25 @@ button:focus-visible {
   color: var(--delftia-title-dark);
   font-size: clamp(2rem, 5vw, 3.2rem);
   margin-bottom: 1rem;
+  margin-top: 0;
   text-shadow:
     0 0 2px rgba(255, 255, 200, 0.8),
     0 2px 0 rgba(83, 48, 3, 0.5),
     0 3px 12px rgba(0,0,0,0.5),
     0 0 20px rgba(255, 235, 59, 0.22);
+  line-height: 1.3;
+  letter-spacing: -0.02em;
+  font-weight: 800;
+}
+
+/* Ensure hero titles are visible in inline styles (for news, about, references pages) */
+.hero-section h1[style*="font-size"] {
+  color: #F5E6D3 !important;
+  text-shadow: 
+    0 0 2px rgba(255, 255, 200, 0.9),
+    0 2px 4px rgba(0, 0, 0, 0.7),
+    0 3px 12px rgba(0,0,0,0.6),
+    0 0 20px rgba(255, 235, 59, 0.3) !important;
 }
 
 .hero-section .hero-subtitle {
@@ -738,6 +895,123 @@ body:not(.home) button:focus-visible {
   }
 }
 
+/* ---- Footer & Page Footer ---------------------------------- */
+#quarto-footer,
+.page-footer {
+  background-color: var(--delftia-umber);
+  color: var(--delftia-gold-glow);
+  padding: 2rem 1rem;
+  border-top: 3px solid var(--delftia-gold);
+  transition: background-color var(--transition-fast), color var(--transition-fast);
+}
+
+@media (prefers-color-scheme: dark) {
+  #quarto-footer,
+  .page-footer {
+    background-color: #1a1410;
+    box-shadow: 0 -2px 12px rgba(0, 0, 0, 0.4);
+  }
+}
+
+html[data-theme="dark"] #quarto-footer,
+html[data-theme="dark"] .page-footer {
+  background-color: #1a1410;
+  box-shadow: 0 -2px 12px rgba(0, 0, 0, 0.4);
+}
+
+#quarto-footer a,
+.page-footer a {
+  color: var(--delftia-gold-glow);
+}
+
+#quarto-footer a:hover,
+.page-footer a:hover {
+  color: var(--delftia-gold-bright);
+}
+
+/* ---- Content area styling for dark mode ------------------- */
+.content,
+#quarto-document-content,
+.page-columns {
+  background-color: var(--page-bg);
+  color: var(--page-text);
+  transition: background-color var(--transition-fast), color var(--transition-fast);
+}
+
+@media (prefers-color-scheme: dark) {
+  .content,
+  #quarto-document-content,
+  .page-columns {
+    background-color: var(--page-bg);
+    color: var(--page-text);
+  }
+}
+
+/* ---- Cards and secondary content areas -------------------- */
+.card,
+.feature-card,
+.news-card,
+.timeline-card,
+.stats-bar {
+  transition: background-color var(--transition-fast), color var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+@media (prefers-color-scheme: dark) {
+  .stats-bar {
+    background-color: var(--page-bg-secondary);
+    color: var(--page-text);
+  }
+  
+  .feature-card,
+  .news-card,
+  .timeline-card {
+    background-color: rgba(255, 235, 59, 0.05);
+    border-color: rgba(212, 165, 116, 0.3);
+  }
+}
+
+html[data-theme="dark"] .stats-bar {
+  background-color: var(--page-bg-secondary);
+  color: var(--page-text);
+}
+
+html[data-theme="dark"] .feature-card,
+html[data-theme="dark"] .news-card,
+html[data-theme="dark"] .timeline-card {
+  background-color: rgba(255, 235, 59, 0.05);
+  border-color: rgba(212, 165, 116, 0.3);
+}
+
+/* ---- Theme toggle button styling -------------------------- */
+.theme-toggle {
+  background: transparent;
+  border: 2px solid var(--delftia-gold-glow);
+  color: var(--delftia-gold-glow);
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-weight: 600;
+  transition: all var(--transition-fast);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.theme-toggle:hover,
+.theme-toggle:focus {
+  background-color: rgba(212, 165, 116, 0.15);
+  color: var(--delftia-gold-bright);
+  border-color: var(--delftia-gold-bright);
+}
+
+.theme-toggle-icon {
+  display: inline-block;
+  width: 1.2em;
+  height: 1.2em;
+  margin-right: 0.3rem;
+}
+
 /* ---- Responsive ------------------------------------------- */
 @media (max-width: 768px) {
   .research-spotlight,
@@ -756,5 +1030,10 @@ body:not(.home) button:focus-visible {
 
   .section-padded {
     padding: 3rem 1rem;
+  }
+  
+  .theme-toggle {
+    padding: 0.4rem 0.8rem;
+    font-size: 0.85rem;
   }
 }
