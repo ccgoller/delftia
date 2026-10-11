@@ -193,9 +193,45 @@ jobs:
             echo "This usually means a competing 'pages build and deployment' (branch-based Pages source) replaced it."
             echo "Set Settings > Pages > Build and deployment > Source to 'GitHub Actions' and re-run this workflow."
             exit 1
-          else
-            echo "✅ All expected deployed URLs are publicly reachable and stable."
           fi
+
+          echo "Verifying deployed HTML and stylesheet match the build artifact..."
+          content_paths=(
+            "index.html"
+            "about.html"
+            "news.html"
+            "references.html"
+            "styles.css"
+          )
+          mismatched_paths=()
+          for path in "${content_paths[@]}"; do
+            url="${base_url}/${path}"
+            downloaded_file="$(mktemp)"
+            if ! curl --silent --show-error --location --fail \
+              --retry 3 --retry-delay 10 --retry-all-errors \
+              --max-time 30 \
+              --output "${downloaded_file}" \
+              "${url}"; then
+              echo "❌ Could not download ${url} for content verification."
+              mismatched_paths+=("${path}")
+            elif ! cmp --silent "_site/${path}" "${downloaded_file}"; then
+              expected_hash="$(sha256sum "_site/${path}" | cut -d ' ' -f 1)"
+              actual_hash="$(sha256sum "${downloaded_file}" | cut -d ' ' -f 1)"
+              echo "❌ ${url} does not match the generated artifact (expected ${expected_hash}, got ${actual_hash})."
+              mismatched_paths+=("${path}")
+            else
+              echo "✅ ${url} matches the generated artifact."
+            fi
+            rm -f "${downloaded_file}"
+          done
+
+          if [ "${#mismatched_paths[@]}" -ne 0 ]; then
+            echo "❌ Deployed content differs from this run's build artifact."
+            echo "Check for stale GitHub Pages/CDN content or a competing deployment."
+            exit 1
+          fi
+
+          echo "✅ All expected deployed URLs are stable and their content matches this build."
 
       # ============================================================
       # 7. ACCESSIBILITY AUDIT: Check color contrast (axe/pa11y)
