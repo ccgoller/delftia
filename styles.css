@@ -351,7 +351,7 @@ html[data-theme="dark"] .hero-section {
   font-weight: 600;
   font-size: 1rem;
   text-decoration: none !important;
-  transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast), background-color var(--transition-fast), color var(--transition-fast);
   margin: 0.4rem;
 }
 
@@ -729,6 +729,63 @@ html[data-theme="dark"] .news-card-text {
   padding: 4rem 1.5rem;
 }
 
+.research-spotlight.reverse {
+  direction: rtl;
+}
+
+.research-spotlight.reverse > * {
+  direction: ltr;
+}
+
+.research-spotlight-text h3 {
+  font-size: 1.4rem;
+  color: var(--delftia-umber);
+  margin-bottom: 1rem;
+  transition: color var(--transition-fast);
+}
+
+@media (prefers-color-scheme: dark) {
+  .research-spotlight-text h3 {
+    color: var(--delftia-gold-glow);
+  }
+}
+
+html[data-theme="dark"] .research-spotlight-text h3 {
+  color: var(--delftia-gold-glow);
+}
+
+.research-spotlight-text p {
+  color: var(--delftia-muted);
+  line-height: 1.7;
+  transition: color var(--transition-fast);
+}
+
+@media (prefers-color-scheme: dark) {
+  .research-spotlight-text p {
+    color: #D4A574;
+  }
+}
+
+html[data-theme="dark"] .research-spotlight-text p {
+  color: #D4A574;
+}
+
+.research-spotlight img {
+  border-radius: var(--card-radius);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+  transition: box-shadow var(--transition-fast);
+}
+
+@media (prefers-color-scheme: dark) {
+  .research-spotlight img {
+    box-shadow: 0 4px 16px rgba(212, 165, 116, 0.2);
+  }
+}
+
+html[data-theme="dark"] .research-spotlight img {
+  box-shadow: 0 4px 16px rgba(212, 165, 116, 0.2);
+}
+
 .research-spotlight.reverse > :first-child {
   order: 2;
 }
@@ -742,18 +799,51 @@ html[data-theme="dark"] .news-card-text {
   border-radius: var(--card-radius);
   box-shadow: 0 6px 24px rgba(0,0,0,0.12);
   object-fit: cover;
+  transition: box-shadow var(--transition-fast);
+}
+
+@media (prefers-color-scheme: dark) {
+  .research-spotlight img {
+    box-shadow: 0 6px 24px rgba(212, 165, 116, 0.2);
+  }
+}
+
+html[data-theme="dark"] .research-spotlight img {
+  box-shadow: 0 6px 24px rgba(212, 165, 116, 0.2);
 }
 
 .research-spotlight-text h2 {
   font-size: 1.7rem;
   color: var(--delftia-umber);
   margin-bottom: 1rem;
+  transition: color var(--transition-fast);
+}
+
+@media (prefers-color-scheme: dark) {
+  .research-spotlight-text h2 {
+    color: var(--delftia-gold-glow);
+  }
+}
+
+html[data-theme="dark"] .research-spotlight-text h2 {
+  color: var(--delftia-gold-glow);
 }
 
 .research-spotlight-text p {
   color: var(--delftia-muted);
   line-height: 1.7;
   margin-bottom: 1.2rem;
+  transition: color var(--transition-fast);
+}
+
+@media (prefers-color-scheme: dark) {
+  .research-spotlight-text p {
+    color: #D4A574;
+  }
+}
+
+html[data-theme="dark"] .research-spotlight-text p {
+  color: #D4A574;
 }
 
 /* ---- Badge / tag chips ------------------------------------ */
@@ -767,6 +857,21 @@ html[data-theme="dark"] .news-card-text {
   font-size: 0.78rem;
   font-weight: 600;
   margin: 0.2rem;
+  transition: all var(--transition-fast);
+}
+
+@media (prefers-color-scheme: dark) {
+  .tag-chip {
+    background: rgba(212, 165, 116, 0.15);
+    color: var(--delftia-gold-glow);
+    border-color: var(--delftia-gold-glow);
+  }
+}
+
+html[data-theme="dark"] .tag-chip {
+  background: rgba(212, 165, 116, 0.15);
+  color: var(--delftia-gold-glow);
+  border-color: var(--delftia-gold-glow);
 }
 
 /* ---- Team cards ------------------------------------------- */
