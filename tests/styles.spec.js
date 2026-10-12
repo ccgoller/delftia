@@ -18,6 +18,10 @@ async function checkStyles(page, theme) {
     await expect(card).toHaveCSS('background-color',
       theme === 'dark' ? 'rgb(36, 27, 19)' : 'rgb(255, 255, 255)');
   }
+  for (const icon of await page.locator('.feature-card .card-icon').all()) {
+    await expect(icon).toHaveCSS('background-color',
+      theme === 'dark' ? 'rgb(0, 0, 0)' : 'rgb(255, 255, 255)');
+  }
   for (const heading of await page.locator('.hero-section h1, .cta-section h2').all()) {
     await expect(heading).toBeVisible();
     const color = await heading.evaluate(element => getComputedStyle(element).color);
@@ -147,6 +151,22 @@ test('display controls and cards reflow on narrow screens', async ({ page }) => 
   await page.goto('/index.html');
   await expect(page.getByRole('button', { name: 'Reading focus', exact: true })).toBeVisible();
   await checkStyles(page, 'light');
+});
+
+test('navbar logo scales down on mobile', async ({ page }) => {
+  await page.setViewportSize({ width: 1280, height: 800 });
+  await page.goto('/index.html');
+  const logo = page.locator('.navbar-brand .navbar-logo:visible');
+  const desktopWidth = await logo.evaluate(element => element.getBoundingClientRect().width);
+  await page.setViewportSize({ width: 320, height: 740 });
+  const mobileBox = await logo.evaluate(element => {
+    const { width, height } = element.getBoundingClientRect();
+    return { width, height };
+  });
+  expect(mobileBox.width).toBeLessThan(desktopWidth);
+  expect(mobileBox.width).toBeLessThanOrEqual(48);
+  expect(mobileBox.height).toBeLessThanOrEqual(30);
+  expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBe(true);
 });
 
 test('invalid reading preference is off by default', async ({ page }) => {
