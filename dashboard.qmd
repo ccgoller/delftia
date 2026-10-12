@@ -1,7 +1,7 @@
 ---
 title: ""
 pagetitle: "Dashboard"
-description: "Interactive annual PubMed publication counts, Delftia genome assembly counts, and latest research records."
+description: "Interactive annual and cumulative Delftia publication counts, genome assembly counts, and latest research records."
 ---
 
 ```{=html}
@@ -15,7 +15,7 @@ Explore research across the genus *Delftia*. These live public database results 
 
 ## Research Growth by Year
 
-Orange shows **PubMed publications**, gray shows **genome assemblies first made public in ENA**, and yellow shows **cumulative genome assemblies** through each year. These counts cover all matching records in today's databases, not historical database snapshots or unique strains. Genome years use ENA's **first_public** date, never record update dates; assemblies without a valid first-public date are excluded from both genome lines. The current year is incomplete.
+Orange shows **PubMed publications**, blue shows **cumulative publications**, gray shows **genome assemblies first made public in ENA**, and yellow shows **cumulative genome assemblies** through each year. These counts cover all matching records in today's databases, not historical database snapshots or unique strains. Genome years use ENA's **first_public** date, never record update dates; assemblies without a valid first-public date are excluded from both genome lines. The current year is incomplete.
 
 ```{=html}
 <section class="dashboard-panel" aria-label="Annual research growth">
@@ -24,12 +24,13 @@ Orange shows **PubMed publications**, gray shows **genome assemblies first made 
     <fieldset class="dashboard-line-legend">
       <legend>Show lines</legend>
       <label><input type="checkbox" data-growth-series="publications" checked> <span class="growth-swatch growth-publications" aria-hidden="true"></span> Publications</label>
+      <label><input type="checkbox" data-growth-series="cumulative-publications" checked> <span class="growth-swatch growth-cumulative-publications" aria-hidden="true"></span> Cumulative publications</label>
       <label><input type="checkbox" data-growth-series="genomes" checked> <span class="growth-swatch growth-genomes" aria-hidden="true"></span> Genomes</label>
-      <label><input type="checkbox" data-growth-series="cumulative" checked> <span class="growth-swatch growth-cumulative" aria-hidden="true"></span> Cumulative genomes</label>
+      <label><input type="checkbox" data-growth-series="cumulative-genomes" checked> <span class="growth-swatch growth-cumulative-genomes growth-cumulative" aria-hidden="true"></span> Cumulative genomes</label>
     </fieldset>
     <p>Hover over or tap the graph to inspect a year. Use the year slider with the arrow keys to explore counts, or toggle lines above. Record filtering below does not change the graph.</p>
     <div class="dashboard-line-scroll">
-      <svg id="growth-chart" class="dashboard-line-chart" viewBox="0 0 720 320" role="img" aria-label="Publications, genomes, and cumulative genomes by year"></svg>
+      <svg id="growth-chart" class="dashboard-line-chart" viewBox="0 0 720 320" role="img" aria-label="Publications, cumulative publications, genomes, and cumulative genomes by year"></svg>
     </div>
     <label for="growth-chart-year">Inspect year</label>
     <input type="range" id="growth-chart-year" min="0" max="0" value="0">

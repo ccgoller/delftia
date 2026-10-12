@@ -1475,7 +1475,9 @@ html[data-reading-focus="true"] .cta-section {
 }
 
 .growth-publications { --growth-color: #E8954B; }
+.growth-cumulative-publications { --growth-color: #79C0FF; }
 .growth-genomes { --growth-color: #B0B0B0; }
+.growth-cumulative-genomes,
 .growth-cumulative { --growth-color: #FFDA73; }
 
 .dashboard-line-scroll {
@@ -1510,7 +1512,9 @@ html[data-reading-focus="true"] .cta-section {
   fill: var(--growth-color);
 }
 
+.growth-cumulative-publications polyline { stroke-dasharray: 4 3; }
 .growth-genomes polyline { stroke-dasharray: 7 4; }
+.growth-cumulative-genomes polyline,
 .growth-cumulative polyline { stroke-dasharray: 2 4; }
 
 .growth-marker {
