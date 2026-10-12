@@ -1,12 +1,12 @@
 ---
 title: ""
-pagetitle: "Scientific References"
+pagetitle: "Publications"
 page-layout: full
 ---
 
 ```{=html}
-<section class="hero-section hero-section--compact" aria-labelledby="refs-heading">
-  <h1 id="refs-heading">Scientific References</h1>
+<section class="hero-section hero-section--compact" aria-labelledby="publications-heading">
+  <h1 id="publications-heading">Publications</h1>
   <p class="hero-subtitle">
     Publications from the Goller lab on <em>Delftia acidovorans</em> — research driven
     in partnership with undergraduate students.
@@ -17,7 +17,7 @@ page-layout: full
 <div class="content-wrap references-content">
 
 <p class="reference-note">
-  <strong>Note:</strong> All references listed here include Goller as an author and reflect
+  <strong>Note:</strong> All publications listed here include Goller as an author and reflect
   collaborative work conducted with undergraduate researchers.
 </p>
 
@@ -37,6 +37,10 @@ Spence PL, Goller C, Riley N, Norman D, Leggett Z. 2025. Where is <em>Delftia</e
 
 <li>
 Sai P, Hoyek A, Goller CC. 2026. <em>Delftia</em> as a small-molecule chassis: lessons from delftibactin and harmane. <em>Appl Environ Microbiol</em>. e00277-25. <a href="https://doi.org/10.1128/aem.00277-25" target="_blank" rel="noopener">doi:10.1128/aem.00277-25<span class="visually-hidden"> (opens in new tab)</span></a>
+</li>
+
+<li>
+Whitham JM, Goller CC. 2026. Improving knowledge of metagenome-assembled genomes (MAGs) through bioinformatics and article annotation. <em>J Microbiol Biol Educ</em>. <a href="https://doi.org/10.1128/jmbe.00226-25" target="_blank" rel="noopener">doi:10.1128/jmbe.00226-25<span class="visually-hidden"> (opens in new tab)</span></a>
 </li>
 
 </ol>

@@ -31,4 +31,4 @@ Explore the Delftia book for learning about this remarkable bacterium.
 :::
 :::
 
-Connect your learning to our [research projects](research.qmd) and [scientific references](references.qmd).
+Connect your learning to our [research projects](research.qmd) and [publications](references.qmd).

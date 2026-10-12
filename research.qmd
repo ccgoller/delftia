@@ -37,7 +37,7 @@ Explore *Delftia* sequences using BLAST and comparative genomics to investigate 
 
 Literature-based projects examine *Delftia*'s gold-biomineralizing abilities and their potential relevance to sustainable biotechnology.
 
-[Read the foundational literature](references.qmd)
+[Browse publications](references.qmd)
 :::
 
 ::: {.feature-card}

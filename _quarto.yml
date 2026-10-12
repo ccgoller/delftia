@@ -37,7 +37,7 @@ website:
           - href: news.qmd
             text: Student Projects
           - href: references.qmd
-            text: References
+            text: Publications
       - href: people.qmd
         text: People
       - href: dashboard.qmd
@@ -70,7 +70,7 @@ website:
         href: learn.qmd
       - text: "Student Projects"
         href: news.qmd
-      - text: "References"
+      - text: "Publications"
         href: references.qmd
 
 format:

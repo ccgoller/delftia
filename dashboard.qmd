@@ -111,4 +111,4 @@ Up to 10 *Delftia* genome assemblies from the European Nucleotide Archive (ENA),
 ```
 :::
 
-For background, explore our [research projects](research.qmd) and [foundational references](references.qmd).
+For background, explore our [research projects](research.qmd) and [publications](references.qmd).
