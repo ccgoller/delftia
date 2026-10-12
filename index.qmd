@@ -31,7 +31,7 @@ body-classes: home
     </div>
     <div class="stat-item">
       <div class="stat-number" aria-hidden="true">13</div>
-      <div class="stat-label"><span class="visually-hidden">13 years of </span>Delftia research</div>
+      <div class="stat-label"><span class="visually-hidden">13 </span>years of <em>Delftia</em> research</div>
     </div>
     <div class="stat-item">
       <div class="stat-number" aria-hidden="true">3</div>
