@@ -50,7 +50,7 @@ html[data-theme="light"] {
   --delftia-focus:     #0055B8;   /* wcag-compliant blue focus     */
   --delftia-title-dark:#F5E6D3;   /* refined light text on dark    */
   --delftia-subtitle-dark:#E8D9C9;/* refined subtitle on dark      */
-  --delftia-hero-accent:#E8954B;  /* delftia orange on dark        */
+  --delftia-hero-accent:#FFDA73;  /* bright delftia gold on dark   */
   --delftia-link-on-light:#704A1F; /* dark amber on light (AAA 7.8:1) */
   --delftia-link-hover-on-light:#5A3A15; /* darker amber hover (AAA 10:1) */
   --delftia-link-visited-on-light:#704A1F; /* visited dark amber on light */
@@ -221,6 +221,7 @@ a:focus {
   color: var(--delftia-gold-glow) !important;
   transition: color var(--transition-fast);
   font-weight: 500;
+  white-space: nowrap;
 }
 
 .navbar-brand:hover,
@@ -238,6 +239,83 @@ a:focus {
 #quarto-header .nav-link:focus-visible {
   outline: 2px solid var(--delftia-gold-bright);
   outline-offset: 2px;
+}
+
+@media (min-width: 992px) {
+  #quarto-header .navbar-container {
+    display: flex !important;
+    flex-wrap: nowrap !important;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem;
+  }
+
+  #quarto-header .navbar-brand-container {
+    flex-shrink: 0;
+    margin-right: 0.5rem !important;
+  }
+
+  #quarto-header .navbar-collapse {
+    display: flex !important;
+    flex-basis: auto !important;
+    flex-grow: 1;
+    align-items: center;
+    justify-content: flex-end;
+    flex-wrap: nowrap !important;
+  }
+
+  #quarto-header .navbar-nav {
+    display: flex !important;
+    flex-direction: row;
+    flex-wrap: nowrap !important;
+    align-items: center;
+    gap: 0.25rem;
+  }
+
+  #quarto-header .nav-link {
+    padding: 0.45rem 0.65rem;
+    font-size: 0.95rem;
+  }
+
+  #quarto-header .quarto-navbar-tools {
+    display: flex !important;
+    align-items: center;
+    flex-shrink: 0;
+    margin-left: 0.5rem;
+  }
+}
+
+@media (max-width: 991.98px) {
+  #quarto-header .navbar-container {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .navbar-brand-container {
+    order: 1;
+    flex: 1 1 auto;
+  }
+
+  .navbar-toggler {
+    order: 2;
+  }
+
+  #quarto-header .quarto-navbar-tools {
+    order: 3;
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    padding-top: 0.35rem;
+    margin-top: 0.25rem;
+    border-top: 1px solid rgba(232, 149, 75, 0.25);
+  }
+
+  #quarto-header .navbar-collapse {
+    order: 4;
+    width: 100%;
+  }
 }
 
 .navbar-brand {
@@ -301,15 +379,15 @@ button:focus-visible {
 /* ---- Hero section ----------------------------------------- */
 .hero-section {
   background:
-    radial-gradient(circle at 16% 18%, rgba(232, 149, 75, 0.10), transparent 40%),
-    radial-gradient(circle at 84% 28%, rgba(232, 149, 75, 0.08), transparent 44%),
-    linear-gradient(140deg, #060300 0%, #100901 40%, #1b1002 68%, #040200 100%);
+    radial-gradient(circle at 16% 18%, rgba(255, 218, 115, 0.12), transparent 40%),
+    radial-gradient(circle at 84% 28%, rgba(255, 199, 44, 0.10), transparent 44%),
+    linear-gradient(140deg, #000000 0%, #050505 40%, #0a0a0a 68%, #000000 100%);
   color: #ffffff;
   padding: 5rem 2rem 4rem;
   text-align: center;
   position: relative;
   overflow: hidden;
-  border-bottom: 5px solid var(--delftia-yellow);
+  border-bottom: 5px solid #FFC72C;
 }
 
 .hero-section::before {
@@ -317,14 +395,14 @@ button:focus-visible {
   position: absolute;
   inset: 0;
   background:
-    radial-gradient(circle at 10% 18%, rgba(232, 149, 75, 0.16) 0 2px, transparent 3px),
-    radial-gradient(circle at 22% 72%, rgba(216, 125, 55, 0.14) 0 3px, transparent 4px),
-    radial-gradient(circle at 34% 38%, rgba(200, 110, 45, 0.12) 0 2px, transparent 3px),
-    radial-gradient(circle at 48% 82%, rgba(210, 130, 60, 0.13) 0 2.5px, transparent 4px),
-    radial-gradient(circle at 63% 20%, rgba(232, 149, 75, 0.14) 0 2px, transparent 3px),
-    radial-gradient(circle at 76% 58%, rgba(200, 110, 45, 0.12) 0 3px, transparent 4px),
-    radial-gradient(circle at 90% 32%, rgba(236, 160, 85, 0.15) 0 2px, transparent 3px),
-    linear-gradient(125deg, rgba(232, 149, 75, 0.08), transparent 45%, rgba(200, 110, 45, 0.08));
+    radial-gradient(circle at 10% 18%, rgba(255, 218, 115, 0.22) 0 2px, transparent 3px),
+    radial-gradient(circle at 22% 72%, rgba(255, 199, 44, 0.20) 0 3px, transparent 4px),
+    radial-gradient(circle at 34% 38%, rgba(255, 224, 130, 0.18) 0 2px, transparent 3px),
+    radial-gradient(circle at 48% 82%, rgba(255, 199, 44, 0.18) 0 2.5px, transparent 4px),
+    radial-gradient(circle at 63% 20%, rgba(255, 218, 115, 0.20) 0 2px, transparent 3px),
+    radial-gradient(circle at 76% 58%, rgba(255, 199, 44, 0.18) 0 3px, transparent 4px),
+    radial-gradient(circle at 90% 32%, rgba(255, 224, 130, 0.22) 0 2px, transparent 3px),
+    linear-gradient(125deg, rgba(255, 218, 115, 0.08), transparent 45%, rgba(255, 199, 44, 0.08));
   z-index: 0;
   pointer-events: none;
 }
@@ -334,8 +412,8 @@ button:focus-visible {
   position: absolute;
   inset: 0;
   background:
-    radial-gradient(ellipse at 0% 100%, rgba(232, 149, 75, 0.18), transparent 55%),
-    radial-gradient(ellipse at 100% 0%, rgba(255, 218, 115, 0.12), transparent 55%);
+    radial-gradient(ellipse at 0% 100%, rgba(255, 199, 44, 0.18), transparent 55%),
+    radial-gradient(ellipse at 100% 0%, rgba(255, 218, 115, 0.16), transparent 55%);
   z-index: 1;
   pointer-events: none;
 }
@@ -375,7 +453,8 @@ html body:not(.home) .hero-section h1 {
   height: 4px;
   margin: 1rem auto 0;
   border-radius: 2px;
-  background: var(--delftia-brand-gradient);
+  background: linear-gradient(90deg, #FFC72C, #FFE082);
+  box-shadow: 0 0 10px rgba(255, 199, 44, 0.5);
 }
 
 /* Ensure hero titles are visible with inline font-size overrides */
@@ -449,27 +528,32 @@ html body:not(.home) .hero-section h1 {
 }
 
 .btn-primary-hero {
-  background: var(--delftia-brand-gradient);
-  color: #1a1410 !important;
-  border: 1px solid rgba(232, 149, 75, 0.8);
-  box-shadow: 0 10px 24px rgba(0,0,0,0.22), 0 0 24px rgba(232, 149, 75, 0.26);
+  background: linear-gradient(135deg, #FFC72C 0%, #FFE082 50%, #FFB81C 100%);
+  color: #000000 !important;
+  font-weight: 700;
+  border: 1px solid #FFE082;
+  box-shadow: 0 10px 24px rgba(0,0,0,0.35), 0 0 20px rgba(255, 199, 44, 0.35);
 }
 
 .btn-primary-hero:hover {
-  background: linear-gradient(135deg, #E8954B, #F4A854 60%, #D67E3E);
-  color: #1a1410 !important;
+  background: linear-gradient(135deg, #FFD54F 0%, #FFF9C4 50%, #FFC72C 100%);
+  color: #000000 !important;
+  box-shadow: 0 12px 28px rgba(0,0,0,0.45), 0 0 25px rgba(255, 218, 115, 0.5);
 }
 
 .btn-outline-hero {
   background: transparent;
-  color: var(--delftia-title-dark) !important;
-  border: 2px solid rgba(232, 149, 75, 0.95);
-  box-shadow: inset 0 0 0 1px rgba(232, 149, 75, 0.18);
+  color: #FFE082 !important;
+  font-weight: 700;
+  border: 2px solid #FFC72C;
+  box-shadow: inset 0 0 0 1px rgba(255, 199, 44, 0.25), 0 0 15px rgba(255, 199, 44, 0.15);
 }
 
 .btn-outline-hero:hover {
-  background: rgba(232, 149, 75, 0.22);
-  color: #F5E6D3 !important;
+  background: rgba(255, 199, 44, 0.2);
+  color: #FFFFFF !important;
+  border-color: #FFE082;
+  box-shadow: inset 0 0 0 1px rgba(255, 224, 130, 0.35), 0 0 20px rgba(255, 199, 44, 0.3);
 }
 
 /* ---- Stats bar -------------------------------------------- */
@@ -1143,19 +1227,19 @@ body:not(.home) :focus-visible {
 .theme-toggle,
 .reading-toggle {
   background: transparent;
-  border: 2px solid var(--delftia-gold-glow);
+  border: 1.5px solid var(--delftia-gold-glow);
   color: var(--delftia-gold-glow);
-  padding: 0.5rem 1rem;
+  padding: 0.35rem 0.75rem;
   border-radius: 20px;
   cursor: pointer;
-  font-size: 0.9rem;
+  font-size: 0.85rem;
   font-weight: 600;
+  white-space: nowrap;
   transition: all var(--transition-fast);
   display: inline-flex;
   align-items: center;
-  gap: 0.5rem;
-  min-height: 44px;
-  min-width: 44px;
+  gap: 0.4rem;
+  min-height: 38px;
 }
 
 .theme-toggle:hover,
@@ -1175,11 +1259,12 @@ body:not(.home) :focus-visible {
 
 .display-controls {
   display: flex;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
+  align-items: center;
   justify-content: flex-end;
   gap: 0.5rem;
-  padding: 0.5rem 1rem;
-  border-top: 1px solid rgba(232, 149, 75, 0.3);
+  padding: 0;
+  border-top: none;
 }
 
 .reading-toggle[aria-pressed="true"] {
