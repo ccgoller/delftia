@@ -27,7 +27,7 @@ body-classes: home
   <div class="stats-grid">
     <div class="stat-item">
       <div class="stat-number" aria-hidden="true">4</div>
-      <div class="stat-label"><span class="visually-hidden">4 </span>Published References</div>
+      <div class="stat-label"><span class="visually-hidden">5 </span>Publications</div>
     </div>
     <div class="stat-item">
       <div class="stat-number" aria-hidden="true">13</div>
@@ -60,7 +60,7 @@ Today, *Delftia* is found in waste-contaminated soil, water systems, and drains.
 <span class="tag-chip"><span aria-hidden="true">🔬</span> Undergraduate Research</span>
 
 <br/><br/>
-<a href="references.html" class="btn-hero btn-primary-hero btn-hero--compact">Read the Literature →</a>
+<a href="references.html" class="btn-hero btn-primary-hero btn-hero--compact">View Publications →</a>
 :::
 
 ![Colonies of *Delftia acidovorans* on agar](images/photo.jpg){fig-alt="Colonies of Delftia acidovorans on agar" .spotlight-image}
