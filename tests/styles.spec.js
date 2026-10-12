@@ -156,7 +156,7 @@ test('display controls and cards reflow on narrow screens', async ({ page }) => 
 test('navbar logo scales down on mobile', async ({ page }) => {
   await page.setViewportSize({ width: 1280, height: 800 });
   await page.goto('/index.html');
-  const logo = page.locator('.navbar-brand .navbar-logo');
+  const logo = page.locator('.navbar-brand .navbar-logo:visible');
   const desktopWidth = await logo.evaluate(element => element.getBoundingClientRect().width);
   await page.setViewportSize({ width: 320, height: 740 });
   const mobileBox = await logo.evaluate(element => {
