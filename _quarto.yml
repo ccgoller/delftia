@@ -25,11 +25,14 @@ website:
     logo-alt: "Delftia Project logo"
     background: "#1a1410"
     foreground: "white"
-    left:
-      - href: index.qmd
-        text: Home
+    search: false
+    right:
       - href: about.qmd
         text: About
+      - href: learn.qmd
+        text: Learn
+      - href: dashboard.qmd
+        text: Dashboard
       - text: Research
         menu:
           - href: research.qmd
@@ -40,16 +43,8 @@ website:
             text: Publications
       - href: people.qmd
         text: People
-      - href: dashboard.qmd
-        text: Dashboard
-      - href: learn.qmd
-        text: Learn
-    right:
       - text: "Get Involved"
         href: about.qmd#get-involved
-      - icon: github
-        href: https://github.com/ccgoller/delftia
-        aria-label: GitHub repository
 
   page-footer:
     background: "#1a1410"
