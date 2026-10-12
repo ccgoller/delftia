@@ -1447,6 +1447,84 @@ html[data-reading-focus="true"] .cta-section {
   display: none;
 }
 
+.dashboard-line-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1.25rem;
+  margin-bottom: 1rem;
+}
+
+.dashboard-line-legend legend {
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.dashboard-line-legend label {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  min-height: 44px;
+  cursor: pointer;
+}
+
+.growth-swatch {
+  width: 1.5rem;
+  height: 0.4rem;
+  background: var(--growth-color);
+  border: 1px solid #1a1410;
+}
+
+.growth-publications { --growth-color: #E8954B; }
+.growth-genomes { --growth-color: #B0B0B0; }
+.growth-cumulative { --growth-color: #FFDA73; }
+
+.dashboard-line-scroll {
+  max-width: 100%;
+  overflow-x: auto;
+  margin-bottom: 1rem;
+}
+
+.dashboard-line-chart {
+  display: block;
+  width: 100%;
+  min-width: 560px;
+  background: #1a1410;
+  border-radius: 0.25rem;
+}
+
+.dashboard-line-chart text {
+  fill: #f5f0e8;
+  font: 13px sans-serif;
+}
+
+.growth-grid {
+  stroke: #665b50;
+}
+
+.growth-series polyline {
+  stroke: var(--growth-color);
+  stroke-width: 3;
+}
+
+.growth-series circle {
+  fill: var(--growth-color);
+}
+
+.growth-genomes polyline { stroke-dasharray: 7 4; }
+.growth-cumulative polyline { stroke-dasharray: 2 4; }
+
+.growth-marker {
+  stroke: #f5f0e8;
+  stroke-dasharray: 4 4;
+  pointer-events: none;
+}
+
+#growth-chart-year {
+  display: block;
+  width: 100%;
+  min-height: 44px;
+}
+
 .nav-footer .footer-items {
   display: flex;
   flex-wrap: wrap;

@@ -9,7 +9,7 @@
   genomesURL.search = new URLSearchParams({
     result: 'assembly',
     query: 'tax_tree(80865)',
-    fields: 'assembly_accession,assembly_name,scientific_name,last_updated',
+    fields: 'assembly_accession,assembly_name,scientific_name,first_public,last_updated',
     format: 'json',
     limit: '0',
   });
@@ -38,6 +38,114 @@
   }
 
   const chartData = {};
+  const growthData = { publications: null, genomes: null, undatedGenomes: 0 };
+  const growthChart = document.getElementById('growth-chart');
+  const growthYear = document.getElementById('growth-chart-year');
+  const growthDetail = document.getElementById('growth-chart-detail');
+  let growthRows = [];
+
+  function svgElement(name, attributes, text) {
+    const element = document.createElementNS('http://www.w3.org/2000/svg', name);
+    for (const [key, value] of Object.entries(attributes)) element.setAttribute(key, value);
+    if (text !== undefined) element.textContent = text;
+    return element;
+  }
+
+  function inspectGrowthYear(index) {
+    const row = growthRows[index];
+    if (!row) return;
+    growthYear.value = index;
+    growthYear.setAttribute('aria-valuetext', String(row.year));
+    growthDetail.textContent = `${row.year}: ${row.publications.toLocaleString()} publications, ${row.genomes.toLocaleString()} genomes, ${row.cumulative.toLocaleString()} cumulative genomes.`;
+    const marker = growthChart.querySelector('.growth-marker');
+    const x = growthRows.length === 1 ? 384 : 64 + index / (growthRows.length - 1) * 640;
+    marker.setAttribute('x1', x);
+    marker.setAttribute('x2', x);
+  }
+
+  function renderGrowthChart() {
+    const status = document.getElementById('growth-chart-status');
+    const controls = document.getElementById('growth-chart-controls');
+    growthChart.replaceChildren();
+    growthDetail.textContent = '';
+    controls.hidden = true;
+    if (!growthData.publications || !growthData.genomes) {
+      status.textContent = 'Unable to load the annual graph right now. Both PubMed and ENA counts are required; refresh to try again.';
+      return;
+    }
+    const years = [...growthData.publications.keys(), ...growthData.genomes.keys()].map(Number);
+    if (!years.length) {
+      status.textContent = 'No dated records available for the annual graph.';
+      return;
+    }
+    const selectedYear = growthRows[Number(growthYear.value)]?.year;
+    growthRows = [];
+    let cumulative = 0;
+    for (let year = Math.min(...years); year <= new Date().getFullYear(); year++) {
+      const genomes = growthData.genomes.get(String(year)) || 0;
+      cumulative += genomes;
+      growthRows.push({ year, genomes, cumulative, publications: growthData.publications.get(String(year)) || 0 });
+    }
+    const series = [...document.querySelectorAll('[data-growth-series]:checked')].map(input => input.dataset.growthSeries);
+    const maximum = Math.max(1, ...growthRows.flatMap(row => series.map(name => row[name])));
+    const x = index => growthRows.length === 1 ? 384 : 64 + index / (growthRows.length - 1) * 640;
+    const y = count => 264 - count / maximum * 232;
+    for (let tick = 0; tick <= 4; tick++) {
+      const count = maximum * tick / 4;
+      growthChart.append(
+        svgElement('line', { x1: 64, x2: 704, y1: y(count), y2: y(count), class: 'growth-grid' }),
+        svgElement('text', { x: 56, y: y(count) + 5, 'text-anchor': 'end' }, count.toLocaleString(undefined, { maximumFractionDigits: 1 })),
+      );
+    }
+    growthChart.append(svgElement('text', { x: 64, y: 20 }, 'Count'));
+    const interval = Math.max(1, Math.ceil((growthRows.length - 1) / 6));
+    growthRows.forEach((row, index) => {
+      if (index % interval === 0 || index === growthRows.length - 1) {
+        growthChart.append(svgElement('text', { x: x(index), y: 290, 'text-anchor': 'middle' }, row.year));
+      }
+    });
+    growthChart.append(svgElement('text', { x: 384, y: 312, 'text-anchor': 'middle' }, 'Year'));
+    for (const name of series) {
+      const group = svgElement('g', { class: `growth-series growth-${name}`, 'data-series': name });
+      group.append(svgElement('polyline', { points: growthRows.map((row, index) => `${x(index)},${y(row[name])}`).join(' '), fill: 'none' }));
+      growthRows.forEach((row, index) => {
+        group.append(svgElement('circle', { cx: x(index), cy: y(row[name]), r: 3 }));
+      });
+      growthChart.append(group);
+    }
+    growthChart.append(svgElement('line', { x1: 64, x2: 64, y1: 32, y2: 264, class: 'growth-marker' }));
+    growthRows.forEach((row, index) => {
+      const left = index === 0 ? 64 : (x(index - 1) + x(index)) / 2;
+      const right = index === growthRows.length - 1 ? 704 : (x(index) + x(index + 1)) / 2;
+      const target = svgElement('rect', { x: left, y: 32, width: right - left, height: 232, fill: 'transparent' });
+      target.append(svgElement('title', {}, `${row.year}: ${row.publications} publications, ${row.genomes} genomes, ${row.cumulative} cumulative genomes`));
+      target.addEventListener('pointerenter', () => inspectGrowthYear(index));
+      target.addEventListener('pointerdown', () => inspectGrowthYear(index));
+      growthChart.append(target);
+    });
+    growthYear.max = growthRows.length - 1;
+    controls.hidden = false;
+    status.textContent = `All matching PubMed articles and ENA assemblies with valid years. ${growthData.undatedGenomes} assemblies without a valid first-public date excluded. Retrieved ${new Date().toLocaleString()}.`;
+    const index = growthRows.findIndex(row => row.year === selectedYear);
+    inspectGrowthYear(index < 0 ? growthRows.length - 1 : index);
+  }
+
+  function countGenomeYears(records) {
+    const years = new Map();
+    for (const record of records) {
+      const date = record.first_public;
+      const parsed = new Date(date);
+      if (typeof date === 'string' && /^\d{4}-\d{2}-\d{2}$/.test(date) &&
+          date >= '1800-01-01' && date <= new Date().toISOString().slice(0, 10) &&
+          Number.isFinite(parsed.getTime()) && parsed.toISOString().slice(0, 10) === date) {
+        const year = date.slice(0, 4);
+        years.set(year, (years.get(year) || 0) + 1);
+      } else {
+        growthData.undatedGenomes++;
+      }
+    }
+    growthData.genomes = years;
+  }
 
   function compareDates(a, b, order) {
     const first = /^\d{4}-\d{2}-\d{2}$/.test(a) ? a : '';
@@ -166,6 +274,7 @@
         }
       }
       renderChart('publications');
+      growthData.publications = years;
       status.textContent = total
         ? `${total.toLocaleString()} PubMed articles. ${undated ? `${undated} without a valid publication year omitted from graph. ` : ''}Retrieved ${new Date().toLocaleString()}.`
         : 'No PubMed articles found.';
@@ -272,6 +381,7 @@
       let count = records.length;
       if (feed.name === 'genomes') {
         genomeRecords = records;
+        countGenomeYears(records);
         renderGenomeChart(records);
         count = renderGenomeList();
       } else {
@@ -295,11 +405,20 @@
   async function loadDashboard() {
     refresh.disabled = true;
     updated.textContent = 'Checking…';
+    growthData.publications = null;
+    growthData.genomes = null;
+    growthData.undatedGenomes = 0;
+    growthRows = [];
+    growthChart.replaceChildren();
+    growthDetail.textContent = '';
+    document.getElementById('growth-chart-controls').hidden = true;
+    document.getElementById('growth-chart-status').textContent = 'Loading annual publication and genome counts…';
     genomeRecords = [];
     chartData.genomes = [];
     renderChart('genomes');
     document.getElementById('genomes-chart-status').textContent = 'Loading all Delftia genome assemblies…';
     await Promise.all([...feeds.map(loadFeed), loadPublicationChart()]);
+    renderGrowthChart();
     updated.textContent = new Date().toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' });
     refresh.disabled = false;
   }
@@ -314,5 +433,9 @@
   }
   search.addEventListener('input', updateDashboardSummary);
   refresh.addEventListener('click', loadDashboard);
+  growthYear.addEventListener('input', () => inspectGrowthYear(Number(growthYear.value)));
+  for (const input of document.querySelectorAll('[data-growth-series]')) {
+    input.addEventListener('change', renderGrowthChart);
+  }
   loadDashboard();
 })();

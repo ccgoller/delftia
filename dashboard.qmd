@@ -13,6 +13,31 @@ description: "Interactive annual PubMed publication counts, Delftia genome assem
 
 Explore research across the genus *Delftia*. These live public database results are not limited to the Delftia Project.
 
+## Research Growth by Year
+
+Orange shows **PubMed publications**, gray shows **genome assemblies first made public in ENA**, and yellow shows **cumulative genome assemblies** through each year. These counts cover all matching records in today's databases, not historical database snapshots or unique strains. Genome years use ENA's **first_public** date, never record update dates; assemblies without a valid first-public date are excluded from both genome lines. The current year is incomplete.
+
+```{=html}
+<section class="dashboard-panel" aria-label="Annual research growth">
+  <p id="growth-chart-status" role="status">Live graphs require JavaScript. Browse the PubMed and ENA source links below.</p>
+  <div id="growth-chart-controls" hidden>
+    <fieldset class="dashboard-line-legend">
+      <legend>Show lines</legend>
+      <label><input type="checkbox" data-growth-series="publications" checked> <span class="growth-swatch growth-publications" aria-hidden="true"></span> Publications</label>
+      <label><input type="checkbox" data-growth-series="genomes" checked> <span class="growth-swatch growth-genomes" aria-hidden="true"></span> Genomes</label>
+      <label><input type="checkbox" data-growth-series="cumulative" checked> <span class="growth-swatch growth-cumulative" aria-hidden="true"></span> Cumulative genomes</label>
+    </fieldset>
+    <p>Hover over or tap the graph to inspect a year. Use the year slider with the arrow keys to explore counts, or toggle lines above. Record filtering below does not change the graph.</p>
+    <div class="dashboard-line-scroll">
+      <svg id="growth-chart" class="dashboard-line-chart" viewBox="0 0 720 320" role="img" aria-label="Publications, genomes, and cumulative genomes by year"></svg>
+    </div>
+    <label for="growth-chart-year">Inspect year</label>
+    <input type="range" id="growth-chart-year" min="0" max="0" value="0">
+    <p id="growth-chart-detail" class="dashboard-chart-detail" aria-live="polite"></p>
+  </div>
+</section>
+```
+
 ```{=html}
 <section class="dashboard-overview" aria-label="Dashboard overview">
   <div class="dashboard-metric">

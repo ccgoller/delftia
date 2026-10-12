@@ -27,10 +27,10 @@ async function mockFeeds(page, { empty = false, failPublications = false, failGe
     const params = new URL(route.request().url()).searchParams;
     expect(params.get('query')).toBe('tax_tree(80865)');
     expect(params.get('limit')).toBe('0');
-    expect(params.get('fields')).toBe('assembly_accession,assembly_name,scientific_name,last_updated');
+    expect(params.get('fields')).toBe('assembly_accession,assembly_name,scientific_name,first_public,last_updated');
     return route.fulfill({ json: empty ? [] : [
-      { accession: 'GCA_000001', assembly_name: 'Alpha assembly', scientific_name: 'Delftia acidovorans', last_updated: '2025-01-01' },
-      { accession: 'GCA_000002', assembly_name: 'Beta assembly', scientific_name: 'Delftia tsuruhatensis', last_updated: '2026-10-02' },
+      { accession: 'GCA_000001', assembly_name: 'Alpha assembly', scientific_name: 'Delftia acidovorans', first_public: '2023-01-01', last_updated: '2025-01-01' },
+      { accession: 'GCA_000002', assembly_name: 'Beta assembly', scientific_name: 'Delftia tsuruhatensis', first_public: '2026-01-01', last_updated: '2026-10-02' },
     ] });
   });
 }
@@ -146,6 +146,96 @@ test('dashboard explains empty results', async ({ page }) => {
   await expect(page.locator('#publications-chart-status')).toHaveText('No PubMed articles found.');
   await expect(page.locator('#genomes-chart-status')).toHaveText('No genome assembly records found.');
   await expect(page.locator('.dashboard-chart li')).toHaveCount(0);
+  await expect(page.locator('#growth-chart-status')).toHaveText('No dated records available for the annual graph.');
+  await expect(page.locator('#growth-chart-controls')).toBeHidden();
+});
+
+test('annual line graph counts first-public years, fills gaps, and supports interaction', async ({ page }) => {
+  await mockFeeds(page);
+  await page.goto('/dashboard.html');
+  const graph = page.locator('#growth-chart');
+  await expect(page.locator('#growth-chart-controls')).toBeVisible();
+  await expect(graph.locator('.growth-series')).toHaveCount(3);
+  for (const [series, color] of [
+    ['publications', 'rgb(232, 149, 75)'], ['genomes', 'rgb(176, 176, 176)'], ['cumulative', 'rgb(255, 218, 115)'],
+  ]) {
+    await expect(graph.locator(`.growth-${series} polyline`)).toHaveCSS('stroke', color);
+    await expect(graph.locator(`.growth-${series} circle`)).toHaveCount(4);
+  }
+  await expect(page.locator('#growth-chart-detail')).toHaveText('2026: 2 publications, 1 genomes, 2 cumulative genomes.');
+  const slider = page.getByRole('slider', { name: 'Inspect year' });
+  await slider.focus();
+  await page.keyboard.press('Home');
+  await expect(slider).toHaveAttribute('aria-valuetext', '2023');
+  await expect(page.locator('#growth-chart-detail')).toHaveText('2023: 0 publications, 1 genomes, 1 cumulative genomes.');
+  await page.keyboard.press('ArrowRight');
+  await expect(page.locator('#growth-chart-detail')).toHaveText('2024: 1 publications, 0 genomes, 1 cumulative genomes.');
+  await graph.locator('rect').nth(2).dispatchEvent('pointerenter');
+  await expect(page.locator('#growth-chart-detail')).toHaveText('2025: 0 publications, 0 genomes, 1 cumulative genomes.');
+  await graph.locator('rect').last().dispatchEvent('pointerdown');
+  await expect(slider).toHaveAttribute('aria-valuetext', '2026');
+  await page.getByRole('checkbox', { name: 'Cumulative genomes', exact: true }).uncheck();
+  await expect(graph.locator('.growth-cumulative')).toHaveCount(0);
+  await page.getByRole('checkbox', { name: 'Genomes', exact: true }).uncheck();
+  await page.getByRole('checkbox', { name: 'Publications', exact: true }).uncheck();
+  await expect(graph.locator('.growth-series')).toHaveCount(0);
+  await page.getByRole('checkbox', { name: 'Genomes', exact: true }).check();
+  await expect(graph.locator('.growth-genomes')).toHaveCount(1);
+  await page.getByRole('searchbox', { name: 'Filter loaded records' }).fill('no matches');
+  await expect(graph.locator('.growth-genomes circle')).toHaveCount(4);
+  await page.getByRole('button', { name: 'Refresh dashboard' }).click();
+  await expect(page.getByRole('button', { name: 'Refresh dashboard' })).toBeEnabled();
+  await expect(graph.locator('.growth-series')).toHaveCount(1);
+  await expect(page.locator('#growth-chart-detail')).toContainText('2 cumulative genomes');
+});
+
+test('annual genome counts deduplicate and exclude invalid first-public dates without using updates', async ({ page }) => {
+  await mockFeeds(page);
+  await page.route('https://www.ebi.ac.uk/ena/portal/api/search?**', route => route.fulfill({ json: [
+    ...Array.from({ length: 12 }, (_, index) => ({ assembly_accession: `GCA_${index}`, first_public: '2024-01-01' })),
+    { assembly_accession: 'GCA_0', first_public: '2024-01-01' },
+    { assembly_accession: 'GCA_missing', last_updated: '2026-01-01' },
+    { assembly_accession: 'GCA_invalid', first_public: '2025-99-99' },
+    { assembly_accession: 'GCA_impossible', first_public: '2025-02-30' },
+    { assembly_accession: 'GCA_future', first_public: '9999-01-01' },
+    { first_public: '2024-01-01' },
+  ] }));
+  await page.goto('/dashboard.html');
+  await expect(page.locator('#growth-chart-status')).toContainText('4 assemblies without a valid first-public date excluded');
+  await expect(page.locator('#growth-chart-detail')).toHaveText('2026: 2 publications, 0 genomes, 12 cumulative genomes.');
+  await page.getByRole('slider', { name: 'Inspect year' }).focus();
+  await page.keyboard.press('Home');
+  await expect(page.locator('#growth-chart-detail')).toHaveText('2024: 1 publications, 12 genomes, 12 cumulative genomes.');
+});
+
+test('annual graph handles a single year and failed refresh without stale lines', async ({ page }) => {
+  await mockFeeds(page);
+  await page.route('https://www.ebi.ac.uk/ena/portal/api/search?**', route => route.fulfill({ json: [
+    { assembly_accession: 'GCA_one', first_public: '2026-01-01' },
+  ] }));
+  await page.route('https://www.ebi.ac.uk/europepmc/webservices/rest/search?**', route => {
+    if (new URL(route.request().url()).searchParams.get('query') !== 'Delftia AND SRC:MED') return route.fallback();
+    return route.fulfill({ json: { hitCount: 1, resultList: { result: [{ pubYear: '2026' }] } } });
+  });
+  await page.goto('/dashboard.html');
+  await expect(page.locator('#growth-chart .growth-series circle')).toHaveCount(3);
+  await expect(page.locator('#growth-chart-detail')).toHaveText('2026: 1 publications, 1 genomes, 1 cumulative genomes.');
+  await page.unrouteAll({ behavior: 'wait' });
+  await mockFeeds(page, { failChart: true });
+  await page.getByRole('button', { name: 'Refresh dashboard' }).click();
+  await expect(page.locator('#growth-chart-status')).toContainText('Unable to load');
+  await expect(page.locator('#growth-chart-controls')).toBeHidden();
+  await expect(page.locator('#growth-chart .growth-series')).toHaveCount(0);
+  await expect(page.locator('#growth-chart-detail')).toBeEmpty();
+  await page.unrouteAll({ behavior: 'wait' });
+  await mockFeeds(page, { failGenomes: true });
+  await page.getByRole('button', { name: 'Refresh dashboard' }).click();
+  await expect(page.getByRole('button', { name: 'Refresh dashboard' })).toBeEnabled();
+  await expect(page.locator('#growth-chart-status')).toContainText('Unable to load');
+  await page.unrouteAll({ behavior: 'wait' });
+  await mockFeeds(page);
+  await page.getByRole('button', { name: 'Refresh dashboard' }).click();
+  await expect(page.locator('#growth-chart .growth-series')).toHaveCount(3);
 });
 
 test('dashboard charts count all pages, include zero years, and support keyboard and sorting', async ({ page }) => {
