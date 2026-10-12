@@ -56,11 +56,13 @@
     if (!row) return;
     growthYear.value = index;
     growthYear.setAttribute('aria-valuetext', String(row.year));
-    growthDetail.textContent = `${row.year}: ${row.publications.toLocaleString()} publications, ${row.genomes.toLocaleString()} genomes, ${row.cumulative.toLocaleString()} cumulative genomes.`;
+    growthDetail.textContent = `${row.year}: ${row.publications.toLocaleString()} publications, ${row.cumulativePublications.toLocaleString()} cumulative publications, ${row.genomes.toLocaleString()} genomes, ${row.cumulativeGenomes.toLocaleString()} cumulative genomes.`;
     const marker = growthChart.querySelector('.growth-marker');
     const x = growthRows.length === 1 ? 384 : 64 + index / (growthRows.length - 1) * 640;
-    marker.setAttribute('x1', x);
-    marker.setAttribute('x2', x);
+    if (marker) {
+      marker.setAttribute('x1', x);
+      marker.setAttribute('x2', x);
+    }
   }
 
   function renderGrowthChart() {
@@ -80,14 +82,26 @@
     }
     const selectedYear = growthRows[Number(growthYear.value)]?.year;
     growthRows = [];
-    let cumulative = 0;
+    let cumulativeGenomes = 0;
+    let cumulativePublications = 0;
     for (let year = Math.min(...years); year <= new Date().getFullYear(); year++) {
       const genomes = growthData.genomes.get(String(year)) || 0;
-      cumulative += genomes;
-      growthRows.push({ year, genomes, cumulative, publications: growthData.publications.get(String(year)) || 0 });
+      const publications = growthData.publications.get(String(year)) || 0;
+      cumulativeGenomes += genomes;
+      cumulativePublications += publications;
+      growthRows.push({
+        year,
+        genomes,
+        cumulativeGenomes,
+        'cumulative-genomes': cumulativeGenomes,
+        cumulative: cumulativeGenomes,
+        publications,
+        cumulativePublications,
+        'cumulative-publications': cumulativePublications,
+      });
     }
     const series = [...document.querySelectorAll('[data-growth-series]:checked')].map(input => input.dataset.growthSeries);
-    const maximum = Math.max(1, ...growthRows.flatMap(row => series.map(name => row[name])));
+    const maximum = Math.max(1, ...growthRows.flatMap(row => series.map(name => row[name] ?? 0)));
     const x = index => growthRows.length === 1 ? 384 : 64 + index / (growthRows.length - 1) * 640;
     const y = count => 264 - count / maximum * 232;
     for (let tick = 0; tick <= 4; tick++) {
@@ -106,10 +120,11 @@
     });
     growthChart.append(svgElement('text', { x: 384, y: 312, 'text-anchor': 'middle' }, 'Year'));
     for (const name of series) {
-      const group = svgElement('g', { class: `growth-series growth-${name}`, 'data-series': name });
-      group.append(svgElement('polyline', { points: growthRows.map((row, index) => `${x(index)},${y(row[name])}`).join(' '), fill: 'none' }));
+      const extraClass = (name === 'cumulative-genomes' || name === 'cumulative') ? ' growth-cumulative' : '';
+      const group = svgElement('g', { class: `growth-series growth-${name}${extraClass}`, 'data-series': name });
+      group.append(svgElement('polyline', { points: growthRows.map((row, index) => `${x(index)},${y(row[name] ?? 0)}`).join(' '), fill: 'none' }));
       growthRows.forEach((row, index) => {
-        group.append(svgElement('circle', { cx: x(index), cy: y(row[name]), r: 3 }));
+        group.append(svgElement('circle', { cx: x(index), cy: y(row[name] ?? 0), r: 3 }));
       });
       growthChart.append(group);
     }
@@ -118,7 +133,7 @@
       const left = index === 0 ? 64 : (x(index - 1) + x(index)) / 2;
       const right = index === growthRows.length - 1 ? 704 : (x(index) + x(index + 1)) / 2;
       const target = svgElement('rect', { x: left, y: 32, width: right - left, height: 232, fill: 'transparent' });
-      target.append(svgElement('title', {}, `${row.year}: ${row.publications} publications, ${row.genomes} genomes, ${row.cumulative} cumulative genomes`));
+      target.append(svgElement('title', {}, `${row.year}: ${row.publications} publications, ${row.cumulativePublications} cumulative publications, ${row.genomes} genomes, ${row.cumulativeGenomes} cumulative genomes`));
       target.addEventListener('pointerenter', () => inspectGrowthYear(index));
       target.addEventListener('pointerdown', () => inspectGrowthYear(index));
       growthChart.append(target);

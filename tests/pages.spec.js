@@ -155,32 +155,41 @@ test('annual line graph counts first-public years, fills gaps, and supports inte
   await page.goto('/dashboard.html');
   const graph = page.locator('#growth-chart');
   await expect(page.locator('#growth-chart-controls')).toBeVisible();
-  await expect(graph.locator('.growth-series')).toHaveCount(3);
+  await expect(graph.locator('.growth-series')).toHaveCount(4);
   for (const [series, color] of [
-    ['publications', 'rgb(232, 149, 75)'], ['genomes', 'rgb(176, 176, 176)'], ['cumulative', 'rgb(255, 218, 115)'],
+    ['publications', 'rgb(232, 149, 75)'],
+    ['cumulative-publications', 'rgb(121, 192, 255)'],
+    ['genomes', 'rgb(176, 176, 176)'],
+    ['cumulative', 'rgb(255, 218, 115)'],
   ]) {
     await expect(graph.locator(`.growth-${series} polyline`)).toHaveCSS('stroke', color);
     await expect(graph.locator(`.growth-${series} circle`)).toHaveCount(4);
   }
-  await expect(page.locator('#growth-chart-detail')).toHaveText('2026: 2 publications, 1 genomes, 2 cumulative genomes.');
+  await expect(page.locator('#growth-chart-detail')).toHaveText('2026: 2 publications, 3 cumulative publications, 1 genomes, 2 cumulative genomes.');
   const slider = page.getByRole('slider', { name: 'Inspect year' });
   await slider.focus();
   await page.keyboard.press('Home');
   await expect(slider).toHaveAttribute('aria-valuetext', '2023');
-  await expect(page.locator('#growth-chart-detail')).toHaveText('2023: 0 publications, 1 genomes, 1 cumulative genomes.');
+  await expect(page.locator('#growth-chart-detail')).toHaveText('2023: 0 publications, 0 cumulative publications, 1 genomes, 1 cumulative genomes.');
   await page.keyboard.press('ArrowRight');
-  await expect(page.locator('#growth-chart-detail')).toHaveText('2024: 1 publications, 0 genomes, 1 cumulative genomes.');
+  await expect(page.locator('#growth-chart-detail')).toHaveText('2024: 1 publications, 1 cumulative publications, 0 genomes, 1 cumulative genomes.');
   await graph.locator('rect').nth(2).dispatchEvent('pointerenter');
-  await expect(page.locator('#growth-chart-detail')).toHaveText('2025: 0 publications, 0 genomes, 1 cumulative genomes.');
+  await expect(page.locator('#growth-chart-detail')).toHaveText('2025: 0 publications, 1 cumulative publications, 0 genomes, 1 cumulative genomes.');
   await graph.locator('rect').last().dispatchEvent('pointerdown');
   await expect(slider).toHaveAttribute('aria-valuetext', '2026');
   await page.getByRole('checkbox', { name: 'Cumulative genomes', exact: true }).uncheck();
   await expect(graph.locator('.growth-cumulative')).toHaveCount(0);
+  await page.getByRole('checkbox', { name: 'Cumulative publications', exact: true }).uncheck();
+  await expect(graph.locator('.growth-cumulative-publications')).toHaveCount(0);
   await page.getByRole('checkbox', { name: 'Genomes', exact: true }).uncheck();
   await page.getByRole('checkbox', { name: 'Publications', exact: true }).uncheck();
   await expect(graph.locator('.growth-series')).toHaveCount(0);
   await page.getByRole('checkbox', { name: 'Genomes', exact: true }).check();
   await expect(graph.locator('.growth-genomes')).toHaveCount(1);
+  await page.getByRole('checkbox', { name: 'Cumulative publications', exact: true }).check();
+  await expect(graph.locator('.growth-cumulative-publications')).toHaveCount(1);
+  await expect(graph.locator('.growth-cumulative-publications polyline')).toHaveCSS('stroke', 'rgb(121, 192, 255)');
+  await page.getByRole('checkbox', { name: 'Cumulative publications', exact: true }).uncheck();
   await page.getByRole('searchbox', { name: 'Filter loaded records' }).fill('no matches');
   await expect(graph.locator('.growth-genomes circle')).toHaveCount(4);
   await page.getByRole('button', { name: 'Refresh dashboard' }).click();
@@ -202,10 +211,10 @@ test('annual genome counts deduplicate and exclude invalid first-public dates wi
   ] }));
   await page.goto('/dashboard.html');
   await expect(page.locator('#growth-chart-status')).toContainText('4 assemblies without a valid first-public date excluded');
-  await expect(page.locator('#growth-chart-detail')).toHaveText('2026: 2 publications, 0 genomes, 12 cumulative genomes.');
+  await expect(page.locator('#growth-chart-detail')).toHaveText('2026: 2 publications, 3 cumulative publications, 0 genomes, 12 cumulative genomes.');
   await page.getByRole('slider', { name: 'Inspect year' }).focus();
   await page.keyboard.press('Home');
-  await expect(page.locator('#growth-chart-detail')).toHaveText('2024: 1 publications, 12 genomes, 12 cumulative genomes.');
+  await expect(page.locator('#growth-chart-detail')).toHaveText('2024: 1 publications, 1 cumulative publications, 12 genomes, 12 cumulative genomes.');
 });
 
 test('annual graph handles a single year and failed refresh without stale lines', async ({ page }) => {
@@ -218,8 +227,8 @@ test('annual graph handles a single year and failed refresh without stale lines'
     return route.fulfill({ json: { hitCount: 1, resultList: { result: [{ pubYear: '2026' }] } } });
   });
   await page.goto('/dashboard.html');
-  await expect(page.locator('#growth-chart .growth-series circle')).toHaveCount(3);
-  await expect(page.locator('#growth-chart-detail')).toHaveText('2026: 1 publications, 1 genomes, 1 cumulative genomes.');
+  await expect(page.locator('#growth-chart .growth-series circle')).toHaveCount(4);
+  await expect(page.locator('#growth-chart-detail')).toHaveText('2026: 1 publications, 1 cumulative publications, 1 genomes, 1 cumulative genomes.');
   await page.unrouteAll({ behavior: 'wait' });
   await mockFeeds(page, { failChart: true });
   await page.getByRole('button', { name: 'Refresh dashboard' }).click();
@@ -235,7 +244,7 @@ test('annual graph handles a single year and failed refresh without stale lines'
   await page.unrouteAll({ behavior: 'wait' });
   await mockFeeds(page);
   await page.getByRole('button', { name: 'Refresh dashboard' }).click();
-  await expect(page.locator('#growth-chart .growth-series')).toHaveCount(3);
+  await expect(page.locator('#growth-chart .growth-series')).toHaveCount(4);
 });
 
 test('dashboard charts count all pages, include zero years, and support keyboard and sorting', async ({ page }) => {
