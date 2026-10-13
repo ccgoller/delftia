@@ -1621,10 +1621,9 @@ html[data-reading-focus="true"] .cta-section {
 
 .nav-footer .footer-items {
   display: flex;
-  flex-wrap: nowrap;
+  flex-wrap: wrap;
   justify-content: center;
   gap: 0.5rem;
-  overflow: hidden;
 }
 
 .footer-github-icon {
