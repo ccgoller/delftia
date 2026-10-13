@@ -35,10 +35,6 @@ body-classes: home
       <div class="stat-number" aria-hidden="true">3</div>
       <div class="stat-label"><span class="visually-hidden">3 </span>Research Initiatives</div>
     </div>
-    <div class="stat-item">
-      <div class="stat-number" aria-hidden="true">NC&nbsp;State</div>
-      <div class="stat-label"><span class="visually-hidden">NC State </span>University Partner</div>
-    </div>
   </div>
 </section>
 ```
