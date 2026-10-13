@@ -241,11 +241,11 @@
   }
 
   async function loadPublicationChart() {
-    const status = document.getElementById('publications-chart-status');
-    chartData.publications = [];
-    renderChart('publications');
-    status.textContent = 'Loading all PubMed-indexed Delftia articles…';
     try {
+      const status = document.getElementById('publications-chart-status');
+      chartData.publications = [];
+      renderChart('publications');
+      status.textContent = 'Loading all PubMed-indexed Delftia articles…';
       const years = new Map();
       let cursor = '*';
       let loaded = 0;
@@ -294,6 +294,7 @@
         ? `${total.toLocaleString()} PubMed articles. ${undated ? `${undated} without a valid publication year omitted from graph. ` : ''}Retrieved ${new Date().toLocaleString()}.`
         : 'No PubMed articles found.';
     } catch {
+      const status = document.getElementById('publications-chart-status');
       status.textContent = 'Unable to load PubMed article counts right now. Use the PubMed link above or refresh to try again.';
     }
   }
@@ -386,11 +387,11 @@
   }
 
   async function loadFeed(feed) {
-    const status = document.getElementById(`${feed.name}-status`);
-    const list = document.getElementById(`${feed.name}-list`);
-    status.textContent = `Loading latest ${feed.name}…`;
-    list.replaceChildren();
     try {
+      const status = document.getElementById(`${feed.name}-status`);
+      const list = document.getElementById(`${feed.name}-list`);
+      status.textContent = `Loading latest ${feed.name}…`;
+      list.replaceChildren();
       const data = await fetchRecords(feed.url);
       const records = feed.records(data);
       let count = records.length;
@@ -406,6 +407,8 @@
         ? `Showing ${count} records. Retrieved ${new Date().toLocaleString()}.`
         : `No ${feed.name} records found. Try the source link above.`;
     } catch {
+      const status = document.getElementById(`${feed.name}-status`);
+      const list = document.getElementById(`${feed.name}-list`);
       list.replaceChildren();
       status.textContent = `Unable to load ${feed.name} right now. Use the source link above or refresh to try again.`;
       if (feed.name === 'genomes') {
@@ -432,10 +435,13 @@
     chartData.genomes = [];
     renderChart('genomes');
     document.getElementById('genomes-chart-status').textContent = 'Loading all Delftia genome assemblies…';
-    await Promise.all([...feeds.map(loadFeed), loadPublicationChart()]);
-    renderGrowthChart();
-    updated.textContent = new Date().toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' });
-    refresh.disabled = false;
+    try {
+      await Promise.all([...feeds.map(loadFeed), loadPublicationChart()]);
+    } finally {
+      renderGrowthChart();
+      updated.textContent = new Date().toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' });
+      refresh.disabled = false;
+    }
   }
   search.hidden = false;
   refresh.hidden = false;
