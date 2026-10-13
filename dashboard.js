@@ -9,7 +9,7 @@
   genomesURL.search = new URLSearchParams({
     result: 'assembly',
     query: 'tax_tree(80865)',
-    fields: 'assembly_accession,assembly_name,scientific_name,first_public,last_updated',
+    fields: 'accession,assembly_name,scientific_name,version,last_updated',
     format: 'json',
     limit: '0',
   });
@@ -72,7 +72,7 @@
     growthDetail.textContent = '';
     controls.hidden = true;
     if (!growthData.publications || !growthData.genomes) {
-      status.textContent = 'Unable to load the annual graph right now. Both PubMed and ENA counts are required; refresh to try again.';
+      status.textContent = 'Unable to load the annual graph right now. PubMed counts, ENA assemblies, and NCBI release dates are required; refresh to try again.';
       return;
     }
     const years = [...growthData.publications.keys(), ...growthData.genomes.keys()].map(Number);
@@ -140,7 +140,7 @@
     });
     growthYear.max = growthRows.length - 1;
     controls.hidden = false;
-    status.textContent = `All matching PubMed articles and ENA assemblies with valid years. ${growthData.undatedGenomes} assemblies without a valid first-public date excluded. Retrieved ${new Date().toLocaleString()}.`;
+    status.textContent = `All matching PubMed articles and ENA assemblies with valid years. Genome years use NCBI assembly release dates. ${growthData.undatedGenomes} assemblies without a valid release date excluded. Retrieved ${new Date().toLocaleString()}.`;
     const index = growthRows.findIndex(row => row.year === selectedYear);
     inspectGrowthYear(index < 0 ? growthRows.length - 1 : index);
   }
@@ -148,7 +148,7 @@
   function countGenomeYears(records) {
     const years = new Map();
     for (const record of records) {
-      const date = record.first_public;
+      const date = record.release_date;
       const parsed = new Date(date);
       if (typeof date === 'string' && /^\d{4}-\d{2}-\d{2}$/.test(date) &&
           date >= '1800-01-01' && date <= new Date().toISOString().slice(0, 10) &&
@@ -160,6 +160,48 @@
       }
     }
     growthData.genomes = years;
+  }
+
+  async function loadGenomeYears(records) {
+    const dates = new Map();
+    if (records.length) {
+      let token = '';
+      let total;
+      let loaded = 0;
+      const seen = new Set();
+      do {
+        const url = new URL('https://api.ncbi.nlm.nih.gov/datasets/v2/genome/taxon/80865/dataset_report');
+        url.search = new URLSearchParams({
+          'filters.assembly_source': 'genbank',
+          page_size: '1000',
+          ...(token ? { page_token: token } : {}),
+        });
+        const data = await fetchRecords(url);
+        total ??= Number(data.total_count);
+        if (!Number.isSafeInteger(total) || total < 0 ||
+            (data.total_count !== undefined && Number(data.total_count) !== total)) {
+          throw new Error('Invalid assembly release dates count');
+        }
+        const reports = data.reports ?? (Number(data.total_count) === 0 ? [] : null);
+        if (!Array.isArray(reports)) throw new Error('Invalid assembly release dates response');
+        loaded += reports.length;
+        for (const report of reports) {
+          if (typeof report.accession === 'string' && report.accession.startsWith('GCA_')) {
+            dates.set(report.accession, report.assembly_info?.release_date);
+          }
+        }
+        token = data.next_page_token || '';
+        if (token && (!reports.length || seen.has(token))) {
+          throw new Error('Incomplete assembly release dates response');
+        }
+        seen.add(token);
+      } while (token);
+      if (loaded !== total) throw new Error('Incomplete assembly release dates response');
+    }
+    countGenomeYears(records.map(record => ({
+      release_date: dates.get(record.assembly_accession.includes('.') || !record.version
+        ? record.assembly_accession : `${record.assembly_accession}.${record.version}`),
+    })));
   }
 
   function compareDates(a, b, order) {
@@ -328,7 +370,7 @@
           assembly_name: record.assembly_name || record.assembly_accession || record.accession,
           scientific_name: record.scientific_name,
           last_updated: record.last_updated || 'Date unavailable',
-          first_public: record.first_public,
+          version: record.version,
         })).filter(record => {
           if (!record.assembly_accession || accessions.has(record.assembly_accession)) return false;
           accessions.add(record.assembly_accession);
@@ -401,9 +443,13 @@
       let count = records.length;
       if (feed.name === 'genomes') {
         genomeRecords = records;
-        countGenomeYears(records);
         renderGenomeChart(records);
         count = renderGenomeList();
+        try {
+          await loadGenomeYears(records);
+        } catch {
+          growthData.genomes = null;
+        }
       } else {
         records.forEach(record => feed.render(list, record));
       }

@@ -1,6 +1,28 @@
 const { test, expect } = require('@playwright/test');
 const AxeBuilder = require('@axe-core/playwright').default;
 
+async function mockAssemblies(page, records) {
+  await page.route('https://www.ebi.ac.uk/ena/portal/api/search?**', route => {
+    const params = new URL(route.request().url()).searchParams;
+    expect(params.get('query')).toBe('tax_tree(80865)');
+    expect(params.get('limit')).toBe('0');
+    expect(params.get('result')).toBe('assembly');
+    expect(params.get('format')).toBe('json');
+    expect(params.get('fields')).toBe('accession,assembly_name,scientific_name,version,last_updated');
+    return route.fulfill({ json: records.map(({ release_date, ...record }) => record) });
+  });
+  await page.route('https://api.ncbi.nlm.nih.gov/datasets/v2/genome/taxon/80865/dataset_report?**', route => {
+    const params = new URL(route.request().url()).searchParams;
+    expect(params.get('filters.assembly_source')).toBe('genbank');
+    expect(params.get('page_size')).toBe('1000');
+    const reports = records.filter(record => record.accession || record.assembly_accession).map(record => ({
+      accession: `${record.accession || record.assembly_accession}${record.version ? `.${record.version}` : ''}`,
+      assembly_info: { release_date: record.release_date },
+    }));
+    return route.fulfill({ json: { reports, total_count: reports.length } });
+  });
+}
+
 async function mockFeeds(page, { empty = false, failPublications = false, failGenomes = false, failChart = false } = {}) {
   await page.route('https://www.ebi.ac.uk/europepmc/webservices/rest/search?**', route => {
     const params = new URL(route.request().url()).searchParams;
@@ -22,17 +44,14 @@ async function mockFeeds(page, { empty = false, failPublications = false, failGe
       authorString: 'Research team', firstPublicationDate: '2026-10-01', doi: '10.1234/delftia',
     }] } } });
   });
-  await page.route('https://www.ebi.ac.uk/ena/portal/api/search?**', route => {
-    if (failGenomes) return route.fulfill({ status: 503, body: 'Unavailable' });
-    const params = new URL(route.request().url()).searchParams;
-    expect(params.get('query')).toBe('tax_tree(80865)');
-    expect(params.get('limit')).toBe('0');
-    expect(params.get('fields')).toBe('assembly_accession,assembly_name,scientific_name,first_public,last_updated');
-    return route.fulfill({ json: empty ? [] : [
-      { accession: 'GCA_000001', assembly_name: 'Alpha assembly', scientific_name: 'Delftia acidovorans', first_public: '2023-01-01', last_updated: '2025-01-01' },
-      { accession: 'GCA_000002', assembly_name: 'Beta assembly', scientific_name: 'Delftia tsuruhatensis', first_public: '2026-01-01', last_updated: '2026-10-02' },
-    ] });
-  });
+  await mockAssemblies(page, empty ? [] : [
+    { accession: 'GCA_000001', assembly_name: 'Alpha assembly', scientific_name: 'Delftia acidovorans', release_date: '2023-01-01', last_updated: '2025-01-01' },
+    { accession: 'GCA_000002', assembly_name: 'Beta assembly', scientific_name: 'Delftia tsuruhatensis', release_date: '2026-01-01', last_updated: '2026-10-02' },
+  ]);
+  if (failGenomes) {
+    await page.route('https://www.ebi.ac.uk/ena/portal/api/search?**',
+      route => route.fulfill({ status: 503, body: 'Unavailable' }));
+  }
 }
 
 for (const path of ['research', 'people', 'dashboard', 'learn']) {
@@ -111,11 +130,11 @@ test('assembly names and dates can be sorted without refetching and retain filte
 
 test('assembly sorting keeps undated records last and renders names safely', async ({ page }) => {
   await mockFeeds(page);
-  await page.route('https://www.ebi.ac.uk/ena/portal/api/search?**', route => route.fulfill({ json: [
+  await mockAssemblies(page, [
     { assembly_accession: 'GCA_missing', assembly_name: '<script>alert(1)</script>' },
     { assembly_accession: 'GCA_old', scientific_name: 'Delftia acidovorans', last_updated: '2024-01-01' },
     { assembly_accession: 'GCA_new', scientific_name: 'Delftia acidovorans', last_updated: '2026-01-01' },
-  ] }));
+  ]);
   await page.goto('/dashboard.html');
   const assemblies = page.locator('#genomes-list li');
   await expect(assemblies.first()).toContainText('GCA_new');
@@ -150,7 +169,7 @@ test('dashboard explains empty results', async ({ page }) => {
   await expect(page.locator('#growth-chart-controls')).toBeHidden();
 });
 
-test('annual line graph counts first-public years, fills gaps, and supports interaction', async ({ page }) => {
+test('annual line graph counts release years, fills gaps, and supports interaction', async ({ page }) => {
   await mockFeeds(page);
   await page.goto('/dashboard.html');
   const graph = page.locator('#growth-chart');
@@ -198,19 +217,19 @@ test('annual line graph counts first-public years, fills gaps, and supports inte
   await expect(page.locator('#growth-chart-detail')).toContainText('2 cumulative genomes');
 });
 
-test('annual genome counts deduplicate and exclude invalid first-public dates without using updates', async ({ page }) => {
+test('annual genome counts deduplicate and exclude invalid release dates without using updates', async ({ page }) => {
   await mockFeeds(page);
-  await page.route('https://www.ebi.ac.uk/ena/portal/api/search?**', route => route.fulfill({ json: [
-    ...Array.from({ length: 12 }, (_, index) => ({ assembly_accession: `GCA_${index}`, first_public: '2024-01-01' })),
-    { assembly_accession: 'GCA_0', first_public: '2024-01-01' },
+  await mockAssemblies(page, [
+    ...Array.from({ length: 12 }, (_, index) => ({ assembly_accession: `GCA_${index}`, release_date: '2024-01-01' })),
+    { assembly_accession: 'GCA_0', release_date: '2024-01-01' },
     { assembly_accession: 'GCA_missing', last_updated: '2026-01-01' },
-    { assembly_accession: 'GCA_invalid', first_public: '2025-99-99' },
-    { assembly_accession: 'GCA_impossible', first_public: '2025-02-30' },
-    { assembly_accession: 'GCA_future', first_public: '9999-01-01' },
-    { first_public: '2024-01-01' },
-  ] }));
+    { assembly_accession: 'GCA_invalid', release_date: '2025-99-99' },
+    { assembly_accession: 'GCA_impossible', release_date: '2025-02-30' },
+    { assembly_accession: 'GCA_future', release_date: '9999-01-01' },
+    { release_date: '2024-01-01' },
+  ]);
   await page.goto('/dashboard.html');
-  await expect(page.locator('#growth-chart-status')).toContainText('4 assemblies without a valid first-public date excluded');
+  await expect(page.locator('#growth-chart-status')).toContainText('4 assemblies without a valid release date excluded');
   await expect(page.locator('#growth-chart-detail')).toHaveText('2026: 2 publications, 3 cumulative publications, 0 genomes, 12 cumulative genomes.');
   await page.getByRole('slider', { name: 'Inspect year' }).focus();
   await page.keyboard.press('Home');
@@ -219,9 +238,9 @@ test('annual genome counts deduplicate and exclude invalid first-public dates wi
 
 test('annual graph handles a single year and failed refresh without stale lines', async ({ page }) => {
   await mockFeeds(page);
-  await page.route('https://www.ebi.ac.uk/ena/portal/api/search?**', route => route.fulfill({ json: [
-    { assembly_accession: 'GCA_one', first_public: '2026-01-01' },
-  ] }));
+  await mockAssemblies(page, [
+    { assembly_accession: 'GCA_one', release_date: '2026-01-01' },
+  ]);
   await page.route('https://www.ebi.ac.uk/europepmc/webservices/rest/search?**', route => {
     if (new URL(route.request().url()).searchParams.get('query') !== 'Delftia AND SRC:MED') return route.fallback();
     return route.fulfill({ json: { hitCount: 1, resultList: { result: [{ pubYear: '2026' }] } } });
@@ -275,7 +294,7 @@ test('dashboard charts count all pages, include zero years, and support keyboard
 
 test('genome chart groups all assemblies rather than the ten latest records', async ({ page }) => {
   await mockFeeds(page);
-  await page.route('https://www.ebi.ac.uk/ena/portal/api/search?**', route => route.fulfill({ json: [
+  await mockAssemblies(page, [
     ...Array.from({ length: 12 }, (_, index) => ({
       assembly_accession: `GCA_${index}`, scientific_name: 'Delftia acidovorans',
       last_updated: `2026-01-${String(index + 1).padStart(2, '0')}`,
@@ -283,7 +302,7 @@ test('genome chart groups all assemblies rather than the ten latest records', as
     { assembly_accession: 'GCA_other', scientific_name: 'Delftia tsuruhatensis', last_updated: '2026-01-01' },
     { assembly_accession: 'GCA_0', scientific_name: 'Delftia acidovorans' },
     { scientific_name: 'Not an assembly' },
-  ] }));
+  ]);
   await page.goto('/dashboard.html');
   await expect(page.locator('#genomes-list li')).toHaveCount(10);
   await expect(page.locator('#genomes-chart-status')).toContainText('13 assembly records across 2 scientific names');
@@ -295,6 +314,102 @@ test('genome chart groups all assemblies rather than the ten latest records', as
   await page.getByLabel('Assembly order').selectOption('oldest');
   await expect(page.locator('#genomes-list li').first()).toContainText('GCA_0');
 });
+
+test('ENA-compatible assembly requests populate both graphs from the full inventory', async ({ page }) => {
+  await mockFeeds(page);
+  await mockAssemblies(page, [
+      ...Array.from({ length: 12 }, (_, index) => ({
+        accession: `GCA_${index}`, assembly_name: `Assembly ${index}`,
+        scientific_name: 'Delftia acidovorans', release_date: '2024-01-01',
+        last_updated: '2026-01-01',
+      })),
+      { accession: 'GCA_other', scientific_name: 'Delftia tsuruhatensis', release_date: '2026-01-01' },
+      { accession: 'GCA_0', scientific_name: 'Delftia acidovorans', release_date: '2024-01-01' },
+      { scientific_name: 'Not an assembly', release_date: '2024-01-01' },
+  ]);
+  await page.route('https://www.ebi.ac.uk/ena/portal/api/search?**', route => {
+    const fields = new URL(route.request().url()).searchParams.get('fields').split(',');
+    if (fields.some(field => !['accession', 'assembly_name', 'scientific_name', 'version', 'last_updated'].includes(field))) {
+      return route.fulfill({ status: 400, body: 'Invalid field' });
+    }
+    return route.fallback();
+  });
+  await page.goto('/dashboard.html');
+  await expect(page.locator('#genomes-list li')).toHaveCount(10);
+  await expect(page.locator('#genomes-chart-status')).toContainText('13 assembly records across 2 scientific names');
+  await expect(page.locator('#genomes-chart a').first()).toHaveAttribute('aria-label',
+    'Delftia acidovorans: 12 genome assemblies. Browse source records.');
+  await expect(page.locator('#growth-chart-controls')).toBeVisible();
+  await expect(page.locator('#growth-chart .growth-series')).toHaveCount(4);
+  await expect(page.locator('#growth-chart-detail')).toHaveText(
+    '2026: 2 publications, 3 cumulative publications, 1 genomes, 13 cumulative genomes.');
+  await page.getByRole('slider', { name: 'Inspect year' }).focus();
+  await page.keyboard.press('Home');
+  await expect(page.locator('#growth-chart-detail')).toHaveText(
+    '2024: 1 publications, 1 cumulative publications, 12 genomes, 12 cumulative genomes.');
+  await page.getByRole('button', { name: 'Refresh dashboard' }).click();
+  await expect(page.getByRole('button', { name: 'Refresh dashboard' })).toBeEnabled();
+  await expect(page.locator('#growth-chart-detail')).toContainText('13 cumulative genomes');
+});
+
+test('genome release dates follow all NCBI pages and match assembly versions', async ({ page }) => {
+  await mockFeeds(page);
+  await mockAssemblies(page, [
+    { accession: 'GCA_000000001', version: '1', scientific_name: 'Delftia acidovorans', last_updated: '2026-01-01' },
+    { accession: 'GCA_000000002.2', scientific_name: 'Delftia acidovorans', last_updated: '2026-01-01' },
+    { accession: 'GCA_000000003', version: '2', scientific_name: 'Delftia acidovorans', last_updated: '2026-01-01' },
+  ]);
+  await page.route('https://api.ncbi.nlm.nih.gov/datasets/v2/genome/taxon/80865/dataset_report?**', route => {
+    const token = new URL(route.request().url()).searchParams.get('page_token');
+    expect(token === null || token === 'next-page').toBe(true);
+    return route.fulfill({ json: {
+      total_count: '4',
+      ...(token ? {} : { next_page_token: 'next-page' }),
+      reports: token ? [
+        { accession: 'GCA_000000002.2', assembly_info: { release_date: '2026-01-01' } },
+        { accession: 'GCA_000000003.1', assembly_info: { release_date: '2025-01-01' } },
+      ] : [
+        { accession: 'GCA_000000001.1', assembly_info: { release_date: '2024-01-01' } },
+        { accession: 'GCF_000000001.1', assembly_info: { release_date: '2025-01-01' } },
+      ],
+    } });
+  });
+  await page.goto('/dashboard.html');
+  await expect(page.locator('#genomes-chart-status')).toContainText('3 assembly records');
+  await expect(page.locator('#growth-chart-status')).toContainText('1 assemblies without a valid release date excluded');
+  await expect(page.locator('#growth-chart-detail')).toHaveText(
+    '2026: 2 publications, 3 cumulative publications, 1 genomes, 2 cumulative genomes.');
+});
+
+for (const failure of ['unavailable', 'incomplete', 'repeated-token', 'invalid']) {
+  test(`genome inventory survives ${failure} release dates and retries without stale annual totals`, async ({ page }) => {
+    await mockFeeds(page);
+    await page.goto('/dashboard.html');
+    await expect(page.locator('#growth-chart-controls')).toBeVisible();
+    await page.route('https://api.ncbi.nlm.nih.gov/datasets/v2/genome/taxon/80865/dataset_report?**', route => {
+      if (failure === 'unavailable') return route.fulfill({ status: 503, body: 'Unavailable' });
+      return route.fulfill({ json: failure === 'invalid' ? { reports: 'invalid', total_count: 1 } : {
+        total_count: 2,
+        reports: [{ accession: 'GCA_000001', assembly_info: { release_date: '2023-01-01' } }],
+        ...(failure === 'repeated-token' ? { next_page_token: 'same-page' } : {}),
+      } });
+    });
+    await page.getByRole('button', { name: 'Refresh dashboard' }).click();
+    await expect(page.getByRole('button', { name: 'Refresh dashboard' })).toBeEnabled();
+    await expect(page.locator('#genomes-list li')).toHaveCount(2);
+    await expect(page.locator('#genomes-chart li')).toHaveCount(2);
+    await expect(page.locator('#growth-chart-status')).toContainText('Unable to load');
+    await expect(page.locator('#growth-chart-controls')).toBeHidden();
+    await expect(page.locator('#growth-chart .growth-series')).toHaveCount(0);
+    await page.unrouteAll({ behavior: 'wait' });
+    await mockFeeds(page);
+    await page.getByRole('button', { name: 'Refresh dashboard' }).click();
+    await expect(page.getByRole('button', { name: 'Refresh dashboard' })).toBeEnabled();
+    await page.getByRole('slider', { name: 'Inspect year' }).focus();
+    await page.keyboard.press('End');
+    await expect(page.locator('#growth-chart-detail')).toContainText('2 cumulative genomes');
+  });
+}
 
 test('chart failures are independent and refresh clears stale graphs', async ({ page }) => {
   await mockFeeds(page, { failChart: true });
