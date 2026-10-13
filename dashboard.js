@@ -5,10 +5,13 @@
     format: 'json',
     pageSize: '10',
   });
-  const genomesURL = new URL('https://api.ncbi.nlm.nih.gov/datasets/v1/genome/taxon/80865/dataset_report');
+  const genomesURL = new URL('https://www.ebi.ac.uk/ena/portal/api/search');
   genomesURL.search = new URLSearchParams({
-    filters_RefSeq_category: 'reference_genome,representative_genome',
-    limit: '1000',
+    result: 'assembly',
+    query: 'tax_tree(80865)',
+    fields: 'assembly_accession,assembly_name,scientific_name,first_public,last_updated',
+    format: 'json',
+    limit: '0',
   });
 
   async function fetchRecords(url) {
@@ -318,14 +321,14 @@
       name: 'genomes',
       url: genomesURL,
       records(data) {
-        if (!data.reports || !Array.isArray(data.reports)) throw new Error('Invalid genomes response');
+        if (!Array.isArray(data)) throw new Error('Invalid genomes response');
         const accessions = new Set();
-        return data.reports.map(record => ({
-          assembly_accession: record.accession,
-          assembly_name: record.assembly_name || record.accession,
-          scientific_name: record.organism?.species_name || 'Delftia',
-          last_updated: record.assembly_info?.seq_rel_date || 'Date unavailable',
-          first_public: record.assembly_info?.seq_rel_date,
+        return data.map(record => ({
+          assembly_accession: record.assembly_accession || record.accession,
+          assembly_name: record.assembly_name || record.assembly_accession || record.accession,
+          scientific_name: record.scientific_name,
+          last_updated: record.last_updated || 'Date unavailable',
+          first_public: record.first_public,
         })).filter(record => {
           if (!record.assembly_accession || accessions.has(record.assembly_accession)) return false;
           accessions.add(record.assembly_accession);
