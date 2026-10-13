@@ -15,7 +15,9 @@ Explore research across the genus *Delftia*. These live public database results 
 
 ## Research Growth by Year
 
-Orange shows **PubMed publications**, blue shows **cumulative publications**, gray shows **genome assemblies first made public in ENA**, and yellow shows **cumulative genome assemblies** through each year. These counts cover all matching records in today's databases, not historical database snapshots or unique strains. Genome years use ENA's **first_public** date, never record update dates; assemblies without a valid first-public date are excluded from both genome lines. The current year is incomplete.
+Orange shows **PubMed publications**, blue shows **cumulative publications**, gray shows **genome assemblies by release year**, and yellow shows **cumulative genome assemblies** through each year. These counts cover all matching records in today's databases, not historical database snapshots or unique strains. Assemblies are retrieved from ENA; genome years use NCBI Datasets **assembly release dates** matched by accession and version, never record update dates. ENA's assembly search does not provide first-public dates. Assemblies without a matching valid release date are excluded from both genome lines. Release dates describe the reported assembly version, not necessarily a strain's first genome release. The current year is incomplete.
+
+[Browse Delftia assemblies on NCBI Datasets](https://www.ncbi.nlm.nih.gov/datasets/genome/?taxon=80865)
 
 ```{=html}
 <section class="dashboard-panel" aria-label="Annual research growth">
