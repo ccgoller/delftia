@@ -1,6 +1,15 @@
 const { test, expect } = require('@playwright/test');
 const AxeBuilder = require('@axe-core/playwright').default;
 
+function ncbiReport({ assembly_accession, assembly_name, scientific_name, first_public }) {
+  return {
+    accession: assembly_accession,
+    assembly_name,
+    organism: scientific_name ? { species_name: scientific_name } : undefined,
+    assembly_info: first_public ? { seq_rel_date: first_public } : undefined,
+  };
+}
+
 async function mockFeeds(page, { empty = false, failPublications = false, failGenomes = false, failChart = false } = {}) {
   await page.route('https://www.ebi.ac.uk/europepmc/webservices/rest/search?**', route => {
     const params = new URL(route.request().url()).searchParams;
@@ -22,16 +31,15 @@ async function mockFeeds(page, { empty = false, failPublications = false, failGe
       authorString: 'Research team', firstPublicationDate: '2026-10-01', doi: '10.1234/delftia',
     }] } } });
   });
-  await page.route('https://www.ebi.ac.uk/ena/portal/api/search?**', route => {
+  await page.route('https://api.ncbi.nlm.nih.gov/datasets/v1/genome/taxon/80865/dataset_report?**', route => {
     if (failGenomes) return route.fulfill({ status: 503, body: 'Unavailable' });
     const params = new URL(route.request().url()).searchParams;
-    expect(params.get('query')).toBe('tax_tree(80865)');
-    expect(params.get('limit')).toBe('0');
-    expect(params.get('fields')).toBe('assembly_accession,assembly_name,scientific_name,first_public,last_updated');
-    return route.fulfill({ json: empty ? [] : [
-      { accession: 'GCA_000001', assembly_name: 'Alpha assembly', scientific_name: 'Delftia acidovorans', first_public: '2023-01-01', last_updated: '2025-01-01' },
-      { accession: 'GCA_000002', assembly_name: 'Beta assembly', scientific_name: 'Delftia tsuruhatensis', first_public: '2026-01-01', last_updated: '2026-10-02' },
-    ] });
+    expect(params.get('filters_RefSeq_category')).toBe('reference_genome,representative_genome');
+    expect(params.get('limit')).toBe('1000');
+    return route.fulfill({ json: { reports: empty ? [] : [
+      ncbiReport({ assembly_accession: 'GCA_000001', assembly_name: 'Alpha assembly', scientific_name: 'Delftia acidovorans', first_public: '2023-01-01' }),
+      ncbiReport({ assembly_accession: 'GCA_000002', assembly_name: 'Beta assembly', scientific_name: 'Delftia tsuruhatensis', first_public: '2026-10-02' }),
+    ] } });
   });
 }
 
@@ -111,11 +119,11 @@ test('assembly names and dates can be sorted without refetching and retain filte
 
 test('assembly sorting keeps undated records last and renders names safely', async ({ page }) => {
   await mockFeeds(page);
-  await page.route('https://www.ebi.ac.uk/ena/portal/api/search?**', route => route.fulfill({ json: [
-    { assembly_accession: 'GCA_missing', assembly_name: '<script>alert(1)</script>' },
-    { assembly_accession: 'GCA_old', scientific_name: 'Delftia acidovorans', last_updated: '2024-01-01' },
-    { assembly_accession: 'GCA_new', scientific_name: 'Delftia acidovorans', last_updated: '2026-01-01' },
-  ] }));
+  await page.route('https://api.ncbi.nlm.nih.gov/datasets/v1/genome/taxon/80865/dataset_report?**', route => route.fulfill({ json: { reports: [
+    ncbiReport({ assembly_accession: 'GCA_missing', assembly_name: '<script>alert(1)</script>' }),
+    ncbiReport({ assembly_accession: 'GCA_old', scientific_name: 'Delftia acidovorans', first_public: '2024-01-01' }),
+    ncbiReport({ assembly_accession: 'GCA_new', scientific_name: 'Delftia acidovorans', first_public: '2026-01-01' }),
+  ] } }));
   await page.goto('/dashboard.html');
   const assemblies = page.locator('#genomes-list li');
   await expect(assemblies.first()).toContainText('GCA_new');
@@ -200,15 +208,15 @@ test('annual line graph counts first-public years, fills gaps, and supports inte
 
 test('annual genome counts deduplicate and exclude invalid first-public dates without using updates', async ({ page }) => {
   await mockFeeds(page);
-  await page.route('https://www.ebi.ac.uk/ena/portal/api/search?**', route => route.fulfill({ json: [
-    ...Array.from({ length: 12 }, (_, index) => ({ assembly_accession: `GCA_${index}`, first_public: '2024-01-01' })),
-    { assembly_accession: 'GCA_0', first_public: '2024-01-01' },
-    { assembly_accession: 'GCA_missing', last_updated: '2026-01-01' },
-    { assembly_accession: 'GCA_invalid', first_public: '2025-99-99' },
-    { assembly_accession: 'GCA_impossible', first_public: '2025-02-30' },
-    { assembly_accession: 'GCA_future', first_public: '9999-01-01' },
-    { first_public: '2024-01-01' },
-  ] }));
+  await page.route('https://api.ncbi.nlm.nih.gov/datasets/v1/genome/taxon/80865/dataset_report?**', route => route.fulfill({ json: { reports: [
+    ...Array.from({ length: 12 }, (_, index) => ncbiReport({ assembly_accession: `GCA_${index}`, first_public: '2024-01-01' })),
+    ncbiReport({ assembly_accession: 'GCA_0', first_public: '2024-01-01' }),
+    ncbiReport({ assembly_accession: 'GCA_missing' }),
+    ncbiReport({ assembly_accession: 'GCA_invalid', first_public: '2025-99-99' }),
+    ncbiReport({ assembly_accession: 'GCA_impossible', first_public: '2025-02-30' }),
+    ncbiReport({ assembly_accession: 'GCA_future', first_public: '9999-01-01' }),
+    ncbiReport({ first_public: '2024-01-01' }),
+  ] } }));
   await page.goto('/dashboard.html');
   await expect(page.locator('#growth-chart-status')).toContainText('4 assemblies without a valid first-public date excluded');
   await expect(page.locator('#growth-chart-detail')).toHaveText('2026: 2 publications, 3 cumulative publications, 0 genomes, 12 cumulative genomes.');
@@ -219,9 +227,9 @@ test('annual genome counts deduplicate and exclude invalid first-public dates wi
 
 test('annual graph handles a single year and failed refresh without stale lines', async ({ page }) => {
   await mockFeeds(page);
-  await page.route('https://www.ebi.ac.uk/ena/portal/api/search?**', route => route.fulfill({ json: [
-    { assembly_accession: 'GCA_one', first_public: '2026-01-01' },
-  ] }));
+  await page.route('https://api.ncbi.nlm.nih.gov/datasets/v1/genome/taxon/80865/dataset_report?**', route => route.fulfill({ json: { reports: [
+    ncbiReport({ assembly_accession: 'GCA_one', first_public: '2026-01-01' }),
+  ] } }));
   await page.route('https://www.ebi.ac.uk/europepmc/webservices/rest/search?**', route => {
     if (new URL(route.request().url()).searchParams.get('query') !== 'Delftia AND SRC:MED') return route.fallback();
     return route.fulfill({ json: { hitCount: 1, resultList: { result: [{ pubYear: '2026' }] } } });
@@ -275,15 +283,15 @@ test('dashboard charts count all pages, include zero years, and support keyboard
 
 test('genome chart groups all assemblies rather than the ten latest records', async ({ page }) => {
   await mockFeeds(page);
-  await page.route('https://www.ebi.ac.uk/ena/portal/api/search?**', route => route.fulfill({ json: [
+  await page.route('https://api.ncbi.nlm.nih.gov/datasets/v1/genome/taxon/80865/dataset_report?**', route => route.fulfill({ json: { reports: [
     ...Array.from({ length: 12 }, (_, index) => ({
       assembly_accession: `GCA_${index}`, scientific_name: 'Delftia acidovorans',
-      last_updated: `2026-01-${String(index + 1).padStart(2, '0')}`,
-    })),
-    { assembly_accession: 'GCA_other', scientific_name: 'Delftia tsuruhatensis', last_updated: '2026-01-01' },
-    { assembly_accession: 'GCA_0', scientific_name: 'Delftia acidovorans' },
-    { scientific_name: 'Not an assembly' },
-  ] }));
+      first_public: `2026-01-${String(index + 1).padStart(2, '0')}`,
+    })).map(ncbiReport),
+    ncbiReport({ assembly_accession: 'GCA_other', scientific_name: 'Delftia tsuruhatensis', first_public: '2026-01-01' }),
+    ncbiReport({ assembly_accession: 'GCA_0', scientific_name: 'Delftia acidovorans' }),
+    ncbiReport({ scientific_name: 'Not an assembly' }),
+  ] } }));
   await page.goto('/dashboard.html');
   await expect(page.locator('#genomes-list li')).toHaveCount(10);
   await expect(page.locator('#genomes-chart-status')).toContainText('13 assembly records across 2 scientific names');
