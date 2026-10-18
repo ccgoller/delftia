@@ -1,0 +1,35 @@
+---
+title: ""
+pagetitle: "Genome Comparison"
+description: "A literature-based comparison of genome features reported for two Delftia tsuruhatensis strains."
+---
+
+```{=html}
+<section class="hero-section hero-section--compact" aria-labelledby="genome-comparison-heading">
+  <h1 id="genome-comparison-heading">Compare Delftia Genomes</h1>
+  <p class="hero-subtitle">A literature-based comparison of two published <em>Delftia tsuruhatensis</em> strains.</p>
+</section>
+```
+
+[Back to the Dashboard](dashboard.qmd).
+
+The table summarizes features reported in the genome announcements for strains MTQ3 and HA60. Both are *D. tsuruhatensis*, not representatives of every strain in the species.
+
+::: {#genome-comparison-table .genome-comparison-table-wrap role="region" aria-label="Genome feature comparison" tabindex="0"}
+
+| Feature | MTQ3 | HA60 |
+|:--|:--|:--|
+| Genome status | Draft genome | Complete genome; circular chromosome |
+| Genome length | 6.27 Mb | 6,922,195 bp (about 6.92 Mb) |
+| G+C content | 66.79% | 66.45% |
+| Isolation context | Tobacco rhizosphere | Commercial nano-hydroxyapatite product |
+| Published focus | Described in its genome announcement as a plant growth-promoting rhizobacterium | Genome sequence report for a strain isolated from a nano-hydroxyapatite product |
+
+:::
+
+## Sources
+
+- Draft Genome Sequence of *Delftia tsuruhatensis* MTQ3, a Strain of Plant Growth-Promoting Rhizobacterium Isolated from Tobacco Rhizosphere (2015). [Read the PubMed record](https://pubmed.ncbi.nlm.nih.gov/26251486/).
+- Complete genome sequence of *Delftia tsuruhatensis* strain HA60 isolated from a commercial nano-hydroxyapatite product (2024). [Find the article on PubMed](https://pubmed.ncbi.nlm.nih.gov/?term=10.1128%2Fmra.00171-24) · [Read the full text in PubMed Central](https://pmc.ncbi.nlm.nih.gov/articles/PMC11237730/) · [DOI: 10.1128/mra.00171-24](https://doi.org/10.1128/mra.00171-24).
+
+Genome sizes, G+C percentages, assembly status, isolation contexts, and descriptions above are reported by the cited articles. They come from separate sequencing and annotation studies and are not a standardized reanalysis; differences should not be interpreted as species-wide traits.

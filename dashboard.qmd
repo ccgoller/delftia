@@ -13,6 +13,8 @@ description: "Interactive annual and cumulative Delftia publication counts, geno
 
 Explore research across the genus *Delftia*. These live public database results are not limited to the Delftia Project.
 
+[Compare features reported for two *Delftia* genomes](dashboard-genome-comparison.qmd).
+
 ## Research Growth by Year
 
 Orange shows **PubMed publications**, blue shows **cumulative publications**, gray shows **genome assemblies by release year**, and yellow shows **cumulative genome assemblies** through each year. These counts cover all matching records in today's databases, not historical database snapshots or unique strains. Assemblies are retrieved from ENA; genome years use NCBI Datasets **assembly release dates** matched by accession and version, never record update dates. ENA's assembly search does not provide first-public dates. Assemblies without a matching valid release date are excluded from both genome lines. Release dates describe the reported assembly version, not necessarily a strain's first genome release. The current year is incomplete.
