@@ -73,6 +73,46 @@ test('loads every page and deduplicates versioned accessions', async ({ page }) 
   await expect(page.locator('#selected-genome-comparison')).toContainText(genomes[2].accession);
 });
 
+test('filters each genome independently without changing the selected comparison', async ({ page }) => {
+  await mockGenomes(page);
+  await page.goto('/dashboard-genome-comparison.html');
+  const first = page.getByLabel('First genome', { exact: true });
+  const second = page.getByLabel('Second genome', { exact: true });
+  const firstFilter = page.getByRole('searchbox', { name: 'Filter first genome' });
+  const secondFilter = page.getByRole('searchbox', { name: 'Filter second genome' });
+  await expect(firstFilter).toBeEnabled();
+  await expect(first).toContainText('strain Alpha');
+  await firstFilter.fill('  TSURUHATENSIS   gamma ');
+  await expect(page.locator('#genome-first-count')).toHaveText('1 of 3 assemblies match. Selected genome kept outside filter.');
+  await expect(first.locator('option')).toHaveCount(2);
+  await expect(first).toHaveValue(genomes[0].accession);
+  await expect(second.locator('option')).toHaveCount(3);
+  await first.selectOption(genomes[2].accession);
+  await expect(first.locator('option')).toHaveCount(1);
+  await expect(page.locator('#selected-genome-comparison')).toContainText(genomes[2].accession);
+  await secondFilter.fill('scaffold');
+  await expect(page.locator('#genome-second-count')).toHaveText('1 of 3 assemblies match.');
+  await expect(second.locator('option')).toHaveCount(1);
+  await expect(second).toHaveValue(genomes[1].accession);
+  await firstFilter.fill('no matching genomes');
+  await expect(page.locator('#genome-first-count')).toHaveText('0 of 3 assemblies match. Selected genome kept outside filter.');
+  await expect(first).toHaveValue(genomes[2].accession);
+  await expect(page.locator('#selected-genome-comparison')).toBeVisible();
+  await firstFilter.fill('');
+  await expect(first.locator('option')).toHaveCount(3);
+  await expect(first.locator(`option[value="${genomes[1].accession}"]`)).toBeDisabled();
+  await expect(first).toHaveValue(genomes[2].accession);
+  await firstFilter.fill('alpha complete');
+  await expect(page.locator('#genome-first-count')).toContainText('1 of 3');
+  await first.selectOption(genomes[0].accession);
+  await expect(page.locator('#selected-genome-comparison')).toContainText('6,500,000 bp');
+  await secondFilter.fill(genomes[2].accession.toLowerCase());
+  await second.selectOption(genomes[2].accession);
+  await expect(page.locator('#selected-genome-comparison')).toContainText(genomes[2].accession);
+  await expect(page.locator('#genome-second-count')).toHaveText('1 of 3 assemblies match.');
+  await expect(second.locator('script')).toHaveCount(0);
+});
+
 for (const theme of ['light', 'dark']) {
   test(`selectable comparison is accessible in ${theme} mode`, async ({ page }) => {
     await page.addInitScript(value => localStorage.setItem('delftia-theme', value), theme);
@@ -96,7 +136,9 @@ for (const records of [[], genomes.slice(0, 1)]) {
     await page.goto('/dashboard-genome-comparison.html');
     await expect(page.locator('#genome-selection-status')).toContainText('Fewer than two');
     await expect(page.getByLabel('First genome', { exact: true })).toBeDisabled();
+    await expect(page.getByRole('searchbox', { name: 'Filter first genome' })).toBeDisabled();
     await expect(page.locator('#selected-genome-comparison')).toBeHidden();
+    await expect(page.getByRole('searchbox', { name: 'Filter first genome' })).toBeDisabled();
     await expect(page.locator('#genome-comparison-table')).toContainText('6.27 Mb');
   });
 }
@@ -119,6 +161,7 @@ for (const failure of ['http', 'malformed', 'incomplete', 'repeated token', 'tim
     await mockGenomes(page);
     await page.getByRole('button', { name: 'Retry loading genomes' }).click();
     await expect(page.locator('#selected-genome-comparison')).toContainText('6,500,000 bp');
+    await expect(page.getByRole('searchbox', { name: 'Filter first genome' })).toBeEnabled();
     await expect(page.getByRole('button', { name: 'Retry loading genomes' })).toBeHidden();
   });
 }
