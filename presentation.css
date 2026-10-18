@@ -1,0 +1,186 @@
+/* Delftia's orange/yellow branding on a fixed dark presentation surface. */
+body.reveal-viewport {
+  background: #1a1410;
+}
+
+.reveal {
+  color: #f5e6d3;
+  font-family: "Inter", "Segoe UI", system-ui, sans-serif;
+  font-size: 30px;
+}
+
+.reveal .slides {
+  text-align: left;
+}
+
+.reveal h1,
+.reveal h2,
+.reveal h3 {
+  color: #ffda73;
+  font-family: inherit;
+  font-weight: 750;
+  text-transform: none;
+}
+
+.reveal h1 {
+  font-size: 2.4em;
+}
+
+.reveal h2 {
+  font-size: 1.6em;
+  border-bottom: 4px solid #e8954b;
+  padding-bottom: 0.3em;
+  margin-bottom: 0.65em;
+}
+
+.reveal h3 {
+  font-size: 1.05em;
+}
+
+.reveal strong {
+  color: #ffda73;
+}
+
+.reveal a,
+.reveal a:visited,
+body.reveal-viewport .footer a,
+body.reveal-viewport .footer a:visited {
+  color: #f4a854;
+  text-decoration: underline;
+  text-underline-offset: 0.15em;
+}
+
+.reveal a:hover,
+body.reveal-viewport .footer a:hover {
+  color: #fce4c3;
+}
+
+.reveal a:focus-visible,
+body.reveal-viewport .footer a:focus-visible,
+.reveal button:focus-visible {
+  outline: 3px solid #ffda73;
+  outline-offset: 5px;
+}
+
+body.reveal-viewport .slide-logo {
+  max-height: 65px;
+  max-width: 180px;
+  background: #f9f5ed;
+  padding: 8px;
+  border-radius: 12px;
+}
+
+body.reveal-viewport .footer {
+  color: #f5e6d3;
+}
+
+body.reveal-viewport .slide-menu-button a {
+  color: #f4a854;
+}
+
+.reveal .controls,
+.reveal .progress {
+  color: #e8954b;
+}
+
+.reveal .slide-number {
+  color: #f5e6d3;
+  background: #1a1410;
+}
+
+.reveal .slide-number a {
+  color: inherit;
+}
+
+.reveal .deck-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 24px;
+  margin: 1em 0;
+}
+
+.reveal .deck-grid--two {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  align-items: center;
+}
+
+.reveal .deck-card {
+  background: #241b13;
+  border: 1px solid #a67548;
+  border-top: 5px solid #e8954b;
+  border-radius: 12px;
+  padding: 24px;
+}
+
+.reveal .deck-card p {
+  font-size: 0.85em;
+}
+
+.reveal .deck-icon {
+  display: block;
+  font-size: 1.6em;
+  margin-bottom: 0.3em;
+}
+
+.reveal .deck-number {
+  color: #ffda73;
+  font-size: 2.3em;
+  font-weight: 800;
+  line-height: 1.15;
+}
+
+.reveal .deck-photo {
+  display: block;
+  max-height: 340px;
+  max-width: 100%;
+  margin: 0 auto;
+  border-radius: 12px;
+  object-fit: contain;
+}
+
+.reveal figcaption {
+  color: #f5e6d3;
+  font-size: 0.6em;
+}
+
+.reveal .recycling-bar {
+  display: flex;
+  height: 90px;
+  margin: 1.5em 0 1em;
+  border: 2px solid #ffda73;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.reveal .recycling-bar-collected {
+  width: 22.3%;
+  background: linear-gradient(110deg, #e8954b, #ffda73);
+}
+
+.reveal .recycling-bar-other {
+  flex: 1;
+  background: repeating-linear-gradient(135deg, #241b13, #241b13 12px, #6b5b4c 12px, #6b5b4c 16px);
+}
+
+.reveal .references-slide {
+  font-size: 0.72em;
+}
+
+.reveal .references-slide li {
+  margin-bottom: 0.8em;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body.reveal-viewport .reveal .slides > section.slide,
+  body.reveal-viewport .reveal .slides > section > section.slide,
+  body.reveal-viewport .reveal #title-slide {
+    transition: none;
+  }
+}
+
+@media print {
+  .reveal .deck-card,
+  .reveal .recycling-bar {
+    print-color-adjust: exact;
+  }
+}

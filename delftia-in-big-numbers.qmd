@@ -1,66 +1,246 @@
 ---
 title: "Delftia in Big Numbers"
-subtitle: "One tiny bacterium, a global e-waste challenge"
+subtitle: "Small microbes. Big questions. Beyond gold."
 pagetitle: "Delftia in Big Numbers"
 format:
   revealjs:
     theme: simple
+    css: presentation.css
+    logo: images/DelftiaLogo-e1594312941275.png
+    footer: '[The Delftia Project · Learn](learn.html)'
+    width: 1280
+    height: 720
     slide-number: true
     transition: fade
 ---
 
+## One genus. Many research questions.
+
+::: {.deck-grid}
+::: {.deck-card}
+<span class="deck-icon" aria-hidden="true">🧬</span>
+
+### Genomes
+What can DNA reveal about different *Delftia* strains?
+:::
+::: {.deck-card}
+<span class="deck-icon" aria-hidden="true">🌱</span>
+
+### Microbial interactions
+How do plant-associated bacteria acquire nutrients?
+:::
+::: {.deck-card}
+<span class="deck-icon" aria-hidden="true">🔬</span>
+
+### Shared discovery
+How can students and communities contribute?
+:::
+:::
+
+Gold biomineralization is one part of the story—not the whole organism. [2–6]
+
+---
+
+## 6.27 million DNA letters {.genome-slide}
+
+::: {.deck-grid .deck-grid--two}
+::: {.deck-card}
+<div class="deck-number">6.27 Mb</div>
+
+Draft genome of *D. tsuruhatensis* **MTQ3**, isolated from the tobacco rhizosphere—the soil around roots. [4]
+:::
+::: {.deck-card}
+```{=html}
+<svg viewBox="0 0 440 180" role="img" aria-label="Schematic DNA fragments representing a draft genome, not a complete circular chromosome">
+  <g fill="none" stroke="#E8954B" stroke-width="16" stroke-linecap="round">
+    <path d="M30 40h110m30 0h170M60 90h180m30 0h130M30 140h80m35 0h210"/>
+  </g>
+  <g stroke="#FFDA73" stroke-width="6">
+    <path d="M60 25v30m40-30v30m100-30v30m50-30v30m50-30v30M100 75v30m50-30v30m50-30v30m100-30v30m50-30v30M60 125v30m120-30v30m50-30v30m50-30v30m50-30v30"/>
+  </g>
+</svg>
+```
+
+**Mb = million base pairs.** A genome is a starting point for testing what a microbe can do—not proof of every predicted function.
+:::
+:::
+
+---
+
+## 2 strains, different genome reports
+
+::: {.deck-grid .deck-grid--two}
+::: {.deck-card}
+<h3>MTQ3 · 6.27 Mb</h3>
+
+Draft genome; isolated from the tobacco rhizosphere. Described as a plant growth-promoting rhizobacterium. [4]
+:::
+::: {.deck-card}
+<h3>HA60 · about 6.92 Mb</h3>
+
+Complete circular chromosome; isolated from a commercial nano-hydroxyapatite product. [7]
+:::
+:::
+
+Both are *D. tsuruhatensis*. These reports used different methods: **two isolates do not define every strain**, and isolation context does not prove a biological capability.
+
+[Explore the published genome comparison](dashboard-genome-comparison.qmd)
+
+---
+
+## 3 genes connected to iron acquisition
+
+A study of MTQ3 used gene knockouts to identify **three nonribosomal peptide synthetase genes involved in siderophore production**. [5]
+
+::: {.deck-grid}
+::: {.deck-card}
+<span class="deck-icon" aria-hidden="true">🧬</span>
+### Genes
+Test a gene's contribution by disrupting it.
+:::
+::: {.deck-card}
+<span class="deck-icon" aria-hidden="true">⚗️</span>
+### Molecules
+Siderophores bind iron.
+:::
+::: {.deck-card}
+<span class="deck-icon" aria-hidden="true">🌱</span>
+### Interactions
+Ask how iron acquisition affects life around roots.
+:::
+:::
+
+This is evidence for a studied strain, not a universal trait of *Delftia*.
+
+---
+
+## 2025 · “Where is Delftia?”
+
+::: {.deck-grid .deck-grid--two}
+::: {}
+![Spot plate showing bacterial growth in a Delftia Project laboratory activity.](images/Spot_Plate_10ul_48hrs.jpg){.deck-photo}
+:::
+::: {}
+A **2025 education publication** brings citizen science into biotechnology and environmental science curricula. [6]
+
+Students also helped discover gold-precipitating bacterial lineages in earlier work. [3]
+
+**Observe → investigate → share**
+
+The next big question can start in a classroom.
+:::
+:::
+
+---
+
 ## 62 million metric tonnes
 
-That is how much electronic waste the world generated in **2022**.
+::: {.deck-grid .deck-grid--two}
+::: {}
+<div class="deck-number">62 billion kg</div>
 
-### 62 million tonnes = 62 billion kilograms
+The world's electronic waste in **2022**. [1]
 
-That is the weight of discarded electronics generated in just one year. [1]
-
----
-
-## About 22 out of every 100
-
-Only **22.3%** of the world's e-waste was documented as formally collected and recycled in 2022. [1]
-
-About **78 out of 100** was not documented as formally collected and recycled. That does not mean all of it was dumped: informal handling and gaps in tracking also matter.
-
----
-
-## What does *Delftia* have to do with gold?
-
-In laboratory research, *Delftia acidovorans* released a molecule called **delftibactin**. It binds dissolved gold and helps turn it into solid gold particles—a process that can protect the bacterium from toxic gold. [2]
-
----
-
-## From dissolved gold to solid particles
-
-**Dissolved gold** → **delftibactin binds it** → **solid gold particles form**
-
-The gold is not created from nothing. The bacterium changes gold's form.
+This global challenge is one motivation for studying new approaches to material recovery—not a measure of what *Delftia* can recycle.
+:::
+::: {.deck-card}
+```{=html}
+<svg viewBox="0 0 400 240" role="img" aria-label="Illustration of discarded electronics: a monitor, phone, and circuit board">
+  <g fill="none" stroke="#E8954B" stroke-width="9" stroke-linejoin="round">
+    <rect x="30" y="30" width="220" height="140" rx="12"/>
+    <path d="M140 170v40m-55 0h110"/>
+    <rect x="285" y="70" width="80" height="140" rx="12"/>
+    <path d="M310 185h30"/>
+  </g>
+  <g fill="none" stroke="#FFDA73" stroke-width="6">
+    <rect x="95" y="65" width="80" height="65" rx="4"/>
+    <path d="M60 85h35m80 20h45M120 45v20m30 65v20"/>
+  </g>
+</svg>
+```
+:::
+:::
 
 ---
 
-## A promising clue—not a recycling solution
+## 22.3% formally collected and recycled
 
-This is a fascinating biological process, but it does **not** prove that *Delftia* can recover gold from mixed electronic waste safely, cheaply, or at industrial scale.
+```{=html}
+<div class="recycling-bar" role="img" aria-label="Of global e-waste generated in 2022, 22.3 percent was documented as formally collected and recycled; 77.7 percent was not">
+  <span class="recycling-bar-collected"></span>
+  <span class="recycling-bar-other"></span>
+</div>
+```
 
-Responsible collection and recycling matter today. Researchers are exploring whether discoveries like this could inform future ways to recover valuable materials. [1, 2]
+**22.3% documented** · **77.7% not documented** [1]
+
+“Not documented” does **not** mean all was dumped: informal handling and tracking gaps also matter.
+
+Responsible collection and recycling matter **today**, while researchers investigate future possibilities.
 
 ---
 
-## Science is a team effort
+## Gold is one remarkable example
 
-University students have helped search for and identify gold-precipitating bacteria, including *Delftia*. [3]
+::: {.deck-grid}
+::: {.deck-card}
+<h3>1 · Dissolved gold</h3>
 
-Curiosity can turn a tiny organism into a big research question:
+Gold can be toxic to bacteria.
+:::
+::: {.deck-card}
+<h3>2 · Delftibactin</h3>
 
-### Could biology help us recover materials more responsibly?
+*D. acidovorans* releases a molecule that binds gold.
+:::
+::: {.deck-card}
+<h3>3 · Solid particles</h3>
+
+Gold changes form; it is **not created from nothing**. [2]
+:::
+:::
+
+**A laboratory finding, not a proven e-waste solution.** This does not establish safe, cheap recovery from mixed electronics at industrial scale.
 
 ---
 
-## Works cited
+## Big questions need many perspectives
+
+**Genomes + microbial interactions + community science**
+
+*Delftia* gives us more to investigate than gold alone.
+
+::: {.deck-grid}
+::: {.deck-card}
+<h3>Compare</h3>
+
+[Explore genomes](dashboard-genome-comparison.qmd)
+:::
+::: {.deck-card}
+<h3>Investigate</h3>
+
+[Discover research projects](research.qmd)
+:::
+::: {.deck-card}
+<h3>Participate</h3>
+
+[Find learning resources](learn.qmd)
+:::
+:::
+
+---
+
+## Works cited · gold, e-waste & learning {.references-slide}
 
 1. Baldé CP, et al. **The Global E-waste Monitor 2024.** International Telecommunication Union and United Nations Institute for Training and Research, 2024. [Read the report](https://ewastemonitor.info/the-global-e-waste-monitor-2024/).
 2. Johnston CW, Wyatt MA, Li X, Ibrahim A, Shuster J, Southam G, Magarvey NA. “Gold biomineralization by a metallophore from a gold-associated microbe.” *Nature Chemical Biology*. 2013;9:241–243. [doi:10.1038/nchembio.1179](https://doi.org/10.1038/nchembio.1179).
 3. Riley NG, Goller CC, Leggett ZH, Lewis DM, Ciccone K, Dunn RR. “Catalyzing rapid discovery of gold-precipitating bacterial lineages with university students.” *PeerJ*. 2020;8:e8925. [doi:10.7717/peerj.8925](https://doi.org/10.7717/peerj.8925).
+
+---
+
+## Works cited · beyond gold {.references-slide}
+
+4. Hou et al. “Draft Genome Sequence of *Delftia tsuruhatensis* MTQ3, a Strain of Plant Growth-Promoting Rhizobacterium Isolated from Tobacco Rhizosphere.” 2015. [PubMed: 26251486](https://pubmed.ncbi.nlm.nih.gov/26251486/).
+5. Guo H, Yang Y, Liu K, et al. “Comparative Genomic Analysis of *Delftia tsuruhatensis* MTQ3 and the Identification of Functional NRPS Genes for Siderophore Production.” 2016. [doi:10.1155/2016/3687619](https://doi.org/10.1155/2016/3687619).
+6. Spence PL, Goller C, Riley N, Norman D, Leggett Z. “Where is *Delftia*? Implementing citizen science into the biotechnology and environmental science curriculum.” *J Microbiol Biol Educ*. 2025;26(1):e00088-24. [doi:10.1128/jmbe.00088-24](https://doi.org/10.1128/jmbe.00088-24).
+7. Wang et al. “Complete genome sequence of *Delftia tsuruhatensis* strain HA60 isolated from a commercial nano-hydroxyapatite product.” 2024. [doi:10.1128/mra.00171-24](https://doi.org/10.1128/mra.00171-24).

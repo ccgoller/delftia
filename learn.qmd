@@ -1,7 +1,7 @@
 ---
 title: ""
 pagetitle: "Learn"
-description: "Course resources, the Delftia book, and a revealjs presentation about Delftia and e-waste."
+description: "Explore Delftia through a visual presentation, course resources, and the Delftia book."
 ---
 
 ```{=html}
@@ -15,6 +15,18 @@ Explore microbiology and *Delftia* with these learning resources.
 
 ::: {.card-grid}
 ::: {.feature-card}
+<div class="card-icon" aria-hidden="true">📊</div>
+
+## Delftia in Big Numbers
+
+Discover *Delftia* beyond gold: genomes, plant-associated bacteria, and community science, alongside the global e-waste challenge.
+
+[Explore the presentation](delftia-in-big-numbers.qmd)
+:::
+
+::: {.feature-card}
+<div class="card-icon" aria-hidden="true">🔬</div>
+
 ## MB 360
 
 Access the MB 360 course resource.
@@ -23,6 +35,8 @@ Access the MB 360 course resource.
 :::
 
 ::: {.feature-card}
+<div class="card-icon" aria-hidden="true">📖</div>
+
 ## Delftia Book
 
 Explore the Delftia book for learning about this remarkable bacterium.
@@ -30,13 +44,6 @@ Explore the Delftia book for learning about this remarkable bacterium.
 [Read the Delftia book](https://go.ncsu.edu/delftiabook)
 :::
 
-::: {.feature-card}
-## Delftia in Big Numbers
-
-See how a tiny bacterium connects to the global e-waste challenge through clear, sourced statistics.
-
-[Explore the presentation](delftia-in-big-numbers.qmd)
-:::
 :::
 
 Connect your learning to our [research projects](research.qmd) and [publications](references.qmd).
