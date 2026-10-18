@@ -78,6 +78,11 @@ for (const path of ['research', 'people', 'dashboard', 'learn']) {
         await expect(page.getByRole('link', { name, exact: true }).last()).toBeVisible();
       }
       if (path === 'learn') {
+        const cards = page.locator('.feature-card');
+        await expect(cards.first().getByRole('heading')).toHaveText('Delftia in Big Numbers');
+        await expect(cards.locator('.card-icon[aria-hidden="true"]')).toHaveCount(3);
+        await expect(cards.first().getByRole('link', { name: 'Explore the presentation' }))
+          .toHaveAttribute('href', /delftia-in-big-numbers\.html$/);
         await expect(page.getByRole('link', { name: 'Visit MB 360' })).toHaveAttribute('href', 'https://go.ncsu.edu/mb360');
         await expect(page.getByRole('link', { name: 'Read the Delftia book' })).toHaveAttribute('href', 'https://go.ncsu.edu/delftiabook');
       }
@@ -89,6 +94,34 @@ for (const path of ['research', 'people', 'dashboard', 'learn']) {
     });
   }
 }
+
+test('Delftia presentation covers more than gold with accessible graphics', async ({ page }) => {
+  await page.goto('/delftia-in-big-numbers.html');
+  await page.waitForFunction(() => window.Reveal?.isReady());
+  await expect(page.locator('.slide-logo')).toBeVisible();
+  const headings = page.locator('.slides section h2');
+  await expect(headings).toContainText([
+    'One genus. Many research questions.',
+    '6.27 million DNA letters',
+    '2 strains, different genome reports',
+    '3 genes connected to iron acquisition',
+    '2025 · “Where is Delftia?”',
+  ]);
+  await expect(page.locator('.slides svg[role="img"][aria-label]')).toHaveCount(2);
+  await expect(page.locator('.recycling-bar[role="img"]')).toHaveAttribute('aria-label', /22.3 percent.*77.7 percent/);
+  const slideCount = await page.evaluate(() => Reveal.getTotalSlides());
+  for (let index = 0; index < slideCount; index++) {
+    await page.evaluate(value => Reveal.slide(value), index);
+    const slide = page.locator('.slides section.present');
+    await expect(slide).toBeVisible();
+    expect(await slide.evaluate(element => element.scrollHeight <= 720)).toBe(true);
+    const results = await new AxeBuilder({ page }).withRules(['color-contrast']).analyze();
+    expect(results.violations).toEqual([]);
+  }
+  await page.evaluate(() => Reveal.slide(9));
+  await page.getByRole('link', { name: 'Find learning resources' }).click();
+  await expect(page).toHaveURL(/learn\.html$/);
+});
 
 for (const theme of ['light', 'dark']) {
   test(`genome comparison is accessible in ${theme} mode`, async ({ page }) => {
