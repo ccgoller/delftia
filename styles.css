@@ -1482,11 +1482,33 @@ html[data-reading-focus="true"] .cta-section {
   overflow-x: auto;
 }
 
+.genome-selectors[hidden] {
+  display: none;
+}
+
+.genome-selectors label {
+  min-width: 0;
+}
+
+.genome-selectors select {
+  width: 100%;
+  min-height: 2.8rem;
+  padding: 0.55rem 0.75rem;
+  border: 1px solid var(--page-border);
+  border-radius: 8px;
+  background: var(--page-surface);
+  color: var(--page-text);
+}
+
 .genome-comparison-table-wrap table {
   width: 100%;
   min-width: 38rem;
   border-collapse: collapse;
   color: var(--page-text);
+}
+
+.genome-comparison-table-wrap caption {
+  color: var(--page-text-secondary);
 }
 
 .genome-comparison-table-wrap th,

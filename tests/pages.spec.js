@@ -93,6 +93,7 @@ for (const path of ['research', 'people', 'dashboard', 'learn']) {
 for (const theme of ['light', 'dark']) {
   test(`genome comparison is accessible in ${theme} mode`, async ({ page }) => {
     await page.addInitScript(value => localStorage.setItem('delftia-theme', value), theme);
+    await mockAssemblies(page, []);
     await page.goto('/dashboard-genome-comparison.html');
     await expect(page.getByRole('heading', { level: 1 })).toHaveText('Compare Delftia Genomes');
     await expect(page.getByRole('table')).toContainText('6.27 Mb');

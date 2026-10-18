@@ -1,17 +1,40 @@
 ---
 title: ""
 pagetitle: "Genome Comparison"
-description: "A literature-based comparison of genome features reported for two Delftia tsuruhatensis strains."
+description: "Select two Delftia genome assemblies and compare their reported features."
 ---
 
 ```{=html}
 <section class="hero-section hero-section--compact" aria-labelledby="genome-comparison-heading">
   <h1 id="genome-comparison-heading">Compare Delftia Genomes</h1>
-  <p class="hero-subtitle">A literature-based comparison of two published <em>Delftia tsuruhatensis</em> strains.</p>
+  <p class="hero-subtitle">Select two <em>Delftia</em> genome assemblies to compare their reported features side by side.</p>
 </section>
 ```
 
 [Back to the Dashboard](dashboard.qmd).
+
+## Select genomes
+
+Choose two different GenBank assemblies from [NCBI Datasets](https://www.ncbi.nlm.nih.gov/datasets/genome/?taxon=80865). The comparison updates when either selection changes. Assemblies can represent different versions of the same strain.
+
+```{=html}
+<div id="genome-selectors" class="dashboard-controls genome-selectors" hidden>
+  <label for="genome-first">First genome
+    <select id="genome-first" aria-controls="selected-genome-comparison"></select>
+  </label>
+  <label for="genome-second">Second genome
+    <select id="genome-second" aria-controls="selected-genome-comparison"></select>
+  </label>
+</div>
+<p id="genome-selection-status" role="status">Interactive selection requires JavaScript and access to NCBI. The published example below is available without either.</p>
+<button id="genome-selection-retry" class="btn btn-secondary" type="button" hidden>Retry loading genomes</button>
+<div id="selected-genome-comparison" class="genome-comparison-table-wrap" role="region" aria-label="Selected genome comparison" tabindex="0" hidden></div>
+<script src="genome-comparison.js" defer></script>
+```
+
+These are assembly metadata and summary statistics, not a sequence alignment, average nucleotide identity (ANI) analysis, or a standardized reannotation. Missing values are shown as “Not reported”; differences do not establish species-wide traits.
+
+## Published example: MTQ3 and HA60
 
 The table summarizes features reported in the genome announcements for strains MTQ3 and HA60. Both are *D. tsuruhatensis*, not representatives of every strain in the species.
 
