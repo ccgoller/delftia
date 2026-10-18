@@ -15,17 +15,23 @@ description: "Select two Delftia genome assemblies to compare their reported fea
 
 ## Select genomes
 
-Choose two different assemblies from NCBI Datasets. The comparison updates when either selection changes. Assembly versions are listed separately; records are not necessarily unique strains.
+Filter each genome list independently by species, strain, accession, assembly name, or assembly level, then choose two different assemblies from NCBI Datasets. Search is case-insensitive; multiple words narrow the results. Clear a filter to see all assemblies again. Your selected genome stays available even when it does not match its filter, so filtering never changes your comparison. The comparison updates when either selection changes. Assembly versions are listed separately; records are not necessarily unique strains.
 
 ```{=html}
 <section class="dashboard-panel" aria-label="Select genomes to compare">
   <p id="genome-selection-status" role="status">Interactive selection requires JavaScript. The published comparison below is available without it.</p>
   <div id="genome-selection-controls" hidden>
     <div class="genome-selection-field">
+      <label for="genome-first-filter">Filter first genome</label>
+      <input type="search" id="genome-first-filter" aria-describedby="genome-first-count" disabled>
+      <p id="genome-first-count" role="status"></p>
       <label for="genome-first">First genome</label>
       <select id="genome-first" disabled></select>
     </div>
     <div class="genome-selection-field">
+      <label for="genome-second-filter">Filter second genome</label>
+      <input type="search" id="genome-second-filter" aria-describedby="genome-second-count" disabled>
+      <p id="genome-second-count" role="status"></p>
       <label for="genome-second">Second genome</label>
       <select id="genome-second" disabled></select>
     </div>

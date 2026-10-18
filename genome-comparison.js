@@ -5,7 +5,13 @@
   const status = document.getElementById('genome-selection-status');
   const retry = document.getElementById('genome-selection-retry');
   const comparison = document.getElementById('selected-genome-comparison');
+  const selectors = [first, second].map(select => ({
+    select,
+    filter: document.getElementById(`${select.id}-filter`),
+    count: document.getElementById(`${select.id}-count`),
+  }));
   let genomes = new Map();
+  let sorted = [];
 
   function text(value) {
     return typeof value === 'string' && value.trim() ? value : 'Not reported';
@@ -18,7 +24,28 @@
   }
 
   function label(genome) {
-    return `${text(genome.organism?.organism_name)} — ${text(genome.assembly_info?.assembly_name)} (${genome.accession})`;
+    const strain = genome.organism?.infraspecific_names?.strain;
+    return `${text(genome.organism?.organism_name)}${strain ? ` — strain ${strain}` : ''} — ${text(genome.assembly_info?.assembly_name)} (${genome.accession})`;
+  }
+
+  function filterOptions({ select, filter, count }) {
+    const selected = select.value;
+    const terms = filter.value.trim().toLocaleLowerCase().split(/\s+/).filter(Boolean);
+    const matches = sorted.filter(genome => {
+      const searchable = `${label(genome)} ${text(genome.assembly_info?.assembly_level)}`.toLocaleLowerCase();
+      return terms.every(term => searchable.includes(term));
+    });
+    const retained = genomes.has(selected) && !matches.some(genome => genome.accession === selected);
+    select.replaceChildren();
+    for (const genome of retained ? [genomes.get(selected), ...matches] : matches) {
+      const option = document.createElement('option');
+      option.value = genome.accession;
+      option.textContent = `${label(genome)}${retained && genome.accession === selected ? ' — selected; outside filter' : ''}`;
+      select.append(option);
+    }
+    if (genomes.has(selected)) select.value = selected;
+    count.textContent = `${matches.length.toLocaleString()} of ${genomes.size.toLocaleString()} assemblies match.${retained ? ' Selected genome kept outside filter.' : ''}`;
+    renderComparison();
   }
 
   const features = [
@@ -84,10 +111,15 @@
     controls.hidden = false;
     first.disabled = true;
     second.disabled = true;
+    for (const { filter, count } of selectors) {
+      filter.disabled = true;
+      count.textContent = '';
+    }
     retry.hidden = true;
     comparison.hidden = true;
     status.textContent = 'Loading Delftia genome assemblies from NCBI Datasets…';
     genomes = new Map();
+    sorted = [];
     first.replaceChildren();
     second.replaceChildren();
     try {
@@ -129,7 +161,7 @@
         retry.hidden = false;
         return;
       }
-      const sorted = [...genomes.values()].sort((a, b) => label(a).localeCompare(label(b)));
+      sorted = [...genomes.values()].sort((a, b) => label(a).localeCompare(label(b)));
       for (const select of [first, second]) {
         for (const genome of sorted) {
           const option = document.createElement('option');
@@ -140,15 +172,20 @@
         select.disabled = false;
       }
       second.selectedIndex = 1;
-      renderComparison();
+      for (const selector of selectors) {
+        selector.filter.disabled = false;
+        filterOptions(selector);
+      }
     } catch {
       status.textContent = 'Unable to load genome assemblies right now. Retry, browse NCBI Datasets, or use the published example below.';
       retry.hidden = false;
     }
   }
 
-  first.addEventListener('change', renderComparison);
-  second.addEventListener('change', renderComparison);
+  for (const selector of selectors) {
+    selector.filter.addEventListener('input', () => filterOptions(selector));
+    selector.select.addEventListener('change', () => filterOptions(selector));
+  }
   retry.addEventListener('click', loadGenomes);
   loadGenomes();
 })();

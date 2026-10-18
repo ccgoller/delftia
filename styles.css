@@ -1485,7 +1485,8 @@ html[data-reading-focus="true"] .cta-section {
   margin-bottom: 0.4rem;
 }
 
-.genome-selection-field select {
+.genome-selection-field select,
+.genome-selection-field input {
   width: 100%;
   min-width: 0;
   padding: 0.5rem;
