@@ -1476,6 +1476,36 @@ html[data-reading-focus="true"] .cta-section {
   margin-bottom: 0;
 }
 
+.genome-comparison-table-wrap {
+  max-width: 100%;
+  margin: 1rem 0 2rem;
+  overflow-x: auto;
+}
+
+.genome-comparison-table-wrap table {
+  width: 100%;
+  min-width: 38rem;
+  border-collapse: collapse;
+  color: var(--page-text);
+}
+
+.genome-comparison-table-wrap th,
+.genome-comparison-table-wrap td {
+  padding: 0.75rem;
+  border: 1px solid var(--page-border);
+  text-align: left;
+  vertical-align: top;
+}
+
+.genome-comparison-table-wrap th {
+  background: var(--page-bg-secondary);
+  color: var(--page-heading);
+}
+
+.genome-comparison-table-wrap tbody th {
+  min-width: 10rem;
+}
+
 .dashboard-chart {
   list-style: none;
   padding: 0;

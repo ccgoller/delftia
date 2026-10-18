@@ -62,6 +62,8 @@ for (const path of ['research', 'people', 'dashboard', 'learn']) {
       await page.goto(`/${path}.html`);
       await expect(page.getByRole('heading', { level: 1 })).toHaveText(new RegExp(path, 'i'));
       if (path === 'dashboard') {
+        await expect(page.getByRole('link', { name: 'Compare features reported for two Delftia genomes' }))
+          .toHaveAttribute('href', /dashboard-genome-comparison\.html$/);
         await expect(page.locator('#genomes-list li')).toHaveCount(2);
         await expect(page.locator('#publications-list li')).toHaveCount(1);
         await expect(page.locator('#publications-count')).toHaveText('1');
@@ -86,6 +88,24 @@ for (const path of ['research', 'people', 'dashboard', 'learn']) {
       expect(results.violations).toEqual([]);
     });
   }
+}
+
+for (const theme of ['light', 'dark']) {
+  test(`genome comparison is accessible in ${theme} mode`, async ({ page }) => {
+    await page.addInitScript(value => localStorage.setItem('delftia-theme', value), theme);
+    await page.goto('/dashboard-genome-comparison.html');
+    await expect(page.getByRole('heading', { level: 1 })).toHaveText('Compare Delftia Genomes');
+    await expect(page.getByRole('table')).toContainText('6.27 Mb');
+    await expect(page.getByRole('table')).toContainText('6,922,195 bp');
+    await expect(page.getByRole('link', { name: 'Read the PubMed record' }))
+      .toHaveAttribute('href', 'https://pubmed.ncbi.nlm.nih.gov/26251486/');
+    await expect(page.getByRole('link', { name: 'Back to the Dashboard' }))
+      .toHaveAttribute('href', /dashboard\.html$/);
+    expect(await page.evaluate(() =>
+      document.documentElement.scrollWidth <= window.innerWidth)).toBe(true);
+    const results = await new AxeBuilder({ page }).withRules(['color-contrast']).analyze();
+    expect(results.violations).toEqual([]);
+  });
 }
 
 test('dashboard displays safe linked records sorted by date and refreshes', async ({ page }) => {

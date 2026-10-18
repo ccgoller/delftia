@@ -85,6 +85,7 @@ jobs:
             "research.html"
             "people.html"
             "dashboard.html"
+            "dashboard-genome-comparison.html"
             "learn.html"
           )
 
@@ -175,6 +176,7 @@ jobs:
             "${base_url}/research.html"
             "${base_url}/people.html"
             "${base_url}/dashboard.html"
+            "${base_url}/dashboard-genome-comparison.html"
             "${base_url}/learn.html"
           )
 
@@ -238,6 +240,7 @@ jobs:
             "research.html"
             "people.html"
             "dashboard.html"
+            "dashboard-genome-comparison.html"
             "learn.html"
             "dashboard.js"
             "styles.css"
