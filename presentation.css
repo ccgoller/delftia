@@ -65,10 +65,17 @@ body.reveal-viewport .footer a:focus-visible,
 body.reveal-viewport .slide-logo {
   max-height: 65px;
   max-width: 180px;
+  background: #f9f5ed;
+  padding: 8px;
+  border-radius: 12px;
 }
 
 body.reveal-viewport .footer {
   color: #f5e6d3;
+}
+
+body.reveal-viewport .slide-menu-button a {
+  color: #f4a854;
 }
 
 .reveal .controls,
@@ -164,7 +171,9 @@ body.reveal-viewport .footer {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  body.reveal-viewport .reveal .slides > section.slide {
+  body.reveal-viewport .reveal .slides > section.slide,
+  body.reveal-viewport .reveal .slides > section > section.slide,
+  body.reveal-viewport .reveal #title-slide {
     transition: none;
   }
 }
