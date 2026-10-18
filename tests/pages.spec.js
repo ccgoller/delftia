@@ -99,8 +99,18 @@ for (const theme of ['light', 'dark']) {
     await expect(page.getByRole('heading', { level: 1 })).toHaveText('Compare Delftia Genomes');
     await expect(page.getByRole('table')).toContainText('6.27 Mb');
     await expect(page.getByRole('table')).toContainText('6,922,195 bp');
+    await expect(page.getByRole('link', { name: 'LCZH01000000' }))
+      .toHaveAttribute('href', 'https://www.ncbi.nlm.nih.gov/nuccore/LCZH01000000');
+    await expect(page.getByRole('link', { name: 'CP135236.1' }))
+      .toHaveAttribute('href', 'https://www.ncbi.nlm.nih.gov/nuccore/CP135236.1');
     await expect(page.getByRole('link', { name: 'Read the PubMed record' }))
       .toHaveAttribute('href', 'https://pubmed.ncbi.nlm.nih.gov/26251486/');
+    await expect(page.getByRole('link', { name: 'Read the article' }))
+      .toHaveAttribute('href', 'https://doi.org/10.1155/2016/3687619');
+    await expect(page.getByText(/used gene knockouts to show that three nonribosomal peptide synthetase genes are involved in siderophore production/))
+      .toBeVisible();
+    await expect(page.getByText(/complete circular genome from a strain isolated from a commercial nano-hydroxyapatite product/))
+      .toBeVisible();
     await expect(page.getByRole('link', { name: 'Back to the Dashboard' }))
       .toHaveAttribute('href', /dashboard\.html$/);
     expect(await page.evaluate(() =>

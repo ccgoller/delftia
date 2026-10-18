@@ -53,12 +53,20 @@ The table summarizes features reported in the genome announcements for strains M
 | G+C content | 66.79% | 66.45% |
 | Isolation context | Tobacco rhizosphere | Commercial nano-hydroxyapatite product |
 | Published focus | Described in its genome announcement as a plant growth-promoting rhizobacterium | Genome sequence report for a strain isolated from a nano-hydroxyapatite product |
+| GenBank sequence | [LCZH01000000](https://www.ncbi.nlm.nih.gov/nuccore/LCZH01000000) | [CP135236.1](https://www.ncbi.nlm.nih.gov/nuccore/CP135236.1) |
 
 :::
+
+### What the publications report
+
+Hou et al. (2015) reported the MTQ3 draft genome and described the tobacco-rhizosphere isolate as a plant growth-promoting rhizobacterium with antimicrobial activity. A follow-up comparative-genomics study by Guo et al. (2016) compared MTQ3 with related *Delftia* strains and used gene knockouts to show that three nonribosomal peptide synthetase genes are involved in siderophore production. These findings suggest a potential role in iron acquisition and microbial interactions; they do not establish that every *Delftia* strain has the same traits.
+
+Wang et al. (2024) reported HA60 as a complete circular genome from a strain isolated from a commercial nano-hydroxyapatite product. The study deposited the chromosome sequence and provides a genome reference for that isolate; its origin alone does not demonstrate that HA60 makes or degrades the product.
 
 ## Sources
 
 - Draft Genome Sequence of *Delftia tsuruhatensis* MTQ3, a Strain of Plant Growth-Promoting Rhizobacterium Isolated from Tobacco Rhizosphere (2015). [Read the PubMed record](https://pubmed.ncbi.nlm.nih.gov/26251486/).
+- Guo H, Yang Y, Liu K, et al. 2016. Comparative Genomic Analysis of *Delftia tsuruhatensis* MTQ3 and the Identification of Functional NRPS Genes for Siderophore Production. [Read the article](https://doi.org/10.1155/2016/3687619).
 - Complete genome sequence of *Delftia tsuruhatensis* strain HA60 isolated from a commercial nano-hydroxyapatite product (2024). [Find the article on PubMed](https://pubmed.ncbi.nlm.nih.gov/?term=10.1128%2Fmra.00171-24) · [Read the full text in PubMed Central](https://pmc.ncbi.nlm.nih.gov/articles/PMC11237730/) · [DOI: 10.1128/mra.00171-24](https://doi.org/10.1128/mra.00171-24).
 
-Genome sizes, G+C percentages, assembly status, isolation contexts, and descriptions above are reported by the cited articles. They come from separate sequencing and annotation studies and are not a standardized reanalysis; differences should not be interpreted as species-wide traits.
+Genome sizes, G+C percentages, assembly status, isolation contexts, and descriptions above are reported by the cited articles. Accession links point to the deposited sequences. The studies used separate sequencing and annotation methods and are not a standardized reanalysis; differences should not be interpreted as species-wide traits.
