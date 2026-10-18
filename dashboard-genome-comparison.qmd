@@ -1,17 +1,46 @@
 ---
 title: ""
 pagetitle: "Genome Comparison"
-description: "A literature-based comparison of genome features reported for two Delftia tsuruhatensis strains."
+description: "Select two Delftia genome assemblies to compare their reported features, or explore a published strain comparison."
 ---
 
 ```{=html}
 <section class="hero-section hero-section--compact" aria-labelledby="genome-comparison-heading">
   <h1 id="genome-comparison-heading">Compare Delftia Genomes</h1>
-  <p class="hero-subtitle">A literature-based comparison of two published <em>Delftia tsuruhatensis</em> strains.</p>
+  <p class="hero-subtitle">Select two <em>Delftia</em> genome assemblies and compare their reported features.</p>
 </section>
 ```
 
 [Back to the Dashboard](dashboard.qmd).
+
+## Select genomes
+
+Choose two different assemblies from NCBI Datasets. The comparison updates when either selection changes. Assembly versions are listed separately; records are not necessarily unique strains.
+
+```{=html}
+<section class="dashboard-panel" aria-label="Select genomes to compare">
+  <p id="genome-selection-status" role="status">Interactive selection requires JavaScript. The published comparison below is available without it.</p>
+  <div id="genome-selection-controls" hidden>
+    <div class="genome-selection-field">
+      <label for="genome-first">First genome</label>
+      <select id="genome-first" disabled></select>
+    </div>
+    <div class="genome-selection-field">
+      <label for="genome-second">Second genome</label>
+      <select id="genome-second" disabled></select>
+    </div>
+  </div>
+  <button type="button" id="genome-selection-retry" class="btn btn-primary" hidden>Retry loading genomes</button>
+</section>
+<div id="selected-genome-comparison" class="genome-comparison-table-wrap" role="region" aria-label="Selected genome comparison" tabindex="0" hidden></div>
+<script src="genome-comparison.js" defer></script>
+```
+
+[Browse Delftia assemblies on NCBI Datasets](https://www.ncbi.nlm.nih.gov/datasets/genome/?taxon=80865).
+
+These are database-reported assembly statistics, not a sequence alignment, average nucleotide identity (ANI) calculation, or standardized reannotation. Missing values are shown as “Not reported.” Differences in assembly quality and annotation methods can affect comparisons.
+
+## Published example: MTQ3 and HA60
 
 The table summarizes features reported in the genome announcements for strains MTQ3 and HA60. Both are *D. tsuruhatensis*, not representatives of every strain in the species.
 
