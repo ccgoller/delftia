@@ -1,13 +1,13 @@
 ---
 title: ""
 pagetitle: "Learn"
-description: "Learning resources for MB 360 and the Delftia book."
+description: "Course resources, the Delftia book, and a revealjs presentation about Delftia and e-waste."
 ---
 
 ```{=html}
 <section class="hero-section hero-section--compact" aria-labelledby="learn-heading">
   <h1 id="learn-heading">Learn</h1>
-  <p class="hero-subtitle">Course resources and the Delftia book.</p>
+  <p class="hero-subtitle">Course resources, the Delftia book, and a big-picture science story.</p>
 </section>
 ```
 
@@ -28,6 +28,14 @@ Access the MB 360 course resource.
 Explore the Delftia book for learning about this remarkable bacterium.
 
 [Read the Delftia book](https://go.ncsu.edu/delftiabook)
+:::
+
+::: {.feature-card}
+## Delftia in Big Numbers
+
+See how a tiny bacterium connects to the global e-waste challenge through clear, sourced statistics.
+
+[Explore the presentation](delftia-in-big-numbers.qmd)
 :::
 :::
 

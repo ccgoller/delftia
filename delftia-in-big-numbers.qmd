@@ -1,0 +1,66 @@
+---
+title: "Delftia in Big Numbers"
+subtitle: "One tiny bacterium, a global e-waste challenge"
+pagetitle: "Delftia in Big Numbers"
+format:
+  revealjs:
+    theme: simple
+    slide-number: true
+    transition: fade
+---
+
+## 62 million metric tonnes
+
+That is how much electronic waste the world generated in **2022**.
+
+### 62 million tonnes = 62 billion kilograms
+
+That is the weight of discarded electronics generated in just one year. [1]
+
+---
+
+## About 22 out of every 100
+
+Only **22.3%** of the world's e-waste was documented as formally collected and recycled in 2022. [1]
+
+About **78 out of 100** was not documented as formally collected and recycled. That does not mean all of it was dumped: informal handling and gaps in tracking also matter.
+
+---
+
+## What does *Delftia* have to do with gold?
+
+In laboratory research, *Delftia acidovorans* released a molecule called **delftibactin**. It binds dissolved gold and helps turn it into solid gold particles—a process that can protect the bacterium from toxic gold. [2]
+
+---
+
+## From dissolved gold to solid particles
+
+**Dissolved gold** → **delftibactin binds it** → **solid gold particles form**
+
+The gold is not created from nothing. The bacterium changes gold's form.
+
+---
+
+## A promising clue—not a recycling solution
+
+This is a fascinating biological process, but it does **not** prove that *Delftia* can recover gold from mixed electronic waste safely, cheaply, or at industrial scale.
+
+Responsible collection and recycling matter today. Researchers are exploring whether discoveries like this could inform future ways to recover valuable materials. [1, 2]
+
+---
+
+## Science is a team effort
+
+University students have helped search for and identify gold-precipitating bacteria, including *Delftia*. [3]
+
+Curiosity can turn a tiny organism into a big research question:
+
+### Could biology help us recover materials more responsibly?
+
+---
+
+## Works cited
+
+1. Baldé CP, et al. **The Global E-waste Monitor 2024.** International Telecommunication Union and United Nations Institute for Training and Research, 2024. [Read the report](https://ewastemonitor.info/the-global-e-waste-monitor-2024/).
+2. Johnston CW, Wyatt MA, Li X, Ibrahim A, Shuster J, Southam G, Magarvey NA. “Gold biomineralization by a metallophore from a gold-associated microbe.” *Nature Chemical Biology*. 2013;9:241–243. [doi:10.1038/nchembio.1179](https://doi.org/10.1038/nchembio.1179).
+3. Riley NG, Goller CC, Leggett ZH, Lewis DM, Ciccone K, Dunn RR. “Catalyzing rapid discovery of gold-precipitating bacterial lineages with university students.” *PeerJ*. 2020;8:e8925. [doi:10.7717/peerj.8925](https://doi.org/10.7717/peerj.8925).
