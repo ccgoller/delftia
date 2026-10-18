@@ -379,9 +379,9 @@ button:focus-visible {
 /* ---- Hero section ----------------------------------------- */
 .hero-section {
   background:
-    radial-gradient(circle at 16% 18%, rgba(255, 218, 115, 0.12), transparent 40%),
-    radial-gradient(circle at 84% 28%, rgba(255, 199, 44, 0.10), transparent 44%),
-    linear-gradient(140deg, #000000 0%, #050505 40%, #0a0a0a 68%, #000000 100%);
+    radial-gradient(circle at 16% 18%, rgba(255, 218, 115, 0.08), transparent 40%),
+    radial-gradient(circle at 84% 28%, rgba(255, 199, 44, 0.07), transparent 44%),
+    linear-gradient(140deg, #000000 0%, #030201 40%, #070503 68%, #000000 100%);
   color: #ffffff;
   padding: 5rem 2rem 4rem;
   text-align: center;
@@ -395,14 +395,16 @@ button:focus-visible {
   position: absolute;
   inset: 0;
   background:
-    radial-gradient(circle at 10% 18%, rgba(255, 218, 115, 0.22) 0 2px, transparent 3px),
-    radial-gradient(circle at 22% 72%, rgba(255, 199, 44, 0.20) 0 3px, transparent 4px),
-    radial-gradient(circle at 34% 38%, rgba(255, 224, 130, 0.18) 0 2px, transparent 3px),
-    radial-gradient(circle at 48% 82%, rgba(255, 199, 44, 0.18) 0 2.5px, transparent 4px),
-    radial-gradient(circle at 63% 20%, rgba(255, 218, 115, 0.20) 0 2px, transparent 3px),
-    radial-gradient(circle at 76% 58%, rgba(255, 199, 44, 0.18) 0 3px, transparent 4px),
-    radial-gradient(circle at 90% 32%, rgba(255, 224, 130, 0.22) 0 2px, transparent 3px),
-    linear-gradient(125deg, rgba(255, 218, 115, 0.08), transparent 45%, rgba(255, 199, 44, 0.08));
+    radial-gradient(circle at 10% 18%, rgba(255, 218, 115, 0.20) 0 2px, transparent 3px),
+    radial-gradient(circle at 22% 72%, rgba(255, 199, 44, 0.18) 0 3px, transparent 4px),
+    radial-gradient(circle at 34% 38%, rgba(255, 224, 130, 0.16) 0 2px, transparent 3px),
+    radial-gradient(circle at 48% 82%, rgba(255, 199, 44, 0.16) 0 2.5px, transparent 4px),
+    radial-gradient(circle at 63% 20%, rgba(255, 218, 115, 0.18) 0 2px, transparent 3px),
+    radial-gradient(circle at 76% 58%, rgba(255, 199, 44, 0.16) 0 3px, transparent 4px),
+    radial-gradient(circle at 90% 32%, rgba(255, 224, 130, 0.20) 0 2px, transparent 3px),
+    linear-gradient(125deg, rgba(255, 218, 115, 0.05), transparent 45%, rgba(255, 199, 44, 0.05));
+  opacity: 0.7;
+  animation: hero-sparkle 6s ease-in-out infinite;
   z-index: 0;
   pointer-events: none;
 }
@@ -412,10 +414,22 @@ button:focus-visible {
   position: absolute;
   inset: 0;
   background:
-    radial-gradient(ellipse at 0% 100%, rgba(255, 199, 44, 0.18), transparent 55%),
-    radial-gradient(ellipse at 100% 0%, rgba(255, 218, 115, 0.16), transparent 55%);
+    radial-gradient(ellipse at 0% 100%, rgba(255, 199, 44, 0.12), transparent 55%),
+    radial-gradient(ellipse at 100% 0%, rgba(255, 218, 115, 0.10), transparent 55%);
+  animation: hero-ambience 18s ease-in-out infinite alternate;
   z-index: 1;
   pointer-events: none;
+}
+
+@keyframes hero-sparkle {
+  0%,
+  100% { opacity: 0.55; }
+  50% { opacity: 0.9; }
+}
+
+@keyframes hero-ambience {
+  from { transform: scale(1); }
+  to { transform: scale(1.04); }
 }
 
 .hero-section > *,
