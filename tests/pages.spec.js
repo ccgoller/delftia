@@ -515,8 +515,16 @@ test('dashboard keeps database links available without JavaScript', async ({ bro
   await context.close();
 });
 
-test('people page identifies the alumni section without guessing names', async ({ page }) => {
+test('people page separates current contributors from lab alumni', async ({ page }) => {
   await page.goto('/people.html');
   await expect(page.getByRole('heading', { name: 'Lab Alumni' })).toBeVisible();
-  await expect(page.getByText('do not yet identify former lab members by name')).toBeVisible();
+  const contributorCards = page.locator('.team-grid').first().locator('.team-card');
+  await expect(contributorCards).toHaveCount(1);
+  await expect(contributorCards).toContainText('Dr. Carlos C. Goller');
+
+  const alumniCards = page.locator('.team-grid').nth(1).locator('.team-card');
+  await expect(alumniCards).toHaveCount(5);
+  for (const name of ['Lauren Ramilo', 'Daiza Norman', 'Rabeya Tahir', 'Pushkar Sai', 'Andrew Hoyek']) {
+    await expect(alumniCards).toContainText(name);
+  }
 });

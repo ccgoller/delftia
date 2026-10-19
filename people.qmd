@@ -15,31 +15,11 @@ The Delftia Project brings together educators, undergraduate researchers, and ci
 
 ## Project Contributors
 
-The contributors below are recognized in our [project overview](about.qmd#community); this is not a complete or current lab roster.
-
 ::: {.team-grid}
 ::: {.team-card}
-### Dr. Carlos Goller
+### Dr. Carlos C. Goller
 
 Principal Investigator · NC State
-:::
-
-::: {.team-card}
-### Lauren Ramilo
-
-Undergraduate Researcher
-:::
-
-::: {.team-card}
-### Daiza Norman
-
-BIT Research Assistant
-:::
-
-::: {.team-card}
-### Rabeya Tahir
-
-WikiEDU & Graphics Lead
 :::
 :::
 
@@ -51,7 +31,27 @@ Explore their [projects](news.qmd) and our [learning resources](learn.qmd).
 
 ## Lab Alumni
 
-We’d like to recognize the people who have contributed to the lab over the years. The public project materials do not yet identify former lab members by name, so we’ll add alumni profiles here as names and roles are confirmed.
+::: {.team-grid}
+::: {.team-card}
+### Lauren Ramilo
+:::
+
+::: {.team-card}
+### Daiza Norman
+:::
+
+::: {.team-card}
+### Rabeya Tahir
+:::
+
+::: {.team-card}
+### Pushkar Sai
+:::
+
+::: {.team-card}
+### Andrew Hoyek
+:::
+:::
 
 ## Join the Community
 
