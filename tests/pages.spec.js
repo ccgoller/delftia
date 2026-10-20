@@ -525,6 +525,6 @@ test('people page separates current contributors from lab alumni', async ({ page
   const alumniCards = page.locator('.team-grid').nth(1).locator('.team-card');
   await expect(alumniCards).toHaveCount(5);
   for (const name of ['Lauren Ramilo', 'Daiza Norman', 'Rabeya Tahir', 'Pushkar Sai', 'Andrew Hoyek']) {
-    await expect(alumniCards).toContainText(name);
+    await expect(alumniCards.filter({ hasText: name })).toHaveCount(1);
   }
 });
