@@ -470,8 +470,7 @@ for (const failure of ['unavailable', 'incomplete', 'repeated-token', 'invalid']
     await mockFeeds(page);
     await page.getByRole('button', { name: 'Refresh dashboard' }).click();
     await expect(page.getByRole('button', { name: 'Refresh dashboard' })).toBeEnabled();
-    await page.getByRole('slider', { name: 'Inspect year' }).focus();
-    await page.keyboard.press('End');
+    await page.getByRole('slider', { name: 'Inspect year' }).press('End');
     await expect(page.locator('#growth-chart-detail')).toContainText('2 cumulative genomes');
   });
 }
