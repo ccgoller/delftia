@@ -294,13 +294,15 @@ a:focus {
     position: relative;
   }
 
-  .navbar-brand-container {
-    order: 1;
+  #quarto-header .navbar-brand-container {
+    order: 1 !important;
     flex: 1 1 auto;
+    min-width: 0;
   }
 
-  .navbar-toggler {
-    order: 2;
+  #quarto-header .navbar-toggler {
+    order: 2 !important;
+    flex-shrink: 0;
   }
 
   #quarto-header .quarto-navbar-tools {
@@ -346,7 +348,7 @@ a:focus {
   padding: 3px 6px;
 }
 
-@media (max-width: 480px) {
+@media (max-width: 991.98px) {
   .navbar-brand .navbar-logo {
     width: min(12vw, 42px);
     min-width: 24px;
