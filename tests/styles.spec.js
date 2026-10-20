@@ -169,6 +169,17 @@ test('navbar logo scales down on mobile', async ({ page }) => {
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBe(true);
 });
 
+test('navbar title is centered on mobile', async ({ page }) => {
+  await page.setViewportSize({ width: 375, height: 812 });
+  await page.goto('/index.html');
+  const title = page.locator('#quarto-header .navbar-title');
+  const titleCenter = await title.evaluate(element => {
+    const { left, width } = element.getBoundingClientRect();
+    return left + width / 2;
+  });
+  expect(titleCenter).toBeCloseTo(187.5, 0);
+});
+
 test('invalid reading preference is off by default', async ({ page }) => {
   await page.addInitScript(() => localStorage.setItem('delftia-reading-focus', 'invalid'));
   await page.goto('/index.html');
