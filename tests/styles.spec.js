@@ -180,6 +180,41 @@ test('navbar title is centered on mobile', async ({ page }) => {
   expect(titleCenter).toBeCloseTo(187.5, 0);
 });
 
+for (const width of [320, 375, 480, 481, 768, 991]) {
+  test(`navbar logo, title, and toggle do not overlap at ${width}px`, async ({ page }) => {
+    await page.setViewportSize({ width, height: 812 });
+    await page.goto('/index.html');
+    await ready(page);
+    const logo = page.locator('.navbar-brand .navbar-logo:visible');
+    const title = page.locator('#quarto-header .navbar-title');
+    const toggle = page.locator('.navbar-toggler');
+
+    for (const expanded of [false, true]) {
+      await expect(toggle).toHaveAttribute('aria-expanded', String(expanded));
+      await expect(logo).toBeVisible();
+      await expect(title).toBeVisible();
+      await expect(toggle).toBeVisible();
+      const logoBox = await logo.boundingBox();
+      const titleBox = await title.boundingBox();
+      const toggleBox = await toggle.boundingBox();
+      expect(logoBox.width).toBeLessThanOrEqual(42);
+      expect(logoBox.height).toBeLessThanOrEqual(28);
+      expect(logoBox.x).toBeGreaterThanOrEqual(0);
+      expect(logoBox.x + logoBox.width).toBeLessThan(titleBox.x);
+      expect(titleBox.x + titleBox.width).toBeLessThan(toggleBox.x);
+      expect(toggleBox.x + toggleBox.width).toBeLessThanOrEqual(width);
+      expect(await page.evaluate(() =>
+        document.documentElement.scrollWidth <= window.innerWidth)).toBe(true);
+
+      if (!expanded) {
+        await toggle.click();
+        await expect(page.locator('#navbarCollapse')).toHaveClass(/\bshow\b/);
+        await expect(page.getByRole('link', { name: 'About', exact: true }).first()).toBeVisible();
+      }
+    }
+  });
+}
+
 test('invalid reading preference is off by default', async ({ page }) => {
   await page.addInitScript(() => localStorage.setItem('delftia-reading-focus', 'invalid'));
   await page.goto('/index.html');
