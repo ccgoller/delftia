@@ -1,6 +1,57 @@
 const { test, expect } = require('@playwright/test');
 const AxeBuilder = require('@axe-core/playwright').default;
 
+for (const theme of ['light', 'dark']) {
+  test(`homepage discovery cards are interactive and accessible in ${theme} mode`, async ({ page }) => {
+    await page.addInitScript(value => localStorage.setItem('delftia-theme', value), theme);
+    await page.goto('/index.html');
+    await expect(page.locator('.hero-section + .discover-delftia')).toBeVisible();
+    const section = page.getByRole('region', { name: 'Discover Delftia' });
+    await expect(section.getByRole('heading', { level: 3 })).toContainText([
+      'A New Genus', 'A World Inside a Genome',
+      'Turning Gold Toxicity into Opportunity', 'Discovery for Everyone', 'Explore the Sources',
+    ]);
+    const cards = section.locator('.discover-card');
+    await expect(cards).toHaveCount(4);
+    for (const card of await cards.all()) {
+      const details = card.locator('details');
+      const summary = card.locator('summary');
+      await expect(card.locator('.discover-details')).toBeHidden();
+      await summary.focus();
+      await page.keyboard.press('Enter');
+      await expect(details).toHaveAttribute('open', '');
+      await expect(card.locator('.discover-details')).toBeVisible();
+      await expect(summary).toBeFocused();
+      const source = card.locator('.discover-source a');
+      const target = new URL(await source.getAttribute('href'), page.url()).hash;
+      await expect(section.locator(target)).toHaveCount(1);
+    }
+    expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
+    const results = await new AxeBuilder({ page }).include('.discover-delftia').analyze();
+    expect(results.violations).toEqual([]);
+    await page.evaluate(() => window.scrollTo(0, 0));
+    await page.getByRole('button', { name: 'Reading focus', exact: true }).click();
+    expect(await section.locator('.discover-grid').evaluate(element =>
+      getComputedStyle(element).gridTemplateColumns.split(' ').length)).toBe(1);
+    await expect(cards.first().locator('.discover-details')).toBeVisible();
+    await cards.first().locator('summary').click();
+    await expect(cards.first().locator('.discover-details')).toBeHidden();
+  });
+}
+
+test('homepage discovery works without JavaScript', async ({ browser }, testInfo) => {
+  const context = await browser.newContext({
+    javaScriptEnabled: false,
+    viewport: testInfo.project.use.viewport,
+  });
+  const page = await context.newPage();
+  await page.goto('http://127.0.0.1:8000/index.html');
+  const card = page.locator('.discover-card').first();
+  await card.locator('summary').click();
+  await expect(card.locator('.discover-details')).toBeVisible();
+  await context.close();
+});
+
 async function mockAssemblies(page, records) {
   await page.route('https://www.ebi.ac.uk/ena/portal/api/search?**', route => {
     const params = new URL(route.request().url()).searchParams;
