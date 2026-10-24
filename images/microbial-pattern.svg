@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="240" height="180" viewBox="0 0 240 180" fill="none">
+  <g stroke="#f4a854" stroke-opacity=".3" stroke-width="1.5">
+    <rect x="27" y="35" width="42" height="14" rx="7" transform="rotate(-24 27 35)" fill="#e8954b" fill-opacity=".11"/>
+    <path d="m38 35 16 8m-5-13 15 8" stroke-opacity=".42"/>
+    <rect x="151" y="116" width="48" height="15" rx="7.5" transform="rotate(19 151 116)" fill="#e8954b" fill-opacity=".1"/>
+    <path d="m164 117 17 7m-4-12 14 6" stroke-opacity=".4"/>
+    <rect x="102" y="72" width="31" height="11" rx="5.5" transform="rotate(62 102 72)" fill="#ffda73" fill-opacity=".08"/>
+    <circle cx="202" cy="44" r="8" fill="#f4a854" fill-opacity=".08"/>
+    <circle cx="205" cy="44" r="2" fill="#ffda73" fill-opacity=".28" stroke="none"/>
+    <circle cx="82" cy="137" r="5" fill="#f4a854" fill-opacity=".1"/>
+    <circle cx="84" cy="136" r="1.5" fill="#ffda73" fill-opacity=".32" stroke="none"/>
+  </g>
+  <g stroke="#f4a854" stroke-opacity=".22" stroke-width="1">
+    <path d="m23 31-5-4m10 1-2-6m35 19 6 2m-8 5 3 5m89 62-6-3m1 10-5 3m47 12 6 3m-1-10 5-2m-74-43 4-5m-10 2-3-5"/>
+  </g>
+</svg>
