@@ -404,6 +404,7 @@ button:focus-visible {
   position: absolute;
   inset: 0;
   background:
+    url("images/microbial-pattern.svg"),
     radial-gradient(circle at 10% 18%, rgba(255, 218, 115, 0.20) 0 2px, transparent 3px),
     radial-gradient(circle at 22% 72%, rgba(255, 199, 44, 0.18) 0 3px, transparent 4px),
     radial-gradient(circle at 34% 38%, rgba(255, 224, 130, 0.16) 0 2px, transparent 3px),
@@ -412,8 +413,11 @@ button:focus-visible {
     radial-gradient(circle at 76% 58%, rgba(255, 199, 44, 0.16) 0 3px, transparent 4px),
     radial-gradient(circle at 90% 32%, rgba(255, 224, 130, 0.20) 0 2px, transparent 3px),
     linear-gradient(125deg, rgba(255, 218, 115, 0.05), transparent 45%, rgba(255, 199, 44, 0.05));
+  background-size: 240px 180px, auto, auto, auto, auto, auto, auto, auto, auto;
+  background-repeat: repeat, no-repeat, no-repeat, no-repeat, no-repeat, no-repeat, no-repeat, no-repeat, no-repeat;
   opacity: 0.7;
-  animation: hero-sparkle 6s ease-in-out infinite;
+  animation: hero-sparkle 6s ease-in-out infinite, hero-microbe-drift 36s ease-in-out infinite alternate;
+  transform-origin: center;
   z-index: 0;
   pointer-events: none;
 }
@@ -439,6 +443,11 @@ button:focus-visible {
 @keyframes hero-ambience {
   from { transform: scale(1); }
   to { transform: scale(1.04); }
+}
+
+@keyframes hero-microbe-drift {
+  from { transform: translate3d(0, 0, 0); }
+  to { transform: translate3d(-8px, 5px, 0); }
 }
 
 .hero-section > *,
