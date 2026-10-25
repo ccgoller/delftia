@@ -588,6 +588,102 @@ html body:not(.home) .hero-section h1 {
   box-shadow: inset 0 0 0 1px rgba(255, 224, 130, 0.35), 0 0 20px rgba(255, 199, 44, 0.3);
 }
 
+/* ---- Homepage discovery ----------------------------------- */
+.discover-delftia {
+  background: var(--page-bg-secondary);
+}
+
+.discover-intro {
+  background: linear-gradient(120deg, #003049, #005f73);
+  color: #ffffff;
+  padding: 3rem 1.5rem;
+  text-align: center;
+}
+
+.discover-intro h2 {
+  color: #ffffff;
+  margin: 0 0 1rem;
+  font-size: clamp(2rem, 4vw, 3rem);
+}
+
+.discover-intro p,
+.discover-tagline {
+  max-width: 900px;
+  margin: auto;
+  font-size: 1.2rem;
+}
+
+.discover-tagline {
+  padding: 3rem 1.5rem;
+  font-weight: 600;
+  text-align: center;
+}
+
+.discover-delftia .discover-grid {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 clamp(1rem, 3vw, 2rem) 3rem;
+  align-items: start;
+}
+
+.discover-stat {
+  color: var(--page-accent);
+  font-size: clamp(2.2rem, 4vw, 3rem);
+  font-weight: 800;
+}
+
+.discover-card h3 {
+  margin-top: 0.5rem;
+}
+
+.discover-card details {
+  margin-top: 1rem;
+}
+
+.discover-card summary {
+  background: #006598;
+  color: #ffffff;
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.discover-card summary:hover {
+  background: #004f78;
+}
+
+.discover-card summary:focus-visible {
+  outline: 3px solid var(--delftia-focus);
+  outline-offset: 3px;
+}
+
+.discover-details {
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--page-border);
+}
+
+.discover-card .discover-details p + p {
+  margin-top: 1rem;
+}
+
+.discover-card .discover-source {
+  margin-top: 1rem;
+  font-size: 0.9rem;
+}
+
+.discover-sources {
+  padding: 2rem clamp(1rem, 3vw, 2rem);
+  border-top: 1px solid var(--page-border);
+  overflow-wrap: anywhere;
+}
+
+.discover-sources h3,
+.discover-sources ol {
+  max-width: 1200px;
+  margin: 0 auto 1rem;
+}
+
 /* ---- Stats bar -------------------------------------------- */
 .stats-bar {
   background: var(--page-bg-secondary);
