@@ -238,11 +238,11 @@ test('images have alt text or aria-label', async ({ page }) => {
     const ariaLabel = await img.getAttribute('aria-label');
     const ariaHidden = await img.getAttribute('aria-hidden');
     
-    // Images should have alt text, aria-label, or be marked as decorative with aria-hidden
-    if (!alt && !ariaLabel && ariaHidden !== 'true') {
-      const src = await img.getAttribute('src');
-      console.log(`Warning: Image without alt text or aria-label: ${src}`);
-    }
+    // Empty alt text is valid for decorative images; a missing attribute is not.
+    expect(
+      alt !== null || Boolean(ariaLabel && ariaLabel.trim()) || ariaHidden === 'true',
+      `Image without alt text or aria-label: ${await img.getAttribute('src')}`
+    ).toBe(true);
   }
 });
 
