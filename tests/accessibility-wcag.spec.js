@@ -4,35 +4,44 @@ const AxeBuilder = require('@axe-core/playwright').default;
 const pages = ['index.html', 'about.html', 'news.html', 'references.html'];
 const themesToTest = ['light', 'dark'];
 
-// Test ARIA labels on form controls
+// Test accessible names from visible form labels
 test('dashboard form controls have accessible names', async ({ page }) => {
+  await page.route('https://www.ebi.ac.uk/europepmc/webservices/rest/search?**', route =>
+    route.fulfill({ json: {
+      hitCount: 1,
+      resultList: { result: [{ id: '123', source: 'MED', title: 'Delftia research', pubYear: '2024' }] },
+    } }));
+  await page.route('https://www.ebi.ac.uk/ena/portal/api/search?**', route =>
+    route.fulfill({ json: [{
+      accession: 'GCA_000001001', scientific_name: 'Delftia acidovorans', last_updated: '2024-01-01',
+    }] }));
+  await page.route('https://api.ncbi.nlm.nih.gov/datasets/v2/genome/taxon/80865/dataset_report?**', route =>
+    route.fulfill({ json: {
+      reports: [{ accession: 'GCA_000001001.1', assembly_info: { release_date: '2024-01-01' } }],
+      total_count: 1,
+    } }));
   await page.goto('/dashboard.html');
   
   // Check year range input (may be hidden until JavaScript loads)
   const yearInput = page.locator('#growth-chart-year');
   expect(await yearInput.count()).toBeGreaterThan(0);
-  const ariaLabel = await yearInput.getAttribute('aria-label');
-  expect(ariaLabel).toBeTruthy();
+  await expect(yearInput).toHaveAccessibleName('Inspect year');
   
   // Check search input (may be hidden initially)
   const searchInput = page.locator('#dashboard-search');
-  const searchAriaLabel = await searchInput.getAttribute('aria-label');
-  expect(searchAriaLabel).toBeTruthy();
+  await expect(searchInput).toHaveAccessibleName('Filter loaded records');
   
   // Check publication sort select
   const pubSort = page.locator('#publications-chart-sort');
-  const pubSortAriaLabel = await pubSort.getAttribute('aria-label');
-  expect(pubSortAriaLabel).toBeTruthy();
+  await expect(pubSort).toHaveAccessibleName('Year order');
   
   // Check genomes chart sort
   const genomeSort = page.locator('#genomes-chart-sort');
-  const genomeSortAriaLabel = await genomeSort.getAttribute('aria-label');
-  expect(genomeSortAriaLabel).toBeTruthy();
+  await expect(genomeSort).toHaveAccessibleName('Species order');
   
   // Check genomes table sort
   const genomeTableSort = page.locator('#genomes-sort');
-  const genomeTableAriaLabel = await genomeTableSort.getAttribute('aria-label');
-  expect(genomeTableAriaLabel).toBeTruthy();
+  await expect(genomeTableSort).toHaveAccessibleName('Assembly order');
 });
 
 test('genome comparison form controls have accessible names', async ({ page }) => {
@@ -41,23 +50,19 @@ test('genome comparison form controls have accessible names', async ({ page }) =
   // Check first genome filter (may be hidden until JavaScript loads)
   const firstFilter = page.locator('#genome-first-filter');
   expect(await firstFilter.count()).toBeGreaterThan(0);
-  const firstFilterAriaLabel = await firstFilter.getAttribute('aria-label');
-  expect(firstFilterAriaLabel).toBeTruthy();
+  await expect(firstFilter).toHaveAccessibleName('Filter first genome');
   
   // Check first genome select
   const firstSelect = page.locator('#genome-first');
-  const firstSelectAriaLabel = await firstSelect.getAttribute('aria-label');
-  expect(firstSelectAriaLabel).toBeTruthy();
+  await expect(firstSelect).toHaveAccessibleName('First genome');
   
   // Check second genome filter
   const secondFilter = page.locator('#genome-second-filter');
-  const secondFilterAriaLabel = await secondFilter.getAttribute('aria-label');
-  expect(secondFilterAriaLabel).toBeTruthy();
+  await expect(secondFilter).toHaveAccessibleName('Filter second genome');
   
   // Check second genome select
   const secondSelect = page.locator('#genome-second');
-  const secondSelectAriaLabel = await secondSelect.getAttribute('aria-label');
-  expect(secondSelectAriaLabel).toBeTruthy();
+  await expect(secondSelect).toHaveAccessibleName('Second genome');
 });
 
 test('GitHub footer link has accessible name', async ({ page }) => {
