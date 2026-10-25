@@ -218,8 +218,8 @@ test('heading hierarchy is correct', async ({ page }) => {
     const level = parseInt(tagName.substring(1));
     
     // Headings should not skip levels (e.g., h1 -> h3 is bad)
-    if (lastLevel > 0 && level > lastLevel + 1) {
-      console.log(`Warning: Heading hierarchy skip from h${lastLevel} to h${level}`);
+    if (lastLevel > 0) {
+      expect(level, `Heading level after h${lastLevel}`).toBeLessThanOrEqual(lastLevel + 1);
     }
     lastLevel = level;
   }
