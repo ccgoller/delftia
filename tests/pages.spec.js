@@ -10,8 +10,9 @@ for (const theme of ['light', 'dark']) {
     const getInvolvedLink = hero.getByRole('link', { name: 'Get Involved', exact: true });
     expect(new URL(await getInvolvedLink.getAttribute('href'), page.url()).href)
       .toBe(new URL('about.html#get-involved', page.url()).href);
-    await expect(hero.getByRole('link', { name: 'Explore Research', exact: true }))
-      .toHaveAttribute('href', '#research-highlights');
+    const exploreResearchLink = hero.getByRole('link', { name: 'Explore Research', exact: true });
+    expect(new URL(await exploreResearchLink.getAttribute('href'), page.url()).href)
+      .toBe(new URL('#research-highlights', page.url()).href);
     for (const item of await page.locator('.stats-bar .stat-item').all()) {
       const accessibleCount = await item.locator('.visually-hidden').textContent();
       await expect(item.locator('.stat-number')).toHaveText(accessibleCount.trim());
