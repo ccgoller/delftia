@@ -37,7 +37,7 @@ Orange shows **PubMed publications**, blue shows **cumulative publications**, gr
       <svg id="growth-chart" class="dashboard-line-chart" viewBox="0 0 720 320" role="img" aria-label="Publications, cumulative publications, genomes, and cumulative genomes by year"></svg>
     </div>
     <label for="growth-chart-year">Inspect year</label>
-    <input type="range" id="growth-chart-year" min="0" max="0" value="0">
+    <input type="range" id="growth-chart-year" min="0" max="0" value="0" aria-label="Select a year to inspect growth data">
     <p id="growth-chart-detail" class="dashboard-chart-detail" aria-live="polite"></p>
   </div>
 </section>
@@ -60,7 +60,7 @@ Orange shows **PubMed publications**, blue shows **cumulative publications**, gr
 </section>
 <div class="dashboard-controls">
   <label for="dashboard-search">Filter loaded records</label>
-  <input type="search" id="dashboard-search" placeholder="Try a species, title, author, or accession" hidden>
+  <input type="search" id="dashboard-search" placeholder="Try a species, title, author, or accession" aria-label="Filter loaded records by species, title, author, or accession" hidden>
   <button type="button" id="refresh-dashboard" class="btn btn-primary" hidden>Refresh dashboard</button>
 </div>
 <p id="dashboard-results-status" class="dashboard-results-status" role="status" aria-live="polite">Live records will appear here when JavaScript is available.</p>
@@ -79,7 +79,7 @@ Counts of articles matching **Delftia** in PubMed, retrieved through Europe PMC 
 ```{=html}
 <section class="dashboard-panel" aria-label="PubMed articles per year">
   <label for="publications-chart-sort">Year order</label>
-  <select id="publications-chart-sort" hidden>
+  <select id="publications-chart-sort" aria-label="Sort articles by publication year" hidden>
     <option value="ascending">Oldest first</option>
     <option value="descending">Newest first</option>
   </select>
@@ -96,7 +96,7 @@ Counts of all *Delftia* genome assembly records in ENA (genus taxonomy **80865**
 ```{=html}
 <section class="dashboard-panel" aria-label="Genome assemblies by species">
   <label for="genomes-chart-sort">Species order</label>
-  <select id="genomes-chart-sort" hidden>
+  <select id="genomes-chart-sort" aria-label="Sort genome assemblies by species or count" hidden>
     <option value="descending">Most assemblies first</option>
     <option value="ascending">Species name</option>
     <option value="newest">Most recently updated first</option>
@@ -130,7 +130,7 @@ Up to 10 *Delftia* genome assemblies from the European Nucleotide Archive (ENA),
 ::: {.dashboard-panel}
 ```{=html}
 <label for="genomes-sort">Assembly order</label>
-<select id="genomes-sort" hidden>
+<select id="genomes-sort" aria-label="Sort genome assemblies by update date or name" hidden>
   <option value="newest">Newest update first</option>
   <option value="oldest">Oldest update first</option>
   <option value="name">Assembly name</option>
