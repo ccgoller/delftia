@@ -23,17 +23,17 @@ Filter each genome list independently by species, strain, accession, assembly na
   <div id="genome-selection-controls" hidden>
     <div class="genome-selection-field">
       <label for="genome-first-filter">Filter first genome</label>
-      <input type="search" id="genome-first-filter" aria-describedby="genome-first-count" aria-label="Filter first genome by species, strain, accession, or assembly name" disabled>
+      <input type="search" id="genome-first-filter" aria-describedby="genome-first-count" disabled>
       <p id="genome-first-count" role="status"></p>
       <label for="genome-first">First genome</label>
-      <select id="genome-first" aria-label="Select first genome to compare" disabled></select>
+      <select id="genome-first" disabled></select>
     </div>
     <div class="genome-selection-field">
       <label for="genome-second-filter">Filter second genome</label>
-      <input type="search" id="genome-second-filter" aria-describedby="genome-second-count" aria-label="Filter second genome by species, strain, accession, or assembly name" disabled>
+      <input type="search" id="genome-second-filter" aria-describedby="genome-second-count" disabled>
       <p id="genome-second-count" role="status"></p>
       <label for="genome-second">Second genome</label>
-      <select id="genome-second" aria-label="Select second genome to compare" disabled></select>
+      <select id="genome-second" disabled></select>
     </div>
   </div>
   <button type="button" id="genome-selection-retry" class="btn btn-primary" hidden>Retry loading genomes</button>
