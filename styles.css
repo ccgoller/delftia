@@ -594,7 +594,7 @@ body.home .discover-delftia {
 }
 
 body.home .discover-intro {
-  background: linear-gradient(120deg, #71300d, #a94b17 52%, #57250f);
+  background: linear-gradient(120deg, #71300d, #8b3a12 52%, #57250f);
   color: #ffffff;
   padding: 3rem 1.5rem;
   text-align: center;
@@ -618,7 +618,7 @@ body.home .discover-tagline {
 }
 
 .discover-tagline {
-  background: color-mix(in srgb, var(--page-bg-secondary) 72%, #FFDA73);
+  background: color-mix(in srgb, var(--page-bg-secondary) 92%, #FFDA73);
   padding: 3rem 1.5rem;
   font-weight: 600;
   text-align: center;
