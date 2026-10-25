@@ -7,8 +7,9 @@ for (const theme of ['light', 'dark']) {
     await page.goto('/index.html');
     const hero = page.locator('.hero-section');
     await expect(hero.getByRole('heading', { level: 1, name: 'The Delftia Project' })).toBeVisible();
-    await expect(hero.getByRole('link', { name: 'Get Involved', exact: true }))
-      .toHaveAttribute('href', 'about.html#get-involved');
+    const getInvolvedLink = hero.getByRole('link', { name: 'Get Involved', exact: true });
+    expect(new URL(await getInvolvedLink.getAttribute('href'), page.url()).href)
+      .toBe(new URL('about.html#get-involved', page.url()).href);
     await expect(hero.getByRole('link', { name: 'Explore Research', exact: true }))
       .toHaveAttribute('href', '#research-highlights');
     for (const item of await page.locator('.stats-bar .stat-item').all()) {
