@@ -5,6 +5,16 @@ for (const theme of ['light', 'dark']) {
   test(`homepage discovery cards are interactive and accessible in ${theme} mode`, async ({ page }) => {
     await page.addInitScript(value => localStorage.setItem('delftia-theme', value), theme);
     await page.goto('/index.html');
+    const hero = page.locator('.hero-section');
+    await expect(hero.getByRole('heading', { level: 1, name: 'The Delftia Project' })).toBeVisible();
+    await expect(hero.getByRole('link', { name: 'Get Involved', exact: true }))
+      .toHaveAttribute('href', 'about.html#get-involved');
+    await expect(hero.getByRole('link', { name: 'Explore Research', exact: true }))
+      .toHaveAttribute('href', '#research-highlights');
+    for (const item of await page.locator('.stats-bar .stat-item').all()) {
+      const accessibleCount = await item.locator('.visually-hidden').textContent();
+      await expect(item.locator('.stat-number')).toHaveText(accessibleCount.trim());
+    }
     await expect(page.locator('.hero-section + .discover-delftia')).toBeVisible();
     const section = page.getByRole('region', { name: 'Discover Delftia' });
     await expect(section.getByRole('heading', { level: 3 })).toContainText([
@@ -521,8 +531,9 @@ for (const failure of ['unavailable', 'incomplete', 'repeated-token', 'invalid']
     await mockFeeds(page);
     await page.getByRole('button', { name: 'Refresh dashboard' }).click();
     await expect(page.getByRole('button', { name: 'Refresh dashboard' })).toBeEnabled();
-    await page.getByRole('slider', { name: 'Inspect year' }).focus();
-    await page.keyboard.press('End');
+    const slider = page.getByRole('slider', { name: 'Inspect year' });
+    await page.locator('#growth-chart rect').last().dispatchEvent('pointerdown');
+    await expect(slider).toHaveAttribute('aria-valuetext', '2026');
     await expect(page.locator('#growth-chart-detail')).toContainText('2 cumulative genomes');
   });
 }

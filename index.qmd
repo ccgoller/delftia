@@ -118,7 +118,7 @@ body-classes: home
   <div class="stats-grid">
     <div class="stat-item">
       <div class="stat-number" aria-hidden="true">4</div>
-      <div class="stat-label"><span class="visually-hidden">5 </span>Publications</div>
+      <div class="stat-label"><span class="visually-hidden">4 </span>Publications</div>
     </div>
     <div class="stat-item">
       <div class="stat-number" aria-hidden="true">13</div>
