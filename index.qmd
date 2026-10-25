@@ -20,7 +20,7 @@ body-classes: home
   </div>
 </section>
 
-<section class="discover-delftia" aria-labelledby="discover-heading">
+<section class="discover-delftia" role="region" aria-labelledby="discover-heading">
   <div class="discover-intro">
     <h2 id="discover-heading">Discover <em>Delftia</em></h2>
     <p><strong>Tiny microbes. Big impact.</strong> <em>Delftia</em> bacteria are found in soil,
