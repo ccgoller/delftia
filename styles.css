@@ -388,15 +388,15 @@ button:focus-visible {
 /* ---- Hero section ----------------------------------------- */
 .hero-section {
   background:
-    radial-gradient(circle at 16% 18%, rgba(255, 218, 115, 0.08), transparent 40%),
-    radial-gradient(circle at 84% 28%, rgba(255, 199, 44, 0.07), transparent 44%),
-    linear-gradient(140deg, #000000 0%, #030201 40%, #070503 68%, #000000 100%);
+    radial-gradient(circle at 16% 18%, rgba(255, 218, 115, 0.16), transparent 40%),
+    radial-gradient(circle at 84% 28%, rgba(255, 137, 56, 0.18), transparent 44%),
+    linear-gradient(140deg, #35150d 0%, #6e2e12 40%, #47200f 68%, #29140d 100%);
   color: #ffffff;
   padding: 5rem 2rem 4rem;
   text-align: center;
   position: relative;
   overflow: hidden;
-  border-bottom: 5px solid #FFC72C;
+  border-bottom: 5px solid #FFB52E;
 }
 
 .hero-section::before {
@@ -590,20 +590,24 @@ html body:not(.home) .hero-section h1 {
 
 /* ---- Homepage discovery ----------------------------------- */
 .discover-delftia {
-  background: var(--page-bg-secondary);
+  background: color-mix(in srgb, var(--page-bg-secondary) 90%, #E8954B);
 }
 
 .discover-intro {
-  background: linear-gradient(120deg, #1a1410, #3D2F0F);
+  background: linear-gradient(120deg, #71300d, #a94b17 52%, #57250f);
   color: #ffffff;
   padding: 3rem 1.5rem;
   text-align: center;
 }
 
 .discover-intro h2 {
-  color: #ffffff;
+  color: #fff3d2;
   margin: 0 0 1rem;
   font-size: clamp(2rem, 4vw, 3rem);
+}
+
+.discover-intro em {
+  color: #ffda73;
 }
 
 .discover-intro p,
@@ -614,6 +618,7 @@ html body:not(.home) .hero-section h1 {
 }
 
 .discover-tagline {
+  background: color-mix(in srgb, var(--page-bg-secondary) 72%, #FFDA73);
   padding: 3rem 1.5rem;
   font-weight: 600;
   text-align: center;
@@ -641,7 +646,7 @@ html body:not(.home) .hero-section h1 {
 }
 
 .discover-card summary {
-  background: #006598;
+  background: #8b3a12;
   color: #ffffff;
   padding: 0.75rem 1rem;
   border-radius: 8px;
@@ -649,7 +654,7 @@ html body:not(.home) .hero-section h1 {
 }
 
 .discover-card summary:hover {
-  background: #004f78;
+  background: #672909;
 }
 
 .discover-card summary:focus-visible {
@@ -686,11 +691,11 @@ html body:not(.home) .hero-section h1 {
 
 /* ---- Stats bar -------------------------------------------- */
 .stats-bar {
-  background: var(--page-bg-secondary);
+  background: color-mix(in srgb, var(--page-bg-secondary) 82%, #FFDA73);
   color: var(--page-text);
   padding: 2rem 1rem;
   text-align: center;
-  border-bottom: 3px solid var(--page-decoration);
+  border-bottom: 3px solid #D9671E;
   transition: background-color var(--transition-fast), border-color var(--transition-fast);
 }
 
@@ -984,8 +989,8 @@ html body:not(.home) .hero-section h1 {
 /* ---- CTA / call-to-action section ------------------------- */
 .cta-section {
   background:
-    radial-gradient(circle at 15% 20%, rgba(232, 149, 75, 0.10), transparent 34%),
-    linear-gradient(135deg, #0F0D0A, #1A1410 52%, #2A2420);
+    radial-gradient(circle at 15% 20%, rgba(255, 168, 60, 0.25), transparent 34%),
+    linear-gradient(135deg, #35150d, #71300d 52%, #29140d);
   color: var(--delftia-gold-glow);
   padding: 4rem 2rem;
   text-align: center;
