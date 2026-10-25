@@ -370,7 +370,7 @@ button:focus-visible {
   position: absolute;
   top: -40px;
   left: 0;
-  background: var(--delftia-focus);
+  background: var(--delftia-gold);
   color: white;
   padding: 8px;
   text-decoration: none;
