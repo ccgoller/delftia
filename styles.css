@@ -631,6 +631,18 @@ body.home .discover-tagline {
   align-items: start;
 }
 
+.discover-icon {
+  display: inline-grid;
+  place-items: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  margin-bottom: 0.65rem;
+  border: 1px solid var(--page-decoration);
+  border-radius: 50%;
+  background: var(--page-chip-bg);
+  font-size: 1.35rem;
+}
+
 .discover-stat {
   color: var(--page-accent);
   font-size: clamp(2.2rem, 4vw, 3rem);

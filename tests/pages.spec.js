@@ -17,6 +17,7 @@ for (const theme of ['light', 'dark']) {
       const accessibleCount = await item.locator('.visually-hidden').textContent();
       await expect(item.locator('.stat-number')).toHaveText(accessibleCount.trim());
     }
+    await expect(page.locator('.stats-bar .stat-item').first().locator('.stat-number')).toHaveText('5');
     await expect(page.locator('.hero-section + .discover-delftia')).toBeVisible();
     const section = page.getByRole('region', { name: 'Discover Delftia' });
     await expect(section.getByRole('heading', { level: 3 })).toContainText([
