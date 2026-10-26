@@ -534,7 +534,9 @@ for (const failure of ['unavailable', 'incomplete', 'repeated-token', 'invalid']
     await page.getByRole('button', { name: 'Refresh dashboard' }).click();
     await expect(page.getByRole('button', { name: 'Refresh dashboard' })).toBeEnabled();
     const slider = page.getByRole('slider', { name: 'Inspect year' });
-    await page.locator('#growth-chart rect').last().dispatchEvent('pointerdown');
+    await page.mouse.move(0, 0);
+    await slider.focus();
+    await page.keyboard.press('End');
     await expect(slider).toHaveAttribute('aria-valuetext', '2026');
     await expect(page.locator('#growth-chart-detail')).toContainText('2 cumulative genomes');
   });
