@@ -33,6 +33,7 @@ body-classes: home
     impact on our planet.</p>
   <div class="card-grid discover-grid">
     <article class="feature-card discover-card" aria-labelledby="discover-genus">
+      <div class="discover-icon" aria-hidden="true">🧫</div>
       <div class="discover-stat">1999</div>
       <h3 id="discover-genus">A New Genus</h3>
       <p>The bacterial genus <em>Delftia</em> was established in 1999,
@@ -48,6 +49,7 @@ body-classes: home
       <p class="discover-source">Source: <a href="#discover-ref-genus">Genus description (1999)</a></p>
     </article>
     <article class="feature-card discover-card" aria-labelledby="discover-genome">
+      <div class="discover-icon" aria-hidden="true">🧬</div>
       <div class="discover-stat">6.27 Mb</div>
       <h3 id="discover-genome">A World Inside a Genome</h3>
       <p>The draft genome of <em>D. tsuruhatensis</em> MTQ3 contains
@@ -64,6 +66,7 @@ body-classes: home
       <p class="discover-source">Source: <a href="#discover-ref-genome">MTQ3 genome report (2015)</a></p>
     </article>
     <article class="feature-card discover-card" aria-labelledby="discover-gold">
+      <div class="discover-icon" aria-hidden="true">🪙</div>
       <div class="discover-stat">2013</div>
       <h3 id="discover-gold">Turning Gold Toxicity into Opportunity</h3>
       <p>Scientists reported how a molecule from <em>D. acidovorans</em>
@@ -81,6 +84,7 @@ body-classes: home
       <p class="discover-source">Source: <a href="#discover-ref-gold">Delftibactin study (2013)</a></p>
     </article>
     <article class="feature-card discover-card" aria-labelledby="discover-community">
+      <div class="discover-icon" aria-hidden="true">🌱</div>
       <div class="discover-stat">2025</div>
       <h3 id="discover-community">Discovery for Everyone</h3>
       <p>“Where is <em>Delftia</em>?” brings citizen science into
@@ -117,8 +121,8 @@ body-classes: home
 <section class="stats-bar" aria-label="Project statistics">
   <div class="stats-grid">
     <div class="stat-item">
-      <div class="stat-number" aria-hidden="true">4</div>
-      <div class="stat-label"><span class="visually-hidden">4 </span>Publications</div>
+      <div class="stat-number" aria-hidden="true">5</div>
+      <div class="stat-label"><span class="visually-hidden">5 </span>Publications</div>
     </div>
     <div class="stat-item">
       <div class="stat-number" aria-hidden="true">13</div>
