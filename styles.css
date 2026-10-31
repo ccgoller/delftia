@@ -629,6 +629,7 @@ body.home .discover-tagline {
   margin: 0 auto;
   padding: 0 clamp(1rem, 3vw, 2rem) 3rem;
   align-items: start;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 420px));
 }
 
 .discover-icon {
@@ -902,6 +903,14 @@ body.home .stats-bar {
   grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
   gap: 1.6rem;
   margin-top: 2rem;
+  justify-content: center;
+  justify-items: center;
+}
+
+.card-grid > .feature-card {
+  width: 100%;
+  max-width: 420px;
+  text-align: center;
 }
 
 .feature-card {
@@ -1025,9 +1034,9 @@ body.home .stats-bar {
 
 body.home .hero-section {
   background:
-    radial-gradient(circle at 16% 18%, rgba(255, 218, 115, 0.16), transparent 40%),
-    radial-gradient(circle at 84% 28%, rgba(255, 137, 56, 0.18), transparent 44%),
-    linear-gradient(140deg, #35150d 0%, #6e2e12 40%, #47200f 68%, #29140d 100%);
+    radial-gradient(circle at 16% 18%, rgba(255, 218, 115, 0.06), transparent 40%),
+    radial-gradient(circle at 84% 28%, rgba(255, 137, 56, 0.07), transparent 44%),
+    linear-gradient(140deg, #0a0402 0%, #1a0b05 45%, #100603 70%, #050201 100%);
   border-bottom-color: #FFB52E;
 }
 
