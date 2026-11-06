@@ -102,7 +102,7 @@ body-classes: home
       <p class="discover-source">Source: <a href="#discover-ref-community">Citizen science publication (2025)</a></p>
     </article>
   </div>
-  <div class="discover-sources" aria-labelledby="discover-sources-heading">
+  <div class="discover-sources" role="group" aria-labelledby="discover-sources-heading">
     <h3 id="discover-sources-heading">Explore the Sources</h3>
     <ol>
       <li id="discover-ref-genus"><em>Delftia</em> Wen et al. 1999.
